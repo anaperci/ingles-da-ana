@@ -1,10 +1,122 @@
-import { Brain } from 'lucide-react'
+import { useState } from 'react'
+import { Brain, Layers, ListChecks, Sparkles } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
+import { TranslationToggle } from '@/components/common/TranslationToggle'
+import { StudySession } from '@/components/vocabulary/StudySession'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Badge } from '@/components/ui/badge'
+import { useVocabulary } from '@/hooks/useVocabulary'
+import type { VocabStudyMode } from '@/types/vocabulary'
+import type { CategoryKey } from '@/types'
+
+const SESSION_SIZE = 10
 
 export default function Vocabulary() {
+  const { byCategory, stats, queueForCategory } = useVocabulary()
+  const [mode, setMode] = useState<VocabStudyMode>('flashcard')
+  const [active, setActive] = useState<{
+    category: CategoryKey | 'all'
+  } | null>(null)
+
+  if (active) {
+    const queue = queueForCategory(active.category, SESSION_SIZE)
+    return (
+      <div className="animate-fade-in">
+        <StudySession
+          queue={queue}
+          mode={mode}
+          category={active.category}
+          onExit={() => setActive(null)}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="animate-fade-in">
-      <PageHeader icon={Brain} title="Vocabulário" subtitle="Em construção…" />
+      <PageHeader
+        icon={Brain}
+        title="Vocabulário"
+        subtitle="Palavras úteis por seção, com repetição espaçada"
+        actions={<TranslationToggle />}
+      />
+
+      {/* Resumo */}
+      <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <SummaryStat icon={Layers} value={stats.total} label="Total" />
+        <SummaryStat icon={Sparkles} value={stats.mastered} label="Dominadas" tone="text-success" />
+        <SummaryStat icon={ListChecks} value={stats.due} label="Para revisar" tone="text-warning" />
+        <SummaryStat icon={Brain} value={stats.newCount} label="Novas" tone="text-primary" />
+      </div>
+
+      {/* Modo + estudo geral */}
+      <Card className="mb-6 flex flex-wrap items-center justify-between gap-4 p-4">
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium text-muted-foreground">Modo:</span>
+          <Tabs value={mode} onValueChange={(v) => setMode(v as VocabStudyMode)}>
+            <TabsList>
+              <TabsTrigger value="flashcard">Flashcards</TabsTrigger>
+              <TabsTrigger value="quiz">Quiz</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+        <Button variant="gradient" onClick={() => setActive({ category: 'all' })}>
+          Estudar tudo ({SESSION_SIZE})
+        </Button>
+      </Card>
+
+      {/* Seções */}
+      <h2 className="mb-3 text-lg font-bold">Seções</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {byCategory.map(({ category, total, mastered }) => {
+          const pct = total > 0 ? Math.round((mastered / total) * 100) : 0
+          return (
+            <Card key={category.key} className="flex flex-col p-5">
+              <div className="mb-2 flex items-center gap-2">
+                <span className="text-2xl">{category.emoji}</span>
+                <h3 className="font-semibold">{category.label}</h3>
+                <Badge variant="secondary" className="ml-auto">
+                  {mastered}/{total}
+                </Badge>
+              </div>
+              <p className="mb-4 text-sm text-muted-foreground">{category.description}</p>
+              <Progress value={pct} className="mb-4" />
+              <Button
+                variant="outline"
+                className="mt-auto"
+                onClick={() => setActive({ category: category.key })}
+              >
+                Estudar {category.label}
+              </Button>
+            </Card>
+          )
+        })}
+      </div>
     </div>
+  )
+}
+
+function SummaryStat({
+  icon: Icon,
+  value,
+  label,
+  tone = 'text-foreground',
+}: {
+  icon: typeof Brain
+  value: number
+  label: string
+  tone?: string
+}) {
+  return (
+    <Card className="flex items-center gap-3 p-4">
+      <Icon className={`h-6 w-6 ${tone}`} />
+      <div>
+        <div className="font-mono text-xl font-bold">{value}</div>
+        <div className="text-xs text-muted-foreground">{label}</div>
+      </div>
+    </Card>
   )
 }
