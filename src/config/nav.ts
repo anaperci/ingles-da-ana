@@ -1,0 +1,28 @@
+import {
+  Home,
+  Brain,
+  MessagesSquare,
+  Mic,
+  MonitorPlay,
+  type LucideIcon,
+} from 'lucide-react'
+
+export interface NavItem {
+  to: string
+  label: string
+  icon: LucideIcon
+  /** módulo correspondente, quando aplicável */
+  end?: boolean
+}
+
+/**
+ * Fonte única da navegação superior. Para adicionar um módulo novo
+ * (ex.: Verbos), basta incluir um item aqui.
+ */
+export const NAV_ITEMS: NavItem[] = [
+  { to: '/', label: 'Início', icon: Home, end: true },
+  { to: '/vocabulario', label: 'Vocabulário', icon: Brain },
+  { to: '/conversacao', label: 'Conversação', icon: MessagesSquare },
+  { to: '/pronuncia', label: 'Pronúncia', icon: Mic },
+  { to: '/videos', label: 'Vídeos', icon: MonitorPlay },
+]

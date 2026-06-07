@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 240 33% 99%;
+    --foreground: 250 24% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 250 24% 12%;
+    --card-border: 262 45% 91%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 250 24% 12%;
+
+    /* Brand — roxo */
+    --primary: 262 83% 58%;
+    --primary-hover: 263 70% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Accent roxo/fúcsia para gradientes */
+    --accent: 285 75% 62%;
+    --accent-foreground: 0 0% 100%;
+
+    --secondary: 262 45% 96%;
+    --secondary-foreground: 262 55% 35%;
+
+    --muted: 250 24% 96%;
+    --muted-foreground: 250 8% 46%;
+
+    /* Estados */
+    --success: 142 70% 42%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 92% 52%;
+    --warning-foreground: 30 50% 16%;
+    --error: 0 80% 60%;
+    --error-foreground: 0 0% 100%;
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Linhas / inputs */
+    --border: 250 24% 90%;
+    --input: 250 24% 90%;
+    --ring: 262 83% 58%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1, h2, h3, h4 {
+    color: hsl(var(--foreground));
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Scrollbar discreta */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.25);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+  background-clip: content-box;
+}
