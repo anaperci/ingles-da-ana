@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import {
   Flame,
   Brain,
+  Repeat,
   Clock,
   TrendingUp,
   Sparkles,
@@ -26,6 +27,12 @@ const MODULES = [
     icon: Brain,
     title: 'Vocabulário',
     desc: 'Flashcards, quiz e repetição espaçada das palavras mais usadas.',
+  },
+  {
+    to: '/verbos',
+    icon: Repeat,
+    title: 'Verbos',
+    desc: 'Irregulares e phrasal verbs com repetição espaçada.',
   },
   {
     to: '/conversacao',

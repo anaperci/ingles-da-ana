@@ -1,6 +1,7 @@
 import {
   Home,
   Brain,
+  Repeat,
   MessagesSquare,
   Mic,
   MonitorPlay,
@@ -22,6 +23,7 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { to: '/', label: 'Início', icon: Home, end: true },
   { to: '/vocabulario', label: 'Vocabulário', icon: Brain },
+  { to: '/verbos', label: 'Verbos', icon: Repeat },
   { to: '/conversacao', label: 'Conversação', icon: MessagesSquare },
   { to: '/pronuncia', label: 'Pronúncia', icon: Mic },
   { to: '/videos', label: 'Vídeos', icon: MonitorPlay },
