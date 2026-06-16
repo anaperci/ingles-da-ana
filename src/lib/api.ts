@@ -1,5 +1,5 @@
 /**
- * Cliente das Edge Functions do Supabase (proxies seguros para Claude, Azure e
+ * Cliente das Edge Functions do Supabase (proxies seguros para OpenAI, Azure e
  * YouTube). As chaves NUNCA ficam no frontend — vivem como secrets nas functions.
  *
  * Config via env (.env):

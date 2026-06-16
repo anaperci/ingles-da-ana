@@ -15,7 +15,7 @@ Plataforma pessoal de treino de inglês com IA — **vocabulário**, **conversa�
 | Módulo | O que faz | Precisa de chave? |
 |---|---|---|
 | Vocabulário | Flashcards + quiz + repetição espaçada (SM-2) | Não (funciona offline) |
-| Conversação | Chat por cenários reais, correções da IA | Sim — `ANTHROPIC_API_KEY` |
+| Conversação | Chat por cenários reais, correções da IA | Sim — `OPENAI_API_KEY` |
 | Pronúncia | Grava a fala e avalia por palavra/fonema | Sim — `AZURE_SPEECH_KEY` |
 | Vídeo do dia | Sugestão diária por interesse | Sim — `YOUTUBE_API_KEY` (tem fallback curado) |
 
@@ -37,7 +37,7 @@ As chaves secretas **nunca** ficam no frontend — vivem como secrets nas functi
 # 1) Banco: rode supabase/migrations/0001_init.sql no SQL Editor (schema ingles)
 
 # 2) Secrets
-supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+supabase secrets set OPENAI_API_KEY=sk-...
 supabase secrets set AZURE_SPEECH_KEY=...  AZURE_SPEECH_REGION=westeurope
 supabase secrets set YOUTUBE_API_KEY=...
 

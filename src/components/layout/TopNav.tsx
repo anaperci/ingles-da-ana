@@ -9,20 +9,22 @@ export function TopNav() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-card-border bg-card/80 backdrop-blur-lg">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-2xl border-2 border-ink bg-white px-3 py-2.5 shadow-hard-card">
         {/* Marca */}
         <NavLink to="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-soft">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-yellow">
             <Sparkles className="h-5 w-5" />
           </div>
-          <span className="text-lg font-extrabold tracking-tight">
-            Inglês da Ana
+          <span className="font-display text-base font-extrabold leading-none tracking-tight text-ink">
+            Inglês
+            <br />
+            da Ana
           </span>
         </NavLink>
 
         {/* Nav desktop */}
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-1 lg:flex">
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.to}
@@ -30,10 +32,10 @@ export function TopNav() {
               end={item.end}
               className={({ isActive }) =>
                 cn(
-                  'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                  'flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold transition-colors',
                   isActive
-                    ? 'bg-yellow text-ink'
-                    : 'text-muted-foreground hover:bg-yellow hover:text-ink'
+                    ? 'border-2 border-ink bg-yellow text-ink'
+                    : 'border-2 border-transparent text-ink/70 hover:bg-yellow hover:text-ink'
                 )
               }
             >
@@ -45,12 +47,12 @@ export function TopNav() {
 
         {/* Perfil + menu mobile */}
         <div className="flex items-center gap-3">
-          <Avatar className="h-9 w-9 border-2 border-primary/20">
+          <Avatar className="h-10 w-10 border-2 border-ink">
             <AvatarImage src="/ana.jpg" alt="Ana" />
-            <AvatarFallback className="bg-primary/10 text-primary">A</AvatarFallback>
+            <AvatarFallback className="bg-yellow font-bold text-ink">A</AvatarFallback>
           </Avatar>
           <button
-            className="rounded-lg p-2 text-muted-foreground hover:bg-secondary md:hidden"
+            className="rounded-xl border-2 border-ink p-2 text-ink lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
           >
@@ -61,7 +63,7 @@ export function TopNav() {
 
       {/* Nav mobile */}
       {open && (
-        <nav className="border-t border-card-border bg-card px-4 py-3 md:hidden">
+        <nav className="mx-auto mt-2 max-w-7xl rounded-2xl border-2 border-ink bg-white p-3 shadow-hard-card lg:hidden">
           <div className="flex flex-col gap-1">
             {NAV_ITEMS.map((item) => (
               <NavLink
@@ -71,10 +73,10 @@ export function TopNav() {
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
                   cn(
-                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                    'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors',
                     isActive
-                      ? 'bg-yellow text-ink'
-                      : 'text-muted-foreground hover:bg-yellow hover:text-ink'
+                      ? 'border-2 border-ink bg-yellow text-ink'
+                      : 'border-2 border-transparent text-ink/70 hover:bg-yellow hover:text-ink'
                   )
                 }
               >

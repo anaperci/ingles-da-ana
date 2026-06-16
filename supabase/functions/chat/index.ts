@@ -1,13 +1,13 @@
-// Edge Function: proxy de conversação com a Claude API.
-// A chave ANTHROPIC_API_KEY fica como secret no Supabase, nunca no frontend.
+// Edge Function: proxy de conversação com a OpenAI API.
+// A chave OPENAI_API_KEY fica como secret no Supabase, nunca no frontend.
 //
 // Deploy:  supabase functions deploy chat
-// Secret:  supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+// Secret:  supabase secrets set OPENAI_API_KEY=sk-...
 import { corsHeaders, json } from '../_shared/cors.ts'
 
 declare const Deno: { env: { get(k: string): string | undefined } }
 
-const MODEL = Deno.env.get('ANTHROPIC_MODEL') ?? 'claude-haiku-4-5-20251001'
+const MODEL = Deno.env.get('OPENAI_MODEL') ?? 'gpt-4o-mini'
 
 interface ChatBody {
   system: string
@@ -19,8 +19,8 @@ Deno.serve(async (req: Request) => {
     return new Response('ok', { headers: corsHeaders })
   }
 
-  const apiKey = Deno.env.get('ANTHROPIC_API_KEY')
-  if (!apiKey) return json({ error: 'ANTHROPIC_API_KEY não configurada' }, 500)
+  const apiKey = Deno.env.get('OPENAI_API_KEY')
+  if (!apiKey) return json({ error: 'OPENAI_API_KEY não configurada' }, 500)
 
   let body: ChatBody
   try {
@@ -31,32 +31,29 @@ Deno.serve(async (req: Request) => {
   if (!body?.messages?.length) return json({ error: 'messages é obrigatório' }, 400)
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
+        Authorization: `Bearer ${apiKey}`,
         'content-type': 'application/json',
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 400,
-        system: body.system,
-        messages: body.messages.map((m) => ({
-          role: m.role,
-          content: m.content,
-        })),
+        max_tokens: 500,
+        messages: [
+          { role: 'system', content: body.system ?? '' },
+          ...body.messages.map((m) => ({ role: m.role, content: m.content })),
+        ],
       }),
     })
 
     if (!res.ok) {
       const err = await res.text()
-      return json({ error: `Anthropic ${res.status}: ${err}` }, 502)
+      return json({ error: `OpenAI ${res.status}: ${err}` }, 502)
     }
 
     const data = await res.json()
-    const reply =
-      data?.content?.map((c: { text?: string }) => c.text ?? '').join('') ?? ''
+    const reply = data?.choices?.[0]?.message?.content ?? ''
     return json({ reply })
   } catch (e) {
     return json({ error: String(e) }, 500)
