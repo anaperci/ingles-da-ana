@@ -9,12 +9,12 @@
        lilac-chip #EDE7F8 · canvas #FAF8F0 · ink-muted #6E6385 */
 
     /* Surfaces */
-    --background: 44 50% 96%; /* canvas #FAF8F0 */
+    --background: 0 0% 100%; /* branco */
     --foreground: 267 90% 8%; /* ink #140228 */
 
     --card: 0 0% 100%;
     --card-foreground: 267 90% 8%;
-    --card-border: 267 90% 8%; /* moldura de tinta (2px) */
+    --card-border: 267 90% 8%; /* moldura de tinta */
 
     --popover: 0 0% 100%;
     --popover-foreground: 267 90% 8%;

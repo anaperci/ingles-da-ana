@@ -32,8 +32,8 @@ export function TopNav() {
                 cn(
                   'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                   isActive
-                    ? 'bg-secondary text-primary'
-                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                    ? 'bg-yellow text-ink'
+                    : 'text-muted-foreground hover:bg-yellow hover:text-ink'
                 )
               }
             >
@@ -73,8 +73,8 @@ export function TopNav() {
                   cn(
                     'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
                     isActive
-                      ? 'bg-secondary text-primary'
-                      : 'text-muted-foreground hover:bg-secondary hover:text-foreground'
+                      ? 'bg-yellow text-ink'
+                      : 'text-muted-foreground hover:bg-yellow hover:text-ink'
                   )
                 }
               >
