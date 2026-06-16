@@ -4,48 +4,58 @@
 
 @layer base {
   :root {
+    /* ── Identidade "O Mix" ──────────────────────────────────
+       ink #140228 · yellow #FEE73C · lilac-accent #5A3A94
+       lilac-chip #EDE7F8 · canvas #FAF8F0 · ink-muted #6E6385 */
+
     /* Surfaces */
-    --background: 240 33% 99%;
-    --foreground: 250 24% 12%;
+    --background: 44 50% 96%; /* canvas #FAF8F0 */
+    --foreground: 267 90% 8%; /* ink #140228 */
 
     --card: 0 0% 100%;
-    --card-foreground: 250 24% 12%;
-    --card-border: 262 45% 91%;
+    --card-foreground: 267 90% 8%;
+    --card-border: 267 90% 8%; /* moldura de tinta (2px) */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 250 24% 12%;
+    --popover-foreground: 267 90% 8%;
 
-    /* Brand — roxo */
-    --primary: 262 83% 58%;
-    --primary-hover: 263 70% 50%;
+    /* Brand — lilás de assinatura */
+    --primary: 258 44% 40%; /* lilac-accent #5A3A94 */
+    --primary-hover: 258 50% 33%;
     --primary-foreground: 0 0% 100%;
 
-    /* Accent roxo/fúcsia para gradientes */
-    --accent: 285 75% 62%;
+    --accent: 258 44% 40%;
     --accent-foreground: 0 0% 100%;
 
-    --secondary: 262 45% 96%;
-    --secondary-foreground: 262 55% 35%;
+    --secondary: 262 50% 97%; /* lilac-wash #F6F2FC */
+    --secondary-foreground: 258 44% 40%;
 
-    --muted: 250 24% 96%;
-    --muted-foreground: 250 8% 46%;
+    --muted: 262 50% 97%;
+    --muted-foreground: 264 16% 46%; /* ink-muted #6E6385 */
 
     /* Estados */
-    --success: 142 70% 42%;
+    --success: 142 60% 38%;
     --success-foreground: 0 0% 100%;
     --warning: 35 92% 52%;
     --warning-foreground: 30 50% 16%;
-    --error: 0 80% 60%;
+    --error: 0 75% 55%;
     --error-foreground: 0 0% 100%;
-    --destructive: 0 80% 60%;
+    --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 100%;
 
     /* Linhas / inputs */
-    --border: 250 24% 90%;
-    --input: 250 24% 90%;
-    --ring: 262 83% 58%;
+    --border: 262 30% 88%; /* lilac-border #DED6EC */
+    --input: 262 30% 88%;
+    --ring: 258 44% 40%;
 
-    --radius: 0.75rem;
+    --radius: 1rem; /* 16px — cards/nav */
+
+    /* Tokens de assinatura (hex direto) */
+    --ink: #140228;
+    --yellow: #fee73c;
+    --lilac-chip: #ede7f8;
+    --lilac-accent: #5a3a94;
+    --canvas: #faf8f0;
   }
 }
 
@@ -70,8 +80,9 @@
 
   h1, h2, h3, h4 {
     color: hsl(var(--foreground));
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-family: 'Inter Tight', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
 }
 

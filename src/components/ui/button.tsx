@@ -4,22 +4,22 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground shadow-soft hover:bg-primary-hover',
+          'border-2 border-ink bg-yellow font-display font-bold text-ink shadow-hard hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-lg active:translate-x-0 active:translate-y-0 active:shadow-hard',
         gradient:
-          'bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-elevated hover:opacity-95',
+          'border-2 border-ink bg-yellow font-display font-bold text-ink shadow-hard hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-lg active:translate-x-0 active:translate-y-0 active:shadow-hard',
         destructive:
-          'bg-destructive text-destructive-foreground shadow-soft hover:bg-destructive/90',
+          'border-2 border-ink bg-error text-error-foreground shadow-hard hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-lg active:translate-x-0 active:translate-y-0 active:shadow-hard',
         outline:
-          'border border-input bg-card hover:bg-secondary hover:text-secondary-foreground',
+          'border-[1.5px] border-lilac-border bg-card text-ink hover:border-lilac-accent hover:bg-lilac-wash',
         secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/70',
-        ghost: 'hover:bg-secondary hover:text-secondary-foreground',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'bg-lilac-chip text-lilac-accent hover:bg-lilac-wash',
+        ghost: 'text-ink hover:bg-lilac-wash',
+        link: 'text-lilac-accent underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-10 px-4 py-2',

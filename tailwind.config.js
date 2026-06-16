@@ -13,6 +13,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Inter Tight', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
@@ -63,6 +64,19 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        /* Identidade "O Mix" — cores fixas da marca */
+        ink: '#140228',
+        yellow: {
+          DEFAULT: '#FEE73C',
+          foreground: '#140228',
+        },
+        lilac: {
+          chip: '#EDE7F8',
+          accent: '#5A3A94',
+          border: '#DED6EC',
+          wash: '#F6F2FC',
+        },
+        canvas: '#FAF8F0',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -72,6 +86,11 @@ export default {
       boxShadow: {
         soft: '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06)',
         elevated: '0 10px 30px -12px hsl(var(--primary) / 0.25), 0 4px 12px -6px rgb(0 0 0 / 0.08)',
+        /* Sombras duras (offset) — assinatura "O Mix" */
+        hard: '4px 4px 0 0 #140228',
+        'hard-lg': '7px 7px 0 0 #140228',
+        'hard-card': '5px 5px 0 0 #140228',
+        'hard-yellow': '6px 6px 0 0 #FEE73C',
       },
       keyframes: {
         'accordion-down': {
