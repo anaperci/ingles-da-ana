@@ -4,6 +4,7 @@ import { TaskCard } from '@/components/dashboard/TaskCard'
 import { ChallengeCard } from '@/components/dashboard/ChallengeCard'
 import { ThisWeekCard } from '@/components/dashboard/ThisWeekCard'
 import { RecordsCard } from '@/components/dashboard/RecordsCard'
+import { VerbOfTheDayCard } from '@/components/dashboard/VerbOfTheDayCard'
 import { useProgress } from '@/hooks/useProgress'
 import { todayKey } from '@/lib/storage'
 
@@ -60,7 +61,9 @@ export default function Home() {
             />
           </div>
         </div>
-      </div>
+
+          <VerbOfTheDayCard />
+        </div>
 
         {/* RAIL */}
         <aside className="space-y-4">

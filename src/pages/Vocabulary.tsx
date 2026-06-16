@@ -21,8 +21,12 @@ export default function Vocabulary() {
     category: CategoryKey | 'all'
   } | null>(null)
 
+  // fila real do dia: novas + vencidas, limitada ao tamanho da sessão
+  const dueToday = Math.min(stats.newCount + stats.due, SESSION_SIZE)
+
   if (active) {
-    const queue = queueForCategory(active.category, SESSION_SIZE)
+    const limit = active.category === 'all' ? Math.max(dueToday, 1) : SESSION_SIZE
+    const queue = queueForCategory(active.category, limit)
     return (
       <div className="animate-fade-in">
         <StudySession
@@ -63,8 +67,12 @@ export default function Vocabulary() {
             </TabsList>
           </Tabs>
         </div>
-        <Button variant="gradient" onClick={() => setActive({ category: 'all' })}>
-          Estudar tudo ({SESSION_SIZE})
+        <Button
+          variant="gradient"
+          disabled={dueToday === 0}
+          onClick={() => setActive({ category: 'all' })}
+        >
+          {dueToday > 0 ? `Estudar tudo (${dueToday})` : 'Tudo em dia ✅'}
         </Button>
       </Card>
 

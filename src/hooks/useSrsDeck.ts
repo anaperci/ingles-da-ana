@@ -66,8 +66,12 @@ export function useSrsDeck<T extends { id: string }>(
         newCount += 1
         continue
       }
-      if (isMastered(s)) mastered += 1
-      else learning += 1
+      if (isMastered(s)) {
+        mastered += 1
+        continue
+      }
+      // em aprendizado: "para revisar" = vencida e ainda não dominada
+      learning += 1
       if (isDue(s)) due += 1
     }
     return { total: items.length, mastered, learning, due, newCount }
