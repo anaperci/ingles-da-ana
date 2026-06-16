@@ -4,64 +4,43 @@
 
 @layer base {
   :root {
-    /* ── Identidade "O Mix" ──────────────────────────────────
-       ink #140228 · yellow #FEE73C · lilac-accent #5A3A94
-       lilac-chip #EDE7F8 · canvas #FAF8F0 · ink-muted #6E6385 */
+    /* ── Paleta: Petróleo + Âmbar + Creme sobre branco ──────────
+       Valores em HSL triplet (mantém suporte a opacidade /NN).
+       Hex de referência ao lado de cada token. */
 
-    /* Surfaces */
-    --background: 0 0% 100%; /* branco */
-    --foreground: 267 90% 8%; /* ink #140228 */
+    --color-primary: 196 45% 20%; /* #1C3E4A petróleo escuro */
+    --color-primary-soft: 196 37% 27%; /* #2C5260 petróleo claro */
 
-    --card: 0 0% 100%;
-    --card-foreground: 267 90% 8%;
-    --card-border: 267 90% 8%; /* moldura de tinta */
+    --color-accent: 31 86% 63%; /* #F2A24E âmbar */
+    --color-accent-dark: 35 73% 45%; /* #C8821F âmbar escuro */
+    --color-accent-text: 33 64% 33%; /* #8A5A1E texto sobre creme/âmbar */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 267 90% 8%;
+    --color-soft: 29 86% 91%; /* #FCE8D5 creme */
+    --color-soft-2: 34 82% 85%; /* #F8DCB8 creme quente */
+    --color-soft-text: 29 44% 29%; /* #6B4A2A texto sobre creme */
+    --color-soft-text-2: 31 30% 42%; /* #8A6B4A texto secundário sobre creme */
 
-    /* Brand — lilás de assinatura */
-    --primary: 258 44% 40%; /* lilac-accent #5A3A94 */
-    --primary-hover: 258 50% 33%;
-    --primary-foreground: 0 0% 100%;
+    --color-bg: 0 0% 100%; /* #FFFFFF fundo base */
+    --color-on-primary: 0 0% 100%; /* #FFFFFF texto sobre petróleo */
+    --color-on-primary-muted: 199 19% 87%; /* #D7E0E4 secundário sobre petróleo */
 
-    --accent: 258 44% 40%;
-    --accent-foreground: 0 0% 100%;
-
-    --secondary: 262 50% 97%; /* lilac-wash #F6F2FC */
-    --secondary-foreground: 258 44% 40%;
-
-    --muted: 262 50% 97%;
-    --muted-foreground: 264 16% 46%; /* ink-muted #6E6385 */
+    /* Neutros de suporte (não no spec, necessários pra UI) */
+    --color-border-soft: 38 16% 90%; /* #E9E6E1 borda 1px bem suave */
+    --color-muted: 40 12% 95%; /* #F5F4F2 superfície neutra clara */
+    --color-muted-text: 220 9% 46%; /* #6B7280 texto secundário neutro */
 
     /* Estados */
-    --success: 142 60% 38%;
-    --success-foreground: 0 0% 100%;
-    --warning: 35 92% 52%;
-    --warning-foreground: 30 50% 16%;
-    --error: 0 75% 55%;
-    --error-foreground: 0 0% 100%;
-    --destructive: 0 75% 55%;
-    --destructive-foreground: 0 0% 100%;
+    --color-success: 142 71% 36%; /* #16A34A */
+    --color-warning: 33 94% 44%; /* #D97706 */
+    --color-error: 0 72% 51%; /* #DC2626 */
 
-    /* Linhas / inputs */
-    --border: 262 30% 88%; /* lilac-border #DED6EC */
-    --input: 262 30% 88%;
-    --ring: 258 44% 40%;
-
-    --radius: 1rem; /* 16px — cards/nav */
-
-    /* Tokens de assinatura (hex direto) */
-    --ink: #140228;
-    --yellow: #fee73c;
-    --lilac-chip: #ede7f8;
-    --lilac-accent: #5a3a94;
-    --canvas: #faf8f0;
+    --radius: 1rem; /* 16px */
   }
 }
 
 @layer base {
   * {
-    border-color: hsl(var(--border));
+    border-color: hsl(var(--color-border-soft));
   }
 
   html {
@@ -72,14 +51,14 @@
 
   body {
     margin: 0;
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: hsl(var(--color-bg));
+    color: hsl(var(--color-primary));
     font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: 'cv11', 'ss01';
   }
 
   h1, h2, h3, h4 {
-    color: hsl(var(--foreground));
+    color: hsl(var(--color-primary));
     font-family: 'Inter Tight', 'Inter', ui-sans-serif, system-ui, sans-serif;
     font-weight: 800;
     letter-spacing: -0.03em;
@@ -92,12 +71,12 @@
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.25);
+  background: hsl(var(--color-muted-text) / 0.25);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground) / 0.4);
+  background: hsl(var(--color-muted-text) / 0.4);
   background-clip: content-box;
 }

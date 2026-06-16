@@ -17,66 +17,63 @@ export default {
         mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
-        border: 'hsl(var(--border))',
-        'card-border': 'hsl(var(--card-border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          hover: 'hsl(var(--primary-hover))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        success: {
-          DEFAULT: 'hsl(var(--success))',
-          foreground: 'hsl(var(--success-foreground))',
-        },
-        warning: {
-          DEFAULT: 'hsl(var(--warning))',
-          foreground: 'hsl(var(--warning-foreground))',
-        },
-        error: {
-          DEFAULT: 'hsl(var(--error))',
-          foreground: 'hsl(var(--error-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+        /* Neutros / superfícies */
+        background: 'hsl(var(--color-bg))',
+        foreground: 'hsl(var(--color-primary))',
+        border: 'hsl(var(--color-border-soft))',
+        'card-border': 'hsl(var(--color-border-soft))',
+        input: 'hsl(var(--color-border-soft))',
+        ring: 'hsl(var(--color-accent))',
+        card: {
+          DEFAULT: 'hsl(var(--color-bg))',
+          foreground: 'hsl(var(--color-primary))',
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          DEFAULT: 'hsl(var(--color-bg))',
+          foreground: 'hsl(var(--color-primary))',
         },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+        muted: {
+          DEFAULT: 'hsl(var(--color-muted))',
+          foreground: 'hsl(var(--color-muted-text))',
         },
-        /* Identidade "O Mix" — cores fixas da marca */
-        ink: '#140228',
-        yellow: {
-          DEFAULT: '#FEE73C',
-          foreground: '#140228',
+
+        /* Petróleo — destaque e texto forte */
+        primary: {
+          DEFAULT: 'hsl(var(--color-primary))',
+          soft: 'hsl(var(--color-primary-soft))',
+          hover: 'hsl(var(--color-primary-soft))',
+          foreground: 'hsl(var(--color-on-primary))',
         },
-        lilac: {
-          chip: '#EDE7F8',
-          accent: '#5A3A94',
-          border: '#DED6EC',
-          wash: '#F6F2FC',
+        'on-primary': {
+          DEFAULT: 'hsl(var(--color-on-primary))',
+          muted: 'hsl(var(--color-on-primary-muted))',
         },
-        canvas: '#FAF8F0',
+
+        /* Âmbar — cor de ação (texto sobre âmbar = petróleo) */
+        accent: {
+          DEFAULT: 'hsl(var(--color-accent))',
+          dark: 'hsl(var(--color-accent-dark))',
+          text: 'hsl(var(--color-accent-text))',
+          foreground: 'hsl(var(--color-primary))',
+        },
+
+        /* Creme — cards suaves e estado ativo */
+        soft: {
+          DEFAULT: 'hsl(var(--color-soft))',
+          2: 'hsl(var(--color-soft-2))',
+          text: 'hsl(var(--color-soft-text))',
+          'text-2': 'hsl(var(--color-soft-text-2))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--color-soft))',
+          foreground: 'hsl(var(--color-soft-text))',
+        },
+
+        /* Estados */
+        success: { DEFAULT: 'hsl(var(--color-success))', foreground: '#fff' },
+        warning: { DEFAULT: 'hsl(var(--color-warning))', foreground: '#fff' },
+        error: { DEFAULT: 'hsl(var(--color-error))', foreground: '#fff' },
+        destructive: { DEFAULT: 'hsl(var(--color-error))', foreground: '#fff' },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -84,13 +81,8 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       boxShadow: {
-        soft: '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06)',
-        elevated: '0 10px 30px -12px hsl(var(--primary) / 0.25), 0 4px 12px -6px rgb(0 0 0 / 0.08)',
-        /* Sombras duras (offset) — assinatura "O Mix" */
-        hard: '4px 4px 0 0 #140228',
-        'hard-lg': '7px 7px 0 0 #140228',
-        'hard-card': '5px 5px 0 0 #140228',
-        'hard-yellow': '6px 6px 0 0 #FEE73C',
+        soft: '0 1px 2px 0 rgb(16 24 32 / 0.04), 0 2px 8px -2px rgb(16 24 32 / 0.06)',
+        elevated: '0 12px 28px -12px rgb(28 62 74 / 0.18), 0 4px 12px -6px rgb(16 24 32 / 0.08)',
       },
       keyframes: {
         'accordion-down': {

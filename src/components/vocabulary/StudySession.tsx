@@ -53,7 +53,7 @@ export function StudySession({ queue, mode, category, onExit }: StudySessionProp
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0
     return (
       <Card className="flex flex-col items-center gap-4 p-10 text-center animate-fade-in">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <Trophy className="h-8 w-8" />
         </div>
         <h2 className="text-2xl font-bold">Sessão concluída! 🎉</h2>

@@ -10,13 +10,13 @@ export function TopNav() {
 
   return (
     <header className="sticky top-0 z-40 px-4 pt-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-2xl border-2 border-ink bg-white px-3 py-2.5 shadow-hard-card">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-2xl border-2 border-primary bg-white px-3 py-2.5 shadow-soft">
         {/* Marca */}
         <NavLink to="/" className="flex items-center gap-2.5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink text-yellow">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-accent">
             <Sparkles className="h-5 w-5" />
           </div>
-          <span className="font-display text-base font-extrabold leading-none tracking-tight text-ink">
+          <span className="font-display text-base font-extrabold leading-none tracking-tight text-primary">
             Inglês
             <br />
             da Ana
@@ -34,8 +34,8 @@ export function TopNav() {
                 cn(
                   'flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold transition-colors',
                   isActive
-                    ? 'border-2 border-ink bg-yellow text-ink'
-                    : 'border-2 border-transparent text-ink/70 hover:bg-yellow hover:text-ink'
+                    ? 'border-2 border-primary bg-accent text-primary'
+                    : 'border-2 border-transparent text-primary/70 hover:bg-accent hover:text-primary'
                 )
               }
             >
@@ -47,12 +47,12 @@ export function TopNav() {
 
         {/* Perfil + menu mobile */}
         <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10 border-2 border-ink">
+          <Avatar className="h-10 w-10 border-2 border-primary">
             <AvatarImage src="/ana.jpg" alt="Ana" />
-            <AvatarFallback className="bg-yellow font-bold text-ink">A</AvatarFallback>
+            <AvatarFallback className="bg-accent font-bold text-primary">A</AvatarFallback>
           </Avatar>
           <button
-            className="rounded-xl border-2 border-ink p-2 text-ink lg:hidden"
+            className="rounded-xl border-2 border-primary p-2 text-primary lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
           >
@@ -63,7 +63,7 @@ export function TopNav() {
 
       {/* Nav mobile */}
       {open && (
-        <nav className="mx-auto mt-2 max-w-7xl rounded-2xl border-2 border-ink bg-white p-3 shadow-hard-card lg:hidden">
+        <nav className="mx-auto mt-2 max-w-7xl rounded-2xl border-2 border-primary bg-white p-3 shadow-soft lg:hidden">
           <div className="flex flex-col gap-1">
             {NAV_ITEMS.map((item) => (
               <NavLink
@@ -75,8 +75,8 @@ export function TopNav() {
                   cn(
                     'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors',
                     isActive
-                      ? 'border-2 border-ink bg-yellow text-ink'
-                      : 'border-2 border-transparent text-ink/70 hover:bg-yellow hover:text-ink'
+                      ? 'border-2 border-primary bg-accent text-primary'
+                      : 'border-2 border-transparent text-primary/70 hover:bg-accent hover:text-primary'
                   )
                 }
               >

@@ -110,7 +110,7 @@ export default function Home() {
 
           <Card className="p-5">
             <div className="mb-2 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-lilac-accent" />
+              <Sparkles className="h-5 w-5 text-accent-dark" />
               <span className="font-semibold">Seu progresso</span>
             </div>
             <p className="text-muted-foreground">
@@ -139,15 +139,15 @@ export default function Home() {
 
         {/* Objetivo + ações */}
         <div className="space-y-4">
-          <Card className="border-ink bg-ink p-6 text-white shadow-hard-yellow">
-            <div className="mb-3 flex items-center gap-2 text-yellow">
+          <Card className="border-primary bg-primary p-6 text-white shadow-soft">
+            <div className="mb-3 flex items-center gap-2 text-accent">
               <Target className="h-5 w-5" />
               <span className="font-semibold uppercase tracking-wide">Objetivo de hoje</span>
             </div>
-            <div className="font-display text-4xl font-extrabold text-yellow">
+            <div className="font-display text-4xl font-extrabold text-accent">
               {DAILY_GOAL_MIN} min
             </div>
-            <Progress value={goalPct} className="mt-3 bg-white/15 [&>div]:bg-yellow" />
+            <Progress value={goalPct} className="mt-3 bg-white/15 [&>div]:bg-accent" />
             <div className="mt-2 text-sm text-white/70">
               {todayMinutes} min concluídos
             </div>
@@ -183,7 +183,7 @@ export default function Home() {
           {MODULES.map((m) => (
             <Link key={m.to} to={m.to} className="group">
               <Card className="h-full p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevated">
-                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-accent/15 text-primary">
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-soft text-primary">
                   <m.icon className="h-6 w-6" />
                 </div>
                 <h3 className="mb-1 font-semibold">{m.title}</h3>

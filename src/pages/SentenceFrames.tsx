@@ -35,7 +35,7 @@ export default function SentenceFrames() {
       />
 
       {/* Dicas do método */}
-      <Card className="mb-6 border-primary/20 bg-gradient-to-r from-primary/10 to-accent/10 p-5">
+      <Card className="mb-6 border-primary/20 bg-soft p-5">
         <div className="mb-3 flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-primary" />
           <span className="font-semibold">Dicas do método</span>

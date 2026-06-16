@@ -11,7 +11,7 @@ export function PageHeader({ icon: Icon, title, subtitle, actions }: PageHeaderP
   return (
     <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
       <div className="flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-soft">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-soft">
           <Icon className="h-6 w-6" />
         </div>
         <div>

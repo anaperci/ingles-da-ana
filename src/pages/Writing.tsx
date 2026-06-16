@@ -73,7 +73,7 @@ function DailySentencesTab() {
   return (
     <div className="space-y-6">
       {/* Resumo do dia */}
-      <Card className="border-primary/20 bg-gradient-to-r from-primary/10 to-accent/10 p-5">
+      <Card className="border-primary/20 bg-soft p-5">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="mb-1 flex items-center gap-2 text-sm text-muted-foreground">

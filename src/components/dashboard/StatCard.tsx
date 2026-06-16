@@ -6,9 +6,9 @@ type Tone = 'primary' | 'success' | 'warning' | 'accent'
 
 /* Card branco — só o tile do ícone recebe a cor */
 const tones: Record<Tone, string> = {
-  warning: 'bg-yellow text-ink', // flame
-  success: 'bg-lilac-chip text-lilac-accent', // brain/book
-  primary: 'bg-ink text-white', // clock
+  warning: 'bg-accent text-primary', // flame
+  success: 'bg-soft text-accent-dark', // brain/book
+  primary: 'bg-primary text-white', // clock
   accent: 'bg-success/15 text-success', // trending
 }
 
@@ -32,7 +32,7 @@ export function StatCard({ icon: Icon, value, label, tone = 'primary' }: StatCar
           <Icon className="h-5 w-5" />
         </div>
         <div>
-          <div className="font-mono text-3xl font-bold text-ink">{value}</div>
+          <div className="font-mono text-3xl font-bold text-primary">{value}</div>
           <div className="mt-0.5 text-sm text-muted-foreground">{label}</div>
         </div>
       </div>
