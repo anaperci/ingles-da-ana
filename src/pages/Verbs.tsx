@@ -10,12 +10,13 @@ import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { useVerbs } from '@/hooks/useVerbs'
+import { verbMethodTips } from '@/data/verbRules'
 import type { IrregularMode, PhrasalMode } from '@/types/verbs'
 
 const SESSION_SIZE = 8
 
 type Active =
-  | { kind: 'irregular'; pattern: string | 'all'; mode: IrregularMode }
+  | { kind: 'irregular'; mode: IrregularMode }
   | { kind: 'phrasal'; base: string | 'all'; mode: PhrasalMode }
   | null
 
@@ -29,7 +30,7 @@ export default function Verbs() {
     return (
       <div className="animate-fade-in">
         <IrregularSession
-          queue={v.irregularQueue(active.pattern, SESSION_SIZE)}
+          queue={v.irregularQueue(SESSION_SIZE)}
           mode={active.mode}
           onExit={() => setActive(null)}
         />
@@ -92,30 +93,43 @@ export default function Verbs() {
                 </TabsList>
               </Tabs>
             </div>
-            <Button variant="gradient" onClick={() => setActive({ kind: 'irregular', pattern: 'all', mode: irregularMode })}>
+            <Button variant="gradient" onClick={() => setActive({ kind: 'irregular', mode: irregularMode })}>
               Estudar todos ({SESSION_SIZE})
             </Button>
           </ModeBar>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {v.irregularByPattern.map((g) => {
-              const pct = g.verbs.length ? Math.round((g.mastered / g.verbs.length) * 100) : 0
-              return (
-                <Card key={g.pattern} className="flex flex-col p-5">
-                  <div className="mb-1 flex items-center justify-between">
-                    <h3 className="font-semibold">{g.label}</h3>
-                    <Badge variant="secondary">{g.mastered}/{g.verbs.length}</Badge>
-                  </div>
-                  <p className="mb-3 font-mono text-xs text-muted-foreground">
-                    {g.verbs.slice(0, 3).map((x) => x.base).join(', ')}…
-                  </p>
-                  <Progress value={pct} className="mb-4" />
-                  <Button variant="outline" className="mt-auto" onClick={() => setActive({ kind: 'irregular', pattern: g.pattern, mode: irregularMode })}>
-                    Estudar grupo
-                  </Button>
-                </Card>
-              )
-            })}
+          {/* Dicas do método */}
+          <Card className="mb-6 border-primary/20 bg-soft p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <Lightbulb className="h-5 w-5 text-primary" />
+              <span className="font-semibold">Dicas do método</span>
+            </div>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {verbMethodTips.map((tip) => (
+                <li key={tip.id} className="text-sm">
+                  <span className="font-semibold text-foreground">{tip.title}. </span>
+                  <span className="text-muted-foreground">{tip.body}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+
+          {/* Referência: os 50 verbos */}
+          <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted-foreground">
+            Todos os verbos ({v.irregulars.length})
+          </h3>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {v.irregulars.map((verb) => (
+              <Card key={verb.id} className="p-4">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="font-bold">{verb.present}</span>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {verb.past} · {verb.pastParticiple}
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground">{verb.translation}</p>
+              </Card>
+            ))}
           </div>
         </TabsContent>
 

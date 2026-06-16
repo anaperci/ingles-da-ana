@@ -1,16 +1,17 @@
 import type { CEFRLevel } from '@/types'
 
-/** Verbo irregular: infinitivo, passado simples, particípio passado. */
+/** Verbo irregular: presente, passado, particípio + frases de exemplo. */
 export interface IrregularVerb {
   id: string
   kind: 'irregular'
-  base: string
+  present: string
   past: string
-  participle: string
+  pastParticiple: string
   translation: string
-  /** chave do grupo de padrão de mudança (ex.: 'i-a-u') */
-  pattern: string
-  level: CEFRLevel
+  pronunciationTip?: string
+  examplePresent: { en: string; pt: string }
+  examplePast: { en: string; pt: string }
+  writingPrompt: string
 }
 
 /** Phrasal verb: verbo base + partícula. */

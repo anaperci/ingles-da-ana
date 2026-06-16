@@ -13,6 +13,7 @@ import { useProgress } from '@/hooks/useProgress'
 import { useShowTranslation } from '@/hooks/useShowTranslation'
 import type { ReviewQuality } from '@/lib/srs'
 import type { IrregularMode, IrregularVerb } from '@/types/verbs'
+import { verbPronunciationRules } from '@/data/verbRules'
 
 interface Props {
   queue: IrregularVerb[]
@@ -108,8 +109,7 @@ function FlashcardCard({ verb, onRate }: { verb: IrregularVerb; onRate: (q: Revi
         onClick={() => setFlipped((v) => !v)}
         className="flex min-h-[240px] cursor-pointer flex-col items-center justify-center gap-3 p-8 text-center"
       >
-        <Badge variant="secondary" className="absolute">{''}</Badge>
-        <div className="text-3xl font-extrabold">{verb.base}</div>
+        <div className="text-3xl font-extrabold">{verb.present}</div>
         {show && <div className="text-sm text-muted-foreground">{verb.translation}</div>}
         {!flipped ? (
           <div className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -118,10 +118,11 @@ function FlashcardCard({ verb, onRate }: { verb: IrregularVerb; onRate: (q: Revi
         ) : (
           <div className="mt-2 flex flex-wrap items-center justify-center gap-4 animate-fade-in">
             <FormChip label="Passado" value={verb.past} />
-            <FormChip label="Particípio" value={verb.participle} />
+            <FormChip label="Particípio" value={verb.pastParticiple} />
           </div>
         )}
       </Card>
+      {flipped && <VerbExtras verb={verb} />}
       {flipped ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Button variant="outline" className="text-error" onClick={() => onRate(1)}>Errei</Button>
@@ -132,6 +133,54 @@ function FlashcardCard({ verb, onRate }: { verb: IrregularVerb; onRate: (q: Revi
       ) : (
         <Button className="w-full" variant="outline" onClick={() => setFlipped(true)}>Mostrar resposta</Button>
       )}
+    </div>
+  )
+}
+
+function VerbExtras({ verb }: { verb: IrregularVerb }) {
+  const { show } = useShowTranslation()
+  const rules = verbPronunciationRules.filter((r) => r.examples.includes(verb.id))
+  return (
+    <div className="animate-fade-in space-y-3 rounded-xl border border-card-border bg-soft/40 p-4">
+      <ExampleLine label="Presente" ex={verb.examplePresent} show={show} />
+      <ExampleLine label="Passado" ex={verb.examplePast} show={show} />
+      {verb.pronunciationTip && (
+        <p className="text-xs text-muted-foreground">
+          <span className="font-semibold text-accent-text">Pronúncia: </span>
+          {verb.pronunciationTip}
+        </p>
+      )}
+      {rules.map((r) => (
+        <div key={r.id} className="rounded-lg bg-white p-2.5">
+          <p className="text-xs font-bold text-primary">{r.title}</p>
+          <p className="mt-0.5 text-xs text-muted-foreground">{r.explanation}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ExampleLine({
+  label,
+  ex,
+  show,
+}: {
+  label: string
+  ex: { en: string; pt: string }
+  show: boolean
+}) {
+  return (
+    <div>
+      <div className="flex items-center gap-2">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+          {label}
+        </span>
+        <button onClick={() => speak(ex.en)} className="text-muted-foreground hover:text-primary" aria-label="Ouvir">
+          <Volume2 className="h-3.5 w-3.5" />
+        </button>
+      </div>
+      <p className="text-sm font-medium text-foreground">{ex.en}</p>
+      {show && <p className="text-xs text-muted-foreground">{ex.pt}</p>}
     </div>
   )
 }
@@ -188,7 +237,7 @@ function TypeCard({
   function submit() {
     if (checked) return
     const pastOk = norm(past) === norm(verb.past)
-    const partOk = norm(participle) === norm(verb.participle)
+    const partOk = norm(participle) === norm(verb.pastParticiple)
     setChecked({ pastOk, partOk })
     if (timerRef.current) window.clearInterval(timerRef.current)
     const missed: ('past' | 'participle')[] = []
@@ -200,7 +249,7 @@ function TypeCard({
   return (
     <Card className="space-y-5 p-8">
       <div className="text-center">
-        <div className="text-2xl font-extrabold">{verb.base}</div>
+        <div className="text-2xl font-extrabold">{verb.present}</div>
         {show && <div className="text-sm text-muted-foreground">{verb.translation}</div>}
         {timed && (
           <div className={cn('mt-2 font-mono text-sm', seconds <= 5 ? 'text-error' : 'text-muted-foreground')}>
@@ -211,7 +260,7 @@ function TypeCard({
 
       <div className="grid gap-3 sm:grid-cols-2">
         <Field label="Passado simples" value={past} onChange={setPast} state={checked?.pastOk} answer={verb.past} disabled={!!checked} onEnter={submit} />
-        <Field label="Particípio passado" value={participle} onChange={setParticiple} state={checked?.partOk} answer={verb.participle} disabled={!!checked} onEnter={submit} />
+        <Field label="Particípio passado" value={participle} onChange={setParticiple} state={checked?.partOk} answer={verb.pastParticiple} disabled={!!checked} onEnter={submit} />
       </div>
 
       {!checked && (

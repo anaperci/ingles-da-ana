@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react'
 import { useSrsDeck } from './useSrsDeck'
 import { useLocalStore } from './useLocalStore'
 import { STORAGE_KEYS } from '@/lib/keys'
-import { IRREGULAR_VERBS, IRREGULAR_PATTERNS } from '@/data/irregularVerbs'
+import { irregularVerbs } from '@/data/irregularVerbs'
 import { PHRASAL_VERBS } from '@/data/phrasalVerbs'
 import type { ReviewQuality } from '@/lib/srs'
 import type {
@@ -11,6 +11,12 @@ import type {
   VerbForm,
   VerbItem,
 } from '@/types/verbs'
+
+/** Adiciona o discriminador `kind` aos irregulares (os dados puros não têm). */
+const IRREGULAR_VERBS: IrregularVerb[] = irregularVerbs.map((v) => ({
+  ...v,
+  kind: 'irregular' as const,
+}))
 
 const ALL_ITEMS: VerbItem[] = [...IRREGULAR_VERBS, ...PHRASAL_VERBS]
 
@@ -47,17 +53,8 @@ export function useVerbs() {
     return past >= participle ? 'past' : 'participle'
   }, [formStats])
 
-  // Agrupamentos
-  const irregularByPattern = useMemo(() => {
-    return Object.keys(IRREGULAR_PATTERNS).map((pattern) => {
-      const verbs = IRREGULAR_VERBS.filter((v) => v.pattern === pattern)
-      const mastered = verbs.filter((v) => {
-        const s = deck.progress[v.id]
-        return s && s.repetitions >= 4 && s.interval >= 21
-      }).length
-      return { pattern, label: IRREGULAR_PATTERNS[pattern], verbs, mastered }
-    })
-  }, [deck.progress])
+  // Lista plana dos 50 irregulares (sem agrupamento por padrão).
+  const irregulars = IRREGULAR_VERBS
 
   const phrasalByBase = useMemo(() => {
     const bases = [...new Set(PHRASAL_VERBS.map((p) => p.baseVerb))]
@@ -71,11 +68,10 @@ export function useVerbs() {
     })
   }, [deck.progress])
 
-  function irregularQueue(pattern: string | 'all', limit?: number): IrregularVerb[] {
+  function irregularQueue(limit?: number): IrregularVerb[] {
     return deck.buildQueue({
       limit,
-      filter: (v) =>
-        v.kind === 'irregular' && (pattern === 'all' || v.pattern === pattern),
+      filter: (v) => v.kind === 'irregular',
     }) as IrregularVerb[]
   }
 
@@ -112,7 +108,7 @@ export function useVerbs() {
   }
 
   return {
-    irregularByPattern,
+    irregulars,
     phrasalByBase,
     irregularQueue,
     phrasalQueue,
