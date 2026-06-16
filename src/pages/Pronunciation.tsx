@@ -28,7 +28,7 @@ export default function Pronunciation() {
       <PageHeader
         icon={Mic}
         title="Pronúncia"
-        subtitle="Leia em voz alta e receba nota por palavra (Azure Speech)"
+        subtitle="Leia em voz alta e receba nota por palavra (reconhecimento de fala do navegador)"
         actions={<TranslationToggle />}
       />
 

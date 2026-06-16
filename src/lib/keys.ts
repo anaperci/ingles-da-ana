@@ -7,4 +7,7 @@ export const STORAGE_KEYS = {
   interests: 'video:interests',
   dailyVideo: 'video:daily',
   showTranslation: 'pref:show-translation',
+  dailyWriting: 'writing:daily',
+  commonWordsKnown: 'words:known',
+  framesWriting: 'frames:writing',
 } as const

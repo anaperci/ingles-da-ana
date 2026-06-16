@@ -1,0 +1,107 @@
+import { useState } from 'react'
+import { Blocks, ChevronLeft, Sparkles } from 'lucide-react'
+import { PageHeader } from '@/components/common/PageHeader'
+import { TranslationToggle } from '@/components/common/TranslationToggle'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { FrameCard } from '@/components/frames/FrameCard'
+import { FrameReader } from '@/components/frames/FrameReader'
+import { FrameSpeaker } from '@/components/frames/FrameSpeaker'
+import { FrameWriter } from '@/components/frames/FrameWriter'
+import { sentenceFrames, methodTips, type SentenceFrame } from '@/data/sentenceFrames'
+
+const LEVEL_LABEL: Record<SentenceFrame['level'], string> = {
+  beginner: 'iniciante',
+  intermediate: 'intermediário',
+}
+
+export default function SentenceFrames() {
+  const [activeId, setActiveId] = useState<string | null>(null)
+  const active = sentenceFrames.find((f) => f.id === activeId) ?? null
+
+  if (active) {
+    return <FrameDetail frame={active} onBack={() => setActiveId(null)} />
+  }
+
+  return (
+    <div className="animate-fade-in">
+      <PageHeader
+        icon={Blocks}
+        title="Formar Frases"
+        subtitle="Estruturas-molde para falar sem travar — ler, falar e escrever"
+        actions={<TranslationToggle />}
+      />
+
+      {/* Dicas do método */}
+      <Card className="mb-6 border-primary/20 bg-gradient-to-r from-primary/10 to-accent/10 p-5">
+        <div className="mb-3 flex items-center gap-2">
+          <Sparkles className="h-5 w-5 text-primary" />
+          <span className="font-semibold">Dicas do método</span>
+        </div>
+        <ul className="space-y-2">
+          {methodTips.map((tip, i) => (
+            <li key={i} className="flex gap-2 text-sm text-muted-foreground">
+              <span className="text-primary">•</span>
+              {tip}
+            </li>
+          ))}
+        </ul>
+      </Card>
+
+      {/* Estruturas */}
+      <h2 className="mb-3 text-lg font-bold">Estruturas</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {sentenceFrames.map((frame) => (
+          <FrameCard key={frame.id} frame={frame} onOpen={() => setActiveId(frame.id)} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function FrameDetail({ frame, onBack }: { frame: SentenceFrame; onBack: () => void }) {
+  return (
+    <div className="animate-fade-in space-y-6">
+      <Button variant="ghost" onClick={onBack} className="gap-2 pl-0">
+        <ChevronLeft className="h-5 w-5" /> Voltar
+      </Button>
+
+      {/* Cabeçalho da estrutura */}
+      <Card className="space-y-3 p-6">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="font-mono text-2xl font-extrabold text-primary">{frame.frame}</span>
+          <Badge variant="secondary">{LEVEL_LABEL[frame.level]}</Badge>
+        </div>
+        <p className="text-lg font-semibold">{frame.meaning}</p>
+        <div className="space-y-1 text-sm text-muted-foreground">
+          <p>
+            <strong className="text-foreground">Como preencher:</strong> {frame.pattern}
+          </p>
+          <p>
+            <strong className="text-foreground">Quando usar:</strong> {frame.explanation}
+          </p>
+        </div>
+      </Card>
+
+      {/* Modos */}
+      <Tabs defaultValue="read">
+        <TabsList className="mb-6">
+          <TabsTrigger value="read">Ler</TabsTrigger>
+          <TabsTrigger value="speak">Falar</TabsTrigger>
+          <TabsTrigger value="write">Escrever</TabsTrigger>
+        </TabsList>
+        <TabsContent value="read">
+          <FrameReader frame={frame} />
+        </TabsContent>
+        <TabsContent value="speak">
+          <FrameSpeaker frame={frame} />
+        </TabsContent>
+        <TabsContent value="write">
+          <FrameWriter frame={frame} />
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}

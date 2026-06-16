@@ -6,6 +6,9 @@ import Verbs from '@/pages/Verbs'
 import Conversation from '@/pages/Conversation'
 import Pronunciation from '@/pages/Pronunciation'
 import Video from '@/pages/Video'
+import Writing from '@/pages/Writing'
+import SentenceFrames from '@/pages/SentenceFrames'
+import SoundVerbs from '@/pages/SoundVerbs'
 import NotFound from '@/pages/NotFound'
 
 export default function App() {
@@ -18,6 +21,9 @@ export default function App() {
         <Route path="/conversacao" element={<Conversation />} />
         <Route path="/pronuncia" element={<Pronunciation />} />
         <Route path="/videos" element={<Video />} />
+        <Route path="/escrita" element={<Writing />} />
+        <Route path="/estruturas" element={<SentenceFrames />} />
+        <Route path="/verbos-som" element={<SoundVerbs />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

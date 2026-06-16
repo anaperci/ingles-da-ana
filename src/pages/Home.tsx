@@ -11,6 +11,9 @@ import {
   MessagesSquare,
   Mic,
   MonitorPlay,
+  PenLine,
+  Blocks,
+  AudioLines,
   Calendar,
   Star,
 } from 'lucide-react'
@@ -33,6 +36,24 @@ const MODULES = [
     icon: Repeat,
     title: 'Verbos',
     desc: 'Irregulares e phrasal verbs com repetição espaçada.',
+  },
+  {
+    to: '/verbos-som',
+    icon: AudioLines,
+    title: 'Verbos por Som',
+    desc: 'Irregulares por padrão de pronúncia: ler, falar e escrever.',
+  },
+  {
+    to: '/escrita',
+    icon: PenLine,
+    title: 'Escrita diária',
+    desc: '30 frases por dia e as 1000 palavras mais faladas do inglês.',
+  },
+  {
+    to: '/estruturas',
+    icon: Blocks,
+    title: 'Formar Frases',
+    desc: 'Estruturas-molde para falar sem travar: ler, falar e escrever.',
   },
   {
     to: '/conversacao',
