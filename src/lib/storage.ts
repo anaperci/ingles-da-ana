@@ -36,3 +36,38 @@ export function removeKey(key: string): void {
 export function todayKey(date = new Date()): string {
   return date.toISOString().slice(0, 10)
 }
+
+/** Chave de metadados do sync (não entra no snapshot). */
+const SYNC_META = PREFIX + '__sync_meta'
+
+/** Snapshot de todo o estado local (chaves do app) para enviar à nuvem. */
+export function snapshotAll(): Record<string, unknown> {
+  const out: Record<string, unknown> = {}
+  for (let i = 0; i < localStorage.length; i++) {
+    const full = localStorage.key(i)
+    if (!full || !full.startsWith(PREFIX) || full === SYNC_META) continue
+    const key = full.slice(PREFIX.length)
+    try {
+      out[key] = JSON.parse(localStorage.getItem(full) as string)
+    } catch {
+      /* valor não-JSON: ignora */
+    }
+  }
+  return out
+}
+
+/** Restaura um snapshot vindo da nuvem para o localStorage. */
+export function restoreAll(payload: Record<string, unknown>): void {
+  for (const [key, value] of Object.entries(payload)) {
+    saveJSON(key, value)
+  }
+}
+
+/** Timestamp (ms) da última alteração local conhecida. */
+export function getLocalUpdatedAt(): number {
+  return loadJSON<number>('__sync_meta', 0)
+}
+
+export function setLocalUpdatedAt(ms: number): void {
+  saveJSON('__sync_meta', ms)
+}
