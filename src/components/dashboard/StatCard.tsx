@@ -4,11 +4,12 @@ import { cn } from '@/lib/utils'
 
 type Tone = 'primary' | 'success' | 'warning' | 'accent'
 
+/* Card branco — só o tile do ícone recebe a cor */
 const tones: Record<Tone, string> = {
-  primary: 'from-primary/10 to-primary/5 text-primary',
-  success: 'from-success/10 to-success/5 text-success',
-  warning: 'from-warning/10 to-warning/5 text-warning',
-  accent: 'from-accent/10 to-accent/5 text-accent',
+  warning: 'bg-yellow text-ink', // flame
+  success: 'bg-lilac-chip text-lilac-accent', // brain/book
+  primary: 'bg-ink text-white', // clock
+  accent: 'bg-success/15 text-success', // trending
 }
 
 interface StatCardProps {
@@ -20,18 +21,20 @@ interface StatCardProps {
 
 export function StatCard({ icon: Icon, value, label, tone = 'primary' }: StatCardProps) {
   return (
-    <Card
-      className={cn(
-        'bg-gradient-to-br p-4 transition-transform duration-200 hover:scale-[1.03]',
-        tones[tone]
-      )}
-    >
-      <div className="flex flex-col items-center gap-1.5 text-center">
-        <div className="flex items-center gap-2">
+    <Card className="p-4 transition-transform duration-200 hover:-translate-y-0.5">
+      <div className="flex flex-col gap-3">
+        <div
+          className={cn(
+            'flex h-10 w-10 items-center justify-center rounded-xl',
+            tones[tone]
+          )}
+        >
           <Icon className="h-5 w-5" />
-          <span className="font-mono text-2xl font-bold">{value}</span>
         </div>
-        <span className="text-sm font-medium text-foreground">{label}</span>
+        <div>
+          <div className="font-mono text-3xl font-bold text-ink">{value}</div>
+          <div className="mt-0.5 text-sm text-muted-foreground">{label}</div>
+        </div>
       </div>
     </Card>
   )

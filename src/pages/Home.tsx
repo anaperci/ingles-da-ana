@@ -108,9 +108,9 @@ export default function Home() {
             </p>
           </div>
 
-          <Card className="border-primary/20 bg-gradient-to-r from-primary/10 to-accent/10 p-5">
+          <Card className="p-5">
             <div className="mb-2 flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-primary" />
+              <Sparkles className="h-5 w-5 text-lilac-accent" />
               <span className="font-semibold">Seu progresso</span>
             </div>
             <p className="text-muted-foreground">
@@ -139,14 +139,16 @@ export default function Home() {
 
         {/* Objetivo + ações */}
         <div className="space-y-4">
-          <Card className="bg-gradient-to-br from-primary to-accent p-6 text-primary-foreground">
-            <div className="mb-3 flex items-center gap-2">
+          <Card className="border-ink bg-ink p-6 text-white shadow-hard-yellow">
+            <div className="mb-3 flex items-center gap-2 text-yellow">
               <Target className="h-5 w-5" />
-              <span className="font-semibold">Objetivo de hoje</span>
+              <span className="font-semibold uppercase tracking-wide">Objetivo de hoje</span>
             </div>
-            <div className="text-3xl font-bold">{DAILY_GOAL_MIN} minutos</div>
-            <Progress value={goalPct} className="mt-3 bg-white/25" />
-            <div className="mt-2 text-sm opacity-90">
+            <div className="font-display text-4xl font-extrabold text-yellow">
+              {DAILY_GOAL_MIN} min
+            </div>
+            <Progress value={goalPct} className="mt-3 bg-white/15 [&>div]:bg-yellow" />
+            <div className="mt-2 text-sm text-white/70">
               {todayMinutes} min concluídos
             </div>
           </Card>
