@@ -50,7 +50,7 @@ export function IrregularSession({ queue, mode, onExit }: Props) {
   if (done) {
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0
     return (
-      <Card className="flex flex-col items-center gap-4 p-10 text-center animate-fade-in">
+      <Card className="flex flex-col items-center gap-4 p-6 sm:p-10 text-center animate-fade-in">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <Trophy className="h-8 w-8" />
         </div>
@@ -65,7 +65,7 @@ export function IrregularSession({ queue, mode, onExit }: Props) {
 
   if (!verb) {
     return (
-      <Card className="p-10 text-center text-muted-foreground">
+      <Card className="p-6 sm:p-10 text-center text-muted-foreground">
         Nada para revisar agora. 😴
         <div className="mt-4"><Button variant="outline" onClick={onExit}>Voltar</Button></div>
       </Card>
@@ -107,7 +107,7 @@ function FlashcardCard({ verb, onRate }: { verb: IrregularVerb; onRate: (q: Revi
     <div className="space-y-5">
       <Card
         onClick={() => setFlipped((v) => !v)}
-        className="flex min-h-[240px] cursor-pointer flex-col items-center justify-center gap-3 p-8 text-center"
+        className="flex min-h-[240px] cursor-pointer flex-col items-center justify-center gap-3 p-6 sm:p-8 text-center"
       >
         <div className="text-3xl font-extrabold">{verb.present}</div>
         {show && <div className="text-sm text-muted-foreground">{verb.translation}</div>}
@@ -172,7 +172,7 @@ function ExampleLine({
   return (
     <div>
       <div className="flex items-center gap-2">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
           {label}
         </span>
         <button onClick={() => speak(ex.en)} className="text-muted-foreground hover:text-primary" aria-label="Ouvir">
@@ -247,7 +247,7 @@ function TypeCard({
   }
 
   return (
-    <Card className="space-y-5 p-8">
+    <Card className="space-y-5 p-6 sm:p-8">
       <div className="text-center">
         <div className="text-2xl font-extrabold">{verb.present}</div>
         {show && <div className="text-sm text-muted-foreground">{verb.translation}</div>}

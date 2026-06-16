@@ -64,7 +64,7 @@ export default function Pronunciation() {
         {phrase ? (
           <PronunciationPractice key={phrase.id} phrase={phrase} />
         ) : (
-          <Card className="p-10 text-center text-muted-foreground">
+          <Card className="p-6 sm:p-10 text-center text-muted-foreground">
             Nenhuma frase nesta seção.
           </Card>
         )}

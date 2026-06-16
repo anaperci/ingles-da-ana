@@ -25,7 +25,7 @@ export function ThisWeekCard() {
           const practiced = active.has(d.key)
           return (
             <div key={i} className="flex flex-col items-center gap-1.5">
-              <span className="text-[11px] font-medium text-muted-foreground">{d.label}</span>
+              <span className="text-xs font-medium text-muted-foreground">{d.label}</span>
               <div
                 className={cn(
                   'flex h-8 w-8 items-center justify-center rounded-lg text-xs font-bold',

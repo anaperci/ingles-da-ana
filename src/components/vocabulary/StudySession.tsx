@@ -52,7 +52,7 @@ export function StudySession({ queue, mode, category, onExit }: StudySessionProp
   if (done) {
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0
     return (
-      <Card className="flex flex-col items-center gap-4 p-10 text-center animate-fade-in">
+      <Card className="flex flex-col items-center gap-4 p-6 sm:p-10 text-center animate-fade-in">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <Trophy className="h-8 w-8" />
         </div>
@@ -70,7 +70,7 @@ export function StudySession({ queue, mode, category, onExit }: StudySessionProp
 
   if (!current) {
     return (
-      <Card className="p-10 text-center text-muted-foreground">
+      <Card className="p-6 sm:p-10 text-center text-muted-foreground">
         Nada para revisar agora. Volte mais tarde! 😴
         <div className="mt-4">
           <Button variant="outline" onClick={onExit}>Voltar</Button>

@@ -26,7 +26,7 @@ export function QuizCard({ word, pool, onanswer }: QuizCardProps) {
   }
 
   return (
-    <Card className="space-y-5 p-8">
+    <Card className="space-y-5 p-6 sm:p-8">
       <div className="flex items-center justify-center gap-2 text-center">
         <span className="text-2xl font-extrabold">{word.word}</span>
         <button

@@ -49,7 +49,7 @@ export function PhrasalSession({ queue, mode, onExit }: Props) {
   if (done) {
     const pct = total > 0 ? Math.round((correct / total) * 100) : 0
     return (
-      <Card className="flex flex-col items-center gap-4 p-10 text-center animate-fade-in">
+      <Card className="flex flex-col items-center gap-4 p-6 sm:p-10 text-center animate-fade-in">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <Trophy className="h-8 w-8" />
         </div>
@@ -62,7 +62,7 @@ export function PhrasalSession({ queue, mode, onExit }: Props) {
 
   if (!pv) {
     return (
-      <Card className="p-10 text-center text-muted-foreground">
+      <Card className="p-6 sm:p-10 text-center text-muted-foreground">
         Nada para revisar agora. 😴
         <div className="mt-4"><Button variant="outline" onClick={onExit}>Voltar</Button></div>
       </Card>
@@ -101,7 +101,7 @@ function MatchCard({ pv, onAnswer }: { pv: PhrasalVerb; onAnswer: (ok: boolean) 
   }
 
   return (
-    <Card className="space-y-5 p-8">
+    <Card className="space-y-5 p-6 sm:p-8">
       <div className="flex items-center justify-center gap-2 text-center">
         <span className="text-2xl font-extrabold">{pv.phrasal}</span>
         <button className="rounded-full p-2 text-muted-foreground hover:bg-secondary" onClick={() => speak(pv.phrasal)} aria-label="Ouvir">
@@ -161,7 +161,7 @@ function CompleteCard({ pv, onAnswer }: { pv: PhrasalVerb; onAnswer: (ok: boolea
   }
 
   return (
-    <Card className="space-y-5 p-8">
+    <Card className="space-y-5 p-6 sm:p-8">
       <p className="text-center text-lg font-semibold">“{blanked}”</p>
       {show && <p className="text-center text-sm text-muted-foreground">{pv.exampleTranslation}</p>}
       <p className="text-center text-sm text-muted-foreground">Qual phrasal verb completa?</p>

@@ -33,7 +33,7 @@ export function Flashcard({ word, onRate }: FlashcardProps) {
     <div className="space-y-5">
       <Card
         onClick={() => setFlipped((v) => !v)}
-        className="relative flex min-h-[260px] cursor-pointer flex-col items-center justify-center gap-3 p-8 text-center transition-shadow hover:shadow-elevated"
+        className="relative flex min-h-[260px] cursor-pointer flex-col items-center justify-center gap-3 p-6 sm:p-8 text-center transition-shadow hover:shadow-elevated"
       >
         <Badge variant="secondary" className="absolute left-4 top-4">
           {word.level}
