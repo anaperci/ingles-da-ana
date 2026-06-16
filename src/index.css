@@ -80,3 +80,14 @@
   background: hsl(var(--color-muted-text) / 0.4);
   background-clip: content-box;
 }
+
+/* Touch targets: ícones de áudio inline (🔊) ganham área de toque de 44px.
+   A margem negativa compensa o crescimento para não desorganizar o layout. */
+button[aria-label^='Ouvir'] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  margin: -0.5rem;
+}
