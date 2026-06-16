@@ -11,6 +11,10 @@ import { FrameReader } from '@/components/frames/FrameReader'
 import { FrameSpeaker } from '@/components/frames/FrameSpeaker'
 import { FrameWriter } from '@/components/frames/FrameWriter'
 import { sentenceFrames, methodTips, type SentenceFrame } from '@/data/sentenceFrames'
+import { sentenceFramesPt2 } from '@/data/sentenceFramesPt2'
+
+/** Lote 1 (8) + Lote 2 (13) = 21 estruturas. */
+const ALL_FRAMES: SentenceFrame[] = [...sentenceFrames, ...sentenceFramesPt2]
 
 const LEVEL_LABEL: Record<SentenceFrame['level'], string> = {
   beginner: 'iniciante',
@@ -19,7 +23,7 @@ const LEVEL_LABEL: Record<SentenceFrame['level'], string> = {
 
 export default function SentenceFrames() {
   const [activeId, setActiveId] = useState<string | null>(null)
-  const active = sentenceFrames.find((f) => f.id === activeId) ?? null
+  const active = ALL_FRAMES.find((f) => f.id === activeId) ?? null
 
   if (active) {
     return <FrameDetail frame={active} onBack={() => setActiveId(null)} />
@@ -53,7 +57,7 @@ export default function SentenceFrames() {
       {/* Estruturas */}
       <h2 className="mb-3 text-lg font-bold">Estruturas</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {sentenceFrames.map((frame) => (
+        {ALL_FRAMES.map((frame) => (
           <FrameCard key={frame.id} frame={frame} onOpen={() => setActiveId(frame.id)} />
         ))}
       </div>
