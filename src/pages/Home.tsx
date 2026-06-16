@@ -2,7 +2,8 @@ import { PenLine, MessagesSquare, Mic } from 'lucide-react'
 import { HeroCard } from '@/components/dashboard/HeroCard'
 import { TaskCard } from '@/components/dashboard/TaskCard'
 import { ChallengeCard } from '@/components/dashboard/ChallengeCard'
-import { Leaderboard } from '@/components/dashboard/Leaderboard'
+import { ThisWeekCard } from '@/components/dashboard/ThisWeekCard'
+import { RecordsCard } from '@/components/dashboard/RecordsCard'
 import { useProgress } from '@/hooks/useProgress'
 import { todayKey } from '@/lib/storage'
 
@@ -63,7 +64,8 @@ export default function Home() {
       {/* RAIL */}
       <aside className="space-y-4">
         <ChallengeCard />
-        <Leaderboard />
+        <ThisWeekCard />
+        <RecordsCard />
       </aside>
     </div>
   )
