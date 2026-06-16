@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Sparkles, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { NAV_ITEMS } from '@/config/nav'
 import { cn } from '@/lib/utils'
 
@@ -12,9 +12,11 @@ interface SidebarProps {
 function Brand() {
   return (
     <NavLink to="/" className="flex items-center gap-2.5 px-2">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-accent">
-        <Sparkles className="h-5 w-5" />
-      </div>
+      <img
+        src="/ana.png"
+        alt="Ana"
+        className="h-10 w-10 shrink-0 rounded-xl border-2 border-primary object-cover"
+      />
       <span className="font-display text-lg font-extrabold leading-none tracking-tight text-foreground">
         English
         <br />

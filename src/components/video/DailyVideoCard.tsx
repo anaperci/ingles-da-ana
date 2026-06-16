@@ -12,17 +12,21 @@ import {
 import { useDailyVideo } from '@/hooks/useDailyVideo'
 import { useInterests } from '@/hooks/useInterests'
 import { useProgress } from '@/hooks/useProgress'
+import { useLocalStore } from '@/hooks/useLocalStore'
+import { todayKey } from '@/lib/storage'
 
 export function DailyVideoCard() {
   const { selected } = useInterests()
   const { video, loading, fromFallback, refresh } = useDailyVideo(selected)
   const { addSession } = useProgress()
   const [open, setOpen] = useState(false)
-  const [watched, setWatched] = useState(false)
+  // persiste a data em que foi assistido — sobrevive a reload, sem contar 2×
+  const [watchedDate, setWatchedDate] = useLocalStore<string>('video:watched', '')
+  const watched = watchedDate === todayKey()
 
   function markWatched() {
     if (watched || !video) return
-    setWatched(true)
+    setWatchedDate(todayKey())
     addSession({
       module: 'video',
       title: `Vídeo · ${video.title.slice(0, 40)}`,

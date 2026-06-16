@@ -55,7 +55,7 @@ export function useProgress() {
   )
 
   const progress = useMemo<UnifiedProgress>(() => {
-    const activeDays = sessions.map((s) => s.date.slice(0, 10))
+    const activeDays = sessions.map((s) => todayKey(new Date(s.date)))
     const { current, longest } = computeStreak(activeDays)
     const scored = sessions.filter((s) => s.score != null)
     const averageScore =

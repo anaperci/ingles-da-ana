@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { Menu, Sparkles } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { Sidebar } from './Sidebar'
 import { LearnChat } from '@/components/chat/LearnChat'
 
@@ -15,9 +15,11 @@ export function AppLayout() {
         {/* Header mobile */}
         <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-white px-4 py-3 lg:hidden">
           <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-accent">
-              <Sparkles className="h-5 w-5" />
-            </div>
+            <img
+              src="/ana.png"
+              alt="Ana"
+              className="h-9 w-9 rounded-xl border-2 border-primary object-cover"
+            />
             <span className="font-display font-extrabold text-foreground">English with Ana</span>
           </div>
           <button

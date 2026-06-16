@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Send, ArrowLeft, Volume2, Loader2 } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -45,27 +45,41 @@ export function ChatView({ scenario, onExit }: ChatViewProps) {
   const endRef = useRef<HTMLDivElement>(null)
   const configured = isBackendConfigured()
 
+  // refs para gravar a sessão UMA vez (ao sair/minimizar), sem over-count
+  const messagesRef = useRef(messages)
+  messagesRef.current = messages
+  const savedRef = useRef(false)
+
+  const saveSession = useCallback(() => {
+    if (savedRef.current) return
+    const userTurns = messagesRef.current.filter((m) => m.role === 'user').length
+    if (userTurns === 0) return
+    savedRef.current = true
+    const minutes = Math.max(1, Math.round((Date.now() - startedAt) / 60000))
+    addSession({
+      module: 'conversation',
+      title: `Conversação · ${scenario.title}`,
+      minutes,
+      score: null,
+      category: scenario.category,
+    })
+  }, [startedAt, scenario.title, scenario.category, addSession])
+
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, loading])
 
-  // grava a sessão ao sair, se houve troca real
+  // grava ao sair (unmount) ou ao minimizar/fechar a aba — só uma vez
   useEffect(() => {
-    return () => {
-      const userTurns = messages.filter((m) => m.role === 'user').length
-      if (userTurns > 0) {
-        const minutes = Math.max(1, Math.round((Date.now() - startedAt) / 60000))
-        addSession({
-          module: 'conversation',
-          title: `Conversação · ${scenario.title}`,
-          minutes,
-          score: null,
-          category: scenario.category,
-        })
-      }
+    const onHide = () => {
+      if (document.visibilityState === 'hidden') saveSession()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messages])
+    document.addEventListener('visibilitychange', onHide)
+    return () => {
+      document.removeEventListener('visibilitychange', onHide)
+      saveSession()
+    }
+  }, [saveSession])
 
   async function send() {
     const text = input.trim()

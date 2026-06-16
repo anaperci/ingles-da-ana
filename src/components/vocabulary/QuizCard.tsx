@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Volume2, Check, X } from 'lucide-react'
 import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { speak } from '@/lib/tts'
 import { buildQuizOptions } from '@/hooks/useVocabulary'

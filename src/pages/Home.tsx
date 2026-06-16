@@ -13,23 +13,24 @@ export default function Home() {
   const { sessions } = useProgress()
 
   const todayMinutes = sessions
-    .filter((s) => s.date.slice(0, 10) === todayKey())
+    .filter((s) => todayKey(new Date(s.date)) === todayKey())
     .reduce((acc, s) => acc + s.minutes, 0)
   const goalPct = Math.min(100, Math.round((todayMinutes / DAILY_GOAL_MIN) * 100))
 
   return (
-    <div className="grid animate-fade-in gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-      {/* MAIN */}
-      <div className="space-y-6">
-        <h1 className="text-2xl font-extrabold lg:text-3xl">
-          Let&apos;s unlock your <span className="text-accent">English</span>, Ana!
-        </h1>
+    <div className="animate-fade-in space-y-6">
+      <h1 className="text-2xl font-extrabold lg:text-3xl">
+        Let&apos;s unlock your <span className="text-accent">English</span>, Ana!
+      </h1>
 
-        <HeroCard pct={goalPct} />
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+        {/* MAIN */}
+        <div className="space-y-6">
+          <HeroCard pct={goalPct} />
 
-        <div>
-          <h2 className="mb-3 text-lg font-bold">Today&apos;s tasks</h2>
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div>
+            <h2 className="mb-3 text-lg font-bold">Today&apos;s tasks</h2>
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             <TaskCard
               variant="default"
               icon={PenLine}
@@ -61,12 +62,13 @@ export default function Home() {
         </div>
       </div>
 
-      {/* RAIL */}
-      <aside className="space-y-4">
-        <ChallengeCard />
-        <ThisWeekCard />
-        <RecordsCard />
-      </aside>
+        {/* RAIL */}
+        <aside className="space-y-4">
+          <ChallengeCard />
+          <ThisWeekCard />
+          <RecordsCard />
+        </aside>
+      </div>
     </div>
   )
 }

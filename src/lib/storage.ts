@@ -32,9 +32,12 @@ export function removeKey(key: string): void {
   }
 }
 
-/** Data de hoje no formato YYYY-MM-DD (fuso local). */
+/** Data no formato YYYY-MM-DD no fuso LOCAL (não UTC). */
 export function todayKey(date = new Date()): string {
-  return date.toISOString().slice(0, 10)
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
 }
 
 /** Chave de metadados do sync (não entra no snapshot). */

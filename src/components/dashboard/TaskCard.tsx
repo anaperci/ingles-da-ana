@@ -60,7 +60,7 @@ export function TaskCard({
 }: TaskCardProps) {
   const s = styles[variant]
   return (
-    <div className={cn('flex flex-col gap-3 rounded-2xl p-5 shadow-soft', s.card)}>
+    <div className={cn('flex h-full flex-col gap-3 rounded-2xl p-5 shadow-soft', s.card)}>
       <div className={cn('flex h-11 w-11 items-center justify-center rounded-xl', s.chip)}>
         <Icon className="h-5 w-5" />
       </div>
@@ -71,7 +71,7 @@ export function TaskCard({
         <h3 className={cn('font-bold', s.title)}>{title}</h3>
         <p className={cn('text-sm', s.desc)}>{desc}</p>
       </div>
-      <div className="mt-1 flex items-center justify-between gap-2">
+      <div className="mt-auto flex items-center justify-between gap-2 pt-1">
         <Link
           to={to}
           className={cn(
