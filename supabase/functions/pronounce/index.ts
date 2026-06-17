@@ -21,9 +21,26 @@ function base64ToBytes(b64: string): Uint8Array {
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
 
-  const key = Deno.env.get('AZURE_SPEECH_KEY')
-  const region = Deno.env.get('AZURE_SPEECH_REGION')
-  if (!key || !region) return json({ error: 'Chaves do Azure não configuradas' }, 500)
+  // À prova de troca: os dois secrets às vezes vêm embaralhados (chave no campo
+  // da região, etc.). Detectamos qual é a chave (longa) e qual é a região (código
+  // curto tipo "eastus"); se nenhum parecer região, usamos o padrão eastus.
+  const raw1 = (Deno.env.get('AZURE_SPEECH_KEY') ?? '').trim()
+  const raw2 = (Deno.env.get('AZURE_SPEECH_REGION') ?? '').trim()
+  const looksLikeKey = (s: string) => s.length > 24
+  const looksLikeRegion = (s: string) =>
+    /^[a-z][a-z0-9]*$/.test(s) && s.length <= 24
+
+  let key = looksLikeKey(raw1) ? raw1 : looksLikeKey(raw2) ? raw2 : raw1
+  // chaves novas da Azure têm 84 chars; 85 = veio com o número "Key 1/2" colado no início
+  if (key.length === 85) key = key.slice(1)
+  const region =
+    looksLikeRegion(raw1) && !looksLikeKey(raw1)
+      ? raw1
+      : looksLikeRegion(raw2) && !looksLikeKey(raw2)
+        ? raw2
+        : 'eastus'
+
+  if (!key) return json({ error: 'Chave do Azure não configurada' }, 500)
 
   let body: Body
   try {
@@ -71,18 +88,20 @@ Deno.serve(async (req: Request) => {
       return json({ error: 'Não consegui entender o áudio. Tente falar mais perto do microfone.' }, 422)
     }
 
+    // A Azure devolve os scores direto no NBest[0] (e nas palavras); algumas
+    // versões aninham em PronunciationAssessment. Lemos os dois, nessa ordem.
     const pa = nbest.PronunciationAssessment ?? {}
     const result = {
-      accuracyScore: pa.AccuracyScore ?? 0,
-      fluencyScore: pa.FluencyScore ?? 0,
-      completenessScore: pa.CompletenessScore ?? 0,
-      pronunciationScore: pa.PronScore ?? 0,
-      prosodyScore: pa.ProsodyScore ?? undefined,
+      accuracyScore: nbest.AccuracyScore ?? pa.AccuracyScore ?? 0,
+      fluencyScore: nbest.FluencyScore ?? pa.FluencyScore ?? 0,
+      completenessScore: nbest.CompletenessScore ?? pa.CompletenessScore ?? 0,
+      pronunciationScore: nbest.PronScore ?? pa.PronScore ?? 0,
+      prosodyScore: nbest.ProsodyScore ?? pa.ProsodyScore ?? undefined,
       recognizedText: data?.DisplayText ?? '',
       words: (nbest.Words ?? []).map((w: any) => ({
         word: w.Word,
-        accuracyScore: w.PronunciationAssessment?.AccuracyScore ?? 0,
-        errorType: w.PronunciationAssessment?.ErrorType,
+        accuracyScore: w.AccuracyScore ?? w.PronunciationAssessment?.AccuracyScore ?? 0,
+        errorType: w.ErrorType ?? w.PronunciationAssessment?.ErrorType,
       })),
     }
 
