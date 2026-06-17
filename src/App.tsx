@@ -9,6 +9,7 @@ import Video from '@/pages/Video'
 import Writing from '@/pages/Writing'
 import SentenceFrames from '@/pages/SentenceFrames'
 import SoundVerbs from '@/pages/SoundVerbs'
+import Notes from '@/pages/Notes'
 import NotFound from '@/pages/NotFound'
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/escrita" element={<Writing />} />
         <Route path="/estruturas" element={<SentenceFrames />} />
         <Route path="/verbos-som" element={<SoundVerbs />} />
+        <Route path="/notes" element={<Notes />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

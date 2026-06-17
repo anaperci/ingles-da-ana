@@ -8,6 +8,7 @@ import {
   PenLine,
   Blocks,
   AudioLines,
+  NotebookPen,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -29,6 +30,7 @@ export const NAV_ITEMS: NavItem[] = [
   { to: '/verbos', label: 'Verbs', icon: Repeat },
   { to: '/verbos-som', label: 'Verb sounds', icon: AudioLines },
   { to: '/escrita', label: 'Writing', icon: PenLine },
+  { to: '/notes', label: 'Notes', icon: NotebookPen },
   { to: '/estruturas', label: 'Sentence frames', icon: Blocks },
   { to: '/conversacao', label: 'Conversation', icon: MessagesSquare },
   { to: '/pronuncia', label: 'Pronunciation', icon: Mic },
