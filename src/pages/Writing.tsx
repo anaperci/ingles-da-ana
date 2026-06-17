@@ -72,9 +72,21 @@ Responda APENAS com um JSON válido, sem markdown e sem cercas de código, exata
 
 function parseFeedback(reply: string): WritingFeedback {
   let txt = reply.trim()
+  // remove cercas de código, se houver
   const fence = txt.match(/```(?:json)?\s*([\s\S]*?)```/i)
   if (fence) txt = fence[1].trim()
-  const obj = JSON.parse(txt) as Partial<WritingFeedback>
+
+  let obj: Partial<WritingFeedback>
+  try {
+    obj = JSON.parse(txt) as Partial<WritingFeedback>
+  } catch {
+    // fallback: extrai do primeiro "{" ao último "}"
+    const start = txt.indexOf('{')
+    const end = txt.lastIndexOf('}')
+    if (start === -1 || end <= start) throw new SyntaxError('sem JSON')
+    obj = JSON.parse(txt.slice(start, end + 1)) as Partial<WritingFeedback>
+  }
+
   const items = Array.isArray(obj.items) ? obj.items : []
   const okCount = items.filter((it) => it.ok).length
   const score = items.length ? Math.round((okCount / items.length) * 100) : 0
@@ -131,6 +143,8 @@ function DailySentencesTab() {
       const data = await callFunction<{ reply: string }>('chat', {
         system: WRITING_SYSTEM,
         messages: [{ role: 'user', content: JSON.stringify(payload) }],
+        json: true,
+        maxTokens: 2500,
       })
       complete(parseFeedback(data.reply))
     } catch (e) {

@@ -12,6 +12,10 @@ const MODEL = Deno.env.get('OPENAI_MODEL') ?? 'gpt-4o-mini'
 interface ChatBody {
   system: string
   messages: { role: 'user' | 'assistant'; content: string }[]
+  /** limite de tokens da resposta (padrão 500) */
+  maxTokens?: number
+  /** força a OpenAI a devolver JSON válido (JSON mode) */
+  json?: boolean
 }
 
 Deno.serve(async (req: Request) => {
@@ -39,7 +43,8 @@ Deno.serve(async (req: Request) => {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 500,
+        max_tokens: Math.min(body.maxTokens ?? 500, 4000),
+        ...(body.json ? { response_format: { type: 'json_object' } } : {}),
         messages: [
           { role: 'system', content: body.system ?? '' },
           ...body.messages.map((m) => ({ role: m.role, content: m.content })),
