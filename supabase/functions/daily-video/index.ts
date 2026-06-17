@@ -9,6 +9,10 @@ interface Body {
   queries: string[]
 }
 
+// "Por hora" só vídeos deste canal (Matheus Werner Jerke). Deixe '' para voltar
+// a buscar pelo mundo todo a partir dos interesses (queries).
+const ONLY_CHANNEL_ID = 'UCX-fPLuEcgUWs-oSu5ttFoQ'
+
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
 
@@ -27,12 +31,19 @@ Deno.serve(async (req: Request) => {
 
   const url = new URL('https://www.googleapis.com/youtube/v3/search')
   url.searchParams.set('part', 'snippet')
-  url.searchParams.set('q', query)
   url.searchParams.set('type', 'video')
   url.searchParams.set('videoEmbeddable', 'true')
-  url.searchParams.set('relevanceLanguage', 'en')
-  url.searchParams.set('maxResults', '15')
+  url.searchParams.set('maxResults', '25')
   url.searchParams.set('key', key)
+
+  if (ONLY_CHANNEL_ID) {
+    // Só vídeos do canal fixo — ignora as queries e varia pelos mais recentes.
+    url.searchParams.set('channelId', ONLY_CHANNEL_ID)
+    url.searchParams.set('order', 'date')
+  } else {
+    url.searchParams.set('q', query)
+    url.searchParams.set('relevanceLanguage', 'en')
+  }
 
   try {
     const res = await fetch(url.toString())
