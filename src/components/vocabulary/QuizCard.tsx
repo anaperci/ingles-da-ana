@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
-import { Volume2, Check, X } from 'lucide-react'
+import { Volume2, Check, X, ArrowRight } from 'lucide-react'
 import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { speak } from '@/lib/tts'
+import { CorrectionCard } from '@/components/common/CorrectionCard'
 import { buildQuizOptions } from '@/hooks/useVocabulary'
 import type { ReviewQuality } from '@/lib/srs'
 import type { VocabWord } from '@/types/vocabulary'
@@ -17,12 +19,16 @@ export function QuizCard({ word, pool, onanswer }: QuizCardProps) {
   const options = useMemo(() => buildQuizOptions(word, pool), [word, pool])
   const [selected, setSelected] = useState<string | null>(null)
 
+  const isWrong = selected !== null && selected !== word.translation
+
   function choose(option: string) {
     if (selected) return
     setSelected(option)
     const correct = option === word.translation
-    // resposta de quiz: acerto = 4, erro = 1
-    setTimeout(() => onanswer(correct ? 4 : 1, correct), 900)
+    // acertou: avança sozinho. Errou: espera ela ler a correção e clicar "Continuar".
+    if (correct) {
+      setTimeout(() => onanswer(4, true), 900)
+    }
   }
 
   return (
@@ -37,9 +43,7 @@ export function QuizCard({ word, pool, onanswer }: QuizCardProps) {
           <Volume2 className="h-5 w-5" />
         </button>
       </div>
-      <p className="text-center text-sm text-muted-foreground">
-        Qual a tradução?
-      </p>
+      <p className="text-center text-sm text-muted-foreground">Qual a tradução?</p>
 
       <div className="grid gap-3">
         {options.map((opt) => {
@@ -66,6 +70,22 @@ export function QuizCard({ word, pool, onanswer }: QuizCardProps) {
           )
         })}
       </div>
+
+      {/* Correção quando erra: tradução certa + exemplo, e botão pra seguir */}
+      {isWrong && (
+        <>
+          <CorrectionCard
+            ok={false}
+            answer={`${word.word} = ${word.translation}`}
+            speakAnswer={false}
+            example={word.example}
+            exampleTranslation={word.exampleTranslation}
+          />
+          <Button className="w-full" onClick={() => onanswer(1, false)}>
+            Continuar <ArrowRight className="h-4 w-4" />
+          </Button>
+        </>
+      )}
     </Card>
   )
 }

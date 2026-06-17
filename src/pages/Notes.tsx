@@ -13,13 +13,14 @@ import {
 import { PageHeader } from '@/components/common/PageHeader'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { MarkdownEditor } from '@/components/notes/MarkdownEditor'
+import { Markdown } from '@/components/notes/Markdown'
 import { loadJSON, saveJSON, removeKey } from '@/lib/storage'
 import {
   listNotes,
@@ -252,9 +253,9 @@ function NoteCard({
       </div>
 
       {note.content && (
-        <p className="mt-2 line-clamp-3 whitespace-pre-wrap text-sm text-muted-foreground">
+        <Markdown className="mt-2 line-clamp-3 text-sm prose-p:text-muted-foreground prose-li:text-muted-foreground">
           {note.content}
-        </p>
+        </Markdown>
       )}
 
       <div className="mt-4 flex items-center justify-between gap-2 pt-1">
@@ -361,13 +362,22 @@ function NoteModal({
             placeholder="Título"
             autoFocus
           />
-          <Textarea
+          <MarkdownEditor
             value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Escreva o que aprendeu…"
+            onChange={setContent}
+            placeholder="Escreva o que aprendeu…  (negrito, itálico, listas e markdown suportados)"
             rows={8}
-            className="resize-y"
           />
+          {content.trim() && (
+            <details className="rounded-lg border border-input bg-muted/30 px-3 py-2 text-sm">
+              <summary className="cursor-pointer select-none font-medium text-muted-foreground">
+                Pré-visualizar
+              </summary>
+              <div className="mt-2">
+                <Markdown>{content}</Markdown>
+              </div>
+            </details>
+          )}
           <div className="relative">
             <TagIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input

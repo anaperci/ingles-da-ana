@@ -65,8 +65,8 @@ export default function Writing() {
 
 const WRITING_SYSTEM = `Você é uma professora de inglês corrigindo as frases da Ana — brasileira, nível iniciante/intermediário, se preparando para morar em Malta. Cada frase tinha uma palavra-alvo. Avalie se a frase está correta e natural em inglês. Seja gentil, direta e útil.
 
-Para CADA frase, traga sempre:
-- "correction": a frase certa em inglês (se já estava correta, repita a original).
+Para CADA frase, traga sempre (NUNCA deixe "correction" vazio):
+- "correction": a frase COMPLETA do jeito certo e natural em inglês. Se a frase dela já estava correta, repita-a (ou dê a versão mais natural). Esse campo é obrigatório em toda frase.
 - "note": explique em português o que estava errado e POR QUÊ (qual a regra que foi quebrada). Se estava certa, elogie e diga por que está natural.
 - "rule": o jeito certo de fazer — a regra prática em português para acertar da próxima vez, com um mini-exemplo curto em inglês. Ex.: "Dias da semana usam 'on': on Monday, on Saturday."
 
@@ -453,18 +453,26 @@ function SentenceCorrection({ fb }: { fb: SentenceFeedback }) {
         )}
       </div>
 
-      {/* O jeito certo: a frase corrigida */}
-      {!fb.ok && (
-        <p className="mb-1.5 font-medium text-foreground">
-          <span className="mr-1 text-xs font-normal uppercase tracking-wide text-muted-foreground">
-            certo:
+      {/* A forma certa: a frase modelo (sempre, mesmo quando já estava certa) */}
+      {fb.correction && (
+        <p className="mb-1.5 flex items-center gap-1.5 font-medium text-foreground">
+          <span className="text-xs font-normal uppercase tracking-wide text-muted-foreground">
+            {fb.ok ? 'forma certa:' : 'certo:'}
           </span>
           {fb.correction}
+          <button
+            type="button"
+            onClick={() => speak(fb.correction)}
+            aria-label={`Ouvir ${fb.correction}`}
+            className="text-muted-foreground hover:text-primary"
+          >
+            <Volume2 className="h-3.5 w-3.5" />
+          </button>
         </p>
       )}
 
       {/* Explicação: por que estava assim */}
-      <p className="text-muted-foreground">{fb.note}</p>
+      {fb.note && <p className="text-muted-foreground">{fb.note}</p>}
 
       {/* Regra prática: como fazer certo na próxima */}
       {fb.rule && (

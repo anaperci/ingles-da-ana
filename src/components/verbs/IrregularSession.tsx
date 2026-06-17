@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { speak } from '@/lib/tts'
 import { PronounceButton } from '@/components/common/PronounceButton'
+import { CorrectionCard } from '@/components/common/CorrectionCard'
 import { useVerbs } from '@/hooks/useVerbs'
 import { useProgress } from '@/hooks/useProgress'
 import { useShowTranslation } from '@/hooks/useShowTranslation'
@@ -262,6 +263,17 @@ function TypeCard({
         <Field label="Passado simples" value={past} onChange={setPast} state={checked?.pastOk} answer={verb.past} disabled={!!checked} onEnter={submit} />
         <Field label="Particípio passado" value={participle} onChange={setParticiple} state={checked?.partOk} answer={verb.pastParticiple} disabled={!!checked} onEnter={submit} />
       </div>
+
+      {/* Correção: forma certa + dica + exemplo no passado */}
+      {checked && (!checked.pastOk || !checked.partOk) && (
+        <CorrectionCard
+          ok={false}
+          answer={`${verb.present} → ${verb.past} → ${verb.pastParticiple}`}
+          note={verb.pronunciationTip}
+          example={verb.examplePast.en}
+          exampleTranslation={verb.examplePast.pt}
+        />
+      )}
 
       {!checked && (
         <Button className="w-full" variant="gradient" onClick={submit} disabled={!past && !participle}>

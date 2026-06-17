@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Check, X, ArrowRight, Volume2 } from 'lucide-react'
+import { Check, ArrowRight, Volume2 } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { speak } from '@/lib/tts'
 import { cn } from '@/lib/utils'
+import { CorrectionCard } from '@/components/common/CorrectionCard'
 import { useProgress } from '@/hooks/useProgress'
 import { normalize } from '@/lib/pronunciation/evaluator'
 import type { SoundVerb } from '@/data/soundVerbs'
@@ -83,10 +84,13 @@ export function VerbWriter({ verb }: { verb: SoundVerb }) {
           </p>
         )}
         {pastVerdict === 'wrong' && (
-          <p className="flex items-center gap-2 text-sm text-error">
-            <X className="h-4 w-4" /> Quase. O passado é{' '}
-            <span className="font-mono font-semibold">{verb.past}</span>.
-          </p>
+          <CorrectionCard
+            ok={false}
+            your={pastAnswer}
+            answer={`${verb.base} → ${verb.past}`}
+            example={verb.examplePast.en}
+            exampleTranslation={verb.examplePast.pt}
+          />
         )}
       </Card>
 
@@ -129,10 +133,12 @@ export function VerbWriter({ verb }: { verb: SoundVerb }) {
           </div>
         )}
         {sentenceVerdict === 'wrong' && (
-          <p className="flex items-center gap-2 text-sm text-error">
-            <X className="h-4 w-4" /> Faltou o passado{' '}
-            <span className="font-mono font-semibold">{verb.past}</span> na frase. Tente de novo.
-          </p>
+          <CorrectionCard
+            ok={false}
+            answer={verb.examplePast.en}
+            exampleTranslation={verb.examplePast.pt}
+            note={`Faltou o passado "${verb.past}" na frase. Use a forma do passado.`}
+          />
         )}
       </Card>
     </div>

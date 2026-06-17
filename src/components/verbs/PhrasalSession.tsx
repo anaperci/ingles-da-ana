@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { speak } from '@/lib/tts'
 import { PronounceButton } from '@/components/common/PronounceButton'
+import { CorrectionCard } from '@/components/common/CorrectionCard'
 import { useVerbs, buildOptions } from '@/hooks/useVerbs'
 import { useProgress } from '@/hooks/useProgress'
 import { useShowTranslation } from '@/hooks/useShowTranslation'
@@ -134,8 +135,14 @@ function MatchCard({ pv, onAnswer }: { pv: PhrasalVerb; onAnswer: (ok: boolean) 
           )
         })}
       </div>
-      {selected && show && (
-        <p className="text-center text-sm text-muted-foreground">“{pv.example}” — {pv.exampleTranslation}</p>
+      {selected && (
+        <CorrectionCard
+          ok={selected === pv.translation}
+          answer={`${pv.phrasal} = ${pv.translation}`}
+          speakAnswer={false}
+          example={pv.example}
+          exampleTranslation={pv.exampleTranslation}
+        />
       )}
     </Card>
   )
@@ -188,6 +195,15 @@ function CompleteCard({ pv, onAnswer }: { pv: PhrasalVerb; onAnswer: (ok: boolea
           )
         })}
       </div>
+      {selected && (
+        <CorrectionCard
+          ok={selected === pv.phrasal}
+          answer={pv.phrasal}
+          note={`Significa: ${pv.translation}`}
+          example={pv.example}
+          exampleTranslation={pv.exampleTranslation}
+        />
+      )}
     </Card>
   )
 }
