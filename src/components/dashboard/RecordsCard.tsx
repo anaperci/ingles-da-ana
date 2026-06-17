@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
-import { Trophy, GraduationCap, Clock, Target } from 'lucide-react'
+import { Trophy, GraduationCap, Clock, Target, Star } from 'lucide-react'
 import { useProgress } from '@/hooks/useProgress'
+import { useWritingPoints } from '@/hooks/useWritingPoints'
 import { currentWeek } from '@/lib/week'
 import { todayKey } from '@/lib/storage'
 
@@ -20,6 +21,7 @@ function Row({ icon: Icon, value, label }: { icon: LucideIcon; value: string; la
 
 export function RecordsCard() {
   const { progress, sessions } = useProgress()
+  const writing = useWritingPoints()
 
   const weekKeys = new Set(currentWeek().map((d) => d.key))
   const weekMinutes = sessions
@@ -42,6 +44,11 @@ export function RecordsCard() {
           icon={Target}
           value={hasScores ? `${progress.averageScore}%` : '—'}
           label="Avg. score"
+        />
+        <Row
+          icon={Star}
+          value={`${writing.total}`}
+          label={`Writing pts · Lv.${writing.level.current.level}`}
         />
       </div>
     </div>

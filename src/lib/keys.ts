@@ -8,6 +8,7 @@ export const STORAGE_KEYS = {
   dailyVideo: 'video:daily',
   showTranslation: 'pref:show-translation',
   dailyWriting: 'writing:daily',
+  writingSrs: 'writing:srs',
   commonWordsKnown: 'words:known',
   framesWriting: 'frames:writing',
 } as const

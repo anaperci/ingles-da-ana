@@ -12,9 +12,13 @@ import {
   Lightbulb,
   HelpCircle,
   X,
+  Star,
+  RotateCcw,
 } from 'lucide-react'
 import { callFunction, NotConfiguredError } from '@/lib/api'
 import type { WritingFeedback, SentenceFeedback } from '@/types/writing'
+import { useWritingPoints } from '@/hooks/useWritingPoints'
+import { WritingPointsCard } from '@/components/writing/WritingPointsCard'
 import { PageHeader } from '@/components/common/PageHeader'
 import { TranslationToggle } from '@/components/common/TranslationToggle'
 import { Card } from '@/components/ui/card'
@@ -61,10 +65,15 @@ export default function Writing() {
 
 const WRITING_SYSTEM = `Você é uma professora de inglês corrigindo as frases da Ana — brasileira, nível iniciante/intermediário, se preparando para morar em Malta. Cada frase tinha uma palavra-alvo. Avalie se a frase está correta e natural em inglês. Seja gentil, direta e útil.
 
+Para CADA frase, traga sempre:
+- "correction": a frase certa em inglês (se já estava correta, repita a original).
+- "note": explique em português o que estava errado e POR QUÊ (qual a regra que foi quebrada). Se estava certa, elogie e diga por que está natural.
+- "rule": o jeito certo de fazer — a regra prática em português para acertar da próxima vez, com um mini-exemplo curto em inglês. Ex.: "Dias da semana usam 'on': on Monday, on Saturday."
+
 Responda APENAS com um JSON válido, sem markdown e sem cercas de código, exatamente neste formato:
 {
   "items": [
-    { "wordId": "<o id recebido>", "ok": <true se já estava correta, senão false>, "correction": "<a frase corrigida em inglês; se já estava certa, repita a original>", "note": "<explicação curta em português do que estava certo ou errado e por quê>" }
+    { "wordId": "<o id recebido>", "ok": <true se já estava correta, senão false>, "correction": "<a frase corrigida em inglês>", "note": "<o que estava errado e por quê, em português>", "rule": "<a regra prática + mini-exemplo, em português>" }
   ],
   "insights": ["<2 a 4 dicas gerais em português, a partir dos padrões de erro que você observou>"],
   "summary": "<1 a 2 frases de resumo encorajador em português>"
@@ -148,6 +157,7 @@ function parseFeedback(reply: string): WritingFeedback {
       ok: Boolean(o.ok),
       correction: String(o.correction),
       note: typeof o.note === 'string' ? o.note : '',
+      rule: typeof o.rule === 'string' ? o.rule : undefined,
     }))
 
   if (items.length === 0) throw new SyntaxError('sem itens aproveitáveis')
@@ -170,6 +180,7 @@ function DailySentencesTab() {
     date,
     sentences,
     writtenCount,
+    reviewCount,
     goal,
     completed,
     feedback,
@@ -178,6 +189,7 @@ function DailySentencesTab() {
     complete,
   } = useDailyWriting()
   const { show: showTranslation } = useShowTranslation()
+  const { todayPoints } = useWritingPoints()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const pct = Math.round((writtenCount / goal) * 100)
@@ -249,6 +261,9 @@ function DailySentencesTab() {
 
   return (
     <div className="space-y-6">
+      {/* Pontuação acumulada */}
+      <WritingPointsCard />
+
       {/* Resumo do dia */}
       <Card className="border-primary/20 bg-soft p-5">
         <div className="flex flex-wrap items-center justify-between gap-4">
@@ -261,6 +276,12 @@ function DailySentencesTab() {
               {writtenCount}
               <span className="text-muted-foreground">/{goal} frases</span>
             </div>
+            {reviewCount > 0 && (
+              <div className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-accent-dark">
+                <RotateCcw className="h-3.5 w-3.5" />
+                {reviewCount} {reviewCount === 1 ? 'palavra de revisão' : 'palavras de revisão'}
+              </div>
+            )}
           </div>
           <div className="flex items-center gap-3">
             {completed ? (
@@ -286,13 +307,15 @@ function DailySentencesTab() {
         <Progress value={pct} className="mt-4" />
         <p className="mt-2 text-sm text-muted-foreground">
           Escreva o que souber e marque <strong>“não sei”</strong> no resto — pode
-          finalizar a qualquer momento que a IA corrige suas frases e traz dicas.
+          finalizar a qualquer momento que a IA corrige suas frases e traz dicas. As
+          palavras que você <strong>errar voltam noutro dia</strong>, em uma frase
+          nova, até você dominar.
         </p>
         {error && <p className="mt-2 text-sm text-error">{error}</p>}
       </Card>
 
       {/* Avaliação da IA */}
-      {feedback && <FeedbackSummary feedback={feedback} />}
+      {feedback && <FeedbackSummary feedback={feedback} earned={todayPoints} />}
 
       {/* Lista de frases */}
       <div className="space-y-3">
@@ -320,6 +343,11 @@ function DailySentencesTab() {
                 >
                   <Volume2 className="h-4 w-4" />
                 </button>
+                {s.review && (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-[11px] font-semibold text-accent-dark">
+                    <RotateCcw className="h-3 w-3" /> revisão
+                  </span>
+                )}
                 {showTranslation && (
                   <span className="text-sm text-muted-foreground">— {s.translation}</span>
                 )}
@@ -361,12 +389,23 @@ function DailySentencesTab() {
   )
 }
 
-function FeedbackSummary({ feedback }: { feedback: WritingFeedback }) {
+function FeedbackSummary({
+  feedback,
+  earned,
+}: {
+  feedback: WritingFeedback
+  earned?: number
+}) {
   return (
     <Card className="space-y-3 p-5">
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <Sparkles className="h-5 w-5 text-primary" />
         <span className="font-semibold">Avaliação da IA</span>
+        {earned ? (
+          <Badge className="gap-1 bg-accent text-accent-foreground">
+            <Star className="h-3.5 w-3.5" /> +{earned} pts
+          </Badge>
+        ) : null}
         <Badge className="ml-auto bg-primary text-primary-foreground">
           {feedback.score}% certas
         </Badge>
@@ -413,8 +452,27 @@ function SentenceCorrection({ fb }: { fb: SentenceFeedback }) {
           </>
         )}
       </div>
-      {!fb.ok && <p className="font-medium text-foreground">{fb.correction}</p>}
+
+      {/* O jeito certo: a frase corrigida */}
+      {!fb.ok && (
+        <p className="mb-1.5 font-medium text-foreground">
+          <span className="mr-1 text-xs font-normal uppercase tracking-wide text-muted-foreground">
+            certo:
+          </span>
+          {fb.correction}
+        </p>
+      )}
+
+      {/* Explicação: por que estava assim */}
       <p className="text-muted-foreground">{fb.note}</p>
+
+      {/* Regra prática: como fazer certo na próxima */}
+      {fb.rule && (
+        <div className="mt-2 flex items-start gap-1.5 rounded-md bg-soft px-2.5 py-2 text-soft-text">
+          <Lightbulb className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent-dark" />
+          <p>{fb.rule}</p>
+        </div>
+      )}
     </div>
   )
 }

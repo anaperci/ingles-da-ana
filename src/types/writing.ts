@@ -13,6 +13,8 @@ export interface DailySentence {
   text: string
   /** marcada como "não sei" — pula a frase sem precisar escrever */
   dontKnow?: boolean
+  /** palavra que voltou da fila de revisão (errou antes, está sendo recobrada) */
+  review?: boolean
 }
 
 /** Correção da IA para uma frase. */
@@ -22,8 +24,10 @@ export interface SentenceFeedback {
   ok: boolean
   /** versão corrigida (ou a mesma, se já estiver certa) */
   correction: string
-  /** explicação curta em PT do erro/acerto */
+  /** explicação em PT do que estava errado e por quê */
   note: string
+  /** o jeito certo de fazer: a regra prática a aplicar na próxima */
+  rule?: string
 }
 
 /** Avaliação completa do dia, vinda da IA. */
