@@ -12,6 +12,8 @@ interface Body {
 // "Por hora" só vídeos deste canal (Matheus Werner Jerke). Deixe '' para voltar
 // a buscar pelo mundo todo a partir dos interesses (queries).
 const ONLY_CHANNEL_ID = 'UCX-fPLuEcgUWs-oSu5ttFoQ'
+// Dentro do canal, foca em vídeos de conversação (títulos em PT). '' = todos.
+const CHANNEL_QUERY = 'conversação'
 
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
@@ -37,9 +39,10 @@ Deno.serve(async (req: Request) => {
   url.searchParams.set('key', key)
 
   if (ONLY_CHANNEL_ID) {
-    // Só vídeos do canal fixo — ignora as queries e varia pelos mais recentes.
+    // Só vídeos do canal fixo, focados em conversação (varia por relevância).
     url.searchParams.set('channelId', ONLY_CHANNEL_ID)
-    url.searchParams.set('order', 'date')
+    if (CHANNEL_QUERY) url.searchParams.set('q', CHANNEL_QUERY)
+    else url.searchParams.set('order', 'date')
   } else {
     url.searchParams.set('q', query)
     url.searchParams.set('relevanceLanguage', 'en')
