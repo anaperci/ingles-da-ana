@@ -18,6 +18,15 @@ interface Body {
   payload?: unknown
 }
 
+// Conexão reaproveitada entre invocações (evita handshake TLS a cada chamada).
+// Esta function roda no boot do app, então a latência conta dobrado.
+// deno-lint-ignore no-explicit-any
+let _sql: any = null
+function db(dbUrl: string) {
+  if (!_sql) _sql = postgres(dbUrl, { prepare: false })
+  return _sql
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -36,7 +45,7 @@ Deno.serve(async (req: Request) => {
   const accountId = (body?.accountId ?? '').toString().trim()
   if (!accountId) return json({ error: 'accountId obrigatório' }, 400)
 
-  const sql = postgres(dbUrl, { prepare: false })
+  const sql = db(dbUrl)
   try {
     if (body.payload !== undefined) {
       const rows = await sql`
@@ -58,8 +67,7 @@ Deno.serve(async (req: Request) => {
       updated_at: rows[0]?.updated_at ?? null,
     })
   } catch (e) {
+    _sql = null // conexão caiu: reconecta na próxima
     return json({ error: String(e) }, 500)
-  } finally {
-    await sql.end()
   }
 })

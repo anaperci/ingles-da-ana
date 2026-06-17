@@ -1,32 +1,122 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { Loader2 } from 'lucide-react'
 import { AppLayout } from '@/components/layout/AppLayout'
-import Home from '@/pages/Home'
-import Vocabulary from '@/pages/Vocabulary'
-import Verbs from '@/pages/Verbs'
-import Conversation from '@/pages/Conversation'
-import Pronunciation from '@/pages/Pronunciation'
-import Video from '@/pages/Video'
-import Writing from '@/pages/Writing'
-import SentenceFrames from '@/pages/SentenceFrames'
-import SoundVerbs from '@/pages/SoundVerbs'
-import Notes from '@/pages/Notes'
-import NotFound from '@/pages/NotFound'
+
+// Code-splitting por rota: cada página vira um chunk próprio, carregado só quando
+// acessada. O JS inicial fica enxuto (a Home não puxa markdown, gravador, etc.).
+const Home = lazy(() => import('@/pages/Home'))
+const Vocabulary = lazy(() => import('@/pages/Vocabulary'))
+const Verbs = lazy(() => import('@/pages/Verbs'))
+const Conversation = lazy(() => import('@/pages/Conversation'))
+const Pronunciation = lazy(() => import('@/pages/Pronunciation'))
+const Video = lazy(() => import('@/pages/Video'))
+const Writing = lazy(() => import('@/pages/Writing'))
+const SentenceFrames = lazy(() => import('@/pages/SentenceFrames'))
+const SoundVerbs = lazy(() => import('@/pages/SoundVerbs'))
+const Notes = lazy(() => import('@/pages/Notes'))
+const NotFound = lazy(() => import('@/pages/NotFound'))
+
+function PageFallback() {
+  return (
+    <div className="flex items-center justify-center py-24 text-muted-foreground">
+      <Loader2 className="h-6 w-6 animate-spin" />
+    </div>
+  )
+}
 
 export default function App() {
   return (
     <Routes>
       <Route element={<AppLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/vocabulario" element={<Vocabulary />} />
-        <Route path="/verbos" element={<Verbs />} />
-        <Route path="/conversacao" element={<Conversation />} />
-        <Route path="/pronuncia" element={<Pronunciation />} />
-        <Route path="/videos" element={<Video />} />
-        <Route path="/escrita" element={<Writing />} />
-        <Route path="/estruturas" element={<SentenceFrames />} />
-        <Route path="/verbos-som" element={<SoundVerbs />} />
-        <Route path="/notes" element={<Notes />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/vocabulario"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Vocabulary />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/verbos"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Verbs />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/conversacao"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Conversation />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/pronuncia"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Pronunciation />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/videos"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Video />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/escrita"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Writing />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/estruturas"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <SentenceFrames />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/verbos-som"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <SoundVerbs />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/notes"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Notes />
+            </Suspense>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <NotFound />
+            </Suspense>
+          }
+        />
       </Route>
     </Routes>
   )

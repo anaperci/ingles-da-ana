@@ -17,9 +17,10 @@ function render() {
   )
 }
 
-// Puxa o progresso da nuvem (se mais recente) antes de montar a UI, depois liga
-// o autosave. Falhas são silenciosas — o app sempre abre com o estado local.
+// Renderiza JÁ com o estado local (abertura instantânea) e puxa a nuvem em
+// segundo plano: se vier mais nova, os stores se atualizam sozinhos via evento.
+// O autosave só liga DEPOIS do pull, pra não empurrar local velho sobre nuvem nova.
+render()
 loadCloudIntoLocal().finally(() => {
-  render()
   startCloudAutosave()
 })

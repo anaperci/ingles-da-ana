@@ -51,6 +51,10 @@ export async function loadCloudIntoLocal(timeoutMs = 3000): Promise<void> {
       if (cloudMs > getLocalUpdatedAt()) {
         restoreAll(res.payload)
         setLocalUpdatedAt(cloudMs)
+        // como o app já renderizou, avisa cada store pra reler o valor restaurado
+        for (const key of Object.keys(res.payload)) {
+          window.dispatchEvent(new CustomEvent(STORE_EVENT, { detail: { key } }))
+        }
       }
     }
   } catch {

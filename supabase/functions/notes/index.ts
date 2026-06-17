@@ -29,9 +29,21 @@ interface Body {
 
 const COLS = 'id, title, content, tag, created_at, updated_at'
 
-// Garante a tabela (idempotente) — o banco é IPv6-only, então o bootstrap mora aqui.
+// Conexão reaproveitada entre invocações (a instância da function persiste quando
+// está "quente"): evita o handshake TLS no Postgres a cada request. ~1.5s -> ~0.3s.
+// deno-lint-ignore no-explicit-any
+let _sql: any = null
+function db(dbUrl: string) {
+  if (!_sql) _sql = postgres(dbUrl, { prepare: false })
+  return _sql
+}
+
+// Garante a tabela só UMA vez por instância (idempotente). O banco é IPv6-only,
+// então o bootstrap mora aqui — mas não precisa rodar DDL em toda requisição.
+let tableReady = false
 // deno-lint-ignore no-explicit-any
 async function ensureTable(sql: any): Promise<void> {
+  if (tableReady) return
   await sql.unsafe(`
     create schema if not exists ingles;
     create table if not exists ingles.notes (
@@ -47,6 +59,7 @@ async function ensureTable(sql: any): Promise<void> {
       on ingles.notes (user_id, created_at desc);
     alter table ingles.notes enable row level security;
   `)
+  tableReady = true
 }
 
 Deno.serve(async (req: Request) => {
@@ -67,7 +80,7 @@ Deno.serve(async (req: Request) => {
   const accountId = (body?.accountId ?? '').toString().trim() || 'ana'
   const action = body?.action ?? 'list'
 
-  const sql = postgres(dbUrl, { prepare: false })
+  const sql = db(dbUrl)
   try {
     await ensureTable(sql)
 
@@ -114,8 +127,8 @@ Deno.serve(async (req: Request) => {
 
     return json({ error: 'ação inválida' }, 400)
   } catch (e) {
+    // se a conexão caiu, descarta pra reconectar na próxima
+    _sql = null
     return json({ error: String(e) }, 500)
-  } finally {
-    await sql.end()
   }
 })
