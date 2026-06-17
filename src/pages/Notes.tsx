@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   NotebookPen,
   Plus,
@@ -22,14 +22,8 @@ import {
 import { MarkdownEditor } from '@/components/notes/MarkdownEditor'
 import { Markdown } from '@/components/notes/Markdown'
 import { loadJSON, saveJSON, removeKey } from '@/lib/storage'
-import {
-  listNotes,
-  createNote,
-  updateNote,
-  deleteNote,
-  type Note,
-  type NoteInput,
-} from '@/lib/notes'
+import { useNotes } from '@/hooks/useNotes'
+import type { Note, NoteInput } from '@/lib/notes'
 
 const DRAFT_KEY = 'notes:draft'
 
@@ -46,29 +40,12 @@ function formatDate(iso: string): string {
 }
 
 export default function Notes() {
-  const [notes, setNotes] = useState<Note[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const { notes, loading, error, create, update, remove } = useNotes()
   const [query, setQuery] = useState('')
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Note | null>(null)
   const [confirm, setConfirm] = useState<Note | null>(null)
   const [deleting, setDeleting] = useState(false)
-
-  const refresh = useCallback(async () => {
-    setError(null)
-    try {
-      setNotes(await listNotes())
-    } catch (e) {
-      setError((e as Error).message)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    refresh()
-  }, [refresh])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -95,13 +72,10 @@ export default function Notes() {
     if (!confirm) return
     setDeleting(true)
     try {
-      await deleteNote(confirm.id)
-      setNotes((prev) => prev.filter((n) => n.id !== confirm.id))
-      setConfirm(null)
-    } catch (e) {
-      setError((e as Error).message)
+      await remove(confirm.id) // otimista: some da tela na hora
     } finally {
       setDeleting(false)
+      setConfirm(null)
     }
   }
 
@@ -158,7 +132,9 @@ export default function Notes() {
         open={modalOpen}
         note={editing}
         onClose={() => setModalOpen(false)}
-        onSaved={refresh}
+        onSubmit={(input) =>
+          editing ? update(editing.id, input) : create(input)
+        }
       />
 
       {/* Confirmação de exclusão */}
@@ -278,17 +254,16 @@ function NoteModal({
   open,
   note,
   onClose,
-  onSaved,
+  onSubmit,
 }: {
   open: boolean
   note: Note | null
   onClose: () => void
-  onSaved: () => void
+  onSubmit: (input: NoteInput) => Promise<void>
 }) {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [tag, setTag] = useState('')
-  const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [err, setErr] = useState<string | null>(null)
 
@@ -315,37 +290,25 @@ function NoteModal({
     saveJSON(DRAFT_KEY, { title, content, tag: tag || null })
   }, [open, note, title, content, tag])
 
-  async function save() {
+  function save() {
     if (!title.trim() && !content.trim()) {
       setErr('Escreva um título ou um conteúdo.')
       return
     }
-    setSaving(true)
     setErr(null)
-    try {
-      const payload: NoteInput = {
-        title: title.trim(),
-        content: content.trim(),
-        tag: tag.trim() || null,
-      }
-      if (note) {
-        await updateNote(note.id, payload)
-      } else {
-        await createNote(payload)
-        removeKey(DRAFT_KEY)
-      }
-      onSaved()
-      setSaved(true)
-      // "Saved!" por 2 segundos, depois fecha
-      window.setTimeout(() => {
-        setSaved(false)
-        onClose()
-      }, 2000)
-    } catch (e) {
-      setErr((e as Error).message)
-    } finally {
-      setSaving(false)
+    const payload: NoteInput = {
+      title: title.trim(),
+      content: content.trim(),
+      tag: tag.trim() || null,
     }
+    // otimista: aplica na hora (o hook sincroniza com o servidor em 2º plano)
+    onSubmit(payload).catch(() => {})
+    if (!note) removeKey(DRAFT_KEY)
+    setSaved(true)
+    window.setTimeout(() => {
+      setSaved(false)
+      onClose()
+    }, 900)
   }
 
   return (
@@ -396,15 +359,11 @@ function NoteModal({
                 <Check className="h-4 w-4" /> Saved!
               </span>
             )}
-            <Button variant="outline" onClick={onClose} disabled={saving}>
+            <Button variant="outline" onClick={onClose}>
               <X className="h-4 w-4" /> Fechar
             </Button>
-            <Button onClick={save} disabled={saving || saved} className="gap-2">
-              {saving ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Check className="h-4 w-4" />
-              )}
+            <Button onClick={save} disabled={saved} className="gap-2">
+              <Check className="h-4 w-4" />
               {note ? 'Salvar' : 'Criar nota'}
             </Button>
           </div>
