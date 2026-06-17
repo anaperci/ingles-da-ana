@@ -8,7 +8,13 @@ import {
   Search,
   CalendarDays,
   CheckCircle2,
+  Loader2,
+  Lightbulb,
+  HelpCircle,
+  X,
 } from 'lucide-react'
+import { callFunction, NotConfiguredError } from '@/lib/api'
+import type { WritingFeedback, SentenceFeedback } from '@/types/writing'
 import { PageHeader } from '@/components/common/PageHeader'
 import { TranslationToggle } from '@/components/common/TranslationToggle'
 import { Card } from '@/components/ui/card'
@@ -53,12 +59,44 @@ export default function Writing() {
 
 /* ───────────────────────── Frases do dia ───────────────────────── */
 
+const WRITING_SYSTEM = `Você é uma professora de inglês corrigindo as frases da Ana — brasileira, nível iniciante/intermediário, se preparando para morar em Malta. Cada frase tinha uma palavra-alvo. Avalie se a frase está correta e natural em inglês. Seja gentil, direta e útil.
+
+Responda APENAS com um JSON válido, sem markdown e sem cercas de código, exatamente neste formato:
+{
+  "items": [
+    { "wordId": "<o id recebido>", "ok": <true se já estava correta, senão false>, "correction": "<a frase corrigida em inglês; se já estava certa, repita a original>", "note": "<explicação curta em português do que estava certo ou errado e por quê>" }
+  ],
+  "insights": ["<2 a 4 dicas gerais em português, a partir dos padrões de erro que você observou>"],
+  "summary": "<1 a 2 frases de resumo encorajador em português>"
+}`
+
+function parseFeedback(reply: string): WritingFeedback {
+  let txt = reply.trim()
+  const fence = txt.match(/```(?:json)?\s*([\s\S]*?)```/i)
+  if (fence) txt = fence[1].trim()
+  const obj = JSON.parse(txt) as Partial<WritingFeedback>
+  const items = Array.isArray(obj.items) ? obj.items : []
+  const okCount = items.filter((it) => it.ok).length
+  const score = items.length ? Math.round((okCount / items.length) * 100) : 0
+  return { items, insights: obj.insights ?? [], summary: obj.summary ?? '', score }
+}
+
 function DailySentencesTab() {
-  const { date, sentences, writtenCount, goal, completed, setSentence, complete } =
-    useDailyWriting()
+  const {
+    date,
+    sentences,
+    writtenCount,
+    goal,
+    completed,
+    feedback,
+    setSentence,
+    toggleDontKnow,
+    complete,
+  } = useDailyWriting()
   const { show: showTranslation } = useShowTranslation()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const pct = Math.round((writtenCount / goal) * 100)
-  const allDone = writtenCount >= goal
 
   const prettyDate = useMemo(
     () =>
@@ -69,6 +107,44 @@ function DailySentencesTab() {
       }),
     [date]
   )
+
+  const fbByWord = useMemo(() => {
+    const m = new Map<string, SentenceFeedback>()
+    feedback?.items.forEach((it) => m.set(it.wordId, it))
+    return m
+  }, [feedback])
+
+  async function finalize() {
+    setError(null)
+    const written = sentences.filter((s) => s.text.trim() && !s.dontKnow)
+    if (written.length === 0) {
+      complete() // nada escrito: finaliza sem avaliação
+      return
+    }
+    setLoading(true)
+    try {
+      const payload = written.map((s) => ({
+        wordId: s.wordId,
+        word: s.word,
+        sentence: s.text.trim(),
+      }))
+      const data = await callFunction<{ reply: string }>('chat', {
+        system: WRITING_SYSTEM,
+        messages: [{ role: 'user', content: JSON.stringify(payload) }],
+      })
+      complete(parseFeedback(data.reply))
+    } catch (e) {
+      if (e instanceof NotConfiguredError) {
+        setError('A avaliação por IA precisa do backend configurado.')
+      } else if (e instanceof SyntaxError) {
+        setError('A IA respondeu num formato inesperado. Tente finalizar de novo.')
+      } else {
+        setError((e as Error).message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -88,40 +164,50 @@ function DailySentencesTab() {
           <div className="flex items-center gap-3">
             {completed ? (
               <Badge className="gap-1 bg-success text-success-foreground">
-                <CheckCircle2 className="h-4 w-4" /> Concluído hoje
+                <CheckCircle2 className="h-4 w-4" /> Concluído
+                {feedback ? ` · ${feedback.score}%` : ' hoje'}
               </Badge>
             ) : (
-              <Button
-                variant="gradient"
-                disabled={!allDone}
-                onClick={complete}
-              >
-                <Check className="h-4 w-4" />
-                {allDone ? 'Concluir o dia' : `Faltam ${goal - writtenCount}`}
+              <Button variant="gradient" disabled={loading} onClick={finalize}>
+                {loading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" /> Avaliando…
+                  </>
+                ) : (
+                  <>
+                    <Check className="h-4 w-4" /> Finalizar e avaliar
+                  </>
+                )}
               </Button>
             )}
           </div>
         </div>
         <Progress value={pct} className="mt-4" />
         <p className="mt-2 text-sm text-muted-foreground">
-          Escreva uma frase em inglês usando cada palavra-alvo. As palavras vêm
-          das 1000 mais faladas e mudam a cada dia.
+          Escreva o que souber e marque <strong>“não sei”</strong> no resto — pode
+          finalizar a qualquer momento que a IA corrige suas frases e traz dicas.
         </p>
+        {error && <p className="mt-2 text-sm text-error">{error}</p>}
       </Card>
+
+      {/* Avaliação da IA */}
+      {feedback && <FeedbackSummary feedback={feedback} />}
 
       {/* Lista de frases */}
       <div className="space-y-3">
         {sentences.map((s, i) => {
           const filled = s.text.trim().length > 0
+          const fb = fbByWord.get(s.wordId)
           return (
             <Card
               key={s.wordId}
               className={cn(
                 'p-4 transition-colors',
-                filled && 'border-success/40 bg-success/5'
+                s.dontKnow && 'opacity-60',
+                filled && !fb && 'border-success/40 bg-success/5'
               )}
             >
-              <div className="mb-2 flex items-center gap-2">
+              <div className="mb-2 flex flex-wrap items-center gap-2">
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary font-mono text-xs font-bold text-muted-foreground">
                   {i + 1}
                 </span>
@@ -134,24 +220,100 @@ function DailySentencesTab() {
                   <Volume2 className="h-4 w-4" />
                 </button>
                 {showTranslation && (
-                  <span className="text-sm text-muted-foreground">
-                    — {s.translation}
-                  </span>
+                  <span className="text-sm text-muted-foreground">— {s.translation}</span>
                 )}
-                {filled && (
-                  <Check className="ml-auto h-4 w-4 text-success" />
+                {!completed && (
+                  <button
+                    onClick={() => toggleDontKnow(s.wordId)}
+                    className={cn(
+                      'ml-auto inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors',
+                      s.dontKnow
+                        ? 'border-warning bg-warning/15 text-warning'
+                        : 'border-border text-muted-foreground hover:text-foreground'
+                    )}
+                  >
+                    <HelpCircle className="h-3.5 w-3.5" /> não sei
+                  </button>
                 )}
               </div>
-              <Textarea
-                value={s.text}
-                onChange={(e) => setSentence(s.wordId, e.target.value)}
-                placeholder={`Escreva uma frase com "${s.word}"...`}
-                rows={2}
-              />
+
+              {s.dontKnow ? (
+                <p className="text-sm italic text-muted-foreground">
+                  Marcada como “não sei” — sem problema, foco no que você já sabe.
+                </p>
+              ) : (
+                <Textarea
+                  value={s.text}
+                  onChange={(e) => setSentence(s.wordId, e.target.value)}
+                  placeholder={`Escreva uma frase com "${s.word}"...`}
+                  rows={2}
+                  disabled={completed}
+                />
+              )}
+
+              {fb && <SentenceCorrection fb={fb} />}
             </Card>
           )
         })}
       </div>
+    </div>
+  )
+}
+
+function FeedbackSummary({ feedback }: { feedback: WritingFeedback }) {
+  return (
+    <Card className="space-y-3 p-5">
+      <div className="flex items-center gap-2">
+        <Sparkles className="h-5 w-5 text-primary" />
+        <span className="font-semibold">Avaliação da IA</span>
+        <Badge className="ml-auto bg-primary text-primary-foreground">
+          {feedback.score}% certas
+        </Badge>
+      </div>
+      {feedback.summary && (
+        <p className="text-sm text-muted-foreground">{feedback.summary}</p>
+      )}
+      {feedback.insights.length > 0 && (
+        <div className="rounded-xl bg-soft p-3">
+          <div className="mb-1 flex items-center gap-2 text-sm font-semibold">
+            <Lightbulb className="h-4 w-4 text-accent-dark" /> Dicas pra você
+          </div>
+          <ul className="space-y-1">
+            {feedback.insights.map((t, i) => (
+              <li key={i} className="text-sm text-muted-foreground">
+                • {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </Card>
+  )
+}
+
+function SentenceCorrection({ fb }: { fb: SentenceFeedback }) {
+  return (
+    <div
+      className={cn(
+        'mt-2 rounded-lg border p-3 text-sm',
+        fb.ok ? 'border-success/40 bg-success/5' : 'border-warning/40 bg-warning/10'
+      )}
+    >
+      <div className="mb-1 flex items-center gap-1.5 font-semibold">
+        {fb.ok ? (
+          <>
+            <Check className="h-4 w-4 text-success" />
+            <span className="text-success">Correto!</span>
+          </>
+        ) : (
+          <>
+            <X className="h-4 w-4 text-warning" />
+            <span className="text-warning">Correção</span>
+          </>
+        )}
+      </div>
+      {!fb.ok && <p className="font-medium text-foreground">{fb.correction}</p>}
+      <p className="text-muted-foreground">{fb.note}</p>
     </div>
   )
 }

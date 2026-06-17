@@ -9,6 +9,7 @@ import {
   type DailySentence,
   type DailyWritingDay,
   type DailyWritingStore,
+  type WritingFeedback,
 } from '@/types/writing'
 
 const DAY_MS = 24 * 60 * 60 * 1000
@@ -59,6 +60,11 @@ export function useDailyWriting() {
     [today.sentences]
   )
 
+  const markedCount = useMemo(
+    () => today.sentences.filter((s) => s.dontKnow).length,
+    [today.sentences]
+  )
+
   const setSentence = useCallback(
     (wordId: string, text: string) => {
       setStore((prev) => {
@@ -72,28 +78,50 @@ export function useDailyWriting() {
     [date, setStore]
   )
 
-  const complete = useCallback(() => {
-    setStore((prev) => {
-      const day = prev[date] ?? buildDay(date)
-      if (day.completed) return prev
-      return { ...prev, [date]: { ...day, completed: true } }
-    })
-    addSession({
-      module: 'writing',
-      title: `${DAILY_SENTENCE_GOAL} frases do dia`,
-      score: null,
-      minutes: 15,
-    })
-  }, [date, setStore, addSession])
+  /** Liga/desliga "não sei" para uma palavra (limpa o texto ao marcar). */
+  const toggleDontKnow = useCallback(
+    (wordId: string) => {
+      setStore((prev) => {
+        const day = prev[date] ?? buildDay(date)
+        const sentences = day.sentences.map((s) =>
+          s.wordId === wordId
+            ? { ...s, dontKnow: !s.dontKnow, text: !s.dontKnow ? '' : s.text }
+            : s
+        )
+        return { ...prev, [date]: { ...day, sentences } }
+      })
+    },
+    [date, setStore]
+  )
+
+  /** Finaliza o dia: guarda a avaliação da IA e registra a sessão. */
+  const complete = useCallback(
+    (feedback?: WritingFeedback) => {
+      setStore((prev) => {
+        const day = prev[date] ?? buildDay(date)
+        return { ...prev, [date]: { ...day, completed: true, feedback } }
+      })
+      addSession({
+        module: 'writing',
+        title: `${DAILY_SENTENCE_GOAL} frases do dia`,
+        score: feedback ? feedback.score : null,
+        minutes: 15,
+      })
+    },
+    [date, setStore, addSession]
+  )
 
   return {
     date,
     today,
     sentences: today.sentences,
     writtenCount,
+    markedCount,
     goal: DAILY_SENTENCE_GOAL,
     completed: today.completed,
+    feedback: today.feedback,
     setSentence,
+    toggleDontKnow,
     complete,
   }
 }
