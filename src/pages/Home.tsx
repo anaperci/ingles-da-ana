@@ -5,6 +5,7 @@ import { ChallengeCard } from '@/components/dashboard/ChallengeCard'
 import { ThisWeekCard } from '@/components/dashboard/ThisWeekCard'
 import { RecordsCard } from '@/components/dashboard/RecordsCard'
 import { VerbOfTheDayCard } from '@/components/dashboard/VerbOfTheDayCard'
+import { WritingPointsCard } from '@/components/writing/WritingPointsCard'
 import { useProgress } from '@/hooks/useProgress'
 import { todayKey } from '@/lib/storage'
 
@@ -61,6 +62,11 @@ export default function Home() {
             />
           </div>
         </div>
+
+          <div>
+            <h2 className="mb-3 text-lg font-bold">Your writing</h2>
+            <WritingPointsCard />
+          </div>
 
           <VerbOfTheDayCard />
         </div>
