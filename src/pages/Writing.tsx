@@ -70,27 +70,99 @@ Responda APENAS com um JSON válido, sem markdown e sem cercas de código, exata
   "summary": "<1 a 2 frases de resumo encorajador em português>"
 }`
 
+/**
+ * Varre o texto e devolve TODO objeto `{...}` balanceado, em qualquer nível,
+ * ignorando chaves dentro de strings. Usado para resgatar as correções
+ * mesmo quando o JSON volta truncado (resposta cortada no meio).
+ */
+function scanObjects(txt: string): Record<string, unknown>[] {
+  const found: string[] = []
+  const stack: number[] = []
+  let inStr = false
+  let esc = false
+  for (let i = 0; i < txt.length; i++) {
+    const c = txt[i]
+    if (inStr) {
+      if (esc) esc = false
+      else if (c === '\\') esc = true
+      else if (c === '"') inStr = false
+      continue
+    }
+    if (c === '"') inStr = true
+    else if (c === '{') stack.push(i)
+    else if (c === '}') {
+      const s = stack.pop()
+      if (s !== undefined) found.push(txt.slice(s, i + 1))
+    }
+  }
+  const out: Record<string, unknown>[] = []
+  for (const chunk of found) {
+    try {
+      out.push(JSON.parse(chunk) as Record<string, unknown>)
+    } catch {
+      /* objeto incompleto: ignora */
+    }
+  }
+  return out
+}
+
+/**
+ * Parser tolerante: aceita JSON inteiro, JSON entre cercas, ou resposta
+ * truncada — neste caso resgata todas as correções completas que existirem.
+ * Só lança erro se NADA aproveitável vier.
+ */
 function parseFeedback(reply: string): WritingFeedback {
-  let txt = reply.trim()
-  // remove cercas de código, se houver
+  let txt = (reply ?? '').trim()
   const fence = txt.match(/```(?:json)?\s*([\s\S]*?)```/i)
   if (fence) txt = fence[1].trim()
 
-  let obj: Partial<WritingFeedback>
+  // 1) tenta o JSON inteiro (caminho feliz)
+  let full: Partial<WritingFeedback> | null = null
   try {
-    obj = JSON.parse(txt) as Partial<WritingFeedback>
+    full = JSON.parse(txt) as Partial<WritingFeedback>
   } catch {
-    // fallback: extrai do primeiro "{" ao último "}"
     const start = txt.indexOf('{')
     const end = txt.lastIndexOf('}')
-    if (start === -1 || end <= start) throw new SyntaxError('sem JSON')
-    obj = JSON.parse(txt.slice(start, end + 1)) as Partial<WritingFeedback>
+    if (start !== -1 && end > start) {
+      try {
+        full = JSON.parse(txt.slice(start, end + 1)) as Partial<WritingFeedback>
+      } catch {
+        /* segue para o resgate */
+      }
+    }
   }
 
-  const items = Array.isArray(obj.items) ? obj.items : []
+  // 2) fonte dos itens: o JSON inteiro, ou os objetos resgatados (truncado)
+  const raw =
+    full && Array.isArray(full.items) ? full.items : (scanObjects(txt) as unknown[])
+
+  const items: SentenceFeedback[] = (raw as Record<string, unknown>[])
+    .filter(
+      (o) =>
+        o &&
+        typeof o.wordId === 'string' &&
+        typeof o.correction === 'string'
+    )
+    .map((o) => ({
+      wordId: o.wordId as string,
+      ok: Boolean(o.ok),
+      correction: String(o.correction),
+      note: typeof o.note === 'string' ? o.note : '',
+    }))
+
+  if (items.length === 0) throw new SyntaxError('sem itens aproveitáveis')
+
+  const insights = Array.isArray(full?.insights)
+    ? (full!.insights as unknown[]).map(String)
+    : []
+  const summary =
+    typeof full?.summary === 'string'
+      ? full!.summary
+      : (txt.match(/"summary"\s*:\s*"([^"]*)"/)?.[1] ?? '')
+
   const okCount = items.filter((it) => it.ok).length
-  const score = items.length ? Math.round((okCount / items.length) * 100) : 0
-  return { items, insights: obj.insights ?? [], summary: obj.summary ?? '', score }
+  const score = Math.round((okCount / items.length) * 100)
+  return { items, insights, summary, score }
 }
 
 function DailySentencesTab() {
@@ -140,13 +212,28 @@ function DailySentencesTab() {
         word: s.word,
         sentence: s.text.trim(),
       }))
-      const data = await callFunction<{ reply: string }>('chat', {
-        system: WRITING_SYSTEM,
-        messages: [{ role: 'user', content: JSON.stringify(payload) }],
-        json: true,
-        maxTokens: 2500,
-      })
-      complete(parseFeedback(data.reply))
+      const content = JSON.stringify(payload)
+
+      // Tenta avaliar; se o JSON vier impossível de aproveitar, refaz 1 vez.
+      let feedbackResult: WritingFeedback | null = null
+      let lastErr: unknown = null
+      for (let attempt = 0; attempt < 2 && !feedbackResult; attempt++) {
+        try {
+          const data = await callFunction<{ reply: string }>('chat', {
+            system: WRITING_SYSTEM,
+            messages: [{ role: 'user', content }],
+            json: true,
+            maxTokens: 4000,
+          })
+          feedbackResult = parseFeedback(data.reply)
+        } catch (err) {
+          lastErr = err
+          if (err instanceof NotConfiguredError) break // não adianta repetir
+        }
+      }
+
+      if (!feedbackResult) throw lastErr ?? new SyntaxError('sem resposta')
+      complete(feedbackResult)
     } catch (e) {
       if (e instanceof NotConfiguredError) {
         setError('A avaliação por IA precisa do backend configurado.')
