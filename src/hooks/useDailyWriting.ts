@@ -45,6 +45,29 @@ function buildDay(dateKey: string): DailyWritingDay {
   return { date: dateKey, sentences: pickTargets(dateKey), completed: false }
 }
 
+/**
+ * Reconcilia um dia salvo contra a lista canônica de 30 palavras únicas.
+ * Auto-cura dias antigos corrompidos (palavras repetidas / fora de ordem)
+ * preservando o texto e o "não sei" já escritos por palavra.
+ */
+function reconcile(stored: DailyWritingDay | undefined, dateKey: string): DailyWritingDay {
+  const canonical = pickTargets(dateKey)
+  if (!stored) return buildDay(dateKey)
+
+  // texto/dontKnow por wordId (a 1ª ocorrência preenchida vence)
+  const byId = new Map<string, DailySentence>()
+  for (const s of stored.sentences) {
+    const prev = byId.get(s.wordId)
+    if (!prev || (!prev.text.trim() && s.text.trim())) byId.set(s.wordId, s)
+  }
+
+  const sentences = canonical.map((c) => {
+    const prev = byId.get(c.wordId)
+    return prev ? { ...c, text: prev.text, dontKnow: prev.dontKnow } : c
+  })
+  return { ...stored, date: dateKey, sentences }
+}
+
 export function useDailyWriting() {
   const [store, setStore] = useLocalStore<DailyWritingStore>(
     STORAGE_KEYS.dailyWriting,
@@ -53,7 +76,7 @@ export function useDailyWriting() {
   const { addSession } = useProgress()
 
   const date = todayKey()
-  const today = store[date] ?? buildDay(date)
+  const today = reconcile(store[date], date)
 
   const writtenCount = useMemo(
     () => today.sentences.filter((s) => s.text.trim().length > 0).length,
@@ -68,7 +91,7 @@ export function useDailyWriting() {
   const setSentence = useCallback(
     (wordId: string, text: string) => {
       setStore((prev) => {
-        const day = prev[date] ?? buildDay(date)
+        const day = reconcile(prev[date], date)
         const sentences = day.sentences.map((s) =>
           s.wordId === wordId ? { ...s, text } : s
         )
@@ -82,7 +105,7 @@ export function useDailyWriting() {
   const toggleDontKnow = useCallback(
     (wordId: string) => {
       setStore((prev) => {
-        const day = prev[date] ?? buildDay(date)
+        const day = reconcile(prev[date], date)
         const sentences = day.sentences.map((s) =>
           s.wordId === wordId
             ? { ...s, dontKnow: !s.dontKnow, text: !s.dontKnow ? '' : s.text }
@@ -98,7 +121,7 @@ export function useDailyWriting() {
   const complete = useCallback(
     (feedback?: WritingFeedback) => {
       setStore((prev) => {
-        const day = prev[date] ?? buildDay(date)
+        const day = reconcile(prev[date], date)
         return { ...prev, [date]: { ...day, completed: true, feedback } }
       })
       addSession({
