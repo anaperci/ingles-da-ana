@@ -6,6 +6,7 @@ import { ThisWeekCard } from '@/components/dashboard/ThisWeekCard'
 import { RecordsCard } from '@/components/dashboard/RecordsCard'
 import { VerbOfTheDayCard } from '@/components/dashboard/VerbOfTheDayCard'
 import { WritingPointsCard } from '@/components/writing/WritingPointsCard'
+import { PlannerCard } from '@/components/dashboard/PlannerCard'
 import { useProgress } from '@/hooks/useProgress'
 import { todayKey } from '@/lib/storage'
 
@@ -82,6 +83,7 @@ export default function Home() {
 
         {/* RAIL */}
         <aside className="space-y-4">
+          <PlannerCard />
           <ChallengeCard />
           <ThisWeekCard />
           <RecordsCard />

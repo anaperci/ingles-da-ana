@@ -10,6 +10,7 @@ import {
   AudioLines,
   NotebookPen,
   Users,
+  CalendarRange,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -27,6 +28,7 @@ export interface NavItem {
  */
 export const NAV_ITEMS: NavItem[] = [
   { to: '/', label: 'Home', icon: Home, end: true },
+  { to: '/planner', label: 'Planner', icon: CalendarRange },
   { to: '/vocabulario', label: 'Vocabulary', icon: Brain },
   { to: '/verbos', label: 'Verbs', icon: Repeat },
   { to: '/verbos-som', label: 'Verb sounds', icon: AudioLines },

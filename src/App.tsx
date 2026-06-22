@@ -15,6 +15,7 @@ const Writing = lazy(() => import('@/pages/Writing'))
 const SentenceFrames = lazy(() => import('@/pages/SentenceFrames'))
 const SoundVerbs = lazy(() => import('@/pages/SoundVerbs'))
 const Pronouns = lazy(() => import('@/pages/Pronouns'))
+const Planner = lazy(() => import('@/pages/Planner'))
 const Notes = lazy(() => import('@/pages/Notes'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 
@@ -107,6 +108,14 @@ export default function App() {
           element={
             <Suspense fallback={<PageFallback />}>
               <Pronouns />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/planner"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Planner />
             </Suspense>
           }
         />
