@@ -15,6 +15,8 @@ import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { usePlanner, type PlannerTask } from '@/hooks/usePlanner'
 import { appLinksForActivity } from '@/lib/plannerLinks'
+import { deckForWeek } from '@/data/weekThemes'
+import { DECK_BY_KEY } from '@/data/themedDecks'
 import { PLANNER, type PlannerDay, type PlannerWeek } from '@/data/planner'
 
 export default function Planner() {
@@ -128,6 +130,7 @@ function WeekBlock({
 
       {isOpen && (
         <div className="space-y-3 border-t border-card-border p-4">
+          <WeekDeckLink week={week.week} />
           {week.days.map((d) => (
             <DayRow
               key={d.day}
@@ -197,6 +200,26 @@ function DayRow({
   )
 }
 
+function WeekDeckLink({ week }: { week: number }) {
+  const deck = DECK_BY_KEY[deckForWeek(week)]
+  if (!deck) return null
+  return (
+    <Link
+      to={`/deck/${deck.key}`}
+      className="flex items-center gap-3 rounded-xl border border-accent/30 bg-accent/5 px-4 py-3 transition-colors hover:bg-accent/10"
+    >
+      <span className="text-xl">{deck.emoji}</span>
+      <div className="min-w-0 flex-1">
+        <div className="text-sm font-bold text-foreground">Vocabulário da semana</div>
+        <div className="text-xs text-muted-foreground">
+          Deck “{deck.label}” · {deck.words.length} palavras
+        </div>
+      </div>
+      <ArrowRight className="h-4 w-4 shrink-0 text-accent-dark" />
+    </Link>
+  )
+}
+
 function ActivityItem({
   checked,
   onToggle,
@@ -237,17 +260,24 @@ function ActivityItem({
       {/* Fazer no app */}
       {links.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2 pl-8">
-          {links.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              className="inline-flex items-center gap-1.5 rounded-full bg-soft px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              <l.icon className="h-3.5 w-3.5" />
-              {l.label}
-              <ArrowRight className="h-3 w-3" />
-            </Link>
-          ))}
+          {links.map((l) => {
+            // Conversação abre já com a atividade do dia como tema da prática
+            const to =
+              l.to === '/conversacao'
+                ? `/conversacao?topic=${encodeURIComponent(activity.slice(0, 400))}`
+                : l.to
+            return (
+              <Link
+                key={l.to}
+                to={to}
+                className="inline-flex items-center gap-1.5 rounded-full bg-soft px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
+              >
+                <l.icon className="h-3.5 w-3.5" />
+                {l.label}
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            )
+          })}
         </div>
       )}
     </div>

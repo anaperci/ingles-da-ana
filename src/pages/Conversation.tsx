@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import { MessagesSquare } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { ChatView } from '@/components/conversation/ChatView'
@@ -6,13 +7,39 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { CONVERSATION_SCENARIOS, type ConversationScenario } from '@/data/conversationScenarios'
 
+/** Cria um cenário a partir de uma tarefa do planner (deep-link `?topic=`). */
+function plannerScenario(topic: string): ConversationScenario {
+  return {
+    id: 'planner',
+    title: 'Prática do planner',
+    emoji: '📅',
+    category: 'social',
+    difficulty: 'beginner',
+    description: topic,
+    context: `Free conversation practice based on a task from Ana's study planner. The task is written in Portuguese: "${topic}". Understand the gist, pick a friendly, simple angle in English, and chat with her about it. Keep it light and encouraging.`,
+    opener:
+      "Hi Ana! Let's practice with today's planner task. No worries about being perfect — just start and I'll help you. So, tell me: how are you today? 😊",
+  }
+}
+
 export default function Conversation() {
+  const [params] = useSearchParams()
+  const navigate = useNavigate()
+  const topic = params.get('topic')?.trim()
   const [active, setActive] = useState<ConversationScenario | null>(null)
 
-  if (active) {
+  const current = topic ? plannerScenario(topic) : active
+
+  if (current) {
     return (
       <div className="animate-fade-in">
-        <ChatView scenario={active} onExit={() => setActive(null)} />
+        <ChatView
+          scenario={current}
+          onExit={() => {
+            setActive(null)
+            if (topic) navigate('/conversacao', { replace: true })
+          }}
+        />
       </div>
     )
   }
