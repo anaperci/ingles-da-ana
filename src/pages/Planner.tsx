@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   CalendarRange,
   Check,
@@ -6,12 +7,14 @@ import {
   PlayCircle,
   ListChecks,
   Sparkles,
+  ArrowRight,
 } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { usePlanner, type PlannerTask } from '@/hooks/usePlanner'
+import { appLinksForActivity } from '@/lib/plannerLinks'
 import { PLANNER, type PlannerDay, type PlannerWeek } from '@/data/planner'
 
 export default function Planner() {
@@ -184,14 +187,69 @@ function DayRow({
           icon={<ListChecks className="h-4 w-4" />}
           label={`Fazer o Quiz ${day.quiz}`}
         />
-        <TaskCheck
+        <ActivityItem
           checked={isDone(day.day, 'activity')}
           onToggle={() => toggle(day.day, 'activity')}
-          icon={<Sparkles className="h-4 w-4" />}
-          label="Atividade do dia"
-          detail={day.activity}
+          activity={day.activity}
         />
       </div>
+    </div>
+  )
+}
+
+function ActivityItem({
+  checked,
+  onToggle,
+  activity,
+}: {
+  checked: boolean
+  onToggle: () => void
+  activity: string
+}) {
+  const links = useMemo(() => appLinksForActivity(activity), [activity])
+  return (
+    <div className="rounded-lg p-2">
+      <button onClick={onToggle} className="flex w-full items-start gap-3 text-left">
+        <span
+          className={cn(
+            'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition-colors',
+            checked ? 'border-success bg-success text-white' : 'border-muted-foreground/40'
+          )}
+        >
+          {checked && <Check className="h-3.5 w-3.5" />}
+        </span>
+        <div className="min-w-0 flex-1">
+          <div
+            className={cn(
+              'flex items-center gap-1.5 text-sm font-semibold',
+              checked ? 'text-muted-foreground line-through' : 'text-foreground'
+            )}
+          >
+            <Sparkles className="h-4 w-4 text-accent-dark" />
+            Atividade do dia
+          </div>
+          <p className={cn('mt-0.5 text-sm', checked ? 'text-muted-foreground/70' : 'text-muted-foreground')}>
+            {activity}
+          </p>
+        </div>
+      </button>
+
+      {/* Fazer no app */}
+      {links.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-2 pl-8">
+          {links.map((l) => (
+            <Link
+              key={l.to}
+              to={l.to}
+              className="inline-flex items-center gap-1.5 rounded-full bg-soft px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
+            >
+              <l.icon className="h-3.5 w-3.5" />
+              {l.label}
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
