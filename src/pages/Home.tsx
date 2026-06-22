@@ -1,4 +1,4 @@
-import { PenLine, MessagesSquare, Mic } from 'lucide-react'
+import { PenLine, MessagesSquare, Mic, Users } from 'lucide-react'
 import { HeroCard } from '@/components/dashboard/HeroCard'
 import { TaskCard } from '@/components/dashboard/TaskCard'
 import { ChallengeCard } from '@/components/dashboard/ChallengeCard'
@@ -59,6 +59,15 @@ export default function Home() {
               cta="Practice"
               to="/pronuncia"
               time="10 min"
+            />
+            <TaskCard
+              variant="default"
+              icon={Users}
+              title="Reforço de pronomes"
+              desc="Sujeito, objeto, possessivos e reflexivos com correção."
+              cta="Praticar"
+              to="/pronomes"
+              time="5 min"
             />
           </div>
         </div>
