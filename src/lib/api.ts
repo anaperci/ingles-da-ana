@@ -48,3 +48,24 @@ export async function callFunction<T>(
   }
   return (await res.json()) as T
 }
+
+/** Igual a callFunction, mas devolve o corpo binário (ex.: áudio do TTS). */
+export async function callFunctionBlob(
+  name: string,
+  body: unknown,
+  signal?: AbortSignal
+): Promise<Blob> {
+  if (!isBackendConfigured()) throw new NotConfiguredError()
+  const res = await fetch(`${functionsBase()}/${name}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${ANON_KEY}`,
+      apikey: ANON_KEY as string,
+    },
+    body: JSON.stringify(body),
+    signal,
+  })
+  if (!res.ok) throw new Error(`Erro ${res.status}: ${res.statusText}`)
+  return res.blob()
+}
