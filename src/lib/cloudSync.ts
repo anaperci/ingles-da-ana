@@ -7,6 +7,7 @@
  * a cada mudança, empurra o snapshot (com debounce).
  */
 import { callFunction, isBackendConfigured } from '@/lib/api'
+import { getAccountId } from '@/lib/account'
 import {
   snapshotAll,
   restoreAll,
@@ -14,8 +15,6 @@ import {
   setLocalUpdatedAt,
 } from '@/lib/storage'
 
-/** Conta fixa — mesmo progresso em qualquer dispositivo. */
-const ACCOUNT_ID = 'ana'
 const STORE_EVENT = 'ingles-store-change'
 const DEBOUNCE_MS = 1500
 
@@ -25,11 +24,11 @@ interface CloudResult {
 }
 
 async function pull(): Promise<CloudResult> {
-  return callFunction<CloudResult>('progress', { accountId: ACCOUNT_ID })
+  return callFunction<CloudResult>('progress', { accountId: getAccountId() })
 }
 
 async function push(payload: Record<string, unknown>): Promise<void> {
-  await callFunction('progress', { accountId: ACCOUNT_ID, payload })
+  await callFunction('progress', { accountId: getAccountId(), payload })
 }
 
 /**
@@ -78,9 +77,12 @@ async function flush() {
   }
 }
 
-/** Inicia o autosave: empurra o snapshot a cada mudança (com debounce). */
+let autosaveStarted = false
+
+/** Inicia o autosave: empurra o snapshot a cada mudança (com debounce). Uma vez só. */
 export function startCloudAutosave() {
-  if (!isBackendConfigured()) return
+  if (!isBackendConfigured() || autosaveStarted) return
+  autosaveStarted = true
 
   window.addEventListener(STORE_EVENT, () => {
     setLocalUpdatedAt(Date.now())

@@ -1,7 +1,26 @@
 import { NavLink } from 'react-router-dom'
-import { X } from 'lucide-react'
+import { X, LogOut } from 'lucide-react'
 import { NAV_ITEMS } from '@/config/nav'
+import { useAuthUser } from '@/hooks/useAuthUser'
 import { cn } from '@/lib/utils'
+
+function UserFooter() {
+  const { email, signOut } = useAuthUser()
+  if (!email) return null
+  return (
+    <div className="mt-auto border-t border-border pt-3">
+      <div className="truncate px-2 text-xs text-muted-foreground" title={email}>
+        {email}
+      </div>
+      <button
+        onClick={() => signOut()}
+        className="mt-1 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-soft/60 hover:text-primary"
+      >
+        <LogOut className="h-4 w-4" /> Sair
+      </button>
+    </div>
+  )
+}
 
 interface SidebarProps {
   /** Drawer aberto no mobile */
@@ -65,6 +84,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col gap-6 border-r border-border bg-white px-4 py-6 lg:flex">
         <Brand />
         <NavItems />
+        <UserFooter />
       </aside>
 
       {/* Mobile — drawer */}
@@ -98,6 +118,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             </button>
           </div>
           <NavItems onNavigate={onClose} />
+          <UserFooter />
         </aside>
       </div>
     </>

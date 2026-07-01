@@ -3,6 +3,7 @@
  * Conta fixa "ana" (o app não tem auth; é pessoal).
  */
 import { callFunction } from '@/lib/api'
+import { getAccountId } from '@/lib/account'
 
 export interface Note {
   id: string
@@ -19,12 +20,10 @@ export interface NoteInput {
   tag: string | null
 }
 
-const ACCOUNT_ID = 'ana'
-
 export async function listNotes(): Promise<Note[]> {
   const res = await callFunction<{ notes: Note[] }>('notes', {
     action: 'list',
-    accountId: ACCOUNT_ID,
+    accountId: getAccountId(),
   })
   return res.notes ?? []
 }
@@ -32,7 +31,7 @@ export async function listNotes(): Promise<Note[]> {
 export async function createNote(note: NoteInput): Promise<Note> {
   const res = await callFunction<{ note: Note }>('notes', {
     action: 'create',
-    accountId: ACCOUNT_ID,
+    accountId: getAccountId(),
     note,
   })
   return res.note
@@ -41,7 +40,7 @@ export async function createNote(note: NoteInput): Promise<Note> {
 export async function updateNote(id: string, note: NoteInput): Promise<Note> {
   const res = await callFunction<{ note: Note }>('notes', {
     action: 'update',
-    accountId: ACCOUNT_ID,
+    accountId: getAccountId(),
     id,
     note,
   })
@@ -49,5 +48,5 @@ export async function updateNote(id: string, note: NoteInput): Promise<Note> {
 }
 
 export async function deleteNote(id: string): Promise<void> {
-  await callFunction('notes', { action: 'delete', accountId: ACCOUNT_ID, id })
+  await callFunction('notes', { action: 'delete', accountId: getAccountId(), id })
 }

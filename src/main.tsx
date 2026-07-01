@@ -4,23 +4,17 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import { Toaster } from 'sonner'
-import { loadCloudIntoLocal, startCloudAutosave } from '@/lib/cloudSync'
+import { AuthGate } from '@/components/auth/AuthGate'
 
-function render() {
-  createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-      <BrowserRouter>
+// Multiusuário: o AuthGate exige login, prepara o cache do usuário, puxa a nuvem
+// e liga o autosave antes de montar o app.
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <BrowserRouter>
+      <AuthGate>
         <App />
-        <Toaster richColors position="top-center" />
-      </BrowserRouter>
-    </StrictMode>
-  )
-}
-
-// Renderiza JÁ com o estado local (abertura instantânea) e puxa a nuvem em
-// segundo plano: se vier mais nova, os stores se atualizam sozinhos via evento.
-// O autosave só liga DEPOIS do pull, pra não empurrar local velho sobre nuvem nova.
-render()
-loadCloudIntoLocal().finally(() => {
-  startCloudAutosave()
-})
+      </AuthGate>
+      <Toaster richColors position="top-center" />
+    </BrowserRouter>
+  </StrictMode>
+)
