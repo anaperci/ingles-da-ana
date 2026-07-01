@@ -71,10 +71,6 @@ export function DailyVideoCard() {
               {fromFallback && <Badge variant="warning">curado</Badge>}
             </div>
             <h3 className="text-lg font-bold leading-snug">{video.title}</h3>
-            <p className="text-sm text-muted-foreground">{video.channel}</p>
-            <p className="line-clamp-2 text-sm text-muted-foreground">
-              {video.description}
-            </p>
 
             <div className="mt-auto flex flex-wrap gap-2">
               <Button variant="gradient" onClick={() => setOpen(true)}>

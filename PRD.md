@@ -106,8 +106,8 @@ Estruturas de frase para ler, falar (com nota do Azure) e escrever.
 - Funciona em qualquer navegador (não depende mais do reconhecimento nativo).
 
 ### 5.12 Vídeos (`/videos`)
-- **Vídeo do dia** via YouTube Data API, cacheado por dia, com fallback curado.
-- Atualmente restrito ao canal **Matheus Werner Jerke**, focado em **conversação** (configurável na function).
+- **Vídeo do dia** via YouTube Data API — **aulas de inglês de vários canais**, escolhidas pelos interesses (conversação, pronúncia, gramática, negócios…), cacheado por dia, com fallback curado.
+- A plataforma **não exibe nome de canal/professor** (só título e miniatura).
 
 ### 5.13 Notas (`/notes`)
 - Estilo Evernote: título, conteúdo, tag, data. **Markdown** com toolbar (negrito, itálico, listas, título) + pré-visualização.

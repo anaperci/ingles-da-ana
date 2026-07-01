@@ -9,11 +9,21 @@ interface Body {
   queries: string[]
 }
 
-// "Por hora" só vídeos deste canal (Matheus Werner Jerke). Deixe '' para voltar
-// a buscar pelo mundo todo a partir dos interesses (queries).
-const ONLY_CHANNEL_ID = 'UCX-fPLuEcgUWs-oSu5ttFoQ'
-// Dentro do canal, foca em vídeos de conversação (títulos em PT). '' = todos.
-const CHANNEL_QUERY = 'conversação'
+// Busca ampla de AULAS DE INGLÊS pelos interesses (vários canais). Para travar
+// num canal específico, coloque o channelId aqui (e opcionalmente CHANNEL_QUERY).
+const ONLY_CHANNEL_ID = ''
+const CHANNEL_QUERY = ''
+
+/** Decodifica entidades HTML que a YouTube devolve nos títulos (&quot; etc.). */
+function decodeEntities(s: string): string {
+  return s
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&#(\d+);/g, (_m, n) => String.fromCharCode(Number(n)))
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+}
 
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
@@ -60,12 +70,13 @@ Deno.serve(async (req: Request) => {
 
     const pick = items[Math.floor(Math.random() * items.length)]
     const sn = pick.snippet
+
     return json({
       video: {
         videoId: pick.id.videoId,
-        title: sn.title,
-        channel: sn.channelTitle,
-        description: sn.description,
+        title: decodeEntities(sn.title ?? 'Aula de inglês'),
+        channel: '', // a plataforma não expõe nome de canal/professor
+        description: '',
         thumbnail:
           sn.thumbnails?.high?.url ??
           sn.thumbnails?.medium?.url ??
