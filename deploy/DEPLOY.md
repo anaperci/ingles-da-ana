@@ -31,11 +31,11 @@ cd ingles-da-ana
 ```bash
 docker compose up -d --build
 ```
-Isso builda o app e sobe na porta **3005** do VPS. Testa:
+Isso builda o app e sobe na porta **3009** do VPS. Testa:
 ```bash
-curl -I http://127.0.0.1:3005   # deve responder 200
+curl -I http://127.0.0.1:3009   # deve responder 200
 ```
-Se a 3005 estiver ocupada, edite `docker-compose.yml` (ex: `3006:80`) e o
+Se a 3009 estiver ocupada, edite `docker-compose.yml` (ex: `3006:80`) e o
 `deploy/nginx-host.conf` na mesma porta.
 
 ### 3. Reverse proxy no nginx do host

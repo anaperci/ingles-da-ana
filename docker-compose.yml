@@ -10,4 +10,4 @@ services:
     restart: unless-stopped
     ports:
       # host:container — muda a 3005 se a porta estiver ocupada no VPS
-      - "3005:80"
+      - "3009:80"
