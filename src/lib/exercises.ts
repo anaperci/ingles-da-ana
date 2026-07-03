@@ -1,6 +1,6 @@
 /**
  * Cliente dos exercícios — fala com as Edge Functions `generate-exercises`
- * (Anthropic, só dona) e `exercises` (CRUD + prática, escopo por conta).
+ * (OpenAI/GPT, só dona) e `exercises` (CRUD + prática, escopo por conta).
  */
 import { callFunction } from '@/lib/api'
 import { getAccountId, getAccessToken } from '@/lib/account'

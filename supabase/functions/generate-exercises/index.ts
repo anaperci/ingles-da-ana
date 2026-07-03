@@ -1,9 +1,9 @@
-// Edge Function: gera exercícios de inglês via Anthropic (claude-sonnet-4-6).
-// GATING: recurso pago — só a conta dona (token) gera. Chave ANTHROPIC_API_KEY
+// Edge Function: gera exercícios de inglês via OpenAI (GPT).
+// GATING: recurso pago — só a conta dona (token) gera. A chave OPENAI_API_KEY
 // vive como secret no Supabase, nunca no frontend.
 //
-// Deploy:  supabase functions deploy generate-exercises
-// Secret:  supabase secrets set ANTHROPIC_API_KEY=sk-ant-...
+// Deploy:  supabase functions deploy generate-exercises --no-verify-jwt
+// Secret:  já existe OPENAI_API_KEY (mesma usada pela função `chat`).
 //
 // Contrato (POST): { prompt: string, token: string } -> { exercises: [...] }
 import { corsHeaders, json } from '../_shared/cors.ts'
@@ -11,7 +11,7 @@ import { isOwnerToken, paidFeatureResponse } from '../_shared/owner.ts'
 
 declare const Deno: { env: { get(k: string): string | undefined } }
 
-const MODEL = Deno.env.get('ANTHROPIC_MODEL') ?? 'claude-sonnet-4-6'
+const MODEL = Deno.env.get('OPENAI_MODEL') ?? 'gpt-4o-mini'
 
 const SYSTEM = `You are an English exercise generator for a Brazilian Portuguese speaker.
 
@@ -40,7 +40,6 @@ const VALID_TYPES = ['multiple_choice', 'fill_blank', 'rewrite', 'match']
 
 // deno-lint-ignore no-explicit-any
 function extractJsonArray(text: string): any[] {
-  // remove cercas de markdown se vierem
   const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim()
   const start = cleaned.indexOf('[')
   const end = cleaned.lastIndexOf(']')
@@ -63,32 +62,34 @@ Deno.serve(async (req: Request) => {
   const prompt = (body.prompt ?? '').trim()
   if (!prompt) return json({ error: 'prompt é obrigatório' }, 400)
 
-  const apiKey = Deno.env.get('ANTHROPIC_API_KEY')
-  if (!apiKey) return json({ error: 'ANTHROPIC_API_KEY não configurada' }, 500)
+  const apiKey = Deno.env.get('OPENAI_API_KEY')
+  if (!apiKey) return json({ error: 'OPENAI_API_KEY não configurada' }, 500)
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
+        Authorization: `Bearer ${apiKey}`,
         'content-type': 'application/json',
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 4000,
-        system: SYSTEM,
-        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 3000,
+        temperature: 0.6,
+        messages: [
+          { role: 'system', content: SYSTEM },
+          { role: 'user', content: prompt },
+        ],
       }),
     })
 
     if (!res.ok) {
       const err = await res.text()
-      return json({ error: `Anthropic ${res.status}: ${err}` }, 502)
+      return json({ error: `OpenAI ${res.status}: ${err}` }, 502)
     }
 
     const data = await res.json()
-    const text: string = data?.content?.[0]?.text ?? ''
+    const text: string = data?.choices?.[0]?.message?.content ?? ''
 
     let parsed: unknown[]
     try {
@@ -97,7 +98,6 @@ Deno.serve(async (req: Request) => {
       return json({ error: `Não consegui interpretar a resposta da IA: ${String(e)}`, raw: text }, 502)
     }
 
-    // valida/normaliza minimamente
     const exercises = parsed
       // deno-lint-ignore no-explicit-any
       .filter((e: any) => e && VALID_TYPES.includes(e.type) && e.question && e.correct_answer)
