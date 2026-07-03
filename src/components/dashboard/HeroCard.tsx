@@ -33,7 +33,7 @@ export function HeroCard({ pct }: HeroCardProps) {
         </div>
         <Link
           to="/escrita"
-          className="inline-flex w-fit items-center gap-2 rounded-full bg-cream px-5 py-2.5 text-sm font-semibold text-cream-foreground shadow-soft transition-colors hover:bg-cream-hover"
+          className="inline-flex w-fit items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground shadow-soft transition-colors hover:bg-accent-dark"
         >
           View tasks
           <ArrowRight className="h-4 w-4" />

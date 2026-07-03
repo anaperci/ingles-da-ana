@@ -109,7 +109,7 @@ function Group({
         </button>
         <button
           onClick={() => onStudy(cat.key)}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent-dark px-3.5 py-2 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-text"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-accent px-3.5 py-2 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-dark"
         >
           <GraduationCap className="h-4 w-4" /> Study
         </button>

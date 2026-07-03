@@ -191,7 +191,7 @@ function DeckDetail({
           {/* Botão Study — card branco → azul escuro */}
           <button
             onClick={onStudy}
-            className="inline-flex items-center gap-2 rounded-full bg-accent-dark px-5 py-2.5 text-sm font-semibold text-accent-foreground shadow-soft transition-colors hover:bg-accent-text"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground shadow-soft transition-colors hover:bg-accent-dark"
           >
             <Play className="h-4 w-4" /> Study
           </button>

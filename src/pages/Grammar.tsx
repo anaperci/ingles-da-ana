@@ -63,7 +63,7 @@ export default function Grammar() {
                 <div className="font-display font-bold text-primary">{t.title}</div>
                 <p className="text-sm text-muted-foreground">{t.description}</p>
               </div>
-              <ArrowRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+              <ArrowRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent-dark" />
             </Card>
           </Link>
         ))}

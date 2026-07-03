@@ -12,14 +12,15 @@
     --color-primary: 216 65% 11%; /* #0A192F ink navy (azul assinatura Solo) */
     --color-primary-soft: 216 53% 23%; /* #1B3358 navy claro (hover sidebar) */
 
-    --color-accent: 221 83% 53%; /* #2563EB azul de ação (contrasta com branco) */
-    --color-accent-dark: 224 76% 48%; /* #1D4ED8 azul escuro (hover/texto) */
-    --color-accent-text: 224 64% 33%; /* #1E40AF texto azul forte */
-    --color-accent-light: 213 94% 68%; /* #60A5FA azul claro (texto/ícone sobre navy) */
+    /* Accent = mint/verde do Solo (fills verdes, texto navy sobre verde) */
+    --color-accent: 160 100% 44%; /* #00DF95 mint-500 (fill/CTA) */
+    --color-accent-dark: 160 100% 30%; /* #009864 mint-700 (texto/hover sobre claro) */
+    --color-accent-text: 159 100% 22%; /* #00714A mint-800 (texto verde forte) */
+    --color-accent-light: 159 79% 57%; /* #3DE8AC mint-400 (texto/ícone sobre navy) */
 
-    /* Creme — botões e destaques sobre fundo navy */
-    --color-cream: 40 46% 92%; /* #F4EEDD creme */
-    --color-cream-hover: 40 40% 85%; /* #E6D9C0 creme escurecido (hover) */
+    /* Creme — superfície quente do Solo */
+    --color-cream: 60 60% 96%; /* #FBFBED cream-100 */
+    --color-cream-hover: 55 45% 90%; /* #F0EFDC cream escurecido (hover) */
 
     --color-soft: 213 30% 95%; /* #EFF2F6 azul bem claro (cards suaves/ativo) */
     --color-soft-2: 213 33% 88%; /* #D9E0EA azul claro */

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 /** Card estático (mock) — Daily challenge. */
 export function ChallengeCard() {
   return (
-    <div className="rounded-2xl bg-accent p-5 text-white shadow-soft">
-      <div className="mb-3 flex items-center gap-2 text-white/90">
+    <div className="rounded-2xl bg-accent p-5 text-primary shadow-soft">
+      <div className="mb-3 flex items-center gap-2 text-primary/80">
         <Target className="h-5 w-5" />
         <span className="text-xs font-bold uppercase tracking-[0.1em]">Daily challenge</span>
       </div>
@@ -14,7 +14,7 @@ export function ChallengeCard() {
       </p>
       <Link
         to="/vocabulario"
-        className="flex w-full items-center justify-center rounded-full bg-cream px-4 py-2.5 text-sm font-semibold text-cream-foreground transition-colors hover:bg-cream-hover"
+        className="flex w-full items-center justify-center rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-soft"
       >
         Try now
       </Link>

@@ -34,7 +34,7 @@ export default function Home() {
         <div>
           <div className="mb-1.5 text-sm text-muted-foreground">{dateLabel}</div>
           <h1 className="text-2xl font-extrabold lg:text-3xl">
-            Let&apos;s unlock your <span className="text-accent">English</span>, Ana!
+            Let&apos;s unlock your <span className="text-accent-dark">English</span>, Ana!
           </h1>
         </div>
         <div className="hidden items-center gap-2.5 sm:flex">

@@ -12,7 +12,7 @@ export function WritingPointsCard() {
     <div className="rounded-2xl border border-card-border bg-card p-5 shadow-soft">
       <div className="mb-3 flex items-center justify-between gap-2">
         <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.1em] text-muted-foreground">
-          <Star className="h-3.5 w-3.5 text-accent" /> Writing points
+          <Star className="h-3.5 w-3.5 text-accent-dark" /> Writing points
         </span>
         <span className="inline-flex items-center gap-1 rounded-full bg-soft px-2.5 py-1 text-xs font-bold text-accent-dark">
           <Flame className="h-3 w-3" /> {streak} {streak === 1 ? 'day' : 'days'}

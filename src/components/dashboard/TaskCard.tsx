@@ -28,8 +28,8 @@ const styles: Record<
     title: 'text-foreground',
     desc: 'text-muted-foreground',
     time: 'text-muted-foreground',
-    // card branco → botão azul escuro
-    btn: 'bg-accent-dark text-accent-foreground hover:bg-accent-text',
+    // CTA = verde (mint) com texto navy
+    btn: 'bg-accent text-accent-foreground hover:bg-accent-dark',
   },
   featured: {
     card: 'bg-primary border border-transparent text-white',
@@ -37,8 +37,8 @@ const styles: Record<
     title: 'text-white',
     desc: 'text-on-primary-muted',
     time: 'text-on-primary-muted',
-    // fundo navy → botão creme
-    btn: 'bg-cream text-cream-foreground hover:bg-cream-hover',
+    // sobre navy → botão verde
+    btn: 'bg-accent text-accent-foreground hover:bg-accent-dark',
   },
   soft: {
     card: 'bg-soft border border-transparent',
@@ -46,7 +46,7 @@ const styles: Record<
     title: 'text-soft-text',
     desc: 'text-soft-text-2',
     time: 'text-soft-text-2',
-    btn: 'bg-accent-dark text-accent-foreground hover:bg-accent-text',
+    btn: 'bg-accent text-accent-foreground hover:bg-accent-dark',
   },
 }
 

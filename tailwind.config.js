@@ -55,7 +55,8 @@ export default {
           dark: 'hsl(var(--color-accent-dark))',
           text: 'hsl(var(--color-accent-text))',
           light: 'hsl(var(--color-accent-light))',
-          foreground: 'hsl(var(--color-on-primary))',
+          // texto sobre o verde = navy (padrão do Solo)
+          foreground: 'hsl(var(--color-primary))',
         },
         /* Creme — botões/destaques sobre navy */
         cream: {
