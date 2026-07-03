@@ -1,35 +1,415 @@
-import type { GrammarCategory, GrammarExercise } from './grammarTypes'
+export interface AdverbEntry {
+  id: string;
+  adverb: string;
+  meaning: string;
+  category: "frequencia" | "intensidade" | "modo" | "falso-amigo" | "posicao";
+  explanation: string;
+  pronunciationTip?: string;
+  examples: { en: string; pt: string }[];
+  writingPrompt: string;
+  commonMistake?: string;
+  positionRule?: string; // onde colocar na frase
+}
 
-// Advérbios — Ana vai fornecer o conteúdo completo.
-// Estrutura de cada exercício:
-//   { id, category, prompt (com "___"), hint, answer, options, note }
-// As categorias abaixo são um ponto de partida; ajuste os labels/keys como quiser.
-
-export const ADVERB_CATEGORIES: GrammarCategory[] = [
-  { key: 'manner', label: 'Modo (how)' },
-  { key: 'frequency', label: 'Frequência' },
-  { key: 'time', label: 'Tempo' },
-  { key: 'place', label: 'Lugar/grau' },
-]
-
-export const ADVERB_EXERCISES: GrammarExercise[] = [
-  // Placeholder inicial pra página funcionar — troque por sua lista.
+export const adverbs: AdverbEntry[] = [
+  // ─── FREQUÊNCIA ──────────────────────────────────────────────────────────
   {
-    id: 'adv-1',
-    category: 'manner',
-    prompt: 'She sings very ___.',
-    hint: 'lindamente',
-    answer: 'beautifully',
-    options: ['beautifully', 'beautiful', 'beauty'],
-    note: 'Advérbio de modo: adjetivo + “-ly”. beautiful → beautifully.',
+    id: "always",
+    adverb: "always",
+    meaning: "sempre",
+    category: "frequencia",
+    explanation: "100% do tempo. Posição: antes do verbo principal, depois do verbo 'to be'.",
+    pronunciationTip: "'always': o AL tem som de 'ól'. 'ólueiz'.",
+    positionRule: "I always + verbo | She is always + adj",
+    examples: [
+      { en: "I always have coffee in the morning.", pt: "Sempre tomo café de manhã." },
+      { en: "She's always late.", pt: "Ela está sempre atrasada." },
+      { en: "He always forgets his keys.", pt: "Ele sempre esquece as chaves." },
+    ],
+    writingPrompt: "Escreva uma frase com 'always' sobre um hábito seu.",
   },
   {
-    id: 'adv-2',
-    category: 'frequency',
-    prompt: 'I ___ drink coffee in the morning.',
-    hint: 'sempre',
-    answer: 'always',
-    options: ['always', 'never', 'yet'],
-    note: 'Advérbios de frequência vêm antes do verbo principal: I always drink…',
+    id: "usually",
+    adverb: "usually",
+    meaning: "geralmente / normalmente",
+    category: "frequencia",
+    explanation: "70–90% do tempo. Indica o que é normal para você.",
+    pronunciationTip: "'usually': o U tem som de 'iú'. 'iúzueli'.",
+    positionRule: "I usually + verbo | She is usually + adj",
+    examples: [
+      { en: "I usually wake up at 7am.", pt: "Geralmente acordo às 7h." },
+      { en: "We usually eat at home.", pt: "Normalmente a gente come em casa." },
+      { en: "She's usually very calm.", pt: "Ela geralmente é muito calma." },
+    ],
+    writingPrompt: "Escreva uma frase com 'usually' sobre sua rotina.",
   },
-]
+  {
+    id: "often",
+    adverb: "often",
+    meaning: "frequentemente / com frequência",
+    category: "frequencia",
+    explanation: "50–70% do tempo. O T em 'often' pode ser pronunciado ou não — ambos estão corretos.",
+    pronunciationTip: "'often': o T pode ser mudo ('ófen') ou pronunciado ('óften'). Ambos corretos.",
+    positionRule: "I often + verbo | She is often + adj",
+    examples: [
+      { en: "I often work late.", pt: "Frequentemente trabalho até tarde." },
+      { en: "We often go to the beach on weekends.", pt: "A gente vai com frequência à praia nos fins de semana." },
+      { en: "How often do you exercise?", pt: "Com que frequência você se exercita?" },
+    ],
+    writingPrompt: "Escreva uma frase com 'often' e uma pergunta com 'how often'.",
+  },
+  {
+    id: "sometimes",
+    adverb: "sometimes",
+    meaning: "às vezes",
+    category: "frequencia",
+    explanation: "30–50% do tempo. Mais flexível na posição — pode ir no início ou no meio da frase.",
+    positionRule: "Sometimes I + verbo | I sometimes + verbo | I + verbo + sometimes",
+    examples: [
+      { en: "Sometimes I forget things.", pt: "Às vezes esqueço as coisas." },
+      { en: "I sometimes eat pizza for breakfast.", pt: "Às vezes como pizza no café da manhã." },
+      { en: "She's sometimes moody.", pt: "Ela às vezes fica mal-humorada." },
+    ],
+    writingPrompt: "Escreva uma frase com 'sometimes' no início e outra no meio.",
+  },
+  {
+    id: "rarely",
+    adverb: "rarely",
+    meaning: "raramente / quase nunca",
+    category: "frequencia",
+    explanation: "10–20% do tempo. Já tem sentido negativo — não precisa de 'not'.",
+    pronunciationTip: "'rarely': o AR vira 'éir'. 'réirli'.",
+    positionRule: "I rarely + verbo (não use com 'not' — já é negativo)",
+    examples: [
+      { en: "I rarely drink alcohol.", pt: "Raramente bebo álcool." },
+      { en: "She rarely complains.", pt: "Ela raramente reclama." },
+      { en: "We rarely see each other anymore.", pt: "A gente raramente se vê mais." },
+    ],
+    writingPrompt: "Escreva uma frase com 'rarely' sobre algo que você quase nunca faz.",
+    commonMistake: "'I don't rarely' está errado — 'rarely' já é negativo.",
+  },
+  {
+    id: "never",
+    adverb: "never",
+    meaning: "nunca",
+    category: "frequencia",
+    explanation: "0% do tempo. Já tem sentido negativo — não precisa de 'not'.",
+    pronunciationTip: "'never': E curto + ER vira R ('néver').",
+    positionRule: "I never + verbo (não use com 'don't' — já é negativo)",
+    examples: [
+      { en: "I never eat meat.", pt: "Nunca como carne." },
+      { en: "She never gives up.", pt: "Ela nunca desiste." },
+      { en: "I've never been to Japan.", pt: "Nunca fui ao Japão." },
+      { en: "Never say never.", pt: "Nunca diga nunca." },
+    ],
+    writingPrompt: "Escreva uma frase com 'never' sobre algo que você nunca faz.",
+    commonMistake: "'I don't never' é dupla negação — errado em inglês. Use só 'I never'.",
+  },
+  {
+    id: "already",
+    adverb: "already",
+    meaning: "já",
+    category: "frequencia",
+    explanation: "Indica que algo aconteceu antes do esperado ou antes de certo momento. Usado em frases afirmativas.",
+    pronunciationTip: "'already': o AL vira 'ól'. 'ólredi'.",
+    examples: [
+      { en: "I've already eaten.", pt: "Já comi." },
+      { en: "She's already left.", pt: "Ela já foi." },
+      { en: "I already knew that.", pt: "Eu já sabia disso." },
+      { en: "Is it already 10pm?", pt: "Já são 22h?" },
+    ],
+    writingPrompt: "Escreva uma frase com 'already' no present perfect.",
+    commonMistake: "Em perguntas e negativas, use 'yet', não 'already'. 'Have you eaten yet?' — não 'already'.",
+  },
+  {
+    id: "yet",
+    adverb: "yet",
+    meaning: "ainda / já (em perguntas e negativas)",
+    category: "frequencia",
+    explanation: "'Yet' vai no final da frase. Em negativas = ainda não. Em perguntas = já. Em afirmativas, use 'already'.",
+    examples: [
+      { en: "I haven't finished yet.", pt: "Ainda não terminei." },
+      { en: "Have you eaten yet?", pt: "Você já comeu?" },
+      { en: "She hasn't called yet.", pt: "Ela ainda não ligou." },
+      { en: "Is she here yet?", pt: "Ela já chegou?" },
+    ],
+    writingPrompt: "Escreva uma negativa com 'yet' e uma pergunta com 'yet'.",
+    commonMistake: "Não use 'yet' em frases afirmativas. 'I've already done it' (não 'yet').",
+  },
+  {
+    id: "still",
+    adverb: "still",
+    meaning: "ainda (continuidade)",
+    category: "frequencia",
+    explanation: "'Still' indica que algo continua acontecendo. Posição: antes do verbo principal, depois do 'to be'.",
+    examples: [
+      { en: "I still live with my parents.", pt: "Ainda moro com meus pais." },
+      { en: "Are you still working there?", pt: "Você ainda trabalha lá?" },
+      { en: "She's still sleeping.", pt: "Ela ainda está dormindo." },
+      { en: "I still don't understand.", pt: "Ainda não entendo." },
+    ],
+    writingPrompt: "Escreva uma frase com 'still' sobre algo que continua igual.",
+    commonMistake: "'Still' = continuidade. 'Yet' = em perguntas/negativas sobre algo esperado. 'Already' = aconteceu antes do esperado.",
+  },
+
+  // ─── INTENSIDADE ──────────────────────────────────────────────────────────
+  {
+    id: "very",
+    adverb: "very",
+    meaning: "muito",
+    category: "intensidade",
+    explanation: "Intensifica adjetivos e advérbios. Não use com verbos — para verbos, use 'a lot' ou 'really'.",
+    examples: [
+      { en: "It's very cold today.", pt: "Está muito frio hoje." },
+      { en: "She's very good at her job.", pt: "Ela é muito boa no trabalho." },
+      { en: "I'm very tired.", pt: "Estou muito cansada." },
+    ],
+    writingPrompt: "Escreva 2 frases com 'very' + adjetivo.",
+    commonMistake: "'I very like it' está errado. Para verbo: 'I really like it' ou 'I like it a lot'.",
+  },
+  {
+    id: "really",
+    adverb: "really",
+    meaning: "muito / de verdade / realmente",
+    category: "intensidade",
+    explanation: "'Really' é mais versátil que 'very' — funciona com adjetivos, advérbios E verbos. Mais informal e natural na fala.",
+    pronunciationTip: "'really': o EA tem som de 'í' longo. 'ríili'.",
+    examples: [
+      { en: "I really like this song.", pt: "Eu realmente gosto dessa música." },
+      { en: "She's really smart.", pt: "Ela é muito inteligente." },
+      { en: "Are you really sure?", pt: "Você tem mesmo certeza?" },
+      { en: "That really helped me.", pt: "Isso realmente me ajudou." },
+    ],
+    writingPrompt: "Escreva uma frase com 'really' + verbo e outra com 'really' + adjetivo.",
+  },
+  {
+    id: "quite",
+    adverb: "quite",
+    meaning: "bastante / razoavelmente",
+    category: "intensidade",
+    explanation: "Em inglês americano, 'quite' = muito/bastante. Em inglês britânico, 'quite' pode significar 'razoavelmente' (menos que 'very'). Cuidado com o contexto.",
+    pronunciationTip: "'quite': o UI tem som de 'ai'. 'kwáit'. Rima com 'night'.",
+    examples: [
+      { en: "It's quite hot today.", pt: "Está bastante quente hoje." },
+      { en: "She's quite good.", pt: "Ela é bem boa." },
+      { en: "I'm quite sure about this.", pt: "Tenho bastante certeza sobre isso." },
+      { en: "That was quite a surprise.", pt: "Que surpresa e tanto." },
+    ],
+    writingPrompt: "Escreva uma frase com 'quite' + adjetivo.",
+  },
+  {
+    id: "pretty",
+    adverb: "pretty",
+    meaning: "bem / bastante (informal)",
+    category: "intensidade",
+    explanation: "'Pretty' como advérbio = bem/bastante, mais informal. Muito comum na fala americana do dia a dia.",
+    pronunciationTip: "'pretty': o TT vira R entre vogais ('préri').",
+    examples: [
+      { en: "That's pretty good.", pt: "Isso é bem bom." },
+      { en: "I'm pretty tired.", pt: "Estou bem cansada." },
+      { en: "It's pretty cold outside.", pt: "Está bastante frio lá fora." },
+      { en: "She's pretty much done.", pt: "Ela praticamente terminou." },
+    ],
+    writingPrompt: "Escreva uma frase com 'pretty' como advérbio de intensidade.",
+    commonMistake: "'Pretty' como advérbio não tem nada a ver com 'bonito'. Contexto muda tudo.",
+  },
+  {
+    id: "too",
+    adverb: "too",
+    meaning: "demais / excessivamente",
+    category: "intensidade",
+    explanation: "'Too' indica excesso — algo além do limite aceitável. Diferente de 'very' (que é neutro). 'It's very hot' = muito quente. 'It's too hot' = quente demais (problema).",
+    examples: [
+      { en: "This coffee is too hot.", pt: "Esse café está quente demais." },
+      { en: "She talks too much.", pt: "Ela fala demais." },
+      { en: "It's too late.", pt: "É tarde demais." },
+      { en: "You're working too hard.", pt: "Você está trabalhando demais." },
+    ],
+    writingPrompt: "Escreva uma frase com 'too' indicando excesso.",
+    commonMistake: "'Too' = excesso (negativo). 'Very' = intensidade (neutro). Não são intercambiáveis.",
+  },
+  {
+    id: "enough",
+    adverb: "enough",
+    meaning: "suficiente / o bastante",
+    category: "intensidade",
+    explanation: "Como advérbio, 'enough' vem DEPOIS do adjetivo ou verbo. 'Good enough' (não 'enough good').",
+    examples: [
+      { en: "Is this good enough?", pt: "Isso é suficientemente bom?" },
+      { en: "I don't sleep enough.", pt: "Não durmo o suficiente." },
+      { en: "She's old enough to decide.", pt: "Ela tem idade suficiente para decidir." },
+      { en: "I've had enough.", pt: "Já chega. / Já tive o suficiente." },
+    ],
+    writingPrompt: "Escreva uma frase com 'enough' depois de um adjetivo.",
+    commonMistake: "'Enough good' está errado — 'enough' como advérbio vem sempre depois do adjetivo: 'good enough'.",
+  },
+
+  // ─── MODO ─────────────────────────────────────────────────────────────────
+  {
+    id: "well",
+    adverb: "well",
+    meaning: "bem (modo)",
+    category: "modo",
+    explanation: "'Well' é o advérbio de 'good'. 'Good' = adjetivo (She's a good singer). 'Well' = advérbio (She sings well).",
+    examples: [
+      { en: "She speaks English well.", pt: "Ela fala inglês bem." },
+      { en: "He did well on the test.", pt: "Ele foi bem na prova." },
+      { en: "I don't sleep well.", pt: "Não durmo bem." },
+      { en: "Well done!", pt: "Muito bem!" },
+    ],
+    writingPrompt: "Escreva uma frase com 'well' descrevendo como alguém faz algo.",
+    commonMistake: "'She speaks English good' está errado. Com verbo, use 'well', não 'good'.",
+  },
+  {
+    id: "hard-hardly",
+    adverb: "hard / hardly",
+    meaning: "muito / com esforço // quase não",
+    category: "modo",
+    explanation: "CILADA: 'hard' (advérbio) = com muito esforço. 'Hardly' = quase não/raramente. São opostos! 'I work hard' ≠ 'I hardly work'.",
+    pronunciationTip: "'hard': o AR vira 'ár'. 'hardly': 'árdli'.",
+    examples: [
+      { en: "She works really hard.", pt: "Ela trabalha muito/com muito esforço." },
+      { en: "I hardly slept last night.", pt: "Quase não dormi ontem à noite." },
+      { en: "He tried hard but failed.", pt: "Ele tentou muito mas falhou." },
+      { en: "I can hardly believe it.", pt: "Mal consigo acreditar nisso." },
+    ],
+    writingPrompt: "Escreva uma frase com 'hard' e outra com 'hardly'.",
+    commonMistake: "'Hard' e 'hardly' são opostos. 'I work hard' = trabalho muito. 'I hardly work' = quase não trabalho.",
+  },
+  {
+    id: "fast-quickly",
+    adverb: "fast / quickly",
+    meaning: "rápido / rapidamente",
+    category: "modo",
+    explanation: "'Fast' pode ser adjetivo ou advérbio (sem -ly). 'Quickly' é só advérbio. Ambos corretos, 'fast' é mais coloquial.",
+    examples: [
+      { en: "She talks too fast.", pt: "Ela fala rápido demais." },
+      { en: "Please respond quickly.", pt: "Por favor responda rapidamente." },
+      { en: "I learned fast.", pt: "Aprendi rápido." },
+      { en: "Can you do it quickly?", pt: "Você consegue fazer isso rapidamente?" },
+    ],
+    writingPrompt: "Escreva uma frase com 'fast' e outra com 'quickly'.",
+    commonMistake: "'Fastly' não existe em inglês. O advérbio de modo é 'fast' ou 'quickly'.",
+  },
+
+  // ─── FALSOS AMIGOS ────────────────────────────────────────────────────────
+  {
+    id: "actually",
+    adverb: "actually",
+    meaning: "na verdade / de fato (NÃO é 'atualmente')",
+    category: "falso-amigo",
+    explanation: "'Actually' NÃO significa 'atualmente'. Significa 'na verdade', 'de fato', muitas vezes para corrigir ou surpreender. 'Atualmente' em inglês é 'currently' ou 'nowadays'.",
+    pronunciationTip: "'actually': 'ækchueli'.",
+    examples: [
+      { en: "Actually, I changed my mind.", pt: "Na verdade, mudei de ideia." },
+      { en: "I actually like it.", pt: "Na verdade eu gosto." },
+      { en: "What do you actually do?", pt: "O que você faz de verdade?" },
+      { en: "I'm currently working on a new project.", pt: "Atualmente estou trabalhando em um projeto novo." },
+    ],
+    writingPrompt: "Escreva uma frase com 'actually' (na verdade) e outra com 'currently' (atualmente).",
+    commonMistake: "'I actually live in São Paulo' = Na verdade moro em SP. Não 'atualmente'.",
+  },
+  {
+    id: "eventually",
+    adverb: "eventually",
+    meaning: "eventualmente = por fim / no final (NÃO é 'de vez em quando')",
+    category: "falso-amigo",
+    explanation: "'Eventually' NÃO significa 'de vez em quando'. Significa 'por fim', 'no final das contas', 'mais cedo ou mais tarde'. 'De vez em quando' = 'sometimes' ou 'once in a while'.",
+    examples: [
+      { en: "She eventually agreed.", pt: "Por fim ela concordou." },
+      { en: "Eventually, things got better.", pt: "No final das contas, as coisas melhoraram." },
+      { en: "He'll understand eventually.", pt: "Ele vai entender eventualmente (mais cedo ou mais tarde)." },
+      { en: "I eat pizza once in a while.", pt: "Como pizza de vez em quando." },
+    ],
+    writingPrompt: "Escreva uma frase com 'eventually' e outra com 'once in a while'.",
+    commonMistake: "'I eventually go to the gym' soa errado — não significa 'de vez em quando'. Use 'sometimes' ou 'once in a while'.",
+  },
+  {
+    id: "currently",
+    adverb: "currently",
+    meaning: "atualmente / no momento",
+    category: "falso-amigo",
+    explanation: "'Currently' = atualmente, no momento presente. É a tradução correta de 'atualmente', não 'actually'.",
+    examples: [
+      { en: "I'm currently studying for my IELTS.", pt: "Atualmente estou estudando para o IELTS." },
+      { en: "She's currently living in London.", pt: "Ela está morando em Londres no momento." },
+      { en: "What are you currently working on?", pt: "No que você está trabalhando atualmente?" },
+    ],
+    writingPrompt: "Escreva uma frase com 'currently' sobre o que você está fazendo agora.",
+  },
+  {
+    id: "anyway",
+    adverb: "anyway",
+    meaning: "de qualquer forma / de qualquer jeito / enfim",
+    category: "falso-amigo",
+    explanation: "'Anyway' é muito usado na fala para mudar de assunto, concluir ou retomar. Equivale ao 'enfim' ou 'de qualquer jeito' do português.",
+    examples: [
+      { en: "Anyway, let's move on.", pt: "Enfim, vamos continuar." },
+      { en: "I don't like it, but I'll do it anyway.", pt: "Não gosto, mas vou fazer de qualquer jeito." },
+      { en: "Anyway, I gotta go.", pt: "Enfim, tenho que ir." },
+      { en: "What were we talking about? Anyway...", pt: "Do que a gente estava falando? Enfim..." },
+    ],
+    writingPrompt: "Escreva uma frase com 'anyway' para mudar de assunto ou concluir.",
+  },
+  {
+    id: "instead",
+    adverb: "instead",
+    meaning: "em vez disso / ao invés",
+    category: "falso-amigo",
+    explanation: "'Instead' (advérbio) vai no final ou início da frase. 'Instead of' (preposição) vai antes de um substantivo ou verbo com -ing.",
+    examples: [
+      { en: "I didn't eat pizza. I had a salad instead.", pt: "Não comi pizza. Comi salada em vez disso." },
+      { en: "Instead of calling, she sent a message.", pt: "Em vez de ligar, ela mandou uma mensagem." },
+      { en: "Let's walk instead of taking a taxi.", pt: "Vamos a pé em vez de pegar um táxi." },
+    ],
+    writingPrompt: "Escreva uma frase com 'instead' e outra com 'instead of'.",
+  },
+
+  // ─── POSIÇÃO E USO ────────────────────────────────────────────────────────
+  {
+    id: "too-also-either",
+    adverb: "too / also / either",
+    meaning: "também (positivo) / também (negativo)",
+    category: "posicao",
+    explanation: "'Too' e 'also' = também (frases afirmativas). 'Either' = também (frases negativas). 'Too' vai no final; 'also' vai antes do verbo; 'either' vai no final de frases negativas.",
+    examples: [
+      { en: "I like it too.", pt: "Eu também gosto." },
+      { en: "I also like it.", pt: "Eu também gosto." },
+      { en: "I don't like it either.", pt: "Eu também não gosto." },
+      { en: "Me too!", pt: "Eu também!" },
+      { en: "Me neither.", pt: "Eu também não." },
+    ],
+    writingPrompt: "Escreva uma frase afirmativa com 'too' e uma negativa com 'either'.",
+    commonMistake: "'I don't like it too' está errado. Na negativa, use 'either': 'I don't like it either'.",
+  },
+  {
+    id: "just",
+    adverb: "just",
+    meaning: "só / apenas / acabei de / exatamente",
+    category: "posicao",
+    explanation: "'Just' tem vários usos: (1) só/apenas (I just want coffee), (2) acabei de (I just arrived), (3) exatamente (That's just what I needed).",
+    pronunciationTip: "'just': o U tem som de 'â'. 'djâst'.",
+    examples: [
+      { en: "I just want to sleep.", pt: "Só quero dormir." },
+      { en: "I just arrived.", pt: "Acabei de chegar." },
+      { en: "Just a moment.", pt: "Só um momento." },
+      { en: "That's just what I needed.", pt: "É exatamente o que eu precisava." },
+      { en: "Just do it.", pt: "Só faz." },
+    ],
+    writingPrompt: "Escreva uma frase com 'just' em cada sentido: só/apenas e acabei de.",
+  },
+  {
+    id: "even",
+    adverb: "even",
+    meaning: "até mesmo / nem mesmo",
+    category: "posicao",
+    explanation: "'Even' intensifica — indica algo surpreendente ou além do esperado. Em negativas: 'not even' = nem mesmo.",
+    examples: [
+      { en: "Even my dog knows that.", pt: "Até o meu cachorro sabe isso." },
+      { en: "She didn't even call.", pt: "Ela nem ligou." },
+      { en: "I can't even.", pt: "Não aguento. (expressão informal)" },
+      { en: "It's even better than I thought.", pt: "É até melhor do que eu pensei." },
+    ],
+    writingPrompt: "Escreva uma frase com 'even' e outra com 'not even'.",
+  },
+];
