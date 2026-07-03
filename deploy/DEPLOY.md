@@ -12,13 +12,20 @@ continua no Supabase (Edge Functions), nada muda lá.
 
 ## Passo a passo (rodar no VPS)
 
-### 1. Clonar o repositório
+### 1. Clonar o repositório (PRIVADO — precisa de token)
+O repo é privado, então o `git clone` pede autenticação. Crie um **Personal
+Access Token** no GitHub (Settings → Developer settings → Tokens → escopo `repo`)
+e use assim (rode UMA linha por vez, não cole tudo junto):
 ```bash
 mkdir -p /opt/apps && cd /opt/apps
-git clone https://github.com/anaperci/ingles-da-ana.git
+git clone https://SEU_TOKEN@github.com/anaperci/ingles-da-ana.git
 cd ingles-da-ana
 ```
 (Nas próximas vezes, só `git pull` pra atualizar.)
+
+> Alternativa sem GitHub no VPS: no seu Mac rode `npm run build` e
+> `rsync -avz --delete dist/ root@IP:/opt/apps/ingles-html/`, e sirva essa pasta
+> pelo nginx (veja o fim deste arquivo).
 
 ### 2. Subir o container (build + run)
 ```bash

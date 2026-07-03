@@ -4,6 +4,7 @@
  * cai na voz nativa do navegador (Web Speech API) para não ficar mudo.
  */
 import { callFunctionBlob, isBackendConfigured } from '@/lib/api'
+import { azureAvailable, azureExtras } from '@/lib/azure'
 
 const cache = new Map<string, string>() // texto -> object URL do MP3
 let currentAudio: HTMLAudioElement | null = null
@@ -43,7 +44,9 @@ export function speak(text: string, lang = 'en-US') {
   if (!clean) return
   stopCurrent()
 
-  if (!isBackendConfigured()) {
+  // Azure é pago: só a dona (ou quem tem chave própria) usa a voz neural.
+  // Os demais usam a voz do navegador silenciosamente.
+  if (!isBackendConfigured() || !azureAvailable()) {
     browserSpeak(clean, lang)
     return
   }
@@ -54,7 +57,7 @@ export function speak(text: string, lang = 'en-US') {
     return
   }
 
-  callFunctionBlob('tts', { text: clean })
+  callFunctionBlob('tts', { text: clean, ...azureExtras() })
     .then((blob) => {
       const url = URL.createObjectURL(blob)
       cache.set(clean, url)

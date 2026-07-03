@@ -3,10 +3,9 @@
 //   supabase secrets set AZURE_SPEECH_KEY=...  AZURE_SPEECH_REGION=westeurope
 // Deploy: supabase functions deploy pronounce
 import { corsHeaders, json } from '../_shared/cors.ts'
+import { resolveAzure, paidFeatureResponse, type AzureBody } from '../_shared/azure.ts'
 
-declare const Deno: { env: { get(k: string): string | undefined } }
-
-interface Body {
+interface Body extends AzureBody {
   audioBase64: string
   referenceText: string
 }
@@ -21,27 +20,6 @@ function base64ToBytes(b64: string): Uint8Array {
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
 
-  // À prova de troca: os dois secrets às vezes vêm embaralhados (chave no campo
-  // da região, etc.). Detectamos qual é a chave (longa) e qual é a região (código
-  // curto tipo "eastus"); se nenhum parecer região, usamos o padrão eastus.
-  const raw1 = (Deno.env.get('AZURE_SPEECH_KEY') ?? '').trim()
-  const raw2 = (Deno.env.get('AZURE_SPEECH_REGION') ?? '').trim()
-  const looksLikeKey = (s: string) => s.length > 24
-  const looksLikeRegion = (s: string) =>
-    /^[a-z][a-z0-9]*$/.test(s) && s.length <= 24
-
-  let key = looksLikeKey(raw1) ? raw1 : looksLikeKey(raw2) ? raw2 : raw1
-  // chaves novas da Azure têm 84 chars; 85 = veio com o número "Key 1/2" colado no início
-  if (key.length === 85) key = key.slice(1)
-  const region =
-    looksLikeRegion(raw1) && !looksLikeKey(raw1)
-      ? raw1
-      : looksLikeRegion(raw2) && !looksLikeKey(raw2)
-        ? raw2
-        : 'eastus'
-
-  if (!key) return json({ error: 'Chave do Azure não configurada' }, 500)
-
   let body: Body
   try {
     body = await req.json()
@@ -51,6 +29,12 @@ Deno.serve(async (req: Request) => {
   if (!body.audioBase64 || !body.referenceText) {
     return json({ error: 'audioBase64 e referenceText são obrigatórios' }, 400)
   }
+
+  // Gating de custo: dona usa a chave do servidor; outros precisam de BYOK.
+  const az = resolveAzure(body)
+  if (!az) return json(paidFeatureResponse(), 402)
+  if (!az.key) return json({ error: 'Chave do Azure não configurada' }, 500)
+  const { key, region } = az
 
   const assessmentParams = btoa(
     JSON.stringify({

@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { Mic, Square, Volume2, RotateCcw, Loader2, MonitorX } from 'lucide-react'
+import { Mic, Square, Volume2, RotateCcw, Loader2, MonitorX, Lock } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ScoreRing } from './ScoreRing'
@@ -10,6 +10,8 @@ import { useProgress } from '@/hooks/useProgress'
 import { useRecorder } from '@/hooks/useRecorder'
 import { blobToWavBase64 } from '@/lib/audio'
 import { callFunction, isBackendConfigured } from '@/lib/api'
+import { azureAvailable, azureExtras } from '@/lib/azure'
+import { AzureKeyDialog } from '@/components/auth/AzureKeyDialog'
 import type { PronunciationResult, WordScore } from '@/types/pronunciation'
 import type { CategoryKey, ModuleKey } from '@/types'
 
@@ -54,8 +56,10 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
   const [result, setResult] = useState<PronunciationResult | null>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [azOpen, setAzOpen] = useState(false)
 
   const recording = state === 'recording'
+  const canAzure = azureAvailable()
   const supported =
     isBackendConfigured() &&
     typeof navigator !== 'undefined' &&
@@ -77,6 +81,7 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
       const res = await callFunction<PronunciationResult>('pronounce', {
         audioBase64,
         referenceText: text,
+        ...azureExtras(),
       })
       setResult(res)
       addSession({
@@ -160,7 +165,19 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
       )}
 
       {/* Controles */}
-      {supported ? (
+      {!canAzure ? (
+        <div className="flex flex-col items-center gap-3 rounded-xl bg-soft p-4 text-center">
+          <div className="flex items-center gap-2 text-sm font-semibold text-soft-text">
+            <Lock className="h-4 w-4" /> Recurso pago (Azure)
+          </div>
+          <p className="text-sm text-soft-text-2">
+            A nota de pronúncia usa o Azure Speech. Conecte sua própria chave Azure para liberar.
+          </p>
+          <Button variant="outline" onClick={() => setAzOpen(true)} className="gap-2">
+            <Mic className="h-4 w-4" /> Conectar Azure
+          </Button>
+        </div>
+      ) : supported ? (
         <div className="flex flex-col items-center gap-3">
           {busy ? (
             <Button size="lg" variant="outline" disabled className="gap-2">
@@ -195,6 +212,8 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
           </span>
         </div>
       )}
+
+      <AzureKeyDialog open={azOpen} onClose={() => setAzOpen(false)} />
     </Card>
   )
 }

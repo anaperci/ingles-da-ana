@@ -4,11 +4,12 @@ import { cn } from '@/lib/utils'
 import { useRecorder } from '@/hooks/useRecorder'
 import { blobToWavBase64 } from '@/lib/audio'
 import { callFunction, isBackendConfigured } from '@/lib/api'
+import { azureAvailable, azureExtras } from '@/lib/azure'
 import type { PronunciationResult } from '@/types/pronunciation'
 
 /**
  * Botão compacto para praticar a fala de um texto curto (palavra/forma verbal)
- * e receber o score do Azure. Reutiliza o proxy `pronounce` já existente.
+ * e receber o score do Azure. Recurso pago: só aparece pra quem tem Azure.
  */
 export function PronounceButton({ text, label }: { text: string; label?: string }) {
   const { state, start, stop } = useRecorder()
@@ -17,7 +18,7 @@ export function PronounceButton({ text, label }: { text: string; label?: string 
   const [error, setError] = useState(false)
   const recording = state === 'recording'
 
-  if (!isBackendConfigured()) return null
+  if (!isBackendConfigured() || !azureAvailable()) return null
 
   async function handleStop() {
     const blob = await stop()
@@ -29,6 +30,7 @@ export function PronounceButton({ text, label }: { text: string; label?: string 
       const res = await callFunction<PronunciationResult>('pronounce', {
         audioBase64: base64,
         referenceText: text,
+        ...azureExtras(),
       })
       setScore(Math.round(res.pronunciationScore))
     } catch {

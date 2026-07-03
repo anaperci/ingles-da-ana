@@ -2,12 +2,11 @@
 // Reaproveita os secrets AZURE_SPEECH_KEY / AZURE_SPEECH_REGION (region eastus).
 // Deploy: supabase functions deploy tts
 import { corsHeaders, json } from '../_shared/cors.ts'
-
-declare const Deno: { env: { get(k: string): string | undefined } }
+import { resolveAzure, paidFeatureResponse, type AzureBody } from '../_shared/azure.ts'
 
 const DEFAULT_VOICE = 'en-GB-SoniaNeural' // britânico natural (Malta); trocável via body.voice
 
-interface Body {
+interface Body extends AzureBody {
   text?: string
   voice?: string
 }
@@ -24,21 +23,6 @@ function escapeXml(s: string): string {
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
 
-  // À prova de troca: descobre chave (longa) e região (curta); default eastus.
-  const raw1 = (Deno.env.get('AZURE_SPEECH_KEY') ?? '').trim()
-  const raw2 = (Deno.env.get('AZURE_SPEECH_REGION') ?? '').trim()
-  const looksKey = (s: string) => s.length > 24
-  const looksRegion = (s: string) => /^[a-z][a-z0-9]*$/.test(s) && s.length <= 24
-  let key = looksKey(raw1) ? raw1 : looksKey(raw2) ? raw2 : raw1
-  if (key.length === 85) key = key.slice(1)
-  const region =
-    looksRegion(raw1) && !looksKey(raw1)
-      ? raw1
-      : looksRegion(raw2) && !looksKey(raw2)
-        ? raw2
-        : 'eastus'
-  if (!key) return json({ error: 'Chave do Azure não configurada' }, 500)
-
   let body: Body
   try {
     body = await req.json()
@@ -47,6 +31,12 @@ Deno.serve(async (req: Request) => {
   }
   const text = (body.text ?? '').toString().trim()
   if (!text) return json({ error: 'text é obrigatório' }, 400)
+
+  // Gating de custo: dona usa a chave do servidor; outros precisam de BYOK.
+  const az = resolveAzure(body)
+  if (!az) return json(paidFeatureResponse(), 402)
+  if (!az.key) return json({ error: 'Chave do Azure não configurada' }, 500)
+  const { key, region } = az
   const voice = body.voice || DEFAULT_VOICE
 
   const ssml = `<speak version='1.0' xml:lang='en-US'><voice name='${voice}'>${escapeXml(

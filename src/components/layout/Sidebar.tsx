@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { X, LogOut, KeyRound } from 'lucide-react'
+import { X, LogOut, KeyRound, Mic } from 'lucide-react'
 import { NAV_ITEMS } from '@/config/nav'
 import { useAuthUser } from '@/hooks/useAuthUser'
 import { ChangePasswordDialog } from '@/components/auth/ChangePasswordDialog'
+import { AzureKeyDialog } from '@/components/auth/AzureKeyDialog'
+import { isOwner } from '@/lib/azure'
 import { cn } from '@/lib/utils'
 
 function UserFooter() {
   const { email, signOut } = useAuthUser()
   const [pwOpen, setPwOpen] = useState(false)
+  const [azOpen, setAzOpen] = useState(false)
   if (!email) return null
   return (
     <div className="mt-auto border-t border-white/10 pt-3">
@@ -21,6 +24,14 @@ function UserFooter() {
       >
         <KeyRound className="h-4 w-4" /> Trocar senha
       </button>
+      {!isOwner() && (
+        <button
+          onClick={() => setAzOpen(true)}
+          className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+        >
+          <Mic className="h-4 w-4" /> Conectar Azure
+        </button>
+      )}
       <button
         onClick={() => signOut()}
         className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-white/60 transition-colors hover:bg-white/10 hover:text-white"
@@ -28,6 +39,7 @@ function UserFooter() {
         <LogOut className="h-4 w-4" /> Sair
       </button>
       <ChangePasswordDialog open={pwOpen} onClose={() => setPwOpen(false)} />
+      <AzureKeyDialog open={azOpen} onClose={() => setAzOpen(false)} />
     </div>
   )
 }
