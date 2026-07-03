@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react'
 import { callFunction, isBackendConfigured, NotConfiguredError } from '@/lib/api'
+import { loadJSON, saveJSON } from '@/lib/storage'
 import { cn } from '@/lib/utils'
 
 type Msg = { role: 'user' | 'assistant'; content: string }
@@ -26,7 +27,16 @@ export function LearnChat() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [hinted, setHinted] = useState(() => loadJSON('chat:hint-seen', false))
   const scrollRef = useRef<HTMLDivElement>(null)
+
+  function openChat() {
+    setOpen(true)
+    if (!hinted) {
+      setHinted(true)
+      saveJSON('chat:hint-seen', true)
+    }
+  }
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
@@ -59,12 +69,23 @@ export function LearnChat() {
 
   return (
     <>
+      {/* Balãozinho de primeiro acesso */}
+      {!open && !hinted && (
+        <button
+          onClick={openChat}
+          className="fixed bottom-8 right-[84px] z-50 flex items-center gap-1.5 rounded-full border border-card-border bg-card px-3.5 py-2 text-sm font-semibold text-primary shadow-lg animate-fade-in"
+        >
+          Tire dúvidas aqui 👋
+          <span className="absolute -right-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 border-b border-r border-card-border bg-card" />
+        </button>
+      )}
+
       {/* Botão flutuante */}
       {!open && (
         <button
-          onClick={() => setOpen(true)}
+          onClick={openChat}
           aria-label="Abrir chat de dúvidas"
-          className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-primary bg-accent text-primary shadow-soft transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-soft active:translate-x-0 active:translate-y-0"
+          className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full border-[3px] border-white bg-primary text-white shadow-lg ring-1 ring-black/5 transition-transform hover:scale-105 active:scale-95"
         >
           <MessageCircle className="h-6 w-6" />
         </button>
@@ -73,7 +94,7 @@ export function LearnChat() {
       {/* Overlay (mobile) */}
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-primary/30 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-40 bg-primary/40 backdrop-blur-sm md:hidden"
           onClick={() => setOpen(false)}
         />
       )}
@@ -81,34 +102,36 @@ export function LearnChat() {
       {/* Painel lateral */}
       <aside
         className={cn(
-          'fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col border-l-2 border-primary bg-white transition-transform duration-200',
+          'fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-background shadow-2xl transition-transform duration-300',
           open ? 'translate-x-0' : 'pointer-events-none translate-x-full'
         )}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between gap-2 border-b-2 border-primary bg-accent px-4 py-3">
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-accent">
-              <Sparkles className="h-5 w-5" />
+        {/* Header (navy = sidebar) */}
+        <div className="flex items-center justify-between gap-2 bg-primary px-4 py-3.5 text-white">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10">
+              <Sparkles className="h-5 w-5 text-mint" />
             </div>
             <div className="leading-tight">
-              <div className="font-display font-extrabold text-primary">Tutora de inglês</div>
-              <div className="text-xs text-primary/70">Tire suas dúvidas em PT-BR</div>
+              <div className="font-display font-bold">Tutora de inglês</div>
+              <div className="flex items-center gap-1.5 text-xs text-white/60">
+                <span className="h-1.5 w-1.5 rounded-full bg-mint" /> online · responde em PT-BR
+              </div>
             </div>
           </div>
           <button
             onClick={() => setOpen(false)}
             aria-label="Fechar chat"
-            className="rounded-xl border-2 border-primary p-1.5 text-primary hover:bg-white"
+            className="rounded-xl p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Mensagens */}
-        <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
+        <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto bg-muted/40 p-4">
           {messages.length === 0 && (
-            <div className="space-y-4">
+            <div className="space-y-3">
               <p className="text-sm text-muted-foreground">
                 Pergunte qualquer coisa sobre inglês ou sobre como estudar. Por exemplo:
               </p>
@@ -117,7 +140,7 @@ export function LearnChat() {
                   <button
                     key={s}
                     onClick={() => send(s)}
-                    className="rounded-xl border-[1.5px] border-card-border px-3 py-2 text-left text-sm text-primary transition-colors hover:bg-accent"
+                    className="rounded-2xl border border-card-border bg-card px-3.5 py-2.5 text-left text-sm text-foreground shadow-soft transition-colors hover:border-accent hover:bg-soft"
                   >
                     {s}
                   </button>
@@ -133,8 +156,10 @@ export function LearnChat() {
             >
               <div
                 className={cn(
-                  'max-w-[85%] whitespace-pre-wrap rounded-2xl border-2 border-primary px-3 py-2 text-sm',
-                  m.role === 'user' ? 'bg-accent text-primary' : 'bg-white text-primary'
+                  'max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm shadow-soft',
+                  m.role === 'user'
+                    ? 'rounded-br-md bg-primary text-white'
+                    : 'rounded-bl-md border border-card-border bg-card text-foreground'
                 )}
               >
                 {m.content}
@@ -144,14 +169,20 @@ export function LearnChat() {
 
           {loading && (
             <div className="flex justify-start">
-              <div className="rounded-2xl border-2 border-primary bg-white px-3 py-2 text-sm text-muted-foreground">
-                digitando…
+              <div className="flex items-center gap-1 rounded-2xl rounded-bl-md border border-card-border bg-card px-3.5 py-3 shadow-soft">
+                {[0, 150, 300].map((d) => (
+                  <span
+                    key={d}
+                    className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground/60"
+                    style={{ animationDelay: `${d}ms` }}
+                  />
+                ))}
               </div>
             </div>
           )}
 
           {error && (
-            <div className="rounded-xl border-2 border-error bg-error/10 px-3 py-2 text-sm text-error">
+            <div className="rounded-xl border border-error/30 bg-error/10 px-3 py-2 text-sm text-error">
               {error}
             </div>
           )}
@@ -163,19 +194,19 @@ export function LearnChat() {
             e.preventDefault()
             send(input)
           }}
-          className="flex items-center gap-2 border-t-2 border-primary p-3"
+          className="flex items-center gap-2 border-t border-border bg-card p-3"
         >
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={isBackendConfigured() ? 'Escreva sua dúvida…' : 'Backend não configurado'}
-            className="flex-1 rounded-xl border-2 border-card-border bg-white px-3 py-2 text-sm text-primary outline-none focus:border-primary"
+            className="h-11 flex-1 rounded-full border border-input bg-muted/50 px-4 text-sm text-foreground outline-none transition-colors focus:border-accent focus:bg-card"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
             aria-label="Enviar"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border-2 border-primary bg-accent text-primary disabled:opacity-40"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white transition-transform hover:scale-105 active:scale-95 disabled:opacity-40 disabled:hover:scale-100"
           >
             <Send className="h-4 w-4" />
           </button>
