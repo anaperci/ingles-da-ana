@@ -87,7 +87,15 @@ export function AuthScreen() {
   return (
     <div
       className="flex min-h-screen items-center justify-center p-4 sm:p-10"
-      style={{ background: 'radial-gradient(130% 100% at 50% -10%,#eef0f4 0%,#e4e7ee 100%)' }}
+      style={{
+        backgroundColor: '#e7eaf0',
+        backgroundImage: [
+          'linear-gradient(rgba(10,25,47,.06) 1px, transparent 1px)',
+          'linear-gradient(90deg, rgba(10,25,47,.06) 1px, transparent 1px)',
+          'radial-gradient(130% 100% at 50% -10%,#eef0f4 0%,#e4e7ee 100%)',
+        ].join(','),
+        backgroundSize: '40px 40px, 40px 40px, 100% 100%',
+      }}
     >
       <div
         className="flex w-full max-w-[940px] flex-col overflow-hidden rounded-3xl shadow-2xl md:h-[540px] md:flex-row"
