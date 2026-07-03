@@ -105,13 +105,13 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
   }
 
   return (
-    <Card className="space-y-6 p-6 sm:p-8">
+    <Card className="space-y-6 border-card-border bg-card p-6 shadow-soft sm:p-10">
       {/* Frase */}
-      <div className="space-y-2 text-center">
+      <div className="space-y-4 text-center">
         {badge}
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-3">
           {result && result.words.length > 0 ? (
-            <p className="text-xl font-bold leading-relaxed sm:text-2xl">
+            <p className="font-display text-2xl font-extrabold leading-relaxed tracking-tight sm:text-3xl">
               {result.words.map((w, i) => (
                 <span key={i} className={cn('mx-0.5', wordColor(w))}>
                   {w.word}
@@ -119,10 +119,12 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
               ))}
             </p>
           ) : (
-            <p className="text-xl font-bold leading-relaxed sm:text-2xl">{text}</p>
+            <p className="font-display text-2xl font-extrabold leading-relaxed tracking-tight sm:text-3xl">
+              {text}
+            </p>
           )}
           <button
-            className="rounded-full p-2 text-muted-foreground hover:bg-secondary"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-card-border bg-card text-muted-foreground shadow-soft transition-colors hover:border-accent hover:text-accent-dark"
             onClick={() => speak(text)}
             aria-label="Ouvir modelo"
           >
@@ -192,7 +194,12 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
               <Square className="h-5 w-5" /> Parar e avaliar
             </Button>
           ) : (
-            <Button size="lg" variant="gradient" onClick={handleStart} className="gap-2">
+            <Button
+              size="lg"
+              variant="default"
+              onClick={handleStart}
+              className="gap-2 animate-pulse hover:animate-none"
+            >
               <Mic className="h-5 w-5" /> Falar agora
             </Button>
           )}

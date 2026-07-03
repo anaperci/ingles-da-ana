@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/badge'
 import { SpeakAndScore } from './SpeakAndScore'
 import type { PronunciationPhrase } from '@/data/pronunciationPhrases'
 
@@ -12,7 +11,11 @@ export function PronunciationPractice({ phrase }: Props) {
     <SpeakAndScore
       text={phrase.text}
       translation={phrase.translation}
-      badge={<Badge variant="secondary">{phrase.difficulty}</Badge>}
+      badge={
+        <span className="inline-flex items-center rounded-full bg-soft px-3 py-1 text-xs font-semibold text-accent-dark">
+          {phrase.difficulty}
+        </span>
+      }
       session={{
         module: 'pronunciation',
         title: `Pronúncia · "${phrase.text.slice(0, 30)}…"`,

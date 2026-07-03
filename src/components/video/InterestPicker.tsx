@@ -7,7 +7,7 @@ export function InterestPicker() {
   const { selected, toggle } = useInterests()
   return (
     <Card className="p-5">
-      <h3 className="mb-1 font-semibold">Seus interesses</h3>
+      <h3 className="mb-1 text-lg font-bold">Seus interesses</h3>
       <p className="mb-4 text-sm text-muted-foreground">
         Escolha temas para personalizar o vídeo do dia.
       </p>
@@ -19,10 +19,10 @@ export function InterestPicker() {
               key={i.key}
               onClick={() => toggle(i.key)}
               className={cn(
-                'rounded-full border px-3 py-1.5 text-sm font-medium transition-colors',
+                'rounded-full border px-4 py-2 text-sm font-medium transition-colors',
                 active
                   ? 'border-primary bg-primary text-primary-foreground'
-                  : 'border-card-border bg-card text-muted-foreground hover:border-primary hover:text-foreground'
+                  : 'border-card-border bg-card text-foreground hover:border-accent'
               )}
             >
               {i.emoji} {i.label}

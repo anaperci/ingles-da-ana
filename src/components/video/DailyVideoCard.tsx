@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Play, RefreshCw, Check, ExternalLink, Loader2 } from 'lucide-react'
+import { Play, RefreshCw, Check, ExternalLink, Loader2, Flame } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -47,46 +47,65 @@ export function DailyVideoCard() {
 
   return (
     <>
-      <Card className="overflow-hidden">
-        <div className="grid md:grid-cols-2">
+      <Card className="overflow-hidden p-3">
+        <div className="grid gap-4 grid-cols-1 lg:grid-cols-[1.15fr_1fr]">
           <button
-            className="group relative aspect-video w-full overflow-hidden bg-muted"
+            className="group relative aspect-video w-full overflow-hidden rounded-2xl bg-muted"
+            style={{ background: 'linear-gradient(160deg,#0a192f,#102341)' }}
             onClick={() => setOpen(true)}
           >
-            <img
-              src={video.thumbnail}
-              alt={video.title}
-              className="h-full w-full object-cover transition-transform group-hover:scale-105"
-            />
+            {video.thumbnail && (
+              <img
+                src={video.thumbnail}
+                alt={video.title}
+                className="h-full w-full object-cover transition-transform group-hover:scale-105"
+              />
+            )}
             <span className="absolute inset-0 flex items-center justify-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/90 text-primary-foreground shadow-elevated transition-transform group-hover:scale-110">
-                <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-elevated transition-transform animate-pulse group-hover:scale-110 group-hover:animate-none">
+                <Play className="h-7 w-7 translate-x-0.5" fill="currentColor" />
               </span>
             </span>
           </button>
 
-          <div className="flex flex-col gap-3 p-5">
+          <div className="flex flex-col gap-3 p-3 lg:p-4">
             <div className="flex items-center gap-2">
-              <Badge variant="secondary">🔥 Vídeo do dia</Badge>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-accent-dark">
+                <Flame className="h-3.5 w-3.5" fill="currentColor" /> Vídeo do dia
+              </span>
               {fromFallback && <Badge variant="warning">curado</Badge>}
             </div>
             <h3 className="text-lg font-bold leading-snug">{video.title}</h3>
 
-            <div className="mt-auto flex flex-wrap gap-2">
-              <Button variant="gradient" onClick={() => setOpen(true)}>
-                <Play className="h-4 w-4" /> Assistir
+            {video.channel && (
+              <p className="text-sm font-medium text-accent-dark">
+                #{video.channel.replace(/\s+/g, '')}
+              </p>
+            )}
+
+            <div className="mt-auto flex flex-wrap items-center gap-2 pt-2">
+              <Button
+                className="bg-accent text-accent-foreground hover:bg-accent/90"
+                onClick={() => setOpen(true)}
+              >
+                <Play className="h-4 w-4" fill="currentColor" /> Assistir
               </Button>
               <Button
-                variant={watched ? 'secondary' : 'outline'}
+                variant="outline"
+                className="border-card-border bg-card hover:border-accent"
                 onClick={markWatched}
                 disabled={watched}
               >
-                <Check className="h-4 w-4" />
+                <Check className="h-4 w-4 text-accent-dark" />
                 {watched ? 'Assistido' : 'Marcar como assistido'}
               </Button>
-              <Button variant="ghost" size="icon" onClick={refresh} aria-label="Outro vídeo">
+              <button
+                onClick={refresh}
+                aria-label="Outro vídeo"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-card-border bg-card text-muted-foreground transition-colors hover:border-accent hover:text-accent-dark"
+              >
                 <RefreshCw className="h-4 w-4" />
-              </Button>
+              </button>
             </div>
           </div>
         </div>

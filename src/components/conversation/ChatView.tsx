@@ -1,10 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Send, ArrowLeft, Volume2, Loader2 } from 'lucide-react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { cn } from '@/lib/utils'
+import { Send, ArrowLeft, Volume2, Loader2, RotateCcw, Mic, UserRound } from 'lucide-react'
 import { speak } from '@/lib/tts'
 import { callFunction, isBackendConfigured, NotConfiguredError } from '@/lib/api'
 import { useProgress } from '@/hooks/useProgress'
@@ -43,7 +38,14 @@ export function ChatView({ scenario, onExit }: ChatViewProps) {
   const [error, setError] = useState<string | null>(null)
   const startedAt = useMemo(() => Date.now(), [])
   const endRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const configured = isBackendConfigured()
+
+  function restart() {
+    setMessages([{ role: 'assistant', content: scenario.opener }])
+    setInput('')
+    setError(null)
+  }
 
   // refs para gravar a sessão UMA vez (ao sair/minimizar), sem over-count
   const messagesRef = useRef(messages)
@@ -107,60 +109,100 @@ export function ChatView({ scenario, onExit }: ChatViewProps) {
   }
 
   return (
-    <div className="mx-auto flex h-[calc(100vh-12rem)] max-w-2xl flex-col">
-      <div className="mb-3 flex items-center gap-3">
-        <Button size="icon" variant="ghost" onClick={onExit} aria-label="Voltar">
+    <div className="mx-auto flex h-[calc(100vh-8rem)] max-w-2xl flex-col overflow-hidden rounded-2xl border border-card-border bg-card shadow-soft">
+      {/* Top bar */}
+      <div className="flex items-center gap-3 border-b border-card-border bg-card px-3 py-3 sm:px-4">
+        <button
+          onClick={onExit}
+          aria-label="Voltar"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-card-border text-foreground transition-colors hover:bg-soft hover:text-accent-dark"
+        >
           <ArrowLeft className="h-5 w-5" />
-        </Button>
-        <span className="text-2xl">{scenario.emoji}</span>
-        <div>
-          <h2 className="font-bold leading-tight">{scenario.title}</h2>
-          <Badge variant="secondary" className="mt-0.5">{scenario.difficulty}</Badge>
+        </button>
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-soft text-lg text-accent-dark">
+          <span>{scenario.emoji}</span>
         </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <h2 className="truncate font-display font-bold leading-tight text-foreground">
+              {scenario.title}
+            </h2>
+            <span className="hidden shrink-0 rounded-full bg-soft px-2 py-0.5 text-[11px] font-medium capitalize text-accent-dark sm:inline">
+              {scenario.difficulty}
+            </span>
+          </div>
+        </div>
+        <button
+          onClick={restart}
+          className="flex shrink-0 items-center gap-1.5 rounded-full border border-card-border px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-soft hover:text-accent-dark"
+        >
+          <RotateCcw className="h-4 w-4" />
+          <span className="hidden sm:inline">Reiniciar</span>
+        </button>
       </div>
 
-      <Card className="flex flex-1 flex-col overflow-hidden">
-        <div className="flex-1 space-y-3 overflow-y-auto p-4">
-          {messages.map((m, i) => (
-            <Bubble key={i} role={m.role} content={m.content} />
-          ))}
-          {loading && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+      {/* Chat area */}
+      <div className="flex-1 space-y-5 overflow-y-auto bg-muted/40 p-4">
+        {messages.map((m, i) => (
+          <Bubble key={i} role={m.role} content={m.content} />
+        ))}
+        {loading && (
+          <div className="flex items-center gap-3">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-accent-light">
+              <UserRound className="h-4 w-4" />
+            </div>
+            <div className="flex items-center gap-2 rounded-[4px_18px_18px_18px] border border-card-border bg-card px-4 py-2.5 text-sm text-muted-foreground">
               <Loader2 className="h-4 w-4 animate-spin" /> digitando…
             </div>
-          )}
-          <div ref={endRef} />
+          </div>
+        )}
+        <div ref={endRef} />
+      </div>
+
+      {!configured && (
+        <div className="border-t border-card-border bg-warning/10 px-4 py-2 text-xs text-warning">
+          Modo demonstração: configure as chaves no Supabase para conversar de verdade.
         </div>
+      )}
+      {error && (
+        <div className="border-t border-card-border bg-error/10 px-4 py-2 text-xs text-error">
+          {error}
+        </div>
+      )}
 
-        {!configured && (
-          <div className="border-t border-card-border bg-warning/10 px-4 py-2 text-xs text-warning">
-            Modo demonstração: configure as chaves no Supabase para conversar de verdade.
-          </div>
-        )}
-        {error && (
-          <div className="border-t border-card-border bg-error/10 px-4 py-2 text-xs text-error">
-            {error}
-          </div>
-        )}
-
-        <form
-          className="flex items-center gap-2 border-t border-card-border p-3"
-          onSubmit={(e) => {
-            e.preventDefault()
-            send()
-          }}
+      {/* Composer */}
+      <form
+        className="flex items-center gap-2 border-t border-card-border bg-card p-3"
+        onSubmit={(e) => {
+          e.preventDefault()
+          send()
+        }}
+      >
+        <button
+          type="button"
+          onClick={() => inputRef.current?.focus()}
+          aria-label="Gravar"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-card-border text-foreground transition-colors hover:bg-soft hover:text-accent-dark"
         >
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Escreva sua resposta em inglês…"
-            disabled={loading}
-          />
-          <Button type="submit" size="icon" variant="gradient" disabled={loading || !input.trim()}>
-            <Send className="h-5 w-5" />
-          </Button>
-        </form>
-      </Card>
+          <Mic className="h-5 w-5" />
+        </button>
+        <input
+          ref={inputRef}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Escreva sua resposta em inglês…"
+          disabled={loading}
+          className="h-11 flex-1 rounded-full border border-card-border bg-muted/50 px-4 text-sm text-foreground outline-none transition placeholder:text-muted-foreground focus:ring-2 focus:ring-accent disabled:opacity-60"
+        />
+        <button
+          type="submit"
+          aria-label="Enviar"
+          disabled={loading || !input.trim()}
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+        >
+          <Send className="h-5 w-5" />
+        </button>
+      </form>
     </div>
   )
 }
@@ -170,33 +212,38 @@ function Bubble({ role, content }: ChatMessage) {
   const tipSplit = content.split('\n💡')
   const main = tipSplit[0]
   const tip = tipSplit[1]
-  return (
-    <div className={cn('flex', isUser ? 'justify-end' : 'justify-start')}>
-      <div
-        className={cn(
-          'group max-w-[80%] rounded-2xl px-4 py-2.5 text-sm',
-          isUser
-            ? 'bg-primary text-primary-foreground'
-            : 'bg-secondary text-foreground'
-        )}
-      >
-        <div className="flex items-start gap-2">
-          <span>{main}</span>
-          {!isUser && (
-            <button
-              onClick={() => speak(main)}
-              className="mt-0.5 opacity-0 transition-opacity group-hover:opacity-100"
-              aria-label="Ouvir"
-            >
-              <Volume2 className="h-4 w-4" />
-            </button>
-          )}
+
+  if (isUser) {
+    return (
+      <div className="flex justify-end">
+        <div className="max-w-[80%] rounded-[18px_4px_18px_18px] bg-primary px-4 py-2.5 text-sm text-primary-foreground">
+          {main}
         </div>
-        {tip && (
-          <div className="mt-2 rounded-lg bg-warning/15 px-2 py-1 text-xs text-warning">
-            💡{tip}
-          </div>
-        )}
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex justify-start gap-3">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-accent-light">
+        <UserRound className="h-4 w-4" />
+      </div>
+      <div className="max-w-[80%]">
+        <div className="rounded-[4px_18px_18px_18px] border border-card-border bg-card px-4 py-2.5 text-sm text-foreground">
+          {main}
+        </div>
+        <div className="mt-1.5 flex items-center gap-2">
+          {tip && (
+            <span className="text-xs italic text-muted-foreground">💡{tip}</span>
+          )}
+          <button
+            onClick={() => speak(main)}
+            className="ml-auto flex h-6 w-6 items-center justify-center rounded-full text-accent-dark transition-colors hover:bg-soft"
+            aria-label="Ouvir"
+          >
+            <Volume2 className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </div>
   )

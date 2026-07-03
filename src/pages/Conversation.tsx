@@ -4,7 +4,6 @@ import { MessagesSquare } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { ChatView } from '@/components/conversation/ChatView'
 import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { CONVERSATION_SCENARIOS, type ConversationScenario } from '@/data/conversationScenarios'
 
 /** Cria um cenário a partir de uma tarefa do planner (deep-link `?topic=`). */
@@ -57,14 +56,18 @@ export default function Conversation() {
           <Card
             key={s.id}
             onClick={() => setActive(s)}
-            className="flex cursor-pointer flex-col p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevated"
+            className="group flex cursor-pointer flex-col border-card-border bg-card p-5 transition-all duration-200 hover:-translate-y-1 hover:border-accent/40 hover:shadow-elevated"
           >
-            <div className="mb-2 flex items-center gap-2">
-              <span className="text-2xl">{s.emoji}</span>
-              <h3 className="font-semibold">{s.title}</h3>
+            <div className="mb-3 flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-soft text-xl text-accent-dark transition-colors group-hover:bg-accent/15">
+                <span>{s.emoji}</span>
+              </div>
+              <h3 className="font-display font-semibold text-foreground">{s.title}</h3>
             </div>
             <p className="mb-4 flex-1 text-sm text-muted-foreground">{s.description}</p>
-            <Badge variant="secondary" className="w-fit">{s.difficulty}</Badge>
+            <span className="w-fit rounded-full bg-soft px-2.5 py-0.5 text-xs font-medium capitalize text-accent-dark">
+              {s.difficulty}
+            </span>
           </Card>
         ))}
       </div>

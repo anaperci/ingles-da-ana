@@ -1,11 +1,8 @@
 import { useState } from 'react'
 import { Mic, ChevronLeft, ChevronRight } from 'lucide-react'
-import { PageHeader } from '@/components/common/PageHeader'
 import { TranslationToggle } from '@/components/common/TranslationToggle'
 import { PronunciationPractice } from '@/components/pronunciation/PronunciationPractice'
-import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { CATEGORIES } from '@/types'
 import { PRONUNCIATION_PHRASES } from '@/data/pronunciationPhrases'
 
@@ -25,12 +22,21 @@ export default function Pronunciation() {
 
   return (
     <div className="animate-fade-in">
-      <PageHeader
-        icon={Mic}
-        title="Pronunciation"
-        subtitle="Read out loud and get scored word by word (browser speech recognition)"
-        actions={<TranslationToggle />}
-      />
+      {/* Cabeçalho */}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-[60px] w-[60px] items-center justify-center rounded-2xl bg-primary shadow-soft">
+            <Mic className="h-7 w-7 text-accent-light" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-extrabold">Pronunciation</h1>
+            <p className="text-muted-foreground">
+              Leia em voz alta e receba score palavra por palavra (reconhecimento de fala)
+            </p>
+          </div>
+        </div>
+        <TranslationToggle />
+      </div>
 
       {/* Filtro por seção */}
       <div className="mb-6 flex flex-wrap gap-2">
@@ -48,23 +54,32 @@ export default function Pronunciation() {
         ))}
       </div>
 
-      <div className="mx-auto max-w-2xl space-y-4">
-        <div className="flex items-center justify-between">
-          <Button variant="outline" size="icon" onClick={() => go(-1)} aria-label="Previous">
+      <div className="mx-auto max-w-2xl space-y-5">
+        {/* Paginação */}
+        <div className="flex items-center justify-center gap-4">
+          <button
+            onClick={() => go(-1)}
+            aria-label="Previous"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-card-border bg-card text-foreground shadow-soft transition-colors hover:border-accent hover:text-accent-dark"
+          >
             <ChevronLeft className="h-5 w-5" />
-          </Button>
-          <Badge variant="secondary">
-            {index + 1} of {phrases.length}
-          </Badge>
-          <Button variant="outline" size="icon" onClick={() => go(1)} aria-label="Next">
+          </button>
+          <span className="min-w-[64px] text-center text-sm font-medium text-muted-foreground">
+            {index + 1} de {phrases.length}
+          </span>
+          <button
+            onClick={() => go(1)}
+            aria-label="Next"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-card-border bg-card text-foreground shadow-soft transition-colors hover:border-accent hover:text-accent-dark"
+          >
             <ChevronRight className="h-5 w-5" />
-          </Button>
+          </button>
         </div>
 
         {phrase ? (
           <PronunciationPractice key={phrase.id} phrase={phrase} />
         ) : (
-          <Card className="p-6 sm:p-10 text-center text-muted-foreground">
+          <Card className="border-card-border bg-card p-6 text-center text-muted-foreground shadow-soft sm:p-10">
             No phrases in this section.
           </Card>
         )}
@@ -86,10 +101,10 @@ function FilterChip({
     <button
       onClick={onClick}
       className={
-        'rounded-full px-3 py-1.5 text-sm font-medium transition-colors ' +
+        'rounded-full px-4 py-1.5 text-sm font-medium transition-colors ' +
         (active
           ? 'bg-primary text-primary-foreground'
-          : 'bg-secondary text-muted-foreground hover:text-foreground')
+          : 'border border-card-border bg-card text-muted-foreground hover:border-accent hover:text-foreground')
       }
     >
       {children}
