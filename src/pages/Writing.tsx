@@ -19,7 +19,6 @@ import { callFunction, NotConfiguredError } from '@/lib/api'
 import type { WritingFeedback, SentenceFeedback } from '@/types/writing'
 import { useWritingPoints } from '@/hooks/useWritingPoints'
 import { WritingPointsCard } from '@/components/writing/WritingPointsCard'
-import { PageHeader } from '@/components/common/PageHeader'
 import { TranslationToggle } from '@/components/common/TranslationToggle'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -37,17 +36,37 @@ import { cn } from '@/lib/utils'
 export default function Writing() {
   return (
     <div className="animate-fade-in">
-      <PageHeader
-        icon={PenLine}
-        title="Daily writing"
-        subtitle="30 sentences a day + the 1000 most spoken words in English"
-        actions={<TranslationToggle />}
-      />
+      {/* Header */}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-2xl bg-primary shadow-soft">
+            <PenLine className="h-7 w-7 text-accent-light" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-extrabold">Daily writing</h1>
+            <p className="text-muted-foreground">
+              30 frases por dia + as 1000 palavras mais faladas em inglês
+            </p>
+          </div>
+        </div>
+        <TranslationToggle />
+      </div>
 
       <Tabs defaultValue="sentences">
-        <TabsList className="mb-6">
-          <TabsTrigger value="sentences">Daily sentences</TabsTrigger>
-          <TabsTrigger value="words">1000 words</TabsTrigger>
+        {/* Pill segmented control */}
+        <TabsList className="mb-6 h-auto gap-1 rounded-full bg-muted p-1">
+          <TabsTrigger
+            value="sentences"
+            className="rounded-full px-4 py-1.5 text-muted-foreground data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-soft"
+          >
+            Daily sentences
+          </TabsTrigger>
+          <TabsTrigger
+            value="words"
+            className="rounded-full px-4 py-1.5 text-muted-foreground data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-soft"
+          >
+            1000 words
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="sentences">
@@ -265,7 +284,7 @@ function DailySentencesTab() {
       <WritingPointsCard />
 
       {/* Resumo do dia */}
-      <Card className="border-primary/20 bg-soft p-5">
+      <Card className="border-card-border bg-card p-5 shadow-soft">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="mb-1 flex items-center gap-2 text-sm text-muted-foreground">
@@ -274,10 +293,10 @@ function DailySentencesTab() {
             </div>
             <div className="text-2xl font-extrabold">
               {writtenCount}
-              <span className="text-muted-foreground">/{goal} sentences</span>
+              <span className="text-muted-foreground">/{goal} frases</span>
             </div>
             {reviewCount > 0 && (
-              <div className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-accent-dark">
+              <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-soft px-2.5 py-1 text-xs font-semibold text-accent-dark">
                 <RotateCcw className="h-3.5 w-3.5" />
                 {reviewCount} {reviewCount === 1 ? 'review word' : 'review words'}
               </div>
@@ -290,14 +309,14 @@ function DailySentencesTab() {
                 {feedback ? ` · ${feedback.score}%` : ' today'}
               </Badge>
             ) : (
-              <Button variant="gradient" disabled={loading} onClick={finalize}>
+              <Button variant="primary" disabled={loading} onClick={finalize}>
                 {loading ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" /> Evaluating…
+                    <Loader2 className="h-4 w-4 animate-spin" /> Avaliando…
                   </>
                 ) : (
                   <>
-                    <Check className="h-4 w-4" /> Finish and evaluate
+                    <Check className="h-4 w-4 text-accent-light" /> Finalizar e avaliar
                   </>
                 )}
               </Button>
@@ -306,10 +325,10 @@ function DailySentencesTab() {
         </div>
         <Progress value={pct} className="mt-4" />
         <p className="mt-2 text-sm text-muted-foreground">
-          Write what you know and mark <strong>“I don't know”</strong> on the rest — you
-          can finish at any time and the AI will correct your sentences and share tips. The
-          words you <strong>get wrong come back another day</strong>, in a new
-          sentence, until you master them.
+          Escreva o que você sabe e marque <strong>“Não sei”</strong> no resto — você
+          pode finalizar a qualquer momento e a IA corrige suas frases e traz dicas. As
+          palavras que você <strong>errar voltam outro dia</strong>, em uma nova
+          frase, até você dominá-las.
         </p>
         {error && <p className="mt-2 text-sm text-error">{error}</p>}
       </Card>
@@ -326,25 +345,25 @@ function DailySentencesTab() {
             <Card
               key={s.wordId}
               className={cn(
-                'p-4 transition-colors',
+                'p-4 shadow-soft transition-colors',
                 s.dontKnow && 'opacity-60',
                 filled && !fb && 'border-success/40 bg-success/5'
               )}
             >
               <div className="mb-2 flex flex-wrap items-center gap-2">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary font-mono text-xs font-bold text-muted-foreground">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted font-mono text-xs font-bold text-muted-foreground">
                   {i + 1}
                 </span>
                 <span className="font-semibold">{s.word}</span>
                 <button
                   onClick={() => speak(s.word)}
-                  className="text-muted-foreground hover:text-foreground"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-accent hover:text-accent-dark"
                   aria-label={`Play ${s.word}`}
                 >
                   <Volume2 className="h-4 w-4" />
                 </button>
                 {s.review && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-[11px] font-semibold text-accent-dark">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-soft px-2 py-0.5 text-[11px] font-semibold text-accent-dark">
                     <RotateCcw className="h-3 w-3" /> review
                   </span>
                 )}
@@ -358,25 +377,26 @@ function DailySentencesTab() {
                       'ml-auto inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors',
                       s.dontKnow
                         ? 'border-warning bg-warning/15 text-warning'
-                        : 'border-border text-muted-foreground hover:text-foreground'
+                        : 'border-border text-muted-foreground hover:border-warning hover:text-warning'
                     )}
                   >
-                    <HelpCircle className="h-3.5 w-3.5" /> I don't know
+                    <HelpCircle className="h-3.5 w-3.5" /> Não sei
                   </button>
                 )}
               </div>
 
               {s.dontKnow ? (
                 <p className="text-sm italic text-muted-foreground">
-                  Marked as “I don't know” — no problem, focus on what you already know.
+                  Marcada como “Não sei” — sem problema, foque no que você já sabe.
                 </p>
               ) : (
                 <Textarea
                   value={s.text}
                   onChange={(e) => setSentence(s.wordId, e.target.value)}
-                  placeholder={`Write a sentence with "${s.word}"...`}
+                  placeholder={`Escreva uma frase com "${s.word}"...`}
                   rows={2}
                   disabled={completed}
+                  className="bg-muted/40 transition-colors focus:bg-card focus:ring-2 focus:ring-accent"
                 />
               )}
 
@@ -397,7 +417,7 @@ function FeedbackSummary({
   earned?: number
 }) {
   return (
-    <Card className="space-y-3 p-5">
+    <Card className="space-y-3 p-5 shadow-soft">
       <div className="flex flex-wrap items-center gap-2">
         <Sparkles className="h-5 w-5 text-primary" />
         <span className="font-semibold">AI evaluation</span>
@@ -508,7 +528,7 @@ function CommonWordsTab() {
   return (
     <div className="space-y-6">
       {/* Resumo */}
-      <Card className="p-5">
+      <Card className="p-5 shadow-soft">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Sparkles className="h-6 w-6 text-primary" />
@@ -620,7 +640,7 @@ function WordRow({
   return (
     <Card
       className={cn(
-        'space-y-2 p-3 transition-colors',
+        'space-y-2 p-3 shadow-soft transition-colors',
         known && 'border-success/40 bg-success/5'
       )}
     >
@@ -631,10 +651,10 @@ function WordRow({
             <span className="truncate font-semibold">{word}</span>
             <button
               onClick={() => speak(word)}
-              className="text-muted-foreground hover:text-foreground"
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-accent hover:text-accent-dark"
               aria-label={`Play ${word}`}
             >
-              <Volume2 className="h-4 w-4" />
+              <Volume2 className="h-3.5 w-3.5" />
             </button>
           </div>
           {showTranslation && (

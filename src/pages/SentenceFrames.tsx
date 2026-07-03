@@ -17,8 +17,8 @@ import { sentenceFramesPt2 } from '@/data/sentenceFramesPt2'
 const ALL_FRAMES: SentenceFrame[] = [...sentenceFrames, ...sentenceFramesPt2]
 
 const LEVEL_LABEL: Record<SentenceFrame['level'], string> = {
-  beginner: 'beginner',
-  intermediate: 'intermediate',
+  beginner: 'iniciante',
+  intermediate: 'intermediário',
 }
 
 export default function SentenceFrames() {
@@ -34,28 +34,31 @@ export default function SentenceFrames() {
       <PageHeader
         icon={Blocks}
         title="Sentence frames"
-        subtitle="Template structures to speak without freezing — read, speak and write"
+        subtitle="Estruturas-molde para falar sem travar — leia, fale e escreva"
         actions={<TranslationToggle />}
       />
 
       {/* Dicas do método */}
-      <Card className="mb-6 border-primary/20 bg-soft p-5">
-        <div className="mb-3 flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-primary" />
-          <span className="font-semibold">Method tips</span>
+      <Card
+        className="mb-8 rounded-2xl border-transparent p-6 text-on-primary shadow-elevated"
+        style={{ background: 'linear-gradient(135deg,#0a192f,#102341 60%,#1b3358)' }}
+      >
+        <div className="mb-4 flex items-center gap-2">
+          <Sparkles className="h-5 w-5 text-accent-light" />
+          <span className="text-lg font-bold text-on-primary">Dicas do método</span>
         </div>
-        <ul className="space-y-2">
+        <div className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
           {methodTips.map((tip, i) => (
-            <li key={i} className="flex gap-2 text-sm text-muted-foreground">
-              <span className="text-primary">•</span>
-              {tip}
-            </li>
+            <div key={i} className="flex gap-3 text-sm leading-relaxed text-on-primary-muted">
+              <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-accent" />
+              <span>{tip}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       </Card>
 
       {/* Estruturas */}
-      <h2 className="mb-3 text-lg font-bold">Frames</h2>
+      <h2 className="mb-4 text-lg font-bold">Frames</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {ALL_FRAMES.map((frame) => (
           <FrameCard key={frame.id} frame={frame} onOpen={() => setActiveId(frame.id)} />
