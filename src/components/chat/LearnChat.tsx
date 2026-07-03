@@ -3,6 +3,7 @@ import { MessageCircle, X, Send, Sparkles } from 'lucide-react'
 import { callFunction, isBackendConfigured, NotConfiguredError } from '@/lib/api'
 import { loadJSON, saveJSON } from '@/lib/storage'
 import { cn } from '@/lib/utils'
+import { Markdown } from '@/components/notes/Markdown'
 
 type Msg = { role: 'user' | 'assistant'; content: string }
 
@@ -156,13 +157,19 @@ export function LearnChat() {
             >
               <div
                 className={cn(
-                  'max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm shadow-soft',
+                  'max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm shadow-soft',
                   m.role === 'user'
-                    ? 'rounded-br-md bg-primary text-white'
+                    ? 'whitespace-pre-wrap rounded-br-md bg-primary text-white'
                     : 'rounded-bl-md border border-card-border bg-card text-foreground'
                 )}
               >
-                {m.content}
+                {m.role === 'user' ? (
+                  m.content
+                ) : (
+                  <Markdown className="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0 prose-p:my-1.5 prose-ul:my-1.5 prose-ol:my-1.5 prose-li:my-0.5">
+                    {m.content}
+                  </Markdown>
+                )}
               </div>
             </div>
           ))}
