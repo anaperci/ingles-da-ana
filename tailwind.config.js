@@ -25,11 +25,11 @@ export default {
         input: 'hsl(var(--color-border-soft))',
         ring: 'hsl(var(--color-accent))',
         card: {
-          DEFAULT: 'hsl(var(--color-bg))',
+          DEFAULT: 'hsl(var(--color-card))',
           foreground: 'hsl(var(--color-primary))',
         },
         popover: {
-          DEFAULT: 'hsl(var(--color-bg))',
+          DEFAULT: 'hsl(var(--color-card))',
           foreground: 'hsl(var(--color-primary))',
         },
         muted: {
@@ -49,7 +49,7 @@ export default {
           muted: 'hsl(var(--color-on-primary-muted))',
         },
 
-        /* Azul de contraste Solo — cor de ação (texto branco sobre azul) */
+        /* Verde (mint) do Solo — cor de ação (texto navy sobre verde) */
         accent: {
           DEFAULT: 'hsl(var(--color-accent))',
           dark: 'hsl(var(--color-accent-dark))',

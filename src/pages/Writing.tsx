@@ -312,11 +312,11 @@ function DailySentencesTab() {
               <Button variant="primary" disabled={loading} onClick={finalize}>
                 {loading ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" /> Avaliando…
+                    <Loader2 className="h-4 w-4 animate-spin" /> Evaluating…
                   </>
                 ) : (
                   <>
-                    <Check className="h-4 w-4 text-accent-light" /> Finalizar e avaliar
+                    <Check className="h-4 w-4 text-accent-light" /> Finish & evaluate
                   </>
                 )}
               </Button>

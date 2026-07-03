@@ -79,7 +79,7 @@ function LeafLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => void
     <NavLink to={item.to} end={item.end} onClick={onNavigate} className={({ isActive }) => linkClasses(isActive)}>
       {({ isActive }) => (
         <>
-          <item.icon className={cn('h-5 w-5 shrink-0', isActive ? 'text-accent' : 'text-white/70')} />
+          <item.icon className={cn('h-5 w-5 shrink-0', isActive ? 'text-accent-light' : 'text-white/70')} />
           {item.label}
         </>
       )}
@@ -100,7 +100,7 @@ function GroupLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => voi
         onClick={() => setOpen((v) => !v)}
         className={cn(linkClasses(groupActive), 'w-full')}
       >
-        <item.icon className={cn('h-5 w-5 shrink-0', groupActive ? 'text-accent' : 'text-white/70')} />
+        <item.icon className={cn('h-5 w-5 shrink-0', groupActive ? 'text-accent-light' : 'text-white/70')} />
         <span className="flex-1 text-left">{item.label}</span>
         <ChevronDown className={cn('h-4 w-4 shrink-0 transition-transform', open && 'rotate-180')} />
       </button>
@@ -123,7 +123,7 @@ function GroupLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => voi
             >
               {({ isActive }) => (
                 <>
-                  <child.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-accent' : 'text-white/60')} />
+                  <child.icon className={cn('h-4 w-4 shrink-0', isActive ? 'text-accent-light' : 'text-white/60')} />
                   {child.label}
                 </>
               )}

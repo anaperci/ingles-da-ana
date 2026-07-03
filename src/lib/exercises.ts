@@ -127,18 +127,18 @@ export const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   hard: 'Difícil',
 }
 
-/** Badge por tipo (paleta petróleo/âmbar + verde/roxo). */
+/** Badge por tipo — identidade Solo (navy / âmbar / verde / slate). */
 export const TYPE_COLOR: Record<ExerciseType, { text: string; bg: string }> = {
-  multiple_choice: { text: '#1C3E4A', bg: '#1C3E4A14' }, // petróleo
-  fill_blank: { text: '#9A5B12', bg: '#F2A24E26' }, // âmbar
-  rewrite: { text: '#0f7a52', bg: '#00df9522' }, // verde
-  match: { text: '#5B4B8A', bg: '#6B5B9518' }, // roxo
+  multiple_choice: { text: '#0a192f', bg: '#0a192f14' }, // navy
+  fill_blank: { text: '#9a5b12', bg: '#f5a52426' }, // âmbar
+  rewrite: { text: '#009864', bg: '#00986414' }, // verde (mint)
+  match: { text: '#475569', bg: '#47556914' }, // slate
 }
 
 export const DIFFICULTY_COLOR: Record<Difficulty, { text: string; bg: string }> = {
-  easy: { text: '#0f7a52', bg: '#00df9522' },
-  medium: { text: '#9A5B12', bg: '#F2A24E26' },
-  hard: { text: '#B23A2B', bg: '#e5484d1f' },
+  easy: { text: '#009864', bg: '#00986414' },
+  medium: { text: '#9a5b12', bg: '#f5a52426' },
+  hard: { text: '#b42318', bg: '#e5484d1a' },
 }
 
 /** normaliza p/ comparação (case-insensitive, trim, colapsa espaços) */

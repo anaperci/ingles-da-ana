@@ -172,7 +172,7 @@ function renderPrompt(prompt: string) {
   return (
     <>
       {before}
-      <span className="mx-1 inline-block min-w-[3ch] border-b-2 border-accent text-accent"> </span>
+      <span className="mx-1 inline-block min-w-[3ch] border-b-2 border-accent-dark text-accent-dark"> </span>
       {after}
     </>
   )

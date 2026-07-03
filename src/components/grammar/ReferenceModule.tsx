@@ -41,10 +41,11 @@ export interface RefCategory {
   bg: string
 }
 
-// Paleta do módulo: petróleo #1C3E4A + âmbar #F2A24E
-const PETROL = '#1C3E4A'
-const AMBER = '#F2A24E'
-const AMBER_TEXT = '#9A5B12'
+// Identidade Solo: navy + verde (mint) + âmbar (warning) para os alertas
+const NAVY = '#0a192f'
+const GREEN = '#009864'
+const AMBER = '#f5a524'
+const AMBER_TEXT = '#9a5b12'
 
 interface Props {
   icon: LucideIcon
@@ -138,7 +139,7 @@ function EntryCard({ entry, category }: { entry: RefEntry; category?: RefCategor
           </span>
         )}
         <div className="min-w-0 flex-1">
-          <span className="text-lg font-extrabold" style={{ color: PETROL }}>
+          <span className="text-lg font-extrabold" style={{ color: NAVY }}>
             {entry.term}
           </span>
           <span className="ml-2 text-sm text-muted-foreground">{entry.meaning}</span>
@@ -166,14 +167,14 @@ function EntryCard({ entry, category }: { entry: RefEntry; category?: RefCategor
 
           {/* Dica de pronúncia */}
           {entry.pronunciationTip && (
-            <TipBox icon={Sparkles} label="Pronúncia" color={PETROL}>
+            <TipBox icon={Sparkles} label="Pronúncia" color={NAVY}>
               {entry.pronunciationTip}
             </TipBox>
           )}
 
           {/* Regra de posição */}
           {entry.positionRule && (
-            <TipBox icon={MoveHorizontal} label="Posição na frase" color={PETROL}>
+            <TipBox icon={MoveHorizontal} label="Posição na frase" color={NAVY}>
               <span className="font-mono text-[13px]">{entry.positionRule}</span>
             </TipBox>
           )}
@@ -222,11 +223,11 @@ function EntryCard({ entry, category }: { entry: RefEntry; category?: RefCategor
           {/* Exercício — writing prompt */}
           <div
             className="flex gap-2.5 rounded-xl px-3.5 py-3"
-            style={{ backgroundColor: `${PETROL}0d` }}
+            style={{ backgroundColor: `${GREEN}14` }}
           >
-            <PenLine className="mt-0.5 h-4 w-4 shrink-0" style={{ color: PETROL }} />
+            <PenLine className="mt-0.5 h-4 w-4 shrink-0" style={{ color: GREEN }} />
             <div>
-              <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: PETROL }}>
+              <div className="text-[11px] font-bold uppercase tracking-wide" style={{ color: GREEN }}>
                 Exercício
               </div>
               <p className="text-sm text-foreground">{entry.writingPrompt}</p>

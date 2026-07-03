@@ -27,7 +27,8 @@
     --color-soft-text: 216 45% 25%; /* #23415C texto sobre soft */
     --color-soft-text-2: 216 18% 45%; /* #5E6B82 texto secundário sobre soft */
 
-    --color-bg: 0 0% 100%; /* #FFFFFF fundo base (sempre branco) */
+    --color-bg: 60 60% 96%; /* #FBFBED cream — fundo da página (Solo) */
+    --color-card: 0 0% 100%; /* #FFFFFF cards brancos sobre o cream */
     --color-on-primary: 0 0% 100%; /* #FFFFFF texto sobre navy */
     --color-on-primary-muted: 213 33% 88%; /* #D9E0EA secundário sobre navy */
 
