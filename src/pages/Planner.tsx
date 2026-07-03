@@ -17,9 +17,17 @@ import { usePlanner, type PlannerTask } from '@/hooks/usePlanner'
 import { appLinksForActivity } from '@/lib/plannerLinks'
 import { deckForWeek } from '@/data/weekThemes'
 import { DECK_BY_KEY } from '@/data/themedDecks'
+import { isOwner } from '@/lib/azure'
+import { CustomPlanner } from '@/components/planner/CustomPlanner'
 import { PLANNER, type PlannerDay, type PlannerWeek } from '@/data/planner'
 
 export default function Planner() {
+  // O cronograma do curso (CDF) é só da conta dona; os demais montam o próprio plano.
+  if (!isOwner()) return <CustomPlanner />
+  return <CoursePlanner />
+}
+
+function CoursePlanner() {
   const { isDone, toggle, dayComplete, stats, currentWeek, currentDay } = usePlanner()
   const [open, setOpen] = useState<number>(currentWeek)
 
