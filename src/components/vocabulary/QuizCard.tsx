@@ -43,7 +43,7 @@ export function QuizCard({ word, pool, onanswer }: QuizCardProps) {
           <Volume2 className="h-5 w-5" />
         </button>
       </div>
-      <p className="text-center text-sm text-muted-foreground">Qual a tradução?</p>
+      <p className="text-center text-sm text-muted-foreground">What's the translation?</p>
 
       <div className="grid gap-3">
         {options.map((opt) => {

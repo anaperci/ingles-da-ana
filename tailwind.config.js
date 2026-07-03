@@ -54,7 +54,14 @@ export default {
           DEFAULT: 'hsl(var(--color-accent))',
           dark: 'hsl(var(--color-accent-dark))',
           text: 'hsl(var(--color-accent-text))',
+          light: 'hsl(var(--color-accent-light))',
           foreground: 'hsl(var(--color-on-primary))',
+        },
+        /* Creme — botões/destaques sobre navy */
+        cream: {
+          DEFAULT: 'hsl(var(--color-cream))',
+          hover: 'hsl(var(--color-cream-hover))',
+          foreground: 'hsl(var(--color-primary))',
         },
         /* Mint — energia/destaque Solo */
         mint: 'hsl(var(--color-mint))',

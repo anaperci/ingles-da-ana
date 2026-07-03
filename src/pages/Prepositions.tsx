@@ -6,8 +6,8 @@ export default function Prepositions() {
   return (
     <GrammarDrill
       icon={Link2}
-      title="Preposições"
-      subtitle="in / on / at, to / for / with e expressões fixas — pratique escolhendo a certa"
+      title="Prepositions"
+      subtitle="in / on / at, to / for / with and fixed expressions — practice by picking the right one"
       exercises={PREPOSITION_EXERCISES}
       categories={PREPOSITION_CATEGORIES}
     />

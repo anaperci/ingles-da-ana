@@ -38,7 +38,7 @@ export function StudySession({ queue, mode, category, onExit }: StudySessionProp
       const score = mode === 'quiz' ? Math.round(((correct + (wasCorrect ? 1 : 0)) / total) * 100) : null
       addSession({
         module: 'vocabulary',
-        title: `Vocabulário · ${mode === 'quiz' ? 'Quiz' : 'Flashcards'}`,
+        title: `Vocabulary · ${mode === 'quiz' ? 'Quiz' : 'Flashcards'}`,
         minutes,
         score,
         category: category === 'all' ? undefined : category,
@@ -56,13 +56,13 @@ export function StudySession({ queue, mode, category, onExit }: StudySessionProp
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <Trophy className="h-8 w-8" />
         </div>
-        <h2 className="text-2xl font-bold">Sessão concluída! 🎉</h2>
+        <h2 className="text-2xl font-bold">Session complete! 🎉</h2>
         <p className="text-muted-foreground">
-          Você revisou <strong>{total}</strong> palavras
-          {mode === 'quiz' && <> e acertou <strong>{correct}</strong> ({pct}%)</>}.
+          You reviewed <strong>{total}</strong> words
+          {mode === 'quiz' && <> and got <strong>{correct}</strong> right ({pct}%)</>}.
         </p>
         <Button variant="gradient" onClick={onExit}>
-          Voltar
+          Back
         </Button>
       </Card>
     )
@@ -71,9 +71,9 @@ export function StudySession({ queue, mode, category, onExit }: StudySessionProp
   if (!current) {
     return (
       <Card className="p-6 sm:p-10 text-center text-muted-foreground">
-        Nada para revisar agora. Volte mais tarde! 😴
+        Nothing to review right now. Come back later! 😴
         <div className="mt-4">
-          <Button variant="outline" onClick={onExit}>Voltar</Button>
+          <Button variant="outline" onClick={onExit}>Back</Button>
         </div>
       </Card>
     )
@@ -86,7 +86,7 @@ export function StudySession({ queue, mode, category, onExit }: StudySessionProp
         <span className="font-mono text-sm text-muted-foreground">
           {index + 1}/{total}
         </span>
-        <Button size="icon" variant="ghost" onClick={onExit} aria-label="Sair">
+        <Button size="icon" variant="ghost" onClick={onExit} aria-label="Exit">
           <X className="h-5 w-5" />
         </Button>
       </div>

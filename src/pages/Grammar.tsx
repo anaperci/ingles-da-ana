@@ -14,26 +14,26 @@ interface GrammarTopic {
 const TOPICS: GrammarTopic[] = [
   {
     to: '/verbos',
-    title: 'Verbos',
-    description: 'Tempos verbais, irregulares e conjugação no dia a dia',
+    title: 'Verbs',
+    description: 'Verb tenses, irregulars and everyday conjugation',
     icon: Repeat,
   },
   {
     to: '/preposicoes',
-    title: 'Preposições',
-    description: 'in / on / at, to / for / with e expressões fixas',
+    title: 'Prepositions',
+    description: 'in / on / at, to / for / with and fixed expressions',
     icon: Link2,
   },
   {
     to: '/adverbios',
-    title: 'Advérbios',
-    description: 'Modo, frequência, tempo e lugar',
+    title: 'Adverbs',
+    description: 'Manner, frequency, time and place',
     icon: Zap,
   },
   {
     to: '/pronomes',
-    title: 'Pronomes',
-    description: 'Sujeito, objeto, possessivos e reflexivos',
+    title: 'Pronouns',
+    description: 'Subject, object, possessive and reflexive',
     icon: Users,
   },
 ]
@@ -43,8 +43,8 @@ export default function Grammar() {
     <div className="animate-fade-in">
       <PageHeader
         icon={BookText}
-        title="Gramática"
-        subtitle="Escolha um tópico pra praticar — cada um tem exercícios com correção explicada"
+        title="Grammar"
+        subtitle="Pick a topic to practice — each one has exercises with explained corrections"
       />
 
       <div className="grid gap-4 sm:grid-cols-2">

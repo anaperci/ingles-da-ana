@@ -30,8 +30,8 @@ export default function SoundVerbs() {
     <div className="animate-fade-in">
       <PageHeader
         icon={AudioLines}
-        title="Verbos por Som"
-        subtitle="Irregulares agrupados pelo padrão de pronúncia — ler, falar e escrever"
+        title="Verbs by sound"
+        subtitle="Irregulars grouped by pronunciation pattern — read, speak and write"
         actions={<TranslationToggle />}
       />
 
@@ -39,7 +39,7 @@ export default function SoundVerbs() {
       <Card className="mb-6 border-primary/20 bg-soft p-5">
         <div className="mb-3 flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-primary" />
-          <span className="font-semibold">Dicas do método</span>
+          <span className="font-semibold">Method tips</span>
         </div>
         <ul className="space-y-2">
           {verbMethodTips.map((tip, i) => (
@@ -62,7 +62,7 @@ export default function SoundVerbs() {
               <Card className="mb-4 p-5">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
                   <Badge className="bg-primary text-primary-foreground">{rule.label}</Badge>
-                  <span className="text-sm text-muted-foreground">{verbs.length} verbos</span>
+                  <span className="text-sm text-muted-foreground">{verbs.length} verbs</span>
                 </div>
                 <p className="text-sm">{rule.rule}</p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -94,7 +94,7 @@ function VerbDetail({ verb, onBack }: { verb: SoundVerb; onBack: () => void }) {
   return (
     <div className="animate-fade-in space-y-6">
       <Button variant="ghost" onClick={onBack} className="gap-2 pl-0">
-        <ChevronLeft className="h-5 w-5" /> Voltar
+        <ChevronLeft className="h-5 w-5" /> Back
       </Button>
 
       {/* Cabeçalho do verbo */}
@@ -107,7 +107,7 @@ function VerbDetail({ verb, onBack }: { verb: SoundVerb; onBack: () => void }) {
             <button
               onClick={() => speak(`${verb.base}, ${verb.past}`)}
               className="rounded-full p-2 text-muted-foreground hover:bg-secondary"
-              aria-label="Ouvir o par"
+              aria-label="Play the pair"
             >
               <Volume2 className="h-5 w-5" />
             </button>
@@ -125,9 +125,9 @@ function VerbDetail({ verb, onBack }: { verb: SoundVerb; onBack: () => void }) {
       {/* Modos */}
       <Tabs defaultValue="read">
         <TabsList className="mb-6">
-          <TabsTrigger value="read">Ler</TabsTrigger>
-          <TabsTrigger value="speak">Falar</TabsTrigger>
-          <TabsTrigger value="write">Escrever</TabsTrigger>
+          <TabsTrigger value="read">Read</TabsTrigger>
+          <TabsTrigger value="speak">Speak</TabsTrigger>
+          <TabsTrigger value="write">Write</TabsTrigger>
         </TabsList>
         <TabsContent value="read">
           <VerbReader verb={verb} />

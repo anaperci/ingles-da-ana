@@ -27,15 +27,15 @@ export default function Pronunciation() {
     <div className="animate-fade-in">
       <PageHeader
         icon={Mic}
-        title="Pronúncia"
-        subtitle="Leia em voz alta e receba nota por palavra (reconhecimento de fala do navegador)"
+        title="Pronunciation"
+        subtitle="Read out loud and get scored word by word (browser speech recognition)"
         actions={<TranslationToggle />}
       />
 
       {/* Filtro por seção */}
       <div className="mb-6 flex flex-wrap gap-2">
         <FilterChip active={filter === 'all'} onClick={() => { setFilter('all'); setIndex(0) }}>
-          Todas
+          All
         </FilterChip>
         {CATEGORIES.map((c) => (
           <FilterChip
@@ -50,13 +50,13 @@ export default function Pronunciation() {
 
       <div className="mx-auto max-w-2xl space-y-4">
         <div className="flex items-center justify-between">
-          <Button variant="outline" size="icon" onClick={() => go(-1)} aria-label="Anterior">
+          <Button variant="outline" size="icon" onClick={() => go(-1)} aria-label="Previous">
             <ChevronLeft className="h-5 w-5" />
           </Button>
           <Badge variant="secondary">
-            {index + 1} de {phrases.length}
+            {index + 1} of {phrases.length}
           </Badge>
-          <Button variant="outline" size="icon" onClick={() => go(1)} aria-label="Próxima">
+          <Button variant="outline" size="icon" onClick={() => go(1)} aria-label="Next">
             <ChevronRight className="h-5 w-5" />
           </Button>
         </div>
@@ -65,7 +65,7 @@ export default function Pronunciation() {
           <PronunciationPractice key={phrase.id} phrase={phrase} />
         ) : (
           <Card className="p-6 sm:p-10 text-center text-muted-foreground">
-            Nenhuma frase nesta seção.
+            No phrases in this section.
           </Card>
         )}
       </div>

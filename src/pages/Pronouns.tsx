@@ -86,14 +86,14 @@ export default function Pronouns() {
     <div className="animate-fade-in">
       <PageHeader
         icon={Users}
-        title="Pronomes"
-        subtitle="Reforço de pronomes: sujeito, objeto, possessivos e reflexivos"
+        title="Pronouns"
+        subtitle="Pronoun practice: subject, object, possessive and reflexive"
       />
 
       {/* Filtro por tipo */}
       <div className="mb-6 flex flex-wrap gap-2">
         <Chip active={filter === 'all'} onClick={() => reset('all')}>
-          Todos
+          All
         </Chip>
         {PRONOUN_CATEGORIES.map((c) => (
           <Chip key={c.key} active={filter === c.key} onClick={() => reset(c.key)}>
@@ -116,7 +116,7 @@ export default function Pronouns() {
           <Card className="space-y-5 p-6 sm:p-8">
             <div className="flex items-center justify-between">
               <Badge variant="secondary">
-                {index + 1} de {list.length}
+                {index + 1} of {list.length}
               </Badge>
               <span className="text-xs font-medium text-muted-foreground">
                 {PRONOUN_CATEGORIES.find((c) => c.key === ex.category)?.label}
@@ -169,7 +169,7 @@ export default function Pronouns() {
                   example={filledSentence(ex)}
                 />
                 <Button className="w-full" onClick={next}>
-                  {index >= list.length - 1 ? 'Ver resultado' : 'Próxima'}{' '}
+                  {index >= list.length - 1 ? 'See result' : 'Next'}{' '}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </>
@@ -223,18 +223,18 @@ function ReferenceTable() {
   return (
     <details className="rounded-2xl border border-card-border bg-card">
       <summary className="flex cursor-pointer select-none items-center gap-2 p-4 font-semibold text-primary">
-        <Table2 className="h-5 w-5" /> Tabela de pronomes
+        <Table2 className="h-5 w-5" /> Pronoun table
       </summary>
       <div className="overflow-x-auto px-4 pb-4">
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="text-left text-xs uppercase tracking-wide text-muted-foreground">
               <th className="py-2 pr-3 font-semibold"> </th>
-              <th className="py-2 pr-3 font-semibold">Sujeito</th>
-              <th className="py-2 pr-3 font-semibold">Objeto</th>
+              <th className="py-2 pr-3 font-semibold">Subject</th>
+              <th className="py-2 pr-3 font-semibold">Object</th>
               <th className="py-2 pr-3 font-semibold">Poss. adj.</th>
               <th className="py-2 pr-3 font-semibold">Poss. pron.</th>
-              <th className="py-2 font-semibold">Reflexivo</th>
+              <th className="py-2 font-semibold">Reflexive</th>
             </tr>
           </thead>
           <tbody>
@@ -266,16 +266,16 @@ function ResultCard({
 }) {
   const pct = Math.round((correct / total) * 100)
   const msg =
-    pct >= 90 ? 'Excelente! Pronomes dominados. 🎉' : pct >= 60 ? 'Boa! Já tá pegando o jeito.' : 'Vamos reforçar — refaz pra fixar.'
+    pct >= 90 ? 'Excellent! Pronouns mastered. 🎉' : pct >= 60 ? 'Nice! You\'re getting the hang of it.' : 'Let\'s reinforce — try again to lock it in.'
   return (
     <Card className="space-y-4 p-8 text-center">
       <div className="text-5xl font-extrabold text-primary">{pct}%</div>
       <p className="text-muted-foreground">
-        Você acertou <strong className="text-foreground">{correct}</strong> de {total}.
+        You got <strong className="text-foreground">{correct}</strong> of {total}.
       </p>
       <p className="text-sm text-muted-foreground">{msg}</p>
       <Button onClick={onRestart} variant="gradient" className="gap-2">
-        <RotateCcw className="h-4 w-4" /> Praticar de novo
+        <RotateCcw className="h-4 w-4" /> Practice again
       </Button>
     </Card>
   )

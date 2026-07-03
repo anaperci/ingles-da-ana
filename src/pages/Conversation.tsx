@@ -11,7 +11,7 @@ import { CONVERSATION_SCENARIOS, type ConversationScenario } from '@/data/conver
 function plannerScenario(topic: string): ConversationScenario {
   return {
     id: 'planner',
-    title: 'Prática do planner',
+    title: 'Planner practice',
     emoji: '📅',
     category: 'social',
     difficulty: 'beginner',
@@ -48,8 +48,8 @@ export default function Conversation() {
     <div className="animate-fade-in">
       <PageHeader
         icon={MessagesSquare}
-        title="Conversação com IA"
-        subtitle="Pratique falar em cenários reais — a IA responde e corrige você"
+        title="Conversation with AI"
+        subtitle="Practice speaking in real scenarios — the AI replies and corrects you"
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

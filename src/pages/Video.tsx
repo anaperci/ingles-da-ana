@@ -8,8 +8,8 @@ export default function Video() {
     <div className="animate-fade-in space-y-6">
       <PageHeader
         icon={MonitorPlay}
-        title="Vídeo do dia"
-        subtitle="Um vídeo por dia, escolhido pelos seus interesses"
+        title="Video of the day"
+        subtitle="One video a day, picked based on your interests"
       />
       <DailyVideoCard />
       <InterestPicker />

@@ -6,10 +6,10 @@ export interface VocabWord {
   word: string
   /** tradução em português */
   translation: string
-  /** frase de exemplo em inglês */
-  example: string
+  /** frase de exemplo em inglês (opcional — palavras de frequência não têm) */
+  example?: string
   /** tradução da frase de exemplo */
-  exampleTranslation: string
+  exampleTranslation?: string
   category: CategoryKey
   level: CEFRLevel
   /** transcrição fonética opcional (ex.: /ˈwɜːrk/) */

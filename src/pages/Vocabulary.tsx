@@ -45,22 +45,22 @@ export default function Vocabulary() {
     <div className="animate-fade-in">
       <PageHeader
         icon={Brain}
-        title="Vocabulário"
-        subtitle="Palavras úteis por seção, com repetição espaçada"
+        title="Vocabulary"
+        subtitle="Useful words by section, with spaced repetition"
         actions={<TranslationToggle />}
       />
 
       {/* Resumo */}
       <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
         <SummaryStat icon={Layers} value={stats.total} label="Total" />
-        <SummaryStat icon={Sparkles} value={stats.mastered} label="Dominadas" tone="text-success" />
-        <SummaryStat icon={ListChecks} value={stats.due} label="Para revisar" tone="text-warning" />
-        <SummaryStat icon={Brain} value={stats.newCount} label="Novas" tone="text-primary" />
+        <SummaryStat icon={Sparkles} value={stats.mastered} label="Mastered" tone="text-success" />
+        <SummaryStat icon={ListChecks} value={stats.due} label="To review" tone="text-warning" />
+        <SummaryStat icon={Brain} value={stats.newCount} label="New" tone="text-primary" />
       </div>
 
       {/* Decks temáticos (alinhados ao planner) */}
       <div className="mb-6">
-        <h2 className="mb-3 text-lg font-bold">Decks temáticos</h2>
+        <h2 className="mb-3 text-lg font-bold">Themed decks</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {THEMED_DECKS.map((d) => (
             <Link
@@ -71,7 +71,7 @@ export default function Vocabulary() {
               <span className="text-2xl">{d.emoji}</span>
               <div className="min-w-0">
                 <div className="truncate font-semibold text-foreground">{d.label}</div>
-                <div className="text-xs text-muted-foreground">{d.words.length} palavras</div>
+                <div className="text-xs text-muted-foreground">{d.words.length} words</div>
               </div>
             </Link>
           ))}
@@ -81,7 +81,7 @@ export default function Vocabulary() {
       {/* Modo + estudo geral */}
       <Card className="mb-6 flex flex-wrap items-center justify-between gap-4 p-4">
         <div className="flex items-center gap-3">
-          <span className="text-sm font-medium text-muted-foreground">Modo:</span>
+          <span className="text-sm font-medium text-muted-foreground">Mode:</span>
           <Tabs value={mode} onValueChange={(v) => setMode(v as VocabStudyMode)}>
             <TabsList>
               <TabsTrigger value="flashcard">Flashcards</TabsTrigger>
@@ -94,12 +94,12 @@ export default function Vocabulary() {
           disabled={dueToday === 0}
           onClick={() => setActive({ category: 'all' })}
         >
-          {dueToday > 0 ? `Estudar tudo (${dueToday})` : 'Tudo em dia ✅'}
+          {dueToday > 0 ? `Study all (${dueToday})` : 'All caught up ✅'}
         </Button>
       </Card>
 
       {/* Seções */}
-      <h2 className="mb-3 text-lg font-bold">Seções</h2>
+      <h2 className="mb-3 text-lg font-bold">Sections</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {byCategory.map(({ category, total, mastered }) => {
           const pct = total > 0 ? Math.round((mastered / total) * 100) : 0
@@ -119,7 +119,7 @@ export default function Vocabulary() {
                 className="mt-auto"
                 onClick={() => setActive({ category: category.key })}
               >
-                Estudar {category.label}
+                Study {category.label}
               </Button>
             </Card>
           )

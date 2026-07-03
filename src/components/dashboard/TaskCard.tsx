@@ -28,15 +28,17 @@ const styles: Record<
     title: 'text-foreground',
     desc: 'text-muted-foreground',
     time: 'text-muted-foreground',
-    btn: 'bg-accent text-accent-foreground hover:bg-accent-dark',
+    // card branco → botão azul escuro
+    btn: 'bg-accent-dark text-accent-foreground hover:bg-accent-text',
   },
   featured: {
     card: 'bg-primary border border-transparent text-white',
-    chip: 'bg-primary-soft text-accent',
+    chip: 'bg-primary-soft text-accent-light',
     title: 'text-white',
     desc: 'text-on-primary-muted',
     time: 'text-on-primary-muted',
-    btn: 'bg-accent text-accent-foreground hover:bg-accent-dark',
+    // fundo navy → botão creme
+    btn: 'bg-cream text-cream-foreground hover:bg-cream-hover',
   },
   soft: {
     card: 'bg-soft border border-transparent',
@@ -65,7 +67,7 @@ export function TaskCard({
         <Icon className="h-5 w-5" />
       </div>
       {goal && (
-        <span className="text-xs font-bold uppercase tracking-wider text-accent">{goal}</span>
+        <span className="text-xs font-bold uppercase tracking-wider text-accent-light">{goal}</span>
       )}
       <div className="space-y-1">
         <h3 className={cn('font-bold', s.title)}>{title}</h3>

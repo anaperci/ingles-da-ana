@@ -88,7 +88,7 @@ export function GrammarDrill({ icon, title, subtitle, exercises, categories }: P
 
       <div className="mb-6 flex flex-wrap gap-2">
         <Chip active={filter === 'all'} onClick={() => reset('all')}>
-          Todos
+          All
         </Chip>
         {categories.map((c) => (
           <Chip key={c.key} active={filter === c.key} onClick={() => reset(c.key)}>
@@ -104,7 +104,7 @@ export function GrammarDrill({ icon, title, subtitle, exercises, categories }: P
           <Card className="space-y-5 p-6 sm:p-8">
             <div className="flex items-center justify-between">
               <Badge variant="secondary">
-                {index + 1} de {list.length}
+                {index + 1} of {list.length}
               </Badge>
               {catLabel && (
                 <span className="text-xs font-medium text-muted-foreground">{catLabel}</span>
@@ -155,7 +155,7 @@ export function GrammarDrill({ icon, title, subtitle, exercises, categories }: P
                   speakAnswer={false}
                 />
                 <Button className="w-full" onClick={next}>
-                  {index >= list.length - 1 ? 'Ver resultado' : 'Próxima'}{' '}
+                  {index >= list.length - 1 ? 'See result' : 'Next'}{' '}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </>
@@ -210,16 +210,16 @@ function ResultCard({
   onRestart: () => void
 }) {
   const pct = Math.round((correct / total) * 100)
-  const msg = pct >= 90 ? 'Excelente! 🎉' : pct >= 60 ? 'Boa! Já tá pegando o jeito.' : 'Vamos reforçar — refaz pra fixar.'
+  const msg = pct >= 90 ? 'Excellent! 🎉' : pct >= 60 ? 'Nice! You\'re getting the hang of it.' : 'Let\'s reinforce — try again to lock it in.'
   return (
     <Card className="space-y-4 p-8 text-center">
       <div className="text-5xl font-extrabold text-primary">{pct}%</div>
       <p className="text-muted-foreground">
-        Você acertou <strong className="text-foreground">{correct}</strong> de {total}.
+        You got <strong className="text-foreground">{correct}</strong> of {total}.
       </p>
       <p className="text-sm text-muted-foreground">{msg}</p>
       <Button onClick={onRestart} variant="gradient" className="gap-2">
-        <RotateCcw className="h-4 w-4" /> Praticar de novo
+        <RotateCcw className="h-4 w-4" /> Practice again
       </Button>
     </Card>
   )

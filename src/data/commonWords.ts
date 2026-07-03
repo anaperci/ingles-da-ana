@@ -9,6 +9,9 @@
  * cidade, comida, viagem, trabalho, tempo, números, cores, etc.).
  */
 
+import type { VocabWord } from '@/types/vocabulary'
+import type { CEFRLevel } from '@/types'
+
 export interface CommonWord {
   id: string
   /** posição na lista (1 = mais comum) */
@@ -1282,3 +1285,16 @@ export const WORD_BANDS: WordBand[] = (() => {
   }
   return bands
 })()
+
+/**
+ * As 1000 palavras mais comuns convertidas para o formato de estudo (VocabWord),
+ * pra entrarem na repetição espaçada da página Vocabulary. Sem frase de exemplo
+ * (não temos), com nível CEFR estimado pela frequência (rank).
+ */
+export const COMMON_AS_VOCAB: VocabWord[] = COMMON_WORDS.map((w) => ({
+  id: w.id,
+  word: w.word,
+  translation: w.translation,
+  category: 'frequentes' as const,
+  level: (w.rank <= 300 ? 'A1' : w.rank <= 600 ? 'A2' : w.rank <= 1000 ? 'B1' : 'B2') as CEFRLevel,
+}))

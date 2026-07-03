@@ -53,8 +53,8 @@ export default function Verbs() {
     <div className="animate-fade-in">
       <PageHeader
         icon={Repeat}
-        title="Verbos"
-        subtitle="Irregulares e phrasal verbs, com repetição espaçada"
+        title="Verbs"
+        subtitle="Irregulars and phrasal verbs, with spaced repetition"
         actions={<TranslationToggle />}
       />
 
@@ -62,8 +62,8 @@ export default function Verbs() {
         <Card className="mb-6 flex items-center gap-3 border-warning/30 bg-warning/10 p-4">
           <Lightbulb className="h-5 w-5 text-warning" />
           <p className="text-sm">
-            Você tem errado mais o <strong>{v.mostMissedForm === 'past' ? 'passado simples' : 'particípio'}</strong>.
-            As próximas revisões vão priorizar isso.
+            You've been missing the <strong>{v.mostMissedForm === 'past' ? 'simple past' : 'past participle'}</strong> more often.
+            The next reviews will focus on that.
           </p>
         </Card>
       )}
@@ -71,7 +71,7 @@ export default function Verbs() {
       <Tabs defaultValue="irregular">
         <TabsList>
           <TabsTrigger value="irregular">
-            Irregulares
+            Irregulars
             <Badge variant="secondary" className="ml-1">{v.irregularStats.mastered}/{v.irregularStats.total}</Badge>
           </TabsTrigger>
           <TabsTrigger value="phrasal">
@@ -84,17 +84,17 @@ export default function Verbs() {
         <TabsContent value="irregular">
           <ModeBar>
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-muted-foreground">Modo:</span>
+              <span className="text-sm font-medium text-muted-foreground">Mode:</span>
               <Tabs value={irregularMode} onValueChange={(x) => setIrregularMode(x as IrregularMode)}>
                 <TabsList>
                   <TabsTrigger value="flashcard">Flashcards</TabsTrigger>
-                  <TabsTrigger value="fillgap">Preencher</TabsTrigger>
-                  <TabsTrigger value="timed">Cronometrado</TabsTrigger>
+                  <TabsTrigger value="fillgap">Fill in</TabsTrigger>
+                  <TabsTrigger value="timed">Timed</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
             <Button variant="gradient" onClick={() => setActive({ kind: 'irregular', mode: irregularMode })}>
-              Estudar todos ({SESSION_SIZE})
+              Study all ({SESSION_SIZE})
             </Button>
           </ModeBar>
 
@@ -102,7 +102,7 @@ export default function Verbs() {
           <Card className="mb-6 border-primary/20 bg-soft p-5">
             <div className="mb-3 flex items-center gap-2">
               <Lightbulb className="h-5 w-5 text-primary" />
-              <span className="font-semibold">Dicas do método</span>
+              <span className="font-semibold">Method tips</span>
             </div>
             <ul className="grid gap-2 sm:grid-cols-2">
               {verbMethodTips.map((tip) => (
@@ -116,7 +116,7 @@ export default function Verbs() {
 
           {/* Referência: os 50 verbos */}
           <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted-foreground">
-            Todos os verbos ({v.irregulars.length})
+            All verbs ({v.irregulars.length})
           </h3>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {v.irregulars.map((verb) => (
@@ -137,16 +137,16 @@ export default function Verbs() {
         <TabsContent value="phrasal">
           <ModeBar>
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-muted-foreground">Modo:</span>
+              <span className="text-sm font-medium text-muted-foreground">Mode:</span>
               <Tabs value={phrasalMode} onValueChange={(x) => setPhrasalMode(x as PhrasalMode)}>
                 <TabsList>
-                  <TabsTrigger value="match">Significado</TabsTrigger>
-                  <TabsTrigger value="complete">Completar frase</TabsTrigger>
+                  <TabsTrigger value="match">Meaning</TabsTrigger>
+                  <TabsTrigger value="complete">Complete the sentence</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
             <Button variant="gradient" onClick={() => setActive({ kind: 'phrasal', base: 'all', mode: phrasalMode })}>
-              Estudar todos ({SESSION_SIZE})
+              Study all ({SESSION_SIZE})
             </Button>
           </ModeBar>
 
@@ -164,7 +164,7 @@ export default function Verbs() {
                   </p>
                   <Progress value={pct} className="mb-4" />
                   <Button variant="outline" className="mt-auto" onClick={() => setActive({ kind: 'phrasal', base: g.base, mode: phrasalMode })}>
-                    Estudar grupo
+                    Study group
                   </Button>
                 </Card>
               )

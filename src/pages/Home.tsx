@@ -53,7 +53,7 @@ export default function Home() {
               to="/conversacao"
             />
             <TaskCard
-              variant="soft"
+              variant="default"
               icon={Mic}
               title="Pronunciation practice"
               desc="Read out loud and see your score per word."
@@ -64,9 +64,9 @@ export default function Home() {
             <TaskCard
               variant="default"
               icon={Users}
-              title="Reforço de pronomes"
-              desc="Sujeito, objeto, possessivos e reflexivos com correção."
-              cta="Praticar"
+              title="Pronoun practice"
+              desc="Subject, object, possessive and reflexive, with corrections."
+              cta="Practice"
               to="/pronomes"
               time="5 min"
             />

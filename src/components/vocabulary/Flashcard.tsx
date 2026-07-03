@@ -14,10 +14,10 @@ interface FlashcardProps {
 }
 
 const RATINGS: { label: string; quality: ReviewQuality; variant: 'outline' | 'secondary' | 'default' | 'gradient'; tone: string }[] = [
-  { label: 'Errei', quality: 1, variant: 'outline', tone: 'text-error' },
-  { label: 'Difícil', quality: 3, variant: 'outline', tone: 'text-warning' },
-  { label: 'Bom', quality: 4, variant: 'secondary', tone: '' },
-  { label: 'Fácil', quality: 5, variant: 'gradient', tone: '' },
+  { label: 'Missed', quality: 1, variant: 'outline', tone: 'text-error' },
+  { label: 'Hard', quality: 3, variant: 'outline', tone: 'text-warning' },
+  { label: 'Good', quality: 4, variant: 'secondary', tone: '' },
+  { label: 'Easy', quality: 5, variant: 'gradient', tone: '' },
 ]
 
 export function Flashcard({ word, onRate }: FlashcardProps) {
@@ -56,18 +56,20 @@ export function Flashcard({ word, onRate }: FlashcardProps) {
               <div className="font-mono text-muted-foreground">{word.phonetic}</div>
             )}
             <div className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
-              <RotateCcw className="h-3.5 w-3.5" /> toque para ver a resposta
+              <RotateCcw className="h-3.5 w-3.5" /> tap to see the answer
             </div>
           </>
         ) : (
           <div className="animate-fade-in space-y-3">
             <div className="text-2xl font-bold text-primary">{word.translation}</div>
-            <div className="mx-auto max-w-md space-y-1">
-              <p className="text-foreground">“{word.example}”</p>
-              {show && (
-                <p className="text-sm text-muted-foreground">{word.exampleTranslation}</p>
-              )}
-            </div>
+            {word.example && (
+              <div className="mx-auto max-w-md space-y-1">
+                <p className="text-foreground">“{word.example}”</p>
+                {show && word.exampleTranslation && (
+                  <p className="text-sm text-muted-foreground">{word.exampleTranslation}</p>
+                )}
+              </div>
+            )}
           </div>
         )}
       </Card>
@@ -87,7 +89,7 @@ export function Flashcard({ word, onRate }: FlashcardProps) {
         </div>
       ) : (
         <Button className="w-full" variant="outline" onClick={() => setFlipped(true)}>
-          Mostrar resposta
+          Show answer
         </Button>
       )}
     </div>

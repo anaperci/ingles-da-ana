@@ -39,15 +39,15 @@ export default function Writing() {
     <div className="animate-fade-in">
       <PageHeader
         icon={PenLine}
-        title="Escrita diária"
-        subtitle="30 frases por dia + as 1000 palavras mais faladas do inglês"
+        title="Daily writing"
+        subtitle="30 sentences a day + the 1000 most spoken words in English"
         actions={<TranslationToggle />}
       />
 
       <Tabs defaultValue="sentences">
         <TabsList className="mb-6">
-          <TabsTrigger value="sentences">Frases do dia</TabsTrigger>
-          <TabsTrigger value="words">1000 palavras</TabsTrigger>
+          <TabsTrigger value="sentences">Daily sentences</TabsTrigger>
+          <TabsTrigger value="words">1000 words</TabsTrigger>
         </TabsList>
 
         <TabsContent value="sentences">
@@ -196,7 +196,7 @@ function DailySentencesTab() {
 
   const prettyDate = useMemo(
     () =>
-      new Date(`${date}T00:00:00`).toLocaleDateString('pt-BR', {
+      new Date(`${date}T00:00:00`).toLocaleDateString('en-US', {
         weekday: 'long',
         day: '2-digit',
         month: 'long',
@@ -248,9 +248,9 @@ function DailySentencesTab() {
       complete(feedbackResult)
     } catch (e) {
       if (e instanceof NotConfiguredError) {
-        setError('A avaliação por IA precisa do backend configurado.')
+        setError('AI evaluation needs the backend configured.')
       } else if (e instanceof SyntaxError) {
-        setError('A IA respondeu num formato inesperado. Tente finalizar de novo.')
+        setError('The AI replied in an unexpected format. Try finishing again.')
       } else {
         setError((e as Error).message)
       }
@@ -274,30 +274,30 @@ function DailySentencesTab() {
             </div>
             <div className="text-2xl font-extrabold">
               {writtenCount}
-              <span className="text-muted-foreground">/{goal} frases</span>
+              <span className="text-muted-foreground">/{goal} sentences</span>
             </div>
             {reviewCount > 0 && (
               <div className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-accent-dark">
                 <RotateCcw className="h-3.5 w-3.5" />
-                {reviewCount} {reviewCount === 1 ? 'palavra de revisão' : 'palavras de revisão'}
+                {reviewCount} {reviewCount === 1 ? 'review word' : 'review words'}
               </div>
             )}
           </div>
           <div className="flex items-center gap-3">
             {completed ? (
               <Badge className="gap-1 bg-success text-success-foreground">
-                <CheckCircle2 className="h-4 w-4" /> Concluído
-                {feedback ? ` · ${feedback.score}%` : ' hoje'}
+                <CheckCircle2 className="h-4 w-4" /> Done
+                {feedback ? ` · ${feedback.score}%` : ' today'}
               </Badge>
             ) : (
               <Button variant="gradient" disabled={loading} onClick={finalize}>
                 {loading ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" /> Avaliando…
+                    <Loader2 className="h-4 w-4 animate-spin" /> Evaluating…
                   </>
                 ) : (
                   <>
-                    <Check className="h-4 w-4" /> Finalizar e avaliar
+                    <Check className="h-4 w-4" /> Finish and evaluate
                   </>
                 )}
               </Button>
@@ -306,10 +306,10 @@ function DailySentencesTab() {
         </div>
         <Progress value={pct} className="mt-4" />
         <p className="mt-2 text-sm text-muted-foreground">
-          Escreva o que souber e marque <strong>“não sei”</strong> no resto — pode
-          finalizar a qualquer momento que a IA corrige suas frases e traz dicas. As
-          palavras que você <strong>errar voltam noutro dia</strong>, em uma frase
-          nova, até você dominar.
+          Write what you know and mark <strong>“I don't know”</strong> on the rest — you
+          can finish at any time and the AI will correct your sentences and share tips. The
+          words you <strong>get wrong come back another day</strong>, in a new
+          sentence, until you master them.
         </p>
         {error && <p className="mt-2 text-sm text-error">{error}</p>}
       </Card>
@@ -339,13 +339,13 @@ function DailySentencesTab() {
                 <button
                   onClick={() => speak(s.word)}
                   className="text-muted-foreground hover:text-foreground"
-                  aria-label={`Ouvir ${s.word}`}
+                  aria-label={`Play ${s.word}`}
                 >
                   <Volume2 className="h-4 w-4" />
                 </button>
                 {s.review && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-[11px] font-semibold text-accent-dark">
-                    <RotateCcw className="h-3 w-3" /> revisão
+                    <RotateCcw className="h-3 w-3" /> review
                   </span>
                 )}
                 {showTranslation && (
@@ -361,20 +361,20 @@ function DailySentencesTab() {
                         : 'border-border text-muted-foreground hover:text-foreground'
                     )}
                   >
-                    <HelpCircle className="h-3.5 w-3.5" /> não sei
+                    <HelpCircle className="h-3.5 w-3.5" /> I don't know
                   </button>
                 )}
               </div>
 
               {s.dontKnow ? (
                 <p className="text-sm italic text-muted-foreground">
-                  Marcada como “não sei” — sem problema, foco no que você já sabe.
+                  Marked as “I don't know” — no problem, focus on what you already know.
                 </p>
               ) : (
                 <Textarea
                   value={s.text}
                   onChange={(e) => setSentence(s.wordId, e.target.value)}
-                  placeholder={`Escreva uma frase com "${s.word}"...`}
+                  placeholder={`Write a sentence with "${s.word}"...`}
                   rows={2}
                   disabled={completed}
                 />
@@ -400,14 +400,14 @@ function FeedbackSummary({
     <Card className="space-y-3 p-5">
       <div className="flex flex-wrap items-center gap-2">
         <Sparkles className="h-5 w-5 text-primary" />
-        <span className="font-semibold">Avaliação da IA</span>
+        <span className="font-semibold">AI evaluation</span>
         {earned ? (
           <Badge className="gap-1 bg-accent text-accent-foreground">
             <Star className="h-3.5 w-3.5" /> +{earned} pts
           </Badge>
         ) : null}
         <Badge className="ml-auto bg-primary text-primary-foreground">
-          {feedback.score}% certas
+          {feedback.score}% correct
         </Badge>
       </div>
       {feedback.summary && (
@@ -416,7 +416,7 @@ function FeedbackSummary({
       {feedback.insights.length > 0 && (
         <div className="rounded-xl bg-soft p-3">
           <div className="mb-1 flex items-center gap-2 text-sm font-semibold">
-            <Lightbulb className="h-4 w-4 text-accent-dark" /> Dicas pra você
+            <Lightbulb className="h-4 w-4 text-accent-dark" /> Tips for you
           </div>
           <ul className="space-y-1">
             {feedback.insights.map((t, i) => (
@@ -443,12 +443,12 @@ function SentenceCorrection({ fb }: { fb: SentenceFeedback }) {
         {fb.ok ? (
           <>
             <Check className="h-4 w-4 text-success" />
-            <span className="text-success">Correto!</span>
+            <span className="text-success">Correct!</span>
           </>
         ) : (
           <>
             <X className="h-4 w-4 text-warning" />
-            <span className="text-warning">Correção</span>
+            <span className="text-warning">Correction</span>
           </>
         )}
       </div>
@@ -457,13 +457,13 @@ function SentenceCorrection({ fb }: { fb: SentenceFeedback }) {
       {fb.correction && (
         <p className="mb-1.5 flex items-center gap-1.5 font-medium text-foreground">
           <span className="text-xs font-normal uppercase tracking-wide text-muted-foreground">
-            {fb.ok ? 'forma certa:' : 'certo:'}
+            {fb.ok ? 'natural form:' : 'right:'}
           </span>
           {fb.correction}
           <button
             type="button"
             onClick={() => speak(fb.correction)}
-            aria-label={`Ouvir ${fb.correction}`}
+            aria-label={`Play ${fb.correction}`}
             className="text-muted-foreground hover:text-primary"
           >
             <Volume2 className="h-3.5 w-3.5" />
@@ -518,7 +518,7 @@ function CommonWordsTab() {
                 <span className="text-muted-foreground">/{total}</span>
               </div>
               <div className="text-xs text-muted-foreground">
-                palavras que você já domina
+                words you already master
               </div>
             </div>
           </div>
@@ -535,7 +535,7 @@ function CommonWordsTab() {
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Buscar palavra ou tradução..."
+          placeholder="Search word or translation..."
           className="pl-9"
         />
       </div>
@@ -565,7 +565,7 @@ function CommonWordsTab() {
 
       {searching && (
         <p className="text-sm text-muted-foreground">
-          {list.length} resultado(s) para “{query.trim()}”
+          {list.length} result(s) for “{query.trim()}”
         </p>
       )}
 
@@ -632,7 +632,7 @@ function WordRow({
             <button
               onClick={() => speak(word)}
               className="text-muted-foreground hover:text-foreground"
-              aria-label={`Ouvir ${word}`}
+              aria-label={`Play ${word}`}
             >
               <Volume2 className="h-4 w-4" />
             </button>
@@ -643,7 +643,7 @@ function WordRow({
         </div>
         <button
           onClick={onToggle}
-          aria-label={known ? 'Marcar como não sei' : 'Marcar como sei'}
+          aria-label={known ? 'Mark as not known' : 'Mark as known'}
           className={cn(
             'flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-colors',
             known
@@ -660,7 +660,7 @@ function WordRow({
         <Input
           value={typed}
           onChange={(e) => setTyped(e.target.value)}
-          placeholder="escreva a palavra…"
+          placeholder="type the word…"
           autoComplete="off"
           autoCorrect="off"
           spellCheck={false}

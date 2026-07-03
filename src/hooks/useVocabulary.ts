@@ -1,16 +1,20 @@
 import { useMemo } from 'react'
 import { useSrsDeck } from './useSrsDeck'
 import { VOCABULARY } from '@/data/vocabulary'
+import { COMMON_AS_VOCAB } from '@/data/commonWords'
 import { STORAGE_KEYS } from '@/lib/keys'
 import { CATEGORIES, type CategoryKey } from '@/types'
 import type { VocabWord } from '@/types/vocabulary'
 
+/** Curadas (com exemplo/categoria) + as 1000 mais comuns (frequência). */
+export const ALL_VOCAB: VocabWord[] = [...VOCABULARY, ...COMMON_AS_VOCAB]
+
 export function useVocabulary() {
-  const deck = useSrsDeck<VocabWord>(STORAGE_KEYS.vocabularyProgress, VOCABULARY)
+  const deck = useSrsDeck<VocabWord>(STORAGE_KEYS.vocabularyProgress, ALL_VOCAB)
 
   const byCategory = useMemo(() => {
     return CATEGORIES.map((cat) => {
-      const words = VOCABULARY.filter((w) => w.category === cat.key)
+      const words = ALL_VOCAB.filter((w) => w.category === cat.key)
       const mastered = words.filter((w) => {
         const s = deck.progress[w.id]
         return s && s.repetitions >= 4 && s.interval >= 21
@@ -27,7 +31,7 @@ export function useVocabulary() {
   }
 
   return {
-    words: VOCABULARY,
+    words: ALL_VOCAB,
     byCategory,
     queueForCategory,
     ...deck,

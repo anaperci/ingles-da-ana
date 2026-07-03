@@ -47,12 +47,12 @@ export function CorrectionCard({
         {ok ? (
           <>
             <Check className="h-4 w-4 text-success" />
-            <span className="text-success">Correto!</span>
+            <span className="text-success">Correct!</span>
           </>
         ) : (
           <>
             <X className="h-4 w-4 text-warning" />
-            <span className="text-warning">Quase</span>
+            <span className="text-warning">Almost!</span>
           </>
         )}
       </div>
@@ -67,14 +67,14 @@ export function CorrectionCard({
       {/* a forma certa */}
       <p className="flex items-center gap-1.5 font-medium text-foreground">
         <span className="text-xs font-normal uppercase tracking-wide text-muted-foreground">
-          certo:
+          right:
         </span>
         {answer}
         {speakAnswer && (
           <button
             type="button"
             onClick={() => speak(answer)}
-            aria-label={`Ouvir ${answer}`}
+            aria-label={`Play ${answer}`}
             className="text-muted-foreground hover:text-primary"
           >
             <Volume2 className="h-3.5 w-3.5" />

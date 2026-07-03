@@ -11,9 +11,12 @@ const buttonVariants = cva(
         default:
           'bg-accent text-accent-foreground shadow-soft hover:bg-accent-dark',
         gradient:
-          'bg-accent text-accent-foreground shadow-soft hover:bg-accent-dark',
+          'bg-gradient-to-r from-accent to-accent-dark text-accent-foreground shadow-soft hover:from-accent-dark hover:to-accent-dark',
         primary:
           'bg-primary text-primary-foreground shadow-soft hover:bg-primary-soft',
+        // Botão sobre fundo navy (regra: card branco → azul; fundo navy → creme)
+        cream:
+          'bg-cream text-cream-foreground shadow-soft hover:bg-cream-hover',
         destructive:
           'bg-error text-error-foreground shadow-soft hover:bg-error/90',
         outline:

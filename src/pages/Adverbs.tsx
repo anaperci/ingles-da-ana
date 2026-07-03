@@ -6,8 +6,8 @@ export default function Adverbs() {
   return (
     <GrammarDrill
       icon={Zap}
-      title="Advérbios"
-      subtitle="Modo, frequência, tempo e lugar — escolha o advérbio certo em cada frase"
+      title="Adverbs"
+      subtitle="Manner, frequency, time and place — pick the right adverb in each sentence"
       exercises={ADVERB_EXERCISES}
       categories={ADVERB_CATEGORIES}
     />

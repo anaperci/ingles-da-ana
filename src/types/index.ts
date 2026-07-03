@@ -23,6 +23,7 @@ export type CategoryKey =
   | 'negocios'
   | 'viagem'
   | 'academico'
+  | 'frequentes'
 
 export interface Category {
   key: CategoryKey
@@ -34,39 +35,45 @@ export interface Category {
 export const CATEGORIES: Category[] = [
   {
     key: 'intercambio',
-    label: 'Intercâmbio',
+    label: 'Exchange',
     emoji: '✈️',
-    description: 'Chegada, acomodação, escola e burocracia em Malta',
+    description: 'Arrival, housing, school and paperwork in Malta',
   },
   {
     key: 'cotidiano',
-    label: 'Dia a dia',
+    label: 'Everyday',
     emoji: '🏠',
-    description: 'Compras, comida, transporte, saúde e serviços',
+    description: 'Shopping, food, transport, health and services',
   },
   {
     key: 'social',
     label: 'Social',
     emoji: '💬',
-    description: 'Conversa fiada, fazer amizade, sair, opiniões',
+    description: 'Small talk, making friends, going out, opinions',
   },
   {
     key: 'negocios',
-    label: 'Negócios',
+    label: 'Business',
     emoji: '💼',
-    description: 'Reuniões, apresentações, e-mails e calls',
+    description: 'Meetings, presentations, emails and calls',
   },
   {
     key: 'viagem',
-    label: 'Viagem',
+    label: 'Travel',
     emoji: '🧳',
-    description: 'Aeroporto, hotel, direções e turismo',
+    description: 'Airport, hotel, directions and sightseeing',
   },
   {
     key: 'academico',
-    label: 'Acadêmico',
+    label: 'Academic',
     emoji: '🎓',
-    description: 'Sala de aula, dúvidas, apresentações e estudo',
+    description: 'Classroom, questions, presentations and study',
+  },
+  {
+    key: 'frequentes',
+    label: 'Most common',
+    emoji: '🔤',
+    description: 'The 1000 most spoken English words',
   },
 ]
 

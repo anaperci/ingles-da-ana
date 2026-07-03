@@ -18,14 +18,14 @@ export function HeroCard({ pct }: HeroCardProps) {
     <div className="flex items-center justify-between gap-5 rounded-2xl bg-primary p-5 text-white shadow-soft">
       <div className="flex flex-col gap-3">
         <div className="space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-accent">
+          <span className="text-xs font-bold uppercase tracking-wider text-accent-light">
             Your plan today
           </span>
           <h2 className="max-w-xs text-xl font-extrabold leading-snug">{headline}</h2>
         </div>
         <Link
           to="/escrita"
-          className="inline-flex w-fit items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground shadow-soft transition-colors hover:bg-accent-dark"
+          className="inline-flex w-fit items-center gap-2 rounded-xl bg-cream px-4 py-2.5 text-sm font-semibold text-cream-foreground shadow-soft transition-colors hover:bg-cream-hover"
         >
           View tasks
           <ArrowRight className="h-4 w-4" />
