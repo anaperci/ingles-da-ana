@@ -49,13 +49,15 @@ export default {
           muted: 'hsl(var(--color-on-primary-muted))',
         },
 
-        /* Âmbar — cor de ação (texto sobre âmbar = petróleo) */
+        /* Azul de contraste Solo — cor de ação (texto branco sobre azul) */
         accent: {
           DEFAULT: 'hsl(var(--color-accent))',
           dark: 'hsl(var(--color-accent-dark))',
           text: 'hsl(var(--color-accent-text))',
-          foreground: 'hsl(var(--color-primary))',
+          foreground: 'hsl(var(--color-on-primary))',
         },
+        /* Mint — energia/destaque Solo */
+        mint: 'hsl(var(--color-mint))',
 
         /* Creme — cards suaves e estado ativo */
         soft: {

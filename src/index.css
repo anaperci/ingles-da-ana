@@ -4,30 +4,34 @@
 
 @layer base {
   :root {
-    /* ── Paleta: Petróleo + Âmbar + Creme sobre branco ──────────
-       Valores em HSL triplet (mantém suporte a opacidade /NN).
-       Hex de referência ao lado de cada token. */
+    /* ── Solo Design System: azul navy sobre branco ─────────────
+       Azul de contraste do Solo (ink navy) como cor principal —
+       sidebar, botões, títulos. Mint como energia/destaque.
+       Valores em HSL triplet (mantém suporte a opacidade /NN). */
 
-    --color-primary: 196 45% 20%; /* #1C3E4A petróleo escuro */
-    --color-primary-soft: 196 37% 27%; /* #2C5260 petróleo claro */
+    --color-primary: 216 65% 11%; /* #0A192F ink navy (azul assinatura Solo) */
+    --color-primary-soft: 216 53% 23%; /* #1B3358 navy claro (hover sidebar) */
 
-    --color-accent: 31 86% 63%; /* #F2A24E âmbar */
-    --color-accent-dark: 35 73% 45%; /* #C8821F âmbar escuro */
-    --color-accent-text: 33 64% 33%; /* #8A5A1E texto sobre creme/âmbar */
+    --color-accent: 217 90% 63%; /* #4D8DF6 azul de contraste (botões/ação) */
+    --color-accent-dark: 218 75% 53%; /* #2F6FE0 azul escuro (hover) */
+    --color-accent-text: 216 60% 22%; /* #16345C texto azul forte */
 
-    --color-soft: 29 86% 91%; /* #FCE8D5 creme */
-    --color-soft-2: 34 82% 85%; /* #F8DCB8 creme quente */
-    --color-soft-text: 29 44% 29%; /* #6B4A2A texto sobre creme */
-    --color-soft-text-2: 31 30% 42%; /* #8A6B4A texto secundário sobre creme */
+    --color-soft: 213 30% 95%; /* #EFF2F6 azul bem claro (cards suaves/ativo) */
+    --color-soft-2: 213 33% 88%; /* #D9E0EA azul claro */
+    --color-soft-text: 216 45% 25%; /* #23415C texto sobre soft */
+    --color-soft-text-2: 216 18% 45%; /* #5E6B82 texto secundário sobre soft */
 
-    --color-bg: 0 0% 100%; /* #FFFFFF fundo base */
-    --color-on-primary: 0 0% 100%; /* #FFFFFF texto sobre petróleo */
-    --color-on-primary-muted: 199 19% 87%; /* #D7E0E4 secundário sobre petróleo */
+    --color-bg: 0 0% 100%; /* #FFFFFF fundo base (sempre branco) */
+    --color-on-primary: 0 0% 100%; /* #FFFFFF texto sobre navy */
+    --color-on-primary-muted: 213 33% 88%; /* #D9E0EA secundário sobre navy */
 
-    /* Neutros de suporte (não no spec, necessários pra UI) */
-    --color-border-soft: 38 16% 90%; /* #E9E6E1 borda 1px bem suave */
-    --color-muted: 40 12% 95%; /* #F5F4F2 superfície neutra clara */
-    --color-muted-text: 220 9% 46%; /* #6B7280 texto secundário neutro */
+    /* Energia/destaque Solo (mint) */
+    --color-mint: 160 100% 44%; /* #00DF95 mint */
+
+    /* Neutros de suporte */
+    --color-border-soft: 218 20% 90%; /* #DFE3EA borda 1px */
+    --color-muted: 216 25% 97%; /* #F7F8FA superfície neutra clara */
+    --color-muted-text: 218 12% 48%; /* #6B7689 texto secundário neutro */
 
     /* Estados */
     --color-success: 142 71% 36%; /* #16A34A */
@@ -63,6 +67,16 @@
     font-weight: 800;
     letter-spacing: -0.03em;
   }
+}
+
+/* Animações da tela de login (cartão de embarque) */
+@keyframes plane-move {
+  0% { transform: translate(-4px, -50%); }
+  100% { transform: translate(6px, -50%); }
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
 }
 
 /* Scrollbar discreta */

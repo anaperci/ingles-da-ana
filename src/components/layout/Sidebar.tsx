@@ -8,13 +8,13 @@ function UserFooter() {
   const { email, signOut } = useAuthUser()
   if (!email) return null
   return (
-    <div className="mt-auto border-t border-border pt-3">
-      <div className="truncate px-2 text-xs text-muted-foreground" title={email}>
+    <div className="mt-auto border-t border-white/10 pt-3">
+      <div className="truncate px-2 text-xs text-white/50" title={email}>
         {email}
       </div>
       <button
         onClick={() => signOut()}
-        className="mt-1 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-soft/60 hover:text-primary"
+        className="mt-1 flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-white/60 transition-colors hover:bg-white/10 hover:text-white"
       >
         <LogOut className="h-4 w-4" /> Sair
       </button>
@@ -34,9 +34,9 @@ function Brand() {
       <img
         src="/ana.png"
         alt="Ana"
-        className="h-10 w-10 shrink-0 rounded-xl border-2 border-primary object-cover"
+        className="h-10 w-10 shrink-0 rounded-xl border-2 border-white/25 object-cover"
       />
-      <span className="font-display text-lg font-extrabold leading-none tracking-tight text-foreground">
+      <span className="font-display text-lg font-extrabold leading-none tracking-tight text-white">
         English
         <br />
         with Ana
@@ -58,15 +58,15 @@ function NavItems({ onNavigate }: { onNavigate?: () => void }) {
             cn(
               'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
               isActive
-                ? 'bg-soft text-primary'
-                : 'text-muted-foreground hover:bg-soft/60 hover:text-primary'
+                ? 'bg-white/10 text-white'
+                : 'text-white/60 hover:bg-white/10 hover:text-white'
             )
           }
         >
           {({ isActive }) => (
             <>
               <item.icon
-                className={cn('h-5 w-5 shrink-0', isActive ? 'text-primary' : 'text-primary/80')}
+                className={cn('h-5 w-5 shrink-0', isActive ? 'text-accent' : 'text-white/70')}
               />
               {item.label}
             </>
@@ -81,7 +81,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   return (
     <>
       {/* Desktop — fixa */}
-      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col gap-6 border-r border-border bg-white px-4 py-6 lg:flex">
+      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col gap-6 border-r border-primary-soft bg-primary px-4 py-6 lg:flex">
         <Brand />
         <NavItems />
         <UserFooter />
@@ -103,7 +103,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         />
         <aside
           className={cn(
-            'absolute left-0 top-0 flex h-full w-72 flex-col gap-6 border-r border-border bg-white px-4 py-6 transition-transform',
+            'absolute left-0 top-0 flex h-full w-72 flex-col gap-6 border-r border-primary-soft bg-primary px-4 py-6 transition-transform',
             open ? 'translate-x-0' : '-translate-x-full'
           )}
         >
@@ -112,7 +112,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             <button
               onClick={onClose}
               aria-label="Close menu"
-              className="rounded-xl border border-border p-1.5 text-primary hover:bg-soft"
+              className="rounded-xl border border-white/20 p-1.5 text-white hover:bg-white/10"
             >
               <X className="h-5 w-5" />
             </button>
