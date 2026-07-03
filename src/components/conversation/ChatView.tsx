@@ -172,7 +172,7 @@ export function ChatView({ scenario, onExit }: ChatViewProps) {
 
       {/* Composer */}
       <form
-        className="flex items-center gap-2 border-t border-card-border bg-card p-3"
+        className="flex items-center gap-2 border-t border-card-border bg-card p-2 sm:p-3"
         onSubmit={(e) => {
           e.preventDefault()
           send()

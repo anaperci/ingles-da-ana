@@ -18,10 +18,10 @@ export function VerbReader({ verb }: { verb: SoundVerb }) {
       )}
 
       {/* Par */}
-      <Card className="flex items-center justify-center gap-3 p-6 text-center">
-        <span className="font-mono text-2xl font-extrabold">{verb.base}</span>
+      <Card className="flex flex-wrap items-center justify-center gap-3 p-6 text-center">
+        <span className="font-mono text-xl font-extrabold sm:text-2xl">{verb.base}</span>
         <ArrowRight className="h-6 w-6 text-muted-foreground" />
-        <span className="font-mono text-2xl font-extrabold text-primary">{verb.past}</span>
+        <span className="font-mono text-xl font-extrabold text-primary sm:text-2xl">{verb.past}</span>
         <button
           onClick={() => speak(`${verb.base}, ${verb.past}`)}
           className="rounded-full p-2 text-muted-foreground hover:bg-secondary"

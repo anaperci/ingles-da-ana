@@ -268,8 +268,8 @@ function ResultCard({
   const msg =
     pct >= 90 ? 'Excellent! Pronouns mastered. 🎉' : pct >= 60 ? 'Nice! You\'re getting the hang of it.' : 'Let\'s reinforce — try again to lock it in.'
   return (
-    <Card className="space-y-4 p-8 text-center">
-      <div className="text-5xl font-extrabold text-primary">{pct}%</div>
+    <Card className="space-y-4 p-6 text-center sm:p-8">
+      <div className="text-4xl font-extrabold text-primary sm:text-5xl">{pct}%</div>
       <p className="text-muted-foreground">
         You got <strong className="text-foreground">{correct}</strong> of {total}.
       </p>

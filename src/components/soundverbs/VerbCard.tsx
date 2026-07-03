@@ -10,7 +10,7 @@ export function VerbCard({ verb, onOpen }: { verb: SoundVerb; onOpen: () => void
     <button onClick={onOpen} className="group text-left">
       <Card className="flex h-full flex-col p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevated">
         <div className="mb-2 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 font-mono text-lg font-bold">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-base font-bold sm:text-lg">
             <span>{verb.base}</span>
             <ArrowRight className="h-4 w-4 text-muted-foreground" />
             <span className="text-primary">{verb.past}</span>

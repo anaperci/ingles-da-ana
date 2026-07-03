@@ -109,9 +109,9 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
       {/* Frase */}
       <div className="space-y-4 text-center">
         {badge}
-        <div className="flex items-center justify-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           {result && result.words.length > 0 ? (
-            <p className="font-display text-2xl font-extrabold leading-relaxed tracking-tight sm:text-3xl">
+            <p className="font-display text-xl font-extrabold leading-relaxed tracking-tight sm:text-2xl">
               {result.words.map((w, i) => (
                 <span key={i} className={cn('mx-0.5', wordColor(w))}>
                   {w.word}
@@ -119,7 +119,7 @@ export function SpeakAndScore({ text, translation, badge, session, onScored }: P
               ))}
             </p>
           ) : (
-            <p className="font-display text-2xl font-extrabold leading-relaxed tracking-tight sm:text-3xl">
+            <p className="font-display text-xl font-extrabold leading-relaxed tracking-tight sm:text-2xl">
               {text}
             </p>
           )}

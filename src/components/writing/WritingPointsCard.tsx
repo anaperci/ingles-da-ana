@@ -20,7 +20,7 @@ export function WritingPointsCard() {
       </div>
 
       <div className="flex items-baseline gap-2">
-        <span className="font-mono text-3xl font-extrabold leading-none text-foreground">{total}</span>
+        <span className="font-mono text-2xl font-extrabold leading-none text-foreground sm:text-3xl">{total}</span>
         {level.next && <span className="text-sm text-muted-foreground">/ {nextThreshold} pts</span>}
         {todayPoints > 0 && (
           <span className="ml-auto text-sm font-semibold text-accent-dark">+{todayPoints} today</span>

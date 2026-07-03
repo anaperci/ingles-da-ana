@@ -37,7 +37,7 @@ export default function Writing() {
   return (
     <div className="animate-fade-in">
       {/* Header */}
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
         <div className="flex items-center gap-3">
           <div className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-2xl bg-primary shadow-soft">
             <PenLine className="h-7 w-7 text-accent-light" />
@@ -285,7 +285,7 @@ function DailySentencesTab() {
 
       {/* Resumo do dia */}
       <Card className="border-card-border bg-card p-5 shadow-soft">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <div>
             <div className="mb-1 flex items-center gap-2 text-sm text-muted-foreground">
               <CalendarDays className="h-4 w-4" />

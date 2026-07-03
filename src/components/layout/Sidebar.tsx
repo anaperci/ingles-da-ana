@@ -175,7 +175,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         />
         <aside
           className={cn(
-            'absolute left-0 top-0 flex h-full w-72 flex-col gap-6 border-r border-primary-soft bg-primary px-4 py-6 transition-transform',
+            'absolute left-0 top-0 flex h-full w-[85vw] max-w-xs flex-col gap-6 border-r border-primary-soft bg-primary px-4 py-6 transition-transform',
             open ? 'translate-x-0' : '-translate-x-full'
           )}
         >

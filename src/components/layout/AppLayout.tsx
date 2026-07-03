@@ -25,7 +25,7 @@ export function AppLayout() {
           <button
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
-            className="rounded-xl border border-border p-2 text-primary hover:bg-soft"
+            className="rounded-xl border border-border p-2.5 text-primary hover:bg-soft"
           >
             <Menu className="h-5 w-5" />
           </button>

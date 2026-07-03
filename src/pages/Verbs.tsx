@@ -52,7 +52,7 @@ export default function Verbs() {
 
   return (
     <div className="animate-fade-in">
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
         <div className="flex items-center gap-4">
           <div className="flex h-[60px] w-[60px] items-center justify-center rounded-2xl bg-primary shadow-soft">
             <Repeat2 className="h-7 w-7 text-accent-light" />

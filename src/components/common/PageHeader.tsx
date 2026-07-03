@@ -9,10 +9,10 @@ interface PageHeaderProps {
 
 export function PageHeader({ icon: Icon, title, subtitle, actions }: PageHeaderProps) {
   return (
-    <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
       <div className="flex items-center gap-4">
-        <div className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-2xl bg-primary shadow-soft">
-          <Icon className="h-7 w-7 text-accent-light" />
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary shadow-soft sm:h-[60px] sm:w-[60px]">
+          <Icon className="h-6 w-6 text-accent-light sm:h-7 sm:w-7" />
         </div>
         <div>
           <h1 className="text-2xl font-extrabold tracking-tight">{title}</h1>

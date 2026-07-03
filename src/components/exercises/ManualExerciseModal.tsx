@@ -118,7 +118,7 @@ export function ManualExerciseModal({
         </DialogHeader>
 
         <div className="space-y-3">
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
             <div>
               <label className={labelCls}>Tipo</label>
               <select className={fieldCls} value={type} onChange={(e) => setType(e.target.value as ExerciseType)}>

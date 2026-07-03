@@ -74,7 +74,7 @@ export default function Exercises() {
       </div>
 
       {/* Filtros */}
-      <div className="mb-4 flex flex-wrap items-center gap-2">
+      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
         <select className={selCls} value={fType} onChange={(e) => setFType(e.target.value)}>
           <option value="all">Todos os tipos</option>
           {(Object.keys(TYPE_LABEL) as ExerciseType[]).map((t) => (
@@ -102,7 +102,7 @@ export default function Exercises() {
         {filtered.length > 0 && (
           <button
             onClick={() => setPracticeStart(0)}
-            className="ml-auto rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:bg-accent-dark"
+            className="w-full rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:bg-accent-dark sm:ml-auto sm:w-auto"
           >
             Praticar {filtered.length}
           </button>
