@@ -73,16 +73,12 @@ export default function Home() {
           </div>
         </div>
 
-          <div>
-            <h2 className="mb-3 text-lg font-bold">Your writing</h2>
-            <WritingPointsCard />
-          </div>
-
           <VerbOfTheDayCard />
         </div>
 
         {/* RAIL */}
         <aside className="space-y-4">
+          <WritingPointsCard />
           <PlannerCard />
           <ChallengeCard />
           <ThisWeekCard />
