@@ -115,7 +115,7 @@ export function AuthScreen() {
             >
               ACESSO À SUA JORNADA
             </div>
-            <h1 className="font-display text-[44px] font-bold leading-[1.04] tracking-tight" style={{ maxWidth: '12ch' }}>
+            <h1 className="font-display text-[44px] font-bold leading-[1.04] tracking-tight" style={{ maxWidth: '12ch', color: '#ffffff' }}>
               Embarque nos seus estudos.
             </h1>
             <p className="mt-4 text-base leading-relaxed" style={{ color: C.ink200, maxWidth: '34ch' }}>
