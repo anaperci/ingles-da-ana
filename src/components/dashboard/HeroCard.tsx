@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 import { ProgressRing } from './ProgressRing'
 
 interface HeroCardProps {
@@ -15,23 +15,31 @@ export function HeroCard({ pct }: HeroCardProps) {
         ? "Let's kick off your plan for today"
         : 'Your plan for today is almost there'
   return (
-    <div className="flex items-center justify-between gap-5 rounded-2xl bg-primary p-5 text-white shadow-soft">
-      <div className="flex flex-col gap-3">
-        <div className="space-y-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-accent-light">
-            Your plan today
+    <div
+      className="relative flex items-center justify-between gap-5 overflow-hidden rounded-2xl p-6 text-white shadow-elevated sm:p-7"
+      style={{ background: 'linear-gradient(130deg,#0a192f,#102341 55%,#1b3358)' }}
+    >
+      {/* glow */}
+      <div
+        className="pointer-events-none absolute -top-24 right-8 h-60 w-60 rounded-full"
+        style={{ background: 'radial-gradient(circle,hsl(var(--color-accent)/0.22),transparent 70%)' }}
+      />
+      <div className="relative flex flex-col gap-3">
+        <div className="space-y-1.5">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.12em] text-accent-light">
+            <Sparkles className="h-3.5 w-3.5" /> Your plan today
           </span>
-          <h2 className="max-w-xs text-xl font-extrabold leading-snug">{headline}</h2>
+          <h2 className="max-w-xs text-xl font-extrabold leading-snug sm:text-2xl">{headline}</h2>
         </div>
         <Link
           to="/escrita"
-          className="inline-flex w-fit items-center gap-2 rounded-xl bg-cream px-4 py-2.5 text-sm font-semibold text-cream-foreground shadow-soft transition-colors hover:bg-cream-hover"
+          className="inline-flex w-fit items-center gap-2 rounded-full bg-cream px-5 py-2.5 text-sm font-semibold text-cream-foreground shadow-soft transition-colors hover:bg-cream-hover"
         >
           View tasks
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
-      <ProgressRing value={pct} size={92} />
+      <ProgressRing value={pct} size={112} />
     </div>
   )
 }

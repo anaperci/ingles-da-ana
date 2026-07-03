@@ -24,7 +24,7 @@ const styles: Record<
 > = {
   default: {
     card: 'bg-card border border-card-border',
-    chip: 'bg-soft text-primary',
+    chip: 'bg-soft text-accent-dark',
     title: 'text-foreground',
     desc: 'text-muted-foreground',
     time: 'text-muted-foreground',
@@ -42,11 +42,11 @@ const styles: Record<
   },
   soft: {
     card: 'bg-soft border border-transparent',
-    chip: 'bg-white text-primary',
+    chip: 'bg-white text-accent-dark',
     title: 'text-soft-text',
     desc: 'text-soft-text-2',
     time: 'text-soft-text-2',
-    btn: 'bg-primary text-primary-foreground hover:bg-primary-soft',
+    btn: 'bg-accent-dark text-accent-foreground hover:bg-accent-text',
   },
 }
 
@@ -77,7 +77,7 @@ export function TaskCard({
         <Link
           to={to}
           className={cn(
-            'inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold shadow-soft transition-colors',
+            'inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold shadow-soft transition-colors',
             s.btn
           )}
         >

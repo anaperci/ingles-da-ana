@@ -36,8 +36,9 @@ export function ProgressRing({ value, size = 104, stroke = 10 }: ProgressRingPro
           style={{ transition: 'stroke-dashoffset 0.5s ease' }}
         />
       </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
         <span className="font-mono text-xl font-bold text-white">{pct}%</span>
+        <span className="mt-1 text-[11px] text-on-primary-muted">done</span>
       </div>
     </div>
   )
