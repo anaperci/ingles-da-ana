@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   PenLine,
   Volume2,
@@ -571,52 +571,109 @@ function CommonWordsTab() {
 
       {/* Lista de palavras */}
       <div className="grid gap-2 sm:grid-cols-2">
-        {list.map((w) => {
-          const known = isKnown(w.id)
-          return (
-            <Card
-              key={w.id}
-              className={cn(
-                'flex items-center gap-3 p-3 transition-colors',
-                known && 'border-success/40 bg-success/5'
-              )}
-            >
-              <span className="w-10 shrink-0 font-mono text-xs text-muted-foreground">
-                #{w.rank}
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="truncate font-semibold">{w.word}</span>
-                  <button
-                    onClick={() => speak(w.word)}
-                    className="text-muted-foreground hover:text-foreground"
-                    aria-label={`Ouvir ${w.word}`}
-                  >
-                    <Volume2 className="h-4 w-4" />
-                  </button>
-                </div>
-                {showTranslation && (
-                  <div className="truncate text-sm text-muted-foreground">
-                    {w.translation}
-                  </div>
-                )}
-              </div>
-              <button
-                onClick={() => toggleKnown(w.id)}
-                aria-label={known ? 'Marcar como não sei' : 'Marcar como sei'}
-                className={cn(
-                  'flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-colors',
-                  known
-                    ? 'border-success bg-success text-success-foreground'
-                    : 'border-border text-muted-foreground hover:text-foreground'
-                )}
-              >
-                <Check className="h-4 w-4" />
-              </button>
-            </Card>
-          )
-        })}
+        {list.map((w) => (
+          <WordRow
+            key={w.id}
+            word={w.word}
+            rank={w.rank}
+            translation={w.translation}
+            showTranslation={showTranslation}
+            known={isKnown(w.id)}
+            onToggle={() => toggleKnown(w.id)}
+            onWroteCorrect={() => {
+              if (!isKnown(w.id)) toggleKnown(w.id)
+            }}
+          />
+        ))}
       </div>
     </div>
+  )
+}
+
+const normWord = (s: string) => s.trim().toLowerCase()
+
+function WordRow({
+  word,
+  rank,
+  translation,
+  showTranslation,
+  known,
+  onToggle,
+  onWroteCorrect,
+}: {
+  word: string
+  rank: number
+  translation: string
+  showTranslation: boolean
+  known: boolean
+  onToggle: () => void
+  onWroteCorrect: () => void
+}) {
+  const [typed, setTyped] = useState('')
+  const correct = typed.length > 0 && normWord(typed) === normWord(word)
+
+  useEffect(() => {
+    if (correct && !known) onWroteCorrect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [correct])
+
+  return (
+    <Card
+      className={cn(
+        'space-y-2 p-3 transition-colors',
+        known && 'border-success/40 bg-success/5'
+      )}
+    >
+      <div className="flex items-center gap-3">
+        <span className="w-8 shrink-0 font-mono text-xs text-muted-foreground">#{rank}</span>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <span className="truncate font-semibold">{word}</span>
+            <button
+              onClick={() => speak(word)}
+              className="text-muted-foreground hover:text-foreground"
+              aria-label={`Ouvir ${word}`}
+            >
+              <Volume2 className="h-4 w-4" />
+            </button>
+          </div>
+          {showTranslation && (
+            <div className="truncate text-sm text-muted-foreground">{translation}</div>
+          )}
+        </div>
+        <button
+          onClick={onToggle}
+          aria-label={known ? 'Marcar como não sei' : 'Marcar como sei'}
+          className={cn(
+            'flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-colors',
+            known
+              ? 'border-success bg-success text-success-foreground'
+              : 'border-border text-muted-foreground hover:text-foreground'
+          )}
+        >
+          <Check className="h-4 w-4" />
+        </button>
+      </div>
+
+      {/* Campo pra escrever a palavra (treino) */}
+      <div className="relative">
+        <Input
+          value={typed}
+          onChange={(e) => setTyped(e.target.value)}
+          placeholder="escreva a palavra…"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
+          className={cn(
+            'h-9 pr-8 text-sm',
+            correct && 'border-success text-success',
+            typed.length > 0 && !correct && 'border-accent'
+          )}
+        />
+        {correct && (
+          <Check className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-success" />
+        )}
+      </div>
+    </Card>
   )
 }

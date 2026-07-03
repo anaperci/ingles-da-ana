@@ -9,6 +9,7 @@ export type ModuleKey =
   | 'writing'
   | 'frames'
   | 'pronouns'
+  | 'grammar'
 
 export type CEFRLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'
 

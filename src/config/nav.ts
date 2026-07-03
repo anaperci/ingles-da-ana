@@ -1,7 +1,7 @@
 import {
   Home,
   Brain,
-  Repeat,
+  BookText,
   MessagesSquare,
   Mic,
   MonitorPlay,
@@ -9,7 +9,6 @@ import {
   Blocks,
   AudioLines,
   NotebookPen,
-  Users,
   CalendarRange,
   type LucideIcon,
 } from 'lucide-react'
@@ -30,9 +29,8 @@ export const NAV_ITEMS: NavItem[] = [
   { to: '/', label: 'Home', icon: Home, end: true },
   { to: '/planner', label: 'Planner', icon: CalendarRange },
   { to: '/vocabulario', label: 'Vocabulary', icon: Brain },
-  { to: '/verbos', label: 'Verbs', icon: Repeat },
+  { to: '/gramatica', label: 'Grammar', icon: BookText },
   { to: '/verbos-som', label: 'Verb sounds', icon: AudioLines },
-  { to: '/pronomes', label: 'Pronouns', icon: Users },
   { to: '/escrita', label: 'Writing', icon: PenLine },
   { to: '/notes', label: 'Notes', icon: NotebookPen },
   { to: '/estruturas', label: 'Sentence frames', icon: Blocks },

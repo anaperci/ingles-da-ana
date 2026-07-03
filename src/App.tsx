@@ -15,6 +15,9 @@ const Writing = lazy(() => import('@/pages/Writing'))
 const SentenceFrames = lazy(() => import('@/pages/SentenceFrames'))
 const SoundVerbs = lazy(() => import('@/pages/SoundVerbs'))
 const Pronouns = lazy(() => import('@/pages/Pronouns'))
+const Grammar = lazy(() => import('@/pages/Grammar'))
+const Prepositions = lazy(() => import('@/pages/Prepositions'))
+const Adverbs = lazy(() => import('@/pages/Adverbs'))
 const Planner = lazy(() => import('@/pages/Planner'))
 const Deck = lazy(() => import('@/pages/Deck'))
 const Notes = lazy(() => import('@/pages/Notes'))
@@ -109,6 +112,30 @@ export default function App() {
           element={
             <Suspense fallback={<PageFallback />}>
               <Pronouns />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/gramatica"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Grammar />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/preposicoes"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Prepositions />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/adverbios"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Adverbs />
             </Suspense>
           }
         />
