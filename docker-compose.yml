@@ -1,0 +1,13 @@
+services:
+  ingles:
+    build:
+      context: .
+      args:
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-https://ydnwqptkrftonunyjzoc.supabase.co}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:-sb_publishable_r37qvgRp1kRznki_8xDC2A_5l7Cf9Lg}
+    image: ingles-da-ana
+    container_name: ingles-da-ana
+    restart: unless-stopped
+    ports:
+      # host:container — muda a 3005 se a porta estiver ocupada no VPS
+      - "3005:80"
