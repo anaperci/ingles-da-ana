@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { MessageCircle, X, Send, Sparkles, RotateCcw } from 'lucide-react'
 import { callFunction, isBackendConfigured, NotConfiguredError } from '@/lib/api'
 import { loadJSON, saveJSON } from '@/lib/storage'
+import { buildStudyContext } from '@/lib/studyContext'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/notes/Markdown'
 
@@ -14,7 +15,8 @@ Regras:
 - Seja direta, calorosa e prática. Nada de enrolação.
 - Respostas curtas (2 a 6 frases). Se a pessoa pedir, aprofunde.
 - Ao corrigir, mostre o certo e explique o porquê em uma linha.
-- Use inglês de Malta/britânico quando houver diferença relevante.`
+- Use inglês de Malta/britânico quando houver diferença relevante.
+- Você recebe abaixo um resumo do que a Ana está estudando hoje e já estudou. Considere isso ao responder (ex.: se ela falar "os verbos do dia", você já sabe quais são), mas não fique listando o contexto sem ela pedir.`
 
 const SUGGESTIONS = [
   'Qual a diferença entre "make" e "do"?',
@@ -64,7 +66,7 @@ export function LearnChat() {
     setLoading(true)
     try {
       const data = await callFunction<{ reply: string }>('chat', {
-        system: TUTOR_SYSTEM,
+        system: TUTOR_SYSTEM + buildStudyContext(),
         messages: next.slice(-CONTEXT_WINDOW),
       })
       setMessages((m) => [...m, { role: 'assistant', content: data.reply }])

@@ -6,7 +6,6 @@ import { ChallengeCard } from '@/components/dashboard/ChallengeCard'
 import { ThisWeekCard } from '@/components/dashboard/ThisWeekCard'
 import { RecordsCard } from '@/components/dashboard/RecordsCard'
 import { DailyStudyCard } from '@/components/dashboard/DailyStudyCard'
-import { DailyVerbsCard } from '@/components/dashboard/DailyVerbsCard'
 import { WritingPointsCard } from '@/components/writing/WritingPointsCard'
 import { PlannerCard } from '@/components/dashboard/PlannerCard'
 import { useProgress } from '@/hooks/useProgress'
@@ -111,7 +110,6 @@ export default function Home() {
         </div>
 
           <DailyStudyCard />
-          <DailyVerbsCard />
         </div>
 
         {/* RAIL */}

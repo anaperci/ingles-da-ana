@@ -9,6 +9,8 @@ import {
   Check,
   Loader2,
   X,
+  LayoutGrid,
+  List as ListIcon,
 } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { Button } from '@/components/ui/button'
@@ -24,6 +26,7 @@ import { Markdown } from '@/components/notes/Markdown'
 import { loadJSON, saveJSON, removeKey } from '@/lib/storage'
 import { useNotes } from '@/hooks/useNotes'
 import type { Note, NoteInput } from '@/lib/notes'
+import { cn } from '@/lib/utils'
 
 const DRAFT_KEY = 'notes:draft'
 
@@ -42,10 +45,18 @@ function formatDate(iso: string): string {
 export default function Notes() {
   const { notes, loading, error, create, update, remove } = useNotes()
   const [query, setQuery] = useState('')
+  const [view, setView] = useState<'cards' | 'list'>(() =>
+    loadJSON<'cards' | 'list'>('notes:view', 'cards')
+  )
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Note | null>(null)
   const [confirm, setConfirm] = useState<Note | null>(null)
   const [deleting, setDeleting] = useState(false)
+
+  function changeView(v: 'cards' | 'list') {
+    setView(v)
+    saveJSON('notes:view', v)
+  }
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -92,15 +103,45 @@ export default function Notes() {
         }
       />
 
-      {/* Busca */}
-      <div className="relative mb-6">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Buscar nas notas…"
-          className="pl-10"
-        />
+      {/* Busca + alternar visualização */}
+      <div className="mb-6 flex items-center gap-3">
+        <div className="relative flex-1">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Buscar nas notas…"
+            className="pl-10"
+          />
+        </div>
+        <div className="flex shrink-0 items-center gap-1 rounded-full border border-card-border bg-card p-1">
+          <button
+            onClick={() => changeView('cards')}
+            aria-label="Ver em cards"
+            title="Cards"
+            className={cn(
+              'flex h-8 w-8 items-center justify-center rounded-full transition-colors',
+              view === 'cards'
+                ? 'bg-primary text-primary-foreground'
+                : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            <LayoutGrid className="h-4 w-4" />
+          </button>
+          <button
+            onClick={() => changeView('list')}
+            aria-label="Ver em lista"
+            title="Lista"
+            className={cn(
+              'flex h-8 w-8 items-center justify-center rounded-full transition-colors',
+              view === 'list'
+                ? 'bg-primary text-primary-foreground'
+                : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            <ListIcon className="h-4 w-4" />
+          </button>
+        </div>
       </div>
 
       {error && (
@@ -118,6 +159,17 @@ export default function Notes() {
         </div>
       ) : filtered.length === 0 ? (
         <EmptyState searching={query.trim().length > 0} onNew={openNew} />
+      ) : view === 'list' ? (
+        <div className="flex flex-col gap-2">
+          {filtered.map((n) => (
+            <NoteRow
+              key={n.id}
+              note={n}
+              onEdit={() => openEdit(n)}
+              onDelete={() => setConfirm(n)}
+            />
+          ))}
+        </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {filtered.map((n) => (
@@ -264,6 +316,50 @@ function NoteCard({
         <span className="font-mono text-xs text-muted-foreground">
           {formatDate(note.created_at)}
         </span>
+      </div>
+    </div>
+  )
+}
+
+function NoteRow({
+  note,
+  onEdit,
+  onDelete,
+}: {
+  note: Note
+  onEdit: () => void
+  onDelete: () => void
+}) {
+  return (
+    <div className="group flex items-center gap-3 rounded-xl border border-card-border bg-card px-4 py-3 shadow-soft transition-colors hover:border-accent">
+      <button onClick={onEdit} className="flex min-w-0 flex-1 items-center gap-3 text-left">
+        <span className="truncate font-display font-semibold text-primary">
+          {note.title || 'Sem título'}
+        </span>
+        {note.tag && (
+          <span className="hidden shrink-0 items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent-dark sm:inline-flex">
+            <TagIcon className="h-3 w-3" /> {note.tag}
+          </span>
+        )}
+        <span className="ml-auto hidden shrink-0 font-mono text-xs text-muted-foreground sm:block">
+          {formatDate(note.created_at)}
+        </span>
+      </button>
+      <div className="flex shrink-0 gap-1 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+        <button
+          onClick={onEdit}
+          aria-label="Editar nota"
+          className="rounded-lg p-1.5 text-muted-foreground hover:bg-soft hover:text-primary"
+        >
+          <Pencil className="h-4 w-4" />
+        </button>
+        <button
+          onClick={onDelete}
+          aria-label="Apagar nota"
+          className="rounded-lg p-1.5 text-muted-foreground hover:bg-error/10 hover:text-error"
+        >
+          <Trash2 className="h-4 w-4" />
+        </button>
       </div>
     </div>
   )
