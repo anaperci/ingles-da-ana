@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { MessageCircle, X, Send, Sparkles } from 'lucide-react'
+import { MessageCircle, X, Send, Sparkles, RotateCcw } from 'lucide-react'
 import { callFunction, isBackendConfigured, NotConfiguredError } from '@/lib/api'
 import { loadJSON, saveJSON } from '@/lib/storage'
 import { cn } from '@/lib/utils'
@@ -22,9 +22,15 @@ const SUGGESTIONS = [
   'Me dá uma rotina de estudo de 30 min/dia',
 ]
 
+const HISTORY_KEY = 'chat:history'
+/** Quantas mensagens guardar e quantas mandar de contexto pra IA. */
+const HISTORY_CAP = 100
+const CONTEXT_WINDOW = 20
+
 export function LearnChat() {
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState<Msg[]>([])
+  // Restaura a conversa anterior (persistida no localStorage).
+  const [messages, setMessages] = useState<Msg[]>(() => loadJSON<Msg[]>(HISTORY_KEY, []))
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -38,6 +44,11 @@ export function LearnChat() {
       saveJSON('chat:hint-seen', true)
     }
   }
+
+  // Salva o histórico sempre que muda (limitado às últimas HISTORY_CAP).
+  useEffect(() => {
+    saveJSON(HISTORY_KEY, messages.slice(-HISTORY_CAP))
+  }, [messages])
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
@@ -54,7 +65,7 @@ export function LearnChat() {
     try {
       const data = await callFunction<{ reply: string }>('chat', {
         system: TUTOR_SYSTEM,
-        messages: next,
+        messages: next.slice(-CONTEXT_WINDOW),
       })
       setMessages((m) => [...m, { role: 'assistant', content: data.reply }])
     } catch (e) {
@@ -120,13 +131,28 @@ export function LearnChat() {
               </div>
             </div>
           </div>
-          <button
-            onClick={() => setOpen(false)}
-            aria-label="Fechar chat"
-            className="rounded-xl p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
-          >
-            <X className="h-5 w-5" />
-          </button>
+          <div className="flex items-center gap-1">
+            {messages.length > 0 && (
+              <button
+                onClick={() => {
+                  setMessages([])
+                  setError(null)
+                }}
+                aria-label="Nova conversa"
+                title="Nova conversa"
+                className="rounded-xl p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                <RotateCcw className="h-5 w-5" />
+              </button>
+            )}
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Fechar chat"
+              className="rounded-xl p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
         </div>
 
         {/* Mensagens */}
