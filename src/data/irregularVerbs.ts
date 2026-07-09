@@ -10,6 +10,19 @@ export interface IrregularVerb {
   writingPrompt: string;
 }
 
+/** Os N verbos do dia — determinístico pela data (YYYY-MM-DD), girando pela lista. */
+export function verbsOfTheDay(dayKey: string, count = 8): IrregularVerb[] {
+  const total = irregularVerbs.length
+  if (total === 0) return []
+  const n = Number(dayKey.replaceAll('-', '')) || 0
+  const start = (n * count) % total
+  const out: IrregularVerb[] = []
+  for (let i = 0; i < Math.min(count, total); i++) {
+    out.push(irregularVerbs[(start + i) % total])
+  }
+  return out
+}
+
 export const irregularVerbs: IrregularVerb[] = [
   {
     id: "begin",

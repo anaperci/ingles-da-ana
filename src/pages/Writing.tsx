@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import {
   PenLine,
   Volume2,
@@ -28,6 +28,8 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { useDailyWriting } from '@/hooks/useDailyWriting'
+import { useWordCloze, pickDistractors } from '@/hooks/useWordCloze'
+import { DAILY_SENTENCE_GOAL } from '@/types/writing'
 import { useCommonWords } from '@/hooks/useCommonWords'
 import { useShowTranslation } from '@/hooks/useShowTranslation'
 import { speak } from '@/lib/tts'
@@ -45,7 +47,7 @@ export default function Writing() {
           <div>
             <h1 className="text-2xl font-extrabold">Daily writing</h1>
             <p className="text-muted-foreground">
-              30 frases por dia + as 1000 palavras mais faladas em inglês
+              {DAILY_SENTENCE_GOAL} frases por dia + as 1000 palavras mais faladas em inglês
             </p>
           </div>
         </div>
@@ -594,13 +596,14 @@ function CommonWordsTab() {
         {list.map((w) => (
           <WordRow
             key={w.id}
+            id={w.id}
             word={w.word}
             rank={w.rank}
             translation={w.translation}
             showTranslation={showTranslation}
             known={isKnown(w.id)}
             onToggle={() => toggleKnown(w.id)}
-            onWroteCorrect={() => {
+            onGotItRight={() => {
               if (!isKnown(w.id)) toggleKnown(w.id)
             }}
           />
@@ -612,30 +615,68 @@ function CommonWordsTab() {
 
 const normWord = (s: string) => s.trim().toLowerCase()
 
+/** Embaralha uma cópia (Fisher-Yates). */
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
 function WordRow({
+  id,
   word,
   rank,
   translation,
   showTranslation,
   known,
   onToggle,
-  onWroteCorrect,
+  onGotItRight,
 }: {
+  id: string
   word: string
   rank: number
   translation: string
   showTranslation: boolean
   known: boolean
   onToggle: () => void
-  onWroteCorrect: () => void
+  onGotItRight: () => void
 }) {
-  const [typed, setTyped] = useState('')
-  const correct = typed.length > 0 && normWord(typed) === normWord(word)
+  const { getCached, generate } = useWordCloze()
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [sentence, setSentence] = useState<string | null>(null)
+  const [options, setOptions] = useState<string[]>([])
+  const [picked, setPicked] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (correct && !known) onWroteCorrect()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [correct])
+  const gotIt = picked != null && normWord(picked) === normWord(word)
+
+  async function practice() {
+    if (open) {
+      setOpen(false)
+      return
+    }
+    setOpen(true)
+    setPicked(null)
+    setLoading(true)
+    let text: string | null = getCached(id)?.sentence ?? null
+    try {
+      if (!text) text = (await generate(id, word))?.sentence ?? null
+    } catch {
+      text = null // sem IA: cai no modo tradução
+    }
+    setSentence(text)
+    setOptions(shuffle([word, ...pickDistractors(id)]))
+    setLoading(false)
+  }
+
+  function choose(opt: string) {
+    if (gotIt) return // já acertou; trava
+    setPicked(opt)
+    if (normWord(opt) === normWord(word) && !known) onGotItRight()
+  }
 
   return (
     <Card
@@ -675,25 +716,92 @@ function WordRow({
         </button>
       </div>
 
-      {/* Campo pra escrever a palavra (treino) */}
-      <div className="relative">
-        <Input
-          value={typed}
-          onChange={(e) => setTyped(e.target.value)}
-          placeholder="type the word…"
-          autoComplete="off"
-          autoCorrect="off"
-          spellCheck={false}
-          className={cn(
-            'h-9 pr-8 text-sm',
-            correct && 'border-success text-success',
-            typed.length > 0 && !correct && 'border-accent'
-          )}
-        />
-        {correct && (
-          <Check className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-success" />
+      {/* Botão de praticar (múltipla escolha) */}
+      <button
+        onClick={practice}
+        className={cn(
+          'inline-flex w-full items-center justify-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors',
+          open
+            ? 'border-accent text-accent-dark'
+            : 'border-border text-muted-foreground hover:border-accent hover:text-accent-dark'
         )}
-      </div>
+      >
+        <ListChecks className="h-3.5 w-3.5" />
+        {open ? 'Fechar' : 'Praticar'}
+      </button>
+
+      {open && (
+        <div className="space-y-2 pt-1">
+          {loading ? (
+            <div className="flex justify-center py-3 text-muted-foreground">
+              <Loader2 className="h-4 w-4 animate-spin" />
+            </div>
+          ) : (
+            <>
+              {/* Enunciado: frase com lacuna (IA) ou, sem IA, a tradução */}
+              <p className="text-sm text-foreground">
+                {sentence ? (
+                  sentence.split('___').map((part, i, arr) => (
+                    <span key={i}>
+                      {part}
+                      {i < arr.length - 1 && (
+                        <span className="mx-0.5 inline-block min-w-[3rem] border-b-2 border-accent align-middle" />
+                      )}
+                    </span>
+                  ))
+                ) : (
+                  <>
+                    Qual palavra significa{' '}
+                    <span className="font-semibold">“{translation}”</span>?
+                  </>
+                )}
+              </p>
+
+              {/* Opções */}
+              <div className="grid grid-cols-2 gap-2">
+                {options.map((opt) => {
+                  const isCorrect = normWord(opt) === normWord(word)
+                  const isPicked = picked != null && normWord(opt) === normWord(picked)
+                  const reveal = picked != null
+                  return (
+                    <button
+                      key={opt}
+                      onClick={() => choose(opt)}
+                      disabled={gotIt}
+                      className={cn(
+                        'flex items-center justify-between gap-1 rounded-lg border px-3 py-2 text-sm font-medium transition-colors',
+                        !reveal && 'border-border hover:border-accent hover:bg-soft',
+                        reveal && isCorrect && 'border-success bg-success/10 text-success',
+                        reveal && isPicked && !isCorrect && 'border-error bg-error/10 text-error',
+                        reveal && !isCorrect && !isPicked && 'border-border opacity-50'
+                      )}
+                    >
+                      {opt}
+                      {reveal && isCorrect && <Check className="h-3.5 w-3.5" />}
+                      {reveal && isPicked && !isCorrect && <X className="h-3.5 w-3.5" />}
+                    </button>
+                  )
+                })}
+              </div>
+
+              {/* Feedback + tentar de novo quando erra */}
+              {picked != null &&
+                (gotIt ? (
+                  <p className="text-xs font-semibold text-success">
+                    Certo! “{word}” marcada como dominada.
+                  </p>
+                ) : (
+                  <button
+                    onClick={() => setPicked(null)}
+                    className="text-xs font-semibold text-accent-dark hover:underline"
+                  >
+                    Tentar de novo
+                  </button>
+                ))}
+            </>
+          )}
+        </div>
+      )}
     </Card>
   )
 }

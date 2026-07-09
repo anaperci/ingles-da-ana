@@ -1,16 +1,17 @@
 import { useState } from 'react'
-import { Repeat2, Lightbulb, Sparkles } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Repeat2, Lightbulb, Sparkles, AudioLines } from 'lucide-react'
 import { TranslationToggle } from '@/components/common/TranslationToggle'
 import { IrregularSession } from '@/components/verbs/IrregularSession'
 import { PhrasalSession } from '@/components/verbs/PhrasalSession'
+import { PhrasalBrowse } from '@/components/verbs/PhrasalBrowse'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { useVerbs } from '@/hooks/useVerbs'
 import { useShowTranslation } from '@/hooks/useShowTranslation'
-import { verbMethodTips } from '@/data/verbRules'
+import { verbMethodTips, phrasalMethodTips } from '@/data/verbRules'
 import type { IrregularMode, PhrasalMode } from '@/types/verbs'
 
 const SESSION_SIZE = 8
@@ -64,7 +65,16 @@ export default function Verbs() {
             </p>
           </div>
         </div>
-        <TranslationToggle />
+        <div className="flex items-center gap-2">
+          <Link
+            to="/verbos-som"
+            className="inline-flex items-center gap-1.5 rounded-full border border-card-border bg-card px-3.5 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent-dark"
+          >
+            <AudioLines className="h-4 w-4" />
+            Sons dos verbos
+          </Link>
+          <TranslationToggle />
+        </div>
       </div>
 
       {v.mostMissedForm && (
@@ -170,26 +180,30 @@ export default function Verbs() {
             </Button>
           </ModeBar>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {v.phrasalByBase.map((g) => {
-              const pct = g.verbs.length ? Math.round((g.mastered / g.verbs.length) * 100) : 0
-              return (
-                <Card key={g.base} className="flex flex-col p-5">
-                  <div className="mb-1 flex items-center justify-between">
-                    <h3 className="font-semibold capitalize">{g.base} …</h3>
-                    <Badge variant="secondary">{g.mastered}/{g.verbs.length}</Badge>
-                  </div>
-                  <p className="mb-3 font-mono text-xs text-muted-foreground">
-                    {g.verbs.map((x) => x.phrasal).join(', ')}
-                  </p>
-                  <Progress value={pct} className="mb-4" />
-                  <Button variant="outline" className="mt-auto" onClick={() => setActive({ kind: 'phrasal', base: g.base, mode: phrasalMode })}>
-                    Study group
-                  </Button>
-                </Card>
-              )
-            })}
-          </div>
+          {/* Dicas do método — phrasal verbs */}
+          <Card
+            className="mb-8 rounded-2xl border-transparent p-6 text-on-primary shadow-elevated"
+            style={{ background: 'linear-gradient(135deg,#0a192f,#102341 60%,#1b3358)' }}
+          >
+            <div className="mb-4 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-accent-light" />
+              <span className="text-lg font-bold text-on-primary">Como estudar phrasal verbs</span>
+            </div>
+            <div className="grid gap-x-6 gap-y-4 sm:grid-cols-2">
+              {phrasalMethodTips.map((tip) => (
+                <div key={tip.id} className="text-sm leading-relaxed">
+                  <p className="font-bold text-accent-light">{tip.title}.</p>
+                  <p className="text-on-primary-muted">{tip.body}</p>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Browse por verbo base, com Ler / Falar / Escrever */}
+          <PhrasalBrowse
+            groups={v.phrasalByBase}
+            onStudyGroup={(base) => setActive({ kind: 'phrasal', base, mode: phrasalMode })}
+          />
         </TabsContent>
       </Tabs>
     </div>

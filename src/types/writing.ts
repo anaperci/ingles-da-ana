@@ -1,7 +1,7 @@
 import type { CommonWord } from '@/data/commonWords'
 
 /** Quantas frases a Ana escreve por dia. */
-export const DAILY_SENTENCE_GOAL = 30
+export const DAILY_SENTENCE_GOAL = 10
 
 /** Estado de UMA frase do dia (a palavra-alvo + o que a Ana escreveu). */
 export interface DailySentence {
@@ -41,7 +41,7 @@ export interface WritingFeedback {
   score: number
 }
 
-/** O caderno de um dia: as 30 frases daquele dia (YYYY-MM-DD). */
+/** O caderno de um dia: as frases daquele dia (YYYY-MM-DD). */
 export interface DailyWritingDay {
   date: string
   sentences: DailySentence[]

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, Send, Plus, Trash2, Lock, Loader2 } from 'lucide-react'
+import { Sparkles, Send, Lock, Loader2, CheckCircle2, X } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { TypeBadge, DifficultyBadge } from './badges'
 import { isOwner } from '@/lib/azure'
@@ -15,20 +15,27 @@ export function GeneratorChat({ onSaved }: { onSaved: () => void }) {
   const owner = isOwner()
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [preview, setPreview] = useState<GeneratedExercise[]>([])
+  /** exercícios recém-criados na página (já salvos no banco) */
+  const [created, setCreated] = useState<GeneratedExercise[]>([])
 
+  /** Gera com a IA e JÁ salva na página (banco), sem passo manual de confirmação. */
   async function generate(text: string) {
     const prompt = text.trim()
     if (!prompt || loading) return
     setError(null)
     setLoading(true)
-    setPreview([])
+    setCreated([])
     try {
       const ex = await generateExercises(prompt)
-      if (!ex.length) setError('A IA não retornou exercícios. Tente reformular.')
-      setPreview(ex)
+      if (!ex.length) {
+        setError('A IA não retornou exercícios. Tente reformular.')
+        return
+      }
+      await createExercises(ex, 'chat')
+      setCreated(ex)
+      setInput('')
+      onSaved() // atualiza a lista da página (agrupada por data)
     } catch (e) {
       const msg = (e as Error).message
       setError(msg.includes('402') || msg.includes('paid_feature')
@@ -36,20 +43,6 @@ export function GeneratorChat({ onSaved }: { onSaved: () => void }) {
         : msg)
     } finally {
       setLoading(false)
-    }
-  }
-
-  async function addAll() {
-    setSaving(true)
-    try {
-      await createExercises(preview, 'chat')
-      setPreview([])
-      setInput('')
-      onSaved()
-    } catch (e) {
-      setError((e as Error).message)
-    } finally {
-      setSaving(false)
     }
   }
 
@@ -97,7 +90,7 @@ export function GeneratorChat({ onSaved }: { onSaved: () => void }) {
         </button>
       </form>
 
-      {owner && !preview.length && !loading && (
+      {owner && !created.length && !loading && (
         <div className="mt-3 flex flex-wrap gap-2">
           {SUGGESTIONS.map((s) => (
             <button
@@ -120,13 +113,23 @@ export function GeneratorChat({ onSaved }: { onSaved: () => void }) {
         </div>
       )}
 
-      {/* Preview */}
-      {preview.length > 0 && (
+      {/* Criados na página (já salvos no banco) */}
+      {created.length > 0 && (
         <div className="mt-4 space-y-3">
-          <div className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-            Preview · {preview.length} {preview.length === 1 ? 'exercício' : 'exercícios'}
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-success/10 px-3 py-1 text-xs font-bold text-success">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              {created.length} {created.length === 1 ? 'exercício criado' : 'exercícios criados'} na página
+            </span>
+            <button
+              onClick={() => setCreated([])}
+              aria-label="Dispensar"
+              className="ml-auto flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
-          {preview.map((ex, i) => (
+          {created.map((ex, i) => (
             <div key={i} className="rounded-xl border border-card-border bg-muted/40 p-3.5">
               <div className="mb-1.5 flex flex-wrap items-center gap-2">
                 <TypeBadge type={ex.type} />
@@ -148,22 +151,6 @@ export function GeneratorChat({ onSaved }: { onSaved: () => void }) {
               )}
             </div>
           ))}
-          <div className="flex gap-2">
-            <button
-              onClick={addAll}
-              disabled={saving}
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-dark disabled:opacity-60"
-            >
-              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
-              Adicionar ao banco
-            </button>
-            <button
-              onClick={() => setPreview([])}
-              className="inline-flex items-center gap-2 rounded-full border border-card-border px-4 py-2.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <Trash2 className="h-4 w-4" /> Descartar
-            </button>
-          </div>
         </div>
       )}
     </Card>

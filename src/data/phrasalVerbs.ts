@@ -20,6 +20,7 @@ export const PHRASAL_VERBS: PhrasalVerb[] = [
     id: 'pv-get-along', kind: 'phrasal', baseVerb: 'get', particle: 'along', phrasal: 'get along',
     meaning: 'to have a good relationship', translation: 'dar-se bem',
     example: 'I get along with my roommates.', exampleTranslation: 'Eu me dou bem com meus colegas de quarto.', level: 'B1',
+    note: "Quase sempre vem com 'with': get along WITH someone.",
   },
   {
     id: 'pv-get-by', kind: 'phrasal', baseVerb: 'get', particle: 'by', phrasal: 'get by',
@@ -37,6 +38,7 @@ export const PHRASAL_VERBS: PhrasalVerb[] = [
     id: 'pv-take-after', kind: 'phrasal', baseVerb: 'take', particle: 'after', phrasal: 'take after',
     meaning: 'to resemble a family member', translation: 'puxar a/parecer com',
     example: 'She takes after her mother.', exampleTranslation: 'Ela puxou a mãe.', level: 'B1',
+    note: 'Inseparável: não diga "take her after". Só se usa pra parentes.',
   },
   {
     id: 'pv-take-up', kind: 'phrasal', baseVerb: 'take', particle: 'up', phrasal: 'take up',
@@ -59,5 +61,6 @@ export const PHRASAL_VERBS: PhrasalVerb[] = [
     id: 'pv-look-forward', kind: 'phrasal', baseVerb: 'look', particle: 'forward to', phrasal: 'look forward to',
     meaning: 'to be excited about something future', translation: 'estar ansioso por',
     example: 'I look forward to meeting you.', exampleTranslation: 'Estou ansiosa para te conhecer.', level: 'B1',
+    note: "Depois do 'to' vem verbo com -ing: look forward to MEETING, não 'to meet'.",
   },
 ]

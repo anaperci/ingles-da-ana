@@ -28,7 +28,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 1,
         "lesson": 1,
         "quiz": 1,
-        "activity": "Escreva um breve texto se apresentando, revelando seu nome, sua origem e o que você faz. Use os conhecimentos adquiridos em aula. Compartilhe o texto na nossa comunidade para nos conhecermos melhor. Use o aplicativo Speak Aloud para treinar sua pronúncia. Insira cada frase do seu texto, ouça atentamente e repita em voz alta. Depois, aguarde seu feedback. Repita o treino quantas vezes for necessário, até se sentir confiante."
+        "activity": "Escreva um breve texto se apresentando, revelando seu nome, sua origem e o que você faz. Use os conhecimentos adquiridos em aula. Use o aplicativo Speak Aloud para treinar sua pronúncia. Insira cada frase do seu texto, ouça atentamente e repita em voz alta. Depois, aguarde seu feedback. Repita o treino quantas vezes for necessário, até se sentir confiante."
       },
       {
         "day": 2,
@@ -46,7 +46,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 4,
         "lesson": 4,
         "quiz": 4,
-        "activity": "Aprenda com uma música usando o Lyricstraining. Procure por sua música favorita na barra de pesquisa, selecione seu nível, e clique em “choice mode” no canto direito da tela. Sugerimos começar pelo nível “Beginner”. Anote algumas palavras da música e busque pelo seu significado. Faça frases de exemplo e se quiser, poste sobre a sua experiência na nossa comunidade."
+        "activity": "Aprenda com uma música usando o Lyricstraining. Procure por sua música favorita na barra de pesquisa, selecione seu nível, e clique em “choice mode” no canto direito da tela. Sugerimos começar pelo nível “Beginner”. Anote algumas palavras da música e busque pelo seu significado. Faça frases de exemplo."
       },
       {
         "day": 5,
@@ -64,7 +64,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 7,
         "lesson": 7,
         "quiz": 7,
-        "activity": "Escreva um breve resumo sobre a sua semana em inglês e poste em nossa comunidade . Se precisar de ajuda, use um dicionário. Você também pode pedir ao Fluêncio que corrija suas frases. Assista a um filme ou série em inglês, com legendas. Foque na pronúncia e de vez em quando pause a cena e imite o que está sendo falado. Lembre-se de sempre falar em voz alta."
+        "activity": "Escreva um breve resumo sobre a sua semana em inglês. Se precisar de ajuda, use um dicionário. Você também pode pedir ao Fluêncio que corrija suas frases. Assista a um filme ou série em inglês, com legendas. Foque na pronúncia e de vez em quando pause a cena e imite o que está sendo falado. Lembre-se de sempre falar em voz alta."
       }
     ]
   },
@@ -87,13 +87,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 10,
         "lesson": 10,
         "quiz": 10,
-        "activity": "Escute a notícia People throw away food. Selecione o nível 1, no canto direito da notícia. Esse é um nível mais fácil se você está começando agora. Leia a notícia, busque pelas palavras que não conhece e responda à pergunta “What do you think about the news” nos comentários da página. Compartilhe a sua experiência com seus colegas, na nossa comunidade."
+        "activity": "Escute a notícia People throw away food. Selecione o nível 1, no canto direito da notícia. Esse é um nível mais fácil se você está começando agora. Leia a notícia, busque pelas palavras que não conhece e responda à pergunta “What do you think about the news” nos comentários da página."
       },
       {
         "day": 11,
         "lesson": 11,
         "quiz": 11,
-        "activity": "Assista a um tutorial de culinária em inglês no YouTube. Pause o vídeo e repita em voz alta. Escolha qualquer vídeo do canal para fazer essa atividade. Anote todos os ingredientes usados na receita e se você manda bem na cozinha, reproduza o prato e mande uma foto ou vídeo na nossa comunidade, descrevendo a receita e seus ingredientes em inglês."
+        "activity": "Assista a um tutorial de culinária em inglês no YouTube. Pause o vídeo e repita em voz alta. Escolha qualquer vídeo do canal para fazer essa atividade. Anote todos os ingredientes usados na receita e se você manda bem na cozinha, reproduza o prato, descrevendo a receita e seus ingredientes em inglês."
       },
       {
         "day": 12,
@@ -105,7 +105,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 13,
         "lesson": 13,
         "quiz": 13,
-        "activity": "Escute o Podcast “The smell of coffee”. Leia o vocabulário e a transcrição do áudio. Faça um post em nossa comunidade dizendo se você gosta ou não dessa bebida e com que frequência você toma."
+        "activity": "Escute o Podcast “The smell of coffee”. Leia o vocabulário e a transcrição do áudio. Escreva se você gosta ou não dessa bebida e com que frequência você toma."
       },
       {
         "day": 14,
@@ -128,13 +128,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 16,
         "lesson": 16,
         "quiz": 16,
-        "activity": "Explore o site ESL Lab para ouvir áudios em inglês sobre diferentes tópicos e praticar a compreensão auditiva. Escolha seu nível de acordo e pesquise por áudios que contenham situações de compras - supermercados, lojas em geral, etc. Pesquise por “store”, “supermarket” e derivados. Use itens da lista que você fez no dia anterior também. Agora imagine que está em um supermercado. Leve sua lista de compras e peça ajuda a um atendente para localizar os itens. Tente visualizar essa conversa e escreva- a em forma de diálogo. Compartilhe com a comunidade."
+        "activity": "Explore o site ESL Lab para ouvir áudios em inglês sobre diferentes tópicos e praticar a compreensão auditiva. Escolha seu nível de acordo e pesquise por áudios que contenham situações de compras - supermercados, lojas em geral, etc. Pesquise por “store”, “supermarket” e derivados. Use itens da lista que você fez no dia anterior também. Agora imagine que está em um supermercado. Leve sua lista de compras e peça ajuda a um atendente para localizar os itens. Tente visualizar essa conversa e escreva- a em forma de diálogo."
       },
       {
         "day": 17,
         "lesson": 17,
         "quiz": 17,
-        "activity": "Assista a um vídeo tutorial em inglês no YouTube sobre projetos DIY (Faça você mesmo) simples e siga as instruções apenas pelo áudio. Pesquise por “easy DIY” ou “simple DIY projects”. Faça anotações sobre o que entendeu. Depois, reveja o vídeo e compare com estas notas. Escreva sua rotina em inglês, falando sobre atividades matinais, trabalho, estudos e lazer. Mantenha-se no simples e não se preocupe com vocabulários complicados. Poste na comunidade. Você também pode pedir ao Fluêncio que corrija suas frases."
+        "activity": "Assista a um vídeo tutorial em inglês no YouTube sobre projetos DIY (Faça você mesmo) simples e siga as instruções apenas pelo áudio. Pesquise por “easy DIY” ou “simple DIY projects”. Faça anotações sobre o que entendeu. Depois, reveja o vídeo e compare com estas notas. Escreva sua rotina em inglês, falando sobre atividades matinais, trabalho, estudos e lazer. Mantenha-se no simples e não se preocupe com vocabulários complicados. Você também pode pedir ao Fluêncio que corrija suas frases."
       },
       {
         "day": 18,
@@ -193,7 +193,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 26,
         "lesson": 26,
         "quiz": 26,
-        "activity": "Escreva 3 frases sobre o seu dia. Compartilhe suas frases na comunidade. Se precisar use um dicionário. Faça frases curtas. Você também pode pedir ao Fluêncio que corrija suas frases. Ouça diálogos simples no site Elllo, selecione seu nível como iniciante aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
+        "activity": "Escreva 3 frases sobre o seu dia. Se precisar use um dicionário. Faça frases curtas. Você também pode pedir ao Fluêncio que corrija suas frases. Ouça diálogos simples no site Elllo, selecione seu nível como iniciante aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
       },
       {
         "day": 27,
@@ -216,7 +216,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 29,
         "lesson": 29,
         "quiz": 29,
-        "activity": "Ouça o trecho ou capitulo de audiobook grátis do dia do site/app Blinkist. Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia. Se quiser, compartilhe com a comunidade."
+        "activity": "Ouça o trecho ou capitulo de audiobook grátis do dia do site/app Blinkist. Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia."
       },
       {
         "day": 30,
@@ -240,7 +240,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 33,
         "lesson": 33,
         "quiz": 33,
-        "activity": "Pratique conversas telefônicas simuladas com o Fluêncio, alternando os papéis de quem liga e quem atende. Use este prompt: “Hello! This is [seu nome]. Can I speak to [nome do seu amigo]? I need to talk about [topico]. Let's role play”. Você também pode pedir para o Fluêncio corrigir suas frases e dar o significado de palavras que você não entendeu. Assista a um vídeo no Youtube, de um dos canais na nossa lista de sugestões. Assista uma vez sem legendas, tente entender o tópico principal dele. Também anote algumas palavras que entendeu. Se for preciso, assista mais vezes. Compartilhe sobre o vídeo com a comunidade."
+        "activity": "Pratique conversas telefônicas simuladas com o Fluêncio, alternando os papéis de quem liga e quem atende. Use este prompt: “Hello! This is [seu nome]. Can I speak to [nome do seu amigo]? I need to talk about [topico]. Let's role play”. Você também pode pedir para o Fluêncio corrigir suas frases e dar o significado de palavras que você não entendeu. Assista a um vídeo no Youtube, de um dos canais na nossa lista de sugestões. Assista uma vez sem legendas, tente entender o tópico principal dele. Também anote algumas palavras que entendeu. Se for preciso, assista mais vezes."
       },
       {
         "day": 34,
@@ -252,7 +252,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 35,
         "lesson": 35,
         "quiz": 35,
-        "activity": "Leia seu diário semanal, de preferência em voz alta. Anote possíveis dúvidas ou correções que você já consegue fazer. Peça feedback na comunidade. Use o aplicativo Speak Aloud para treinar sua pronúncia. Insira as palavras ou frases, ouça atentamente e repita em voz alta. Depois, aguarde seu feedback. Escreva um breve resumo, em inglês, sobre o audiobook do dia 29. Você também pode pedir ao Fluêncio que corrija suas frases."
+        "activity": "Leia seu diário semanal, de preferência em voz alta. Anote possíveis dúvidas ou correções que você já consegue fazer. Use o aplicativo Speak Aloud para treinar sua pronúncia. Insira as palavras ou frases, ouça atentamente e repita em voz alta. Depois, aguarde seu feedback. Escreva um breve resumo, em inglês, sobre o audiobook do dia 29. Você também pode pedir ao Fluêncio que corrija suas frases."
       }
     ]
   },
@@ -263,7 +263,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 36,
         "lesson": 36,
         "quiz": 36,
-        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e precisar, ative as legendas do vídeo. Assista o vídeo ao vídeo pelo menos duas vezes. Escreva um breve resumo do que aprendeu e se precisar, use um dicionário. Você também pode pedir ao Fluêncio que corrija suas frases. Compartilhe o vídeo e suas ideias sobre ele em nossa comunidade."
+        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e precisar, ative as legendas do vídeo. Assista o vídeo ao vídeo pelo menos duas vezes. Escreva um breve resumo do que aprendeu e se precisar, use um dicionário. Você também pode pedir ao Fluêncio que corrija suas frases."
       },
       {
         "day": 37,
@@ -281,7 +281,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 39,
         "lesson": 39,
         "quiz": 39,
-        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo mais alguns trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Repita em voz alta o que é dito, tentando imitar quem está falando. Compartilhe a sua experiência com a comunidade. Use o Speak Aloud para essa prática"
+        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo mais alguns trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Repita em voz alta o que é dito, tentando imitar quem está falando. Use o Speak Aloud para essa prática"
       },
       {
         "day": 40,
@@ -293,7 +293,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 41,
         "lesson": 41,
         "quiz": 41,
-        "activity": "Selecione e escute rádios de qualquer lugar do mundo através do Radio Garden. Tente interpretar notícias ou propagandas que escuta. Não se preocupe em compreender tudo que é falado. Pratique com trava- língua. Escolha um Tongue Twister, escute o áudio e repita em voz alta. Repita várias vezes, até que se sinta confortável com a pronúncia. Divirta-se e, se quiser, compartilhe um vídeo em nossa comunidade."
+        "activity": "Selecione e escute rádios de qualquer lugar do mundo através do Radio Garden. Tente interpretar notícias ou propagandas que escuta. Não se preocupe em compreender tudo que é falado. Pratique com trava- língua. Escolha um Tongue Twister, escute o áudio e repita em voz alta. Repita várias vezes, até que se sinta confortável com a pronúncia. Divirta-se."
       },
       {
         "day": 42,
@@ -322,13 +322,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 45,
         "lesson": 45,
         "quiz": 45,
-        "activity": "Ouça e assista à leitura de histórias no site Storyline. Procure por temas que te agradem. Não se preocupe em entender tudo o que é falado, mas sim em compreender o contexto. Imagine que precisa comprar um ingresso para um evento - um concerto, jogo ou exposição. Tente visualizar a conversa que teria com o atendente e escreva-a em forma de diálogo. Use o Fluêncio para corrigir seu diálogo e o Speak Aloud para praticar a pronúncia. Compartilhe com a comunidade e chame alguém para praticar com você."
+        "activity": "Ouça e assista à leitura de histórias no site Storyline. Procure por temas que te agradem. Não se preocupe em entender tudo o que é falado, mas sim em compreender o contexto. Imagine que precisa comprar um ingresso para um evento - um concerto, jogo ou exposição. Tente visualizar a conversa que teria com o atendente e escreva-a em forma de diálogo. Use o Fluêncio para corrigir seu diálogo e o Speak Aloud para praticar a pronúncia. Chame alguém para praticar com você."
       },
       {
         "day": 46,
         "lesson": 46,
         "quiz": 46,
-        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva sobre uma viagem, férias ou local de lazer que você tenha visitado recentemente, dando sua opinião sobre ele. Peça ajuda ao Fluêncio para corrigir a sua produção. Se puder, compartilhe na comunidade."
+        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva sobre uma viagem, férias ou local de lazer que você tenha visitado recentemente, dando sua opinião sobre ele. Peça ajuda ao Fluêncio para corrigir a sua produção."
       },
       {
         "day": 47,
@@ -340,13 +340,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 48,
         "lesson": 48,
         "quiz": 48,
-        "activity": "Faça pequenas encenações de situações cotidianas para praticar diálogos e expressões faciais. Chame alguém para praticar com você ou use Fluêncio. Use este prompt. “Iʼm at a [bakery, restaurant, cinema, etc - substitua pelo lugar que achar mais interessante], you are the attendant. Talk to me, ask me questions related to the situation and correct my mistakes”. Leia e interaja em posts de seus artistas favoritos nas redes sociais. Compartilhe na comunidade."
+        "activity": "Faça pequenas encenações de situações cotidianas para praticar diálogos e expressões faciais. Chame alguém para praticar com você ou use Fluêncio. Use este prompt. “Iʼm at a [bakery, restaurant, cinema, etc - substitua pelo lugar que achar mais interessante], you are the attendant. Talk to me, ask me questions related to the situation and correct my mistakes”. Leia e interaja em posts de seus artistas favoritos nas redes sociais."
       },
       {
         "day": 49,
         "lesson": 49,
         "quiz": 49,
-        "activity": "Experimente escrever poemas ou letras de músicas em inglês. Use o Fluêncio se precisar de ajuda Mostre o resultado na comunidade! Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém da para jogar com você."
+        "activity": "Experimente escrever poemas ou letras de músicas em inglês. Use o Fluêncio se precisar de ajuda. Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém para jogar com você."
       }
     ]
   },
@@ -357,7 +357,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 50,
         "lesson": 50,
         "quiz": 50,
-        "activity": "É hora de trabalhar na sua confiança. Acesse Best of Affirmations. Clique em “affirm” e leia a afirmação em voz alta. Tente ler uma afirmação por dia e se necessário procure pelo significado da frase. Escolha um vídeo da nossa lista de canais do YouTube, acessando o módulo de Introdução e explore seus interesses. Assista ao vídeo e tente identificar sobre o que o vídeo fala ou até mesmo palavras e expressões, mas calma! Não foque em entender o vídeo todo, mas sim o contexto. Assista ao vídeo mais de uma vez e poste sobre a sua experiência na comunidade."
+        "activity": "É hora de trabalhar na sua confiança. Acesse Best of Affirmations. Clique em “affirm” e leia a afirmação em voz alta. Tente ler uma afirmação por dia e se necessário procure pelo significado da frase. Escolha um vídeo da nossa lista de canais do YouTube, acessando o módulo de Introdução e explore seus interesses. Assista ao vídeo e tente identificar sobre o que o vídeo fala ou até mesmo palavras e expressões, mas calma! Não foque em entender o vídeo todo, mas sim o contexto. Assista ao vídeo mais de uma vez."
       },
       {
         "day": 51,
@@ -375,7 +375,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 53,
         "lesson": 53,
         "quiz": 53,
-        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e, se precisar, ative as legendas do vídeo. Escreva um breve resumo do que aprendeu. Se precisar, use o Reverso Contexto. Corrija as frases usando o Fluêncio e compartilhe o vídeo e suas ideias sobre ele em nossa comunidade."
+        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e, se precisar, ative as legendas do vídeo. Escreva um breve resumo do que aprendeu. Se precisar, use o Reverso Contexto. Corrija as frases usando o Fluêncio."
       },
       {
         "day": 54,
@@ -404,7 +404,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 57,
         "lesson": 57,
         "quiz": 57,
-        "activity": "Assista a um vídeo tutorial em inglês no YouTube sobre projetos DIY simples e siga as instruções apenas pelo áudio. Pesquise por “easy DIY” ou “simple DIY projects”. Faça anotações sobre o que entendeu. Depois, reveja o vídeo e compare com estas notas. Jogue algumas partidas de Letter Box e compartilhe sua experiência na comunidade."
+        "activity": "Assista a um vídeo tutorial em inglês no YouTube sobre projetos DIY simples e siga as instruções apenas pelo áudio. Pesquise por “easy DIY” ou “simple DIY projects”. Faça anotações sobre o que entendeu. Depois, reveja o vídeo e compare com estas notas. Jogue algumas partidas de Letter Box."
       },
       {
         "day": 58,
@@ -434,7 +434,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 62,
         "lesson": 62,
         "quiz": 62,
-        "activity": "É hora de trabalhar na sua confiança. Acesse Best of Affirmations. Clique em “affirm” e leia a afirmação em voz alta. Tente ler uma afirmação por dia essa semana e se necessário procure pelo significado da frase. Pratique com trava- língua. Escolha um Tongue Twister, escute o áudio e repita em voz alta. Repita várias vezes, até que se sinta confortável com a pronúncia. Divirta-se e, se quiser, compartilhe um vídeo em nossa comunidade."
+        "activity": "É hora de trabalhar na sua confiança. Acesse Best of Affirmations. Clique em “affirm” e leia a afirmação em voz alta. Tente ler uma afirmação por dia essa semana e se necessário procure pelo significado da frase. Pratique com trava- língua. Escolha um Tongue Twister, escute o áudio e repita em voz alta. Repita várias vezes, até que se sinta confortável com a pronúncia. Divirta-se."
       },
       {
         "day": 63,
@@ -451,7 +451,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 64,
         "lesson": 64,
         "quiz": 64,
-        "activity": "Leia as embalagens dos produtos em inglês enquanto faz compras em um supermercado. Se puder, tire fotos e pesquise as palavras depois. Use o aplicativo Speak Aloud para treinar sua pronúncia. Insira as palavras ou frases, ouça atentamente e repita em voz alta. Depois, aguarde seu feedback. Ouça sobre Oily Fish. E responda a pergunta: How often do you eat fish such as salmon or mackerel? Compartilhe com a comunidade."
+        "activity": "Leia as embalagens dos produtos em inglês enquanto faz compras em um supermercado. Se puder, tire fotos e pesquise as palavras depois. Use o aplicativo Speak Aloud para treinar sua pronúncia. Insira as palavras ou frases, ouça atentamente e repita em voz alta. Depois, aguarde seu feedback. Ouça sobre Oily Fish. E responda a pergunta: How often do you eat fish such as salmon or mackerel?"
       },
       {
         "day": 65,
@@ -463,13 +463,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 66,
         "lesson": 66,
         "quiz": 66,
-        "activity": "Escolha uma receita, leia seus ingredientes e método de preparo usado o site Tasty. Procure pelo significado das palavras que não conhece. Assista ao vídeo da receita e pratique sua pronúncia. Se você mandar bem na cozinha, reproduza a receita e faça um vídeo sobre ela. Poste em nossa comunidade."
+        "activity": "Escolha uma receita, leia seus ingredientes e método de preparo usado o site Tasty. Procure pelo significado das palavras que não conhece. Assista ao vídeo da receita e pratique sua pronúncia. Se você mandar bem na cozinha, reproduza a receita e faça um vídeo sobre ela."
       },
       {
         "day": 67,
         "lesson": 67,
         "quiz": 67,
-        "activity": "Aprenda com sua música favorita usando o Lyricstraining. Jogue duas rodadas com a mesma música, uma vez no nível beginner e outra no intermediate. Anote algumas palavras da música e busque pelo seu significado. Se possível, escreva algumas frases com elas e compartilhe o resultado na nossa comunidade."
+        "activity": "Aprenda com sua música favorita usando o Lyricstraining. Jogue duas rodadas com a mesma música, uma vez no nível beginner e outra no intermediate. Anote algumas palavras da música e busque pelo seu significado. Se possível, escreva algumas frases com elas."
       },
       {
         "day": 68,
@@ -481,13 +481,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 69,
         "lesson": 69,
         "quiz": 69,
-        "activity": "Jogue uma partida de Connections e divirta-se. Você deverá encontrar 4 palavras que pertencem ao mesmo grupo. Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use a comunidade para isso, ou entre em outras como o Reddit."
+        "activity": "Jogue uma partida de Connections e divirta-se. Você deverá encontrar 4 palavras que pertencem ao mesmo grupo. Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use fóruns ou grupos como o Reddit."
       },
       {
         "day": 70,
         "lesson": 70,
         "quiz": 70,
-        "activity": "Jogue o Baba Dum em inglês e divirta- se associando palavras a imagens. Escreva sua rotina diária em inglês, falando sobre atividades matinais, trabalho, estudos e lazer. Mantenha-se no simples e não se preocupe com vocabulários complicados. Poste na comunidade. Use o Fluêncio para correção."
+        "activity": "Jogue o Baba Dum em inglês e divirta- se associando palavras a imagens. Escreva sua rotina diária em inglês, falando sobre atividades matinais, trabalho, estudos e lazer. Mantenha-se no simples e não se preocupe com vocabulários complicados. Use o Fluêncio para correção."
       }
     ]
   },
@@ -498,19 +498,19 @@ export const PLANNER: PlannerWeek[] = [
         "day": 71,
         "lesson": 71,
         "quiz": 71,
-        "activity": "Ouça o audiobook grátis do dia do site/app Blinkist. Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia. Se quiser, compartilhe com a comunidade."
+        "activity": "Ouça o audiobook grátis do dia do site/app Blinkist. Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia."
       },
       {
         "day": 72,
         "lesson": 72,
         "quiz": 72,
-        "activity": "Explore o site ESL Lab e ouça áudios em inglês sobre diferentes tópicos e pratique a compreensão auditiva. Escolha seu nível de acordo e pesquise por áudios que contenham situações de compras, visitas, shopping ou lojas. Agora imagine que está em um shopping. Leve sua lista de afazeres e peça ajuda a um guarda para encontrar alguma loja específica. Tente visualizar essa conversa, grave-a ou escreva-a em forma de diálogo. Compartilhe com a comunidade."
+        "activity": "Explore o site ESL Lab e ouça áudios em inglês sobre diferentes tópicos e pratique a compreensão auditiva. Escolha seu nível de acordo e pesquise por áudios que contenham situações de compras, visitas, shopping ou lojas. Agora imagine que está em um shopping. Leve sua lista de afazeres e peça ajuda a um guarda para encontrar alguma loja específica. Tente visualizar essa conversa, grave-a ou escreva-a em forma de diálogo."
       },
       {
         "day": 73,
         "lesson": 73,
         "quiz": 73,
-        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva uma resenha simples de um filme ou série que assistiu recentemente. Use o Fluêncio para te ajudar. Poste na comunidade."
+        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva uma resenha simples de um filme ou série que assistiu recentemente. Use o Fluêncio para te ajudar."
       },
       {
         "day": 74,
@@ -534,7 +534,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 77,
         "lesson": 77,
         "quiz": 77,
-        "activity": "Leia seu diário semanal, de preferência em voz alta. Anote possíveis dúvidas ou correções que você já consegue fazer. Peça feedback na comunidade. Escreva um breve resumo, em inglês, sobre o audiobook que ouviu no dia 71 e avalie seu desempenho. Use o Fluêncio para a correção."
+        "activity": "Leia seu diário semanal, de preferência em voz alta. Anote possíveis dúvidas ou correções que você já consegue fazer. Escreva um breve resumo, em inglês, sobre o audiobook que ouviu no dia 71 e avalie seu desempenho. Use o Fluêncio para a correção."
       }
     ]
   },
@@ -551,7 +551,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 79,
         "lesson": 79,
         "quiz": 79,
-        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e se precisar, ative as legendas do vídeo. Escreva um breve resumo do que aprendeu e se precisar, use o Use o Reverso Contexto Collins, ou o Fluêncio. Compartilhe o vídeo e suas ideias sobre ele em nossa comunidade."
+        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e se precisar, ative as legendas do vídeo. Escreva um breve resumo do que aprendeu e se precisar, use o Use o Reverso Contexto Collins, ou o Fluêncio."
       },
       {
         "day": 80,
@@ -575,7 +575,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 83,
         "lesson": 83,
         "quiz": 83,
-        "activity": "Escreva sobre uma viagem, férias ou local de lazer que você tenha visitado recentemente, dando sua opinião sobre ele. Se puder, compartilhe na comunidade. Use o Fluêncio pora a correção. Escute uma entrevista em um podcast, se for de um de seus artistas favoritos, melhor ainda. Aqui estão algumas sugestões: The Armchair Expert e Ted Interview."
+        "activity": "Escreva sobre uma viagem, férias ou local de lazer que você tenha visitado recentemente, dando sua opinião sobre ele. Use o Fluêncio pora a correção. Escute uma entrevista em um podcast, se for de um de seus artistas favoritos, melhor ainda. Aqui estão algumas sugestões: The Armchair Expert e Ted Interview."
       },
       {
         "day": 84,
@@ -598,7 +598,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 86,
         "lesson": 86,
         "quiz": 86,
-        "activity": "Leia e escute mais alguns trechos de “The little prince”. Escreva um breve resumo da história que leu até agora. Também escreva sobre como tem sido essa experiência e poste em nossa comunidade. Use o Fluêncio para a correção."
+        "activity": "Leia e escute mais alguns trechos de “The little prince”. Escreva um breve resumo da história que leu até agora. Também escreva sobre como tem sido essa experiência. Use o Fluêncio para a correção."
       },
       {
         "day": 87,
@@ -610,7 +610,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 88,
         "lesson": 88,
         "quiz": 88,
-        "activity": "Experimente escrever poemas ou letras de músicas em inglês. Mostre o resultado na comunidade! Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém da comunidade para jogar com você."
+        "activity": "Experimente escrever poemas ou letras de músicas em inglês. Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém para jogar com você."
       },
       {
         "day": 89,
@@ -622,7 +622,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 90,
         "lesson": 90,
         "quiz": 90,
-        "activity": "Crie uma lista de compras. Tente utilizar vocabulários mais diferenciados. Aproveite para pesquisar o vocabulário de itens do seu dia-a-dia. Agora imagine que está em um supermercado ou em uma loja de departamentos. Leve sua lista de compras e peça ajuda a um atendente para localizar os itens. Tente visualizar essa conversa e escreva- a em forma de diálogo. Compartilhe com a comunidade. FIM DO STAGE THREE Congratulations!"
+        "activity": "Crie uma lista de compras. Tente utilizar vocabulários mais diferenciados. Aproveite para pesquisar o vocabulário de itens do seu dia-a-dia. Agora imagine que está em um supermercado ou em uma loja de departamentos. Leve sua lista de compras e peça ajuda a um atendente para localizar os itens. Tente visualizar essa conversa e escreva- a em forma de diálogo. FIM DO STAGE THREE Congratulations!"
       },
       {
         "day": 91,
@@ -645,19 +645,19 @@ export const PLANNER: PlannerWeek[] = [
         "day": 93,
         "lesson": 93,
         "quiz": 93,
-        "activity": "Leia em voz a mesma notícia que você leu ontem e procure pelas palavras que você não conhece. Escreva um breve resumo sobre essa notícia e sua opinião sobre ela. Poste em nossa comunidade e divida seus pensamentos com seus colegas."
+        "activity": "Leia em voz a mesma notícia que você leu ontem e procure pelas palavras que você não conhece. Escreva um breve resumo sobre essa notícia e sua opinião sobre ela."
       },
       {
         "day": 94,
         "lesson": 94,
         "quiz": 94,
-        "activity": "Assista a um vídeo no Ted ED sem legendas. Preste atenção no contexto geral. Assista mais uma vez, com legendas e busque um maior entendimento do vídeo. Faça as atividades sugeridas pelo site. Clique em “Think” e responda um quiz sobre o vídeo. Poste o vídeo em nossa comunidade e o recomende para seus colegas."
+        "activity": "Assista a um vídeo no Ted ED sem legendas. Preste atenção no contexto geral. Assista mais uma vez, com legendas e busque um maior entendimento do vídeo. Faça as atividades sugeridas pelo site. Clique em “Think” e responda um quiz sobre o vídeo."
       },
       {
         "day": 95,
         "lesson": 95,
         "quiz": 95,
-        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva sobre uma pessoa que você admira: descreva uma pessoa que você admira e explique por que ela é importante para você. Poste seu texto em nossa comunidade. Você também pode conferir seu texto usando o Fluêncio."
+        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva sobre uma pessoa que você admira: descreva uma pessoa que você admira e explique por que ela é importante para você. Você também pode conferir seu texto usando o Fluêncio."
       },
       {
         "day": 96,
@@ -675,7 +675,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 98,
         "lesson": 98,
         "quiz": 98,
-        "activity": "Faça um breve texto de como foi a sua semana e a sua rotina. Poste sobre isso em nossa comunidade. Peça ajuda ao Fluêncio para a correção. É hora de relaxar, assista a um filme ou série em inglês. Não se preocupe, use as legendas se for preciso."
+        "activity": "Faça um breve texto de como foi a sua semana e a sua rotina. Peça ajuda ao Fluêncio para a correção. É hora de relaxar, assista a um filme ou série em inglês. Não se preocupe, use as legendas se for preciso."
       }
     ]
   },
@@ -704,7 +704,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 102,
         "lesson": 102,
         "quiz": 102,
-        "activity": "Converse com o Fluêncio sobre esportes, use este prompt: \"Hi! Do you play any sports? I like to play [esporte que gosta]. What is your favorite sport?\" Você pode pedir que ele te corrija ou explique palavras que não conhece. Tente manter a conversa, como se estivesse falando com um amigo. Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use a comunidade para isso, ou entre em outras como o Reddit."
+        "activity": "Converse com o Fluêncio sobre esportes, use este prompt: \"Hi! Do you play any sports? I like to play [esporte que gosta]. What is your favorite sport?\" Você pode pedir que ele te corrija ou explique palavras que não conhece. Tente manter a conversa, como se estivesse falando com um amigo. Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use fóruns ou grupos como o Reddit."
       },
       {
         "day": 103,
@@ -722,7 +722,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 105,
         "lesson": 105,
         "quiz": 105,
-        "activity": "Ouça diálogos simples no site Elllo, selecione seu nível como iniciante aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Anote palavras novas desse diálogo e tente criar pelo menos 5 frases com elas. Compartilhe na comunidade."
+        "activity": "Ouça diálogos simples no site Elllo, selecione seu nível como iniciante aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Anote palavras novas desse diálogo e tente criar pelo menos 5 frases com elas."
       }
     ]
   },
@@ -763,7 +763,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 111,
         "lesson": 111,
         "quiz": 111,
-        "activity": "Pesquise no YouTube por uma entrevista do artista da atividade de ontem e compare com a sua própria entrevista, a que você criou. Anote palavras novas ou curiosidades que você aprendeu sobre ele. Escreva um texto breve sobre esse artista, comparando o que você aprendeu em sua biografia e a entrevista que você assistiu. Poste suas anotações em nossa comunidade."
+        "activity": "Pesquise no YouTube por uma entrevista do artista da atividade de ontem e compare com a sua própria entrevista, a que você criou. Anote palavras novas ou curiosidades que você aprendeu sobre ele. Escreva um texto breve sobre esse artista, comparando o que você aprendeu em sua biografia e a entrevista que você assistiu."
       },
       {
         "day": 112,
@@ -804,7 +804,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 117,
         "lesson": 117,
         "quiz": 117,
-        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e se precisar, assista uma vez sem legendas e anote palavras ou frases que compreendeu. Escreva um breve resumo do que aprendeu e se precisar, use o Reverso Contexto. Compartilhe o vídeo e suas ideias sobre ele em nossa comunidade. Use o Fluêncio para a correção."
+        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e se precisar, assista uma vez sem legendas e anote palavras ou frases que compreendeu. Escreva um breve resumo do que aprendeu e se precisar, use o Reverso Contexto. Use o Fluêncio para a correção."
       },
       {
         "day": 118,
@@ -833,7 +833,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 121,
         "lesson": 121,
         "quiz": 121,
-        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Repita em voz alta o que é dito, tentando imitar quem está falando. Compartilhe a sua experiência com a comunidade de alunos."
+        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Repita em voz alta o que é dito, tentando imitar quem está falando."
       },
       {
         "day": 122,
@@ -845,13 +845,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 123,
         "lesson": 123,
         "quiz": 123,
-        "activity": "Pesquise no Youtube vídeos sobre a notícia que leu ontem. Pesquise pelo mesmo título ou similar. Assista ao vídeo com atenção. Escreva um pequeno texto dando a sua opinião sobre a notícia que leu e o vídeo que assistiu. Confira seu texto com o Fluêncio e poste em nossa comunidade."
+        "activity": "Pesquise no Youtube vídeos sobre a notícia que leu ontem. Pesquise pelo mesmo título ou similar. Assista ao vídeo com atenção. Escreva um pequeno texto dando a sua opinião sobre a notícia que leu e o vídeo que assistiu. Confira seu texto com o Fluêncio."
       },
       {
         "day": 124,
         "lesson": 124,
         "quiz": 124,
-        "activity": "Narre a notícia e o vídeo que assistiu. Busque usar algumas das palavras que você lembra e que tenha estudado recentemente, sem pesquisar muito. Use o aplicativo Speak Aloud para treinar sua pronúncia. Insira as palavras ou frases, ouça atentamente e repita em voz alta. Depois, aguarde seu feedback. Grave um vídeo ou áudio de você mesmo narrando, e poste em nossa comunidade."
+        "activity": "Narre a notícia e o vídeo que assistiu. Busque usar algumas das palavras que você lembra e que tenha estudado recentemente, sem pesquisar muito. Use o aplicativo Speak Aloud para treinar sua pronúncia. Insira as palavras ou frases, ouça atentamente e repita em voz alta. Depois, aguarde seu feedback. Grave um vídeo ou áudio de você mesmo narrando."
       },
       {
         "day": 125,
@@ -863,7 +863,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 126,
         "lesson": 126,
         "quiz": 126,
-        "activity": "Aprenda com sua música favorita usando o Lyricstraining. Anote palavras novas e ao final da atividade cante a música acompanhando a letra. Faça frases com algumas das palavras novas que você descobriu na música e poste na nossa comunidade."
+        "activity": "Aprenda com sua música favorita usando o Lyricstraining. Anote palavras novas e ao final da atividade cante a música acompanhando a letra. Faça frases com algumas das palavras novas que você descobriu na música."
       }
     ]
   },
@@ -910,7 +910,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 133,
         "lesson": 133,
         "quiz": 133,
-        "activity": "Escreva um breve resumo sobre a sua semana em inglês e poste em nossa comunidade. Use um dicionário, como o de Oxford, caso seja necessário. Use o Fluêncio para a correção. Assista a um vídeo no YouTube, sobre seu tema favorito. Preste atenção no tema central e tente identificar palavras e frases. Faça um pequeno texto contando o que você entendeu."
+        "activity": "Escreva um breve resumo sobre a sua semana em inglês. Use um dicionário, como o de Oxford, caso seja necessário. Use o Fluêncio para a correção. Assista a um vídeo no YouTube, sobre seu tema favorito. Preste atenção no tema central e tente identificar palavras e frases. Faça um pequeno texto contando o que você entendeu."
       }
     ]
   },
@@ -921,7 +921,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 134,
         "lesson": 134,
         "quiz": 134,
-        "activity": "Leia uma notícia sobre seu esporte favorito no site da BBC Sport. Faça um breve resumo sobre o que leu e poste em nossa comunidade. Use o Fluêncio para a correção."
+        "activity": "Leia uma notícia sobre seu esporte favorito no site da BBC Sport. Faça um breve resumo sobre o que leu. Use o Fluêncio para a correção."
       },
       {
         "day": 135,
@@ -939,7 +939,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 137,
         "lesson": 137,
         "quiz": 137,
-        "activity": "Escreva um parágrafo sobre seu esporte favorito, com que frequência joga e com quem. Use o Fluêncio para a correção. Poste seu texto na comunidade e interaja com seus colegas, pedindo que também falem de deus esportes favoritos."
+        "activity": "Escreva um parágrafo sobre seu esporte favorito, com que frequência joga e com quem. Use o Fluêncio para a correção."
       },
       {
         "day": 138,
@@ -957,7 +957,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 140,
         "lesson": 140,
         "quiz": 140,
-        "activity": "Escolha e escute um episódio do Podcast This American Life. Faça um breve resumo sobre o episódio e poste na nossa comunidade."
+        "activity": "Escolha e escute um episódio do Podcast This American Life. Faça um breve resumo sobre o episódio."
       }
     ]
   },
@@ -968,13 +968,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 141,
         "lesson": 141,
         "quiz": 141,
-        "activity": "Ouça o audiobook grátis do dia do site/app Blinkist. Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia. Se quiser, compartilhe com a comunidade."
+        "activity": "Ouça o audiobook grátis do dia do site/app Blinkist. Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia."
       },
       {
         "day": 142,
         "lesson": 142,
         "quiz": 142,
-        "activity": "Leia as embalagens dos produtos em inglês enquanto faz compras em um supermercado, ou pesquise por embalagens em sites de compra online. Se puder, tire fotos ou capturas de tela e pesquise as palavras depois. Descreva um projeto que você gostaria de realizar no futuro e como planeja fazê- lo. Compartilhe suas ideias com a comunidade."
+        "activity": "Leia as embalagens dos produtos em inglês enquanto faz compras em um supermercado, ou pesquise por embalagens em sites de compra online. Se puder, tire fotos ou capturas de tela e pesquise as palavras depois. Descreva um projeto que você gostaria de realizar no futuro e como planeja fazê- lo."
       },
       {
         "day": 143,
@@ -986,7 +986,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 144,
         "lesson": 144,
         "quiz": 144,
-        "activity": "Imagine que precisa fazer uma reserva em um hotel. Tente visualizar a conversa que teria com o atendente e escreva-a em forma de diálogo. Compartilhe com a comunidade e chame alguém para praticar com você. Use o Fluêncio para praticar essa conversa. Use o prompt: “Hello! My name is [seu some]. I'm learning English and I'd like to talk to you. Let 's roleplay. Iʼm a guest and you are a hotel clerk. Iʼd like to make a reservation. Ask me questions about it.”. Use vocabulários que você aprendeu recentemente."
+        "activity": "Imagine que precisa fazer uma reserva em um hotel. Tente visualizar a conversa que teria com o atendente e escreva-a em forma de diálogo. Chame alguém para praticar com você. Use o Fluêncio para praticar essa conversa. Use o prompt: “Hello! My name is [seu some]. I'm learning English and I'd like to talk to you. Let 's roleplay. Iʼm a guest and you are a hotel clerk. Iʼd like to make a reservation. Ask me questions about it.”. Use vocabulários que você aprendeu recentemente."
       },
       {
         "day": 145,
@@ -1004,7 +1004,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 147,
         "lesson": 147,
         "quiz": 147,
-        "activity": "Leia seu diário semanal, de preferência em voz alta. Anote possíveis dúvidas ou correções que você já consegue fazer. Compartilhe na comunidade. Escreva um breve resumo, em inglês, sobre o audiobook que ouviu no primeiro dia e avalie seu desempenho. use o Fluêncio para a correção."
+        "activity": "Leia seu diário semanal, de preferência em voz alta. Anote possíveis dúvidas ou correções que você já consegue fazer. Escreva um breve resumo, em inglês, sobre o audiobook que ouviu no primeiro dia e avalie seu desempenho. use o Fluêncio para a correção."
       }
     ]
   },
@@ -1021,19 +1021,19 @@ export const PLANNER: PlannerWeek[] = [
         "day": 149,
         "lesson": 149,
         "quiz": 149,
-        "activity": "Escreva 5 frases sobre o seu dia. Compartilhe suas frases na comunidade. Use o Fluêncio para a correção. Ouça diálogos simples no site Elllo, selecione seu nível como aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
+        "activity": "Escreva 5 frases sobre o seu dia. Use o Fluêncio para a correção. Ouça diálogos simples no site Elllo, selecione seu nível como aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
       },
       {
         "day": 150,
         "lesson": 150,
         "quiz": 150,
-        "activity": "Visite sites de notícias como BBC News ou CNN e leia artigos sobre tópicos de seu interesse. Escreva um breve resumo sobre a notícia e poste em nossa comunidade. FIM DO STAGE FIVE Congratulations!"
+        "activity": "Visite sites de notícias como BBC News ou CNN e leia artigos sobre tópicos de seu interesse. Escreva um breve resumo sobre a notícia. FIM DO STAGE FIVE Congratulations!"
       },
       {
         "day": 151,
         "lesson": 151,
         "quiz": 151,
-        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Repita em voz alta o que é dito, tentando imitar quem está falando. Compartilhe a sua experiência com a comunidade."
+        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Repita em voz alta o que é dito, tentando imitar quem está falando."
       },
       {
         "day": 152,
@@ -1074,7 +1074,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 157,
         "lesson": 157,
         "quiz": 157,
-        "activity": "Escolha um episódio de Podcast e foque na ideia central do áudio. Experimente escrever poemas ou letras de músicas em inglês. Mostre o resultado na comunidade! Use o fluência para inspiração ou correção."
+        "activity": "Escolha um episódio de Podcast e foque na ideia central do áudio. Experimente escrever poemas ou letras de músicas em inglês. Use o fluência para inspiração ou correção."
       },
       {
         "day": 158,
@@ -1086,13 +1086,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 159,
         "lesson": 159,
         "quiz": 159,
-        "activity": "Use o site Vocabulary.com e clique em “Random Word” abaixo da barra de pesquisa. Estude a palavra gerada, faça quizzes para expandir e praticar vocabulário em inglês. Use a palavra gerada para criar 5 frases e compartilhar com a comunidade. Para um desafio maior, tente inseri-la num diálogo."
+        "activity": "Use o site Vocabulary.com e clique em “Random Word” abaixo da barra de pesquisa. Estude a palavra gerada, faça quizzes para expandir e praticar vocabulário em inglês. Use a palavra gerada para criar 5 frases. Para um desafio maior, tente inseri-la num diálogo."
       },
       {
         "day": 160,
         "lesson": 160,
         "quiz": 160,
-        "activity": "Pratique uma conversa com o Fluêncio sobre o clima e estações do ano. Use este prompt: \"Hello! How is the weather today? Is it hot or cold where you are?\" Leia e interaja em posts de seus artistas favoritos em inglês. Compartilhe o post que achar mais interessante e o porquê na nossa comunidade!"
+        "activity": "Pratique uma conversa com o Fluêncio sobre o clima e estações do ano. Use este prompt: \"Hello! How is the weather today? Is it hot or cold where you are?\" Leia e interaja em posts de seus artistas favoritos em inglês."
       },
       {
         "day": 161,
@@ -1115,13 +1115,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 163,
         "lesson": 163,
         "quiz": 163,
-        "activity": "Escreva 5 frases sobre o seu dia. Compartilhe suas frases na comunidade. Corrija usando o Fluêncio. Ouça diálogos simples no site Elllo, selecione seu nível como iniciante aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
+        "activity": "Escreva 5 frases sobre o seu dia. Corrija usando o Fluêncio. Ouça diálogos simples no site Elllo, selecione seu nível como iniciante aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
       },
       {
         "day": 164,
         "lesson": 164,
         "quiz": 164,
-        "activity": "Ouça o audiobook grátis do dia do site/app Blinkist. Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia. Se quiser, compartilhe com a comunidade."
+        "activity": "Ouça o audiobook grátis do dia do site/app Blinkist. Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia."
       },
       {
         "day": 165,
@@ -1133,7 +1133,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 166,
         "lesson": 166,
         "quiz": 166,
-        "activity": "Assista 15 segundos de uma série ou vídeo, ou filme, sem legendas, e anote o que entendeu. Assista ao trecho novamente, com legendas em inglês, e faça a correção. Assista mais alguns trechos do vídeo e repita o processo. Escreva um breve resumo, em inglês, sobre o trecho e compartilhe com a comunidade."
+        "activity": "Assista 15 segundos de uma série ou vídeo, ou filme, sem legendas, e anote o que entendeu. Assista ao trecho novamente, com legendas em inglês, e faça a correção. Assista mais alguns trechos do vídeo e repita o processo. Escreva um breve resumo, em inglês, sobre o trecho."
       },
       {
         "day": 167,
@@ -1162,7 +1162,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 170,
         "lesson": 170,
         "quiz": 170,
-        "activity": "Faça a palavra cruzada diária do Washington Post para encontrar e aprender novas palavras em inglês. Escolha pelo menos 5 dessas palavras e escreva frases com elas e com o vocabulário que você aprendeu recentemente. Compartilhe seus estudos na comunidade. Use o Fluêncio para a correção."
+        "activity": "Faça a palavra cruzada diária do Washington Post para encontrar e aprender novas palavras em inglês. Escolha pelo menos 5 dessas palavras e escreva frases com elas e com o vocabulário que você aprendeu recentemente. Use o Fluêncio para a correção."
       },
       {
         "day": 171,
@@ -1192,7 +1192,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 175,
         "lesson": 175,
         "quiz": 175,
-        "activity": "Escreva um breve resumo sobre a sua semana em inglês e poste em nossa comunidade. Use um dicionário, como o de Oxford, caso seja necessário. Use o Fluêncio para a correção. Assista a um filme ou série em inglês, e compartilhe a sua escolha e opinião na comunidade."
+        "activity": "Escreva um breve resumo sobre a sua semana em inglês. Use um dicionário, como o de Oxford, caso seja necessário. Use o Fluêncio para a correção. Assista a um filme ou série em inglês."
       }
     ]
   },
@@ -1203,7 +1203,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 176,
         "lesson": 176,
         "quiz": 176,
-        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva sobre seus objetivos. Descreva quais são seus objetivos de curto e longo prazo e como planeja alcançá-los. Compartilhe em nossa comunidade. Use o Fluêncio para a correção."
+        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva sobre seus objetivos. Descreva quais são seus objetivos de curto e longo prazo e como planeja alcançá-los. Use o Fluêncio para a correção."
       },
       {
         "day": 177,
@@ -1215,7 +1215,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 178,
         "lesson": 178,
         "quiz": 178,
-        "activity": "Experimente escrever poemas ou letras de músicas em inglês. Mostre o resultado na comunidade. Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém da comunidade para jogar com você."
+        "activity": "Experimente escrever poemas ou letras de músicas em inglês. Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém para jogar com você."
       },
       {
         "day": 179,
@@ -1233,13 +1233,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 181,
         "lesson": 181,
         "quiz": 181,
-        "activity": "Explore o site English Vocabulary Exercises para uma variedade de atividades de vocabulário, incluindo quizzes e jogos. Escreva frases com os vocabulários que você aprendeu durante os jogos e poste em nossa comunidade."
+        "activity": "Explore o site English Vocabulary Exercises para uma variedade de atividades de vocabulário, incluindo quizzes e jogos. Escreva frases com os vocabulários que você aprendeu durante os jogos."
       },
       {
         "day": 182,
         "lesson": 182,
         "quiz": 182,
-        "activity": "Assista a desenhos animados ou programas infantis em inglês para se acostumar com o ritmo e entonação da língua. Sugestões de canais de desenhos: Peekaboo Kidz, The Kiboomers, Cocomelon. Escreva um breve resumo sobre o episódio que assistiu e poste em nossa comunidade. Use o Fluêncio para a correção."
+        "activity": "Assista a desenhos animados ou programas infantis em inglês para se acostumar com o ritmo e entonação da língua. Sugestões de canais de desenhos: Peekaboo Kidz, The Kiboomers, Cocomelon. Escreva um breve resumo sobre o episódio que assistiu. Use o Fluêncio para a correção."
       }
     ]
   },
@@ -1256,7 +1256,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 184,
         "lesson": 184,
         "quiz": 184,
-        "activity": "Assista um vídeo do canal Big Think. Faça um breve texto sobre o que você aprendeu com o vídeo e compartilhe com a comunidade."
+        "activity": "Assista um vídeo do canal Big Think. Faça um breve texto sobre o que você aprendeu com o vídeo."
       },
       {
         "day": 185,
@@ -1268,7 +1268,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 186,
         "lesson": 186,
         "quiz": 186,
-        "activity": "Imagine que precisa ir a um café com um amigo. Tente visualizar a conversa entre essas três pessoas: você, seu amigo e um atendente, e escreva-a em forma de diálogo. Compartilhe com a comunidade e chame alguém para praticar com você. Caso não encontre ninguém para praticar, pergunte ao Fluêncio se ele pode conversar com você sobre isso. Ele será o atendente do café e você o hóspede. Use o prompt: ““Hello! My name is [seu some]. I'm learning English and I'd like to talk to you. Let 's roleplay. Iʼm a customer and you are a café attendant. Suggest me what to order.” Use vocabulários que você aprendeu recentemente."
+        "activity": "Imagine que precisa ir a um café com um amigo. Tente visualizar a conversa entre essas três pessoas: você, seu amigo e um atendente, e escreva-a em forma de diálogo. Chame alguém para praticar com você. Caso não encontre ninguém para praticar, pergunte ao Fluêncio se ele pode conversar com você sobre isso. Ele será o atendente do café e você o hóspede. Use o prompt: ““Hello! My name is [seu some]. I'm learning English and I'd like to talk to you. Let 's roleplay. Iʼm a customer and you are a café attendant. Suggest me what to order.” Use vocabulários que você aprendeu recentemente."
       },
       {
         "day": 187,
@@ -1286,7 +1286,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 189,
         "lesson": 189,
         "quiz": 189,
-        "activity": "Leia uma notícia sobre algum esporte que você gosta ou descobriu recentemente. Procure por esportes diferentes, como lacrosse ou rugby. Use sites como o BBC Sports e o Sky Sports. Faça um resumo, com suas palavras, sobre o esporte escolhido, como se tivesse que explicá- lo para alguém que nunca ouviu falar dele. Escreva e leia em voz alta, use o Speak Aloud para te ajudar com isso. Se quiser, compartilhe com a comunidade também."
+        "activity": "Leia uma notícia sobre algum esporte que você gosta ou descobriu recentemente. Procure por esportes diferentes, como lacrosse ou rugby. Use sites como o BBC Sports e o Sky Sports. Faça um resumo, com suas palavras, sobre o esporte escolhido, como se tivesse que explicá- lo para alguém que nunca ouviu falar dele. Escreva e leia em voz alta, use o Speak Aloud para te ajudar com isso."
       }
     ]
   },
@@ -1321,7 +1321,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 194,
         "lesson": 194,
         "quiz": 194,
-        "activity": "Ouça diálogos simples no site Ello, selecione áudios dos níveis dois ou três. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Anote palavras novas desse diálogo e tente criar pelo menos 5 frases com elas. Compartilhe na comunidade."
+        "activity": "Ouça diálogos simples no site Ello, selecione áudios dos níveis dois ou três. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Anote palavras novas desse diálogo e tente criar pelo menos 5 frases com elas."
       },
       {
         "day": 195,
@@ -1333,7 +1333,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 196,
         "lesson": 196,
         "quiz": 196,
-        "activity": "Faça um breve texto de como foi a sua semana e a sua rotina. Poste sobre isso em nossa comunidade. É hora de relaxar, assista a um filme ou série em inglês. Não se preocupe, use as legendas se for preciso."
+        "activity": "Faça um breve texto de como foi a sua semana e a sua rotina. É hora de relaxar, assista a um filme ou série em inglês. Não se preocupe, use as legendas se for preciso."
       }
     ]
   },
@@ -1356,7 +1356,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 199,
         "lesson": 199,
         "quiz": 199,
-        "activity": "Assista um vídeo sobre mudança de casa de algum canal que você se interesse. Pesquise no YouTube por “moving vlog”, ou “moving out”. Faça anotações sobre o vídeo: para onde estão indo? Qual o motivo da mudança? Compartilhe com a comunidade caso tenha achado interessante!"
+        "activity": "Assista um vídeo sobre mudança de casa de algum canal que você se interesse. Pesquise no YouTube por “moving vlog”, ou “moving out”. Faça anotações sobre o vídeo: para onde estão indo? Qual o motivo da mudança?"
       },
       {
         "day": 200,
@@ -1380,7 +1380,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 203,
         "lesson": 203,
         "quiz": 203,
-        "activity": "Pratique com trava- língua. Escolha um Tongue Twister, escute o áudio e repita em voz alta. Use o Speak Aloud pra te ajudar também! Repita várias vezes, até que se sinta confortável com a pronúncia. Divirta-se e, se quiser, compartilhe um vídeo em nossa comunidade. Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use a comunidade para isso, ou entre em outras como o Reddit."
+        "activity": "Pratique com trava- língua. Escolha um Tongue Twister, escute o áudio e repita em voz alta. Use o Speak Aloud pra te ajudar também! Repita várias vezes, até que se sinta confortável com a pronúncia. Divirta-se. Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use fóruns ou grupos como o Reddit."
       }
     ]
   },
@@ -1391,19 +1391,19 @@ export const PLANNER: PlannerWeek[] = [
         "day": 204,
         "lesson": 204,
         "quiz": 204,
-        "activity": "Escreva um texto em inglês e poste em nossa comunidade sobre como tem sido a sua rotina de estudos, quais atividades tem mais gostado de fazer e mostre que você está no caminho certo para a fluência. Grave-se narrando este texto e cheque sua pronúncia. Use o Speak Aloud para te ajudar se for preciso. Se quiser, compartilhe com a comunidade também."
+        "activity": "Escreva um texto em inglês sobre como tem sido a sua rotina de estudos, quais atividades tem mais gostado de fazer e mostre que você está no caminho certo para a fluência. Grave-se narrando este texto e cheque sua pronúncia. Use o Speak Aloud para te ajudar se for preciso."
       },
       {
         "day": 205,
         "lesson": 205,
         "quiz": 205,
-        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar. Escreva um breve resumo do que aprendeu e se precisar, use o Reverso Contexto. Compartilhe o vídeo e suas ideias sobre ele em nossa comunidade."
+        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar. Escreva um breve resumo do que aprendeu e se precisar, use o Reverso Contexto."
       },
       {
         "day": 206,
         "lesson": 206,
         "quiz": 206,
-        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Repita em voz alta o que é dito, tentando imitar quem está falando. Compartilhe a sua experiência com a comunidade."
+        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Repita em voz alta o que é dito, tentando imitar quem está falando."
       },
       {
         "day": 207,
@@ -1415,7 +1415,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 208,
         "lesson": 208,
         "quiz": 208,
-        "activity": "Faça um resumo da história que você leu ontem. Tente usar as palavras que aprendeu. Pratique sua fala, narre a história que você leu. Grave um vídeo ou áudio e poste na nossa comunidade. Use o Speak Aloud para auxiliar na pronúncia."
+        "activity": "Faça um resumo da história que você leu ontem. Tente usar as palavras que aprendeu. Pratique sua fala, narre a história que você leu. Grave um vídeo ou áudio. Use o Speak Aloud para auxiliar na pronúncia."
       },
       {
         "day": 209,
@@ -1427,7 +1427,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 210,
         "lesson": 210,
         "quiz": 210,
-        "activity": "Aprenda com sua música favorita usando o Lyricstraining. Anote palavras novas e ao final da atividade cante a música acompanhando a letra. Faça frases com algumas das palavras novas que você descobriu na música e poste na nossa comunidade. FIM DO STAGE SEVEN Congratulations!"
+        "activity": "Aprenda com sua música favorita usando o Lyricstraining. Anote palavras novas e ao final da atividade cante a música acompanhando a letra. Faça frases com algumas das palavras novas que você descobriu na música. FIM DO STAGE SEVEN Congratulations!"
       }
     ]
   },
@@ -1438,13 +1438,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 211,
         "lesson": 211,
         "quiz": 211,
-        "activity": "Faça a palavra cruzada diária do Washington Post para encontrar e aprender novas palavras em inglês. Escolha pelo menos 5 dessas palavras e escreva frases com elas e com o vocabulário que você aprendeu recentemente. Compartilhe seus estudos na comunidade."
+        "activity": "Faça a palavra cruzada diária do Washington Post para encontrar e aprender novas palavras em inglês. Escolha pelo menos 5 dessas palavras e escreva frases com elas e com o vocabulário que você aprendeu recentemente."
       },
       {
         "day": 212,
         "lesson": 212,
         "quiz": 212,
-        "activity": "Ouça o audiobook grátis do site/app Blinkist. Escreva uma resenha sobre esse audiobook, mostre sua opinião, coloque os para os e contras, e recomende a leitura ou não. Poste essa resenha na comunidade e/ou nas suas redes sociais."
+        "activity": "Ouça o audiobook grátis do site/app Blinkist. Escreva uma resenha sobre esse audiobook, mostre sua opinião, coloque os para os e contras, e recomende a leitura ou não."
       },
       {
         "day": 213,
@@ -1462,13 +1462,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 215,
         "lesson": 215,
         "quiz": 215,
-        "activity": "Escreva um comentário em inglês em alguma matéria ou postagem em blog sobre um assunto que você goste e domine, de preferência aquele que visitou no dia anterior. Tente interagir com outras pessoas que também comentaram. Use matérias que você já leu antes, ou postagens que você visitou recentemente em redes sociais, como o Instagram. Pode até comentar em postagens na nossa comunidade para incentivar outros a responderem em inglês também! Explore comics e graphic novels em inglês, que são visualmente estimulantes e linguisticamente variados. Use sites como Project Gutenberg, Webtoon, Tapas e Comic Fury."
+        "activity": "Escreva um comentário em inglês em alguma matéria ou postagem em blog sobre um assunto que você goste e domine, de preferência aquele que visitou no dia anterior. Tente interagir com outras pessoas que também comentaram. Use matérias que você já leu antes, ou postagens que você visitou recentemente em redes sociais, como o Instagram. Explore comics e graphic novels em inglês, que são visualmente estimulantes e linguisticamente variados. Use sites como Project Gutenberg, Webtoon, Tapas e Comic Fury."
       },
       {
         "day": 216,
         "lesson": 216,
         "quiz": 216,
-        "activity": "Escolha um episódio do Podcast e escute ele todo, ou apenas a um trecho. Você pode selecionar o nível de dificuldade e baixar a transcrição do áudio. Use palavras desconhecidas que você anotou ou leu na transcrição do áudio e escreva pelo menos 5 frases com elas. Compartilhe para obter feedback e/ou use o Fluêncio para corrigi-las."
+        "activity": "Escolha um episódio do Podcast e escute ele todo, ou apenas a um trecho. Você pode selecionar o nível de dificuldade e baixar a transcrição do áudio. Use palavras desconhecidas que você anotou ou leu na transcrição do áudio e escreva pelo menos 5 frases com elas. Use o Fluêncio para corrigi-las."
       },
       {
         "day": 217,
@@ -1491,7 +1491,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 219,
         "lesson": 219,
         "quiz": 219,
-        "activity": "Assista programas a um episódio de Talk Show “The Tonight Show Starring Jimmy Fallon. Pesquise mais sobre o artista que você viu no episódio. Use a Wikipedia ou o site oficial do artista. Poste os fatos mais interessantes sobre ele em nossa comunidade."
+        "activity": "Assista programas a um episódio de Talk Show “The Tonight Show Starring Jimmy Fallon. Pesquise mais sobre o artista que você viu no episódio. Use a Wikipedia ou o site oficial do artista. Anote os fatos mais interessantes sobre ele."
       },
       {
         "day": 220,
@@ -1503,7 +1503,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 221,
         "lesson": 221,
         "quiz": 221,
-        "activity": "Escolha e assista vídeos de notícias sobre o clima na CNN Weather. Escreva um breve texto como está o clima em sua região e qual é a previsão para os próximos dias. Compartilhe nas suas redes sociais, nos marque na postagem!"
+        "activity": "Escolha e assista vídeos de notícias sobre o clima na CNN Weather. Escreva um breve texto como está o clima em sua região e qual é a previsão para os próximos dias."
       },
       {
         "day": 222,
@@ -1515,13 +1515,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 223,
         "lesson": 223,
         "quiz": 223,
-        "activity": "Leia mais alguns trechos de The Little Prince. Pesquise pelas palavras que não conhece e busque compreender a história. Faça algumas frases de exemplo com essas palavras e escreva um breve resumo do que leu. Compartilhe conosco na comunidade ou nas suas redes sociais."
+        "activity": "Leia mais alguns trechos de The Little Prince. Pesquise pelas palavras que não conhece e busque compreender a história. Faça algumas frases de exemplo com essas palavras e escreva um breve resumo do que leu."
       },
       {
         "day": 224,
         "lesson": 224,
         "quiz": 224,
-        "activity": "Escute algumas notícias no site NPR. Narre algumas das notícias que escutou e grave um vídeo ou áudio sobre isso. Poste em nossa comunidade. Se precisar, use o Speak Aloud para checar sua pronúncia."
+        "activity": "Escute algumas notícias no site NPR. Narre algumas das notícias que escutou e grave um vídeo ou áudio sobre isso. Se precisar, use o Speak Aloud para checar sua pronúncia."
       }
     ]
   },
@@ -1550,19 +1550,19 @@ export const PLANNER: PlannerWeek[] = [
         "day": 228,
         "lesson": 228,
         "quiz": 228,
-        "activity": "Selecione as palavras que anotou no dia anterior e escreva uma história com elas, ou imagine a letra da música como uma narração. Escreva esta história e, se quiser, compartilhe com a comunidade. Se grave lendo essa história que criou, preste atenção na entonação e na pronúncia correta das palavras. Se for preciso, use o Speak Aloud para te ajudar na pronúncia, um dicionário ou o Google Tradutor para checar sua precisão. Repita, com ajuda do Speak Aloud, as palavras quantas vezes precisar até ter uma pronúncia apropriada."
+        "activity": "Selecione as palavras que anotou no dia anterior e escreva uma história com elas, ou imagine a letra da música como uma narração. Escreva esta história. Se grave lendo essa história que criou, preste atenção na entonação e na pronúncia correta das palavras. Se for preciso, use o Speak Aloud para te ajudar na pronúncia, um dicionário ou o Google Tradutor para checar sua precisão. Repita, com ajuda do Speak Aloud, as palavras quantas vezes precisar até ter uma pronúncia apropriada."
       },
       {
         "day": 229,
         "lesson": 229,
         "quiz": 229,
-        "activity": "Encontre e leia histórias curtas em sites como Project Gutenberg ou Wattpad. Faça um resumo dessa história que leu. Escreva com suas palavras e tente, em seguida, contar para alguém que você acha que se interessa - ou simplesmente compartilhe em nossa comunidade, caso tenha gostado do que encontrou!"
+        "activity": "Encontre e leia histórias curtas em sites como Project Gutenberg ou Wattpad. Faça um resumo dessa história que leu. Escreva com suas palavras e tente, em seguida, contar para alguém que você acha que se interessa."
       },
       {
         "day": 230,
         "lesson": 230,
         "quiz": 230,
-        "activity": "Experimente escrever frases com rimas, cujas últimas palavras tenham o mesmo som. Não precisam fazer sentido, como num poema ou letra de música, mas, se fizer, melhor! Mostre o resultado na comunidade! Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém da comunidade para jogar com você."
+        "activity": "Experimente escrever frases com rimas, cujas últimas palavras tenham o mesmo som. Não precisam fazer sentido, como num poema ou letra de música, mas, se fizer, melhor! Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém para jogar com você."
       },
       {
         "day": 231,
@@ -1579,7 +1579,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 232,
         "lesson": 232,
         "quiz": 232,
-        "activity": "Escolha um episódio do Podcast e escute ele todo, ou apenas a um trecho. Você pode selecionar o nível de dificuldade e baixar a transcrição do áudio. Foque em entender frases maiores. Use palavras desconhecidas que você anotou ou leu na transcrição do áudio e escreva pelo menos 5 frases com elas. Compartilhe para na nossa comunidade."
+        "activity": "Escolha um episódio do Podcast e escute ele todo, ou apenas a um trecho. Você pode selecionar o nível de dificuldade e baixar a transcrição do áudio. Foque em entender frases maiores. Use palavras desconhecidas que você anotou ou leu na transcrição do áudio e escreva pelo menos 5 frases com elas."
       },
       {
         "day": 233,
@@ -1591,7 +1591,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 234,
         "lesson": 234,
         "quiz": 234,
-        "activity": "Escreva 3 frases sobre o seu dia. Compartilhe suas frases em nossa comunidade. Ouça diálogos simples no site Elllo, selecione seu nível aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Use o Speak Aloud para te ajudar com pronúncias mais complexas e anote algumas frases para estudo posterior!"
+        "activity": "Escreva 3 frases sobre o seu dia. Ouça diálogos simples no site Elllo, selecione seu nível aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Use o Speak Aloud para te ajudar com pronúncias mais complexas e anote algumas frases para estudo posterior!"
       },
       {
         "day": 235,
@@ -1609,7 +1609,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 237,
         "lesson": 237,
         "quiz": 237,
-        "activity": "Leia a notícia que você encontrou ontem em voz alta. Pratique sua entonação e pronúncia. Escreva um resumo sobre a notícia e adicione o seu ponto de vista sobre ela. Confira seu texto usando Grammarly e compartilhe em nossa comunidade."
+        "activity": "Leia a notícia que você encontrou ontem em voz alta. Pratique sua entonação e pronúncia. Escreva um resumo sobre a notícia e adicione o seu ponto de vista sobre ela. Confira seu texto usando Grammarly."
       },
       {
         "day": 238,
@@ -1638,7 +1638,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 241,
         "lesson": 241,
         "quiz": 241,
-        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva sobre uma pessoa que você admira: descreva uma pessoa que você admira e explique por que ela é importante para você. Poste seu texto em nossa comunidade. Você também pode conferir seu texto usando o Grammarly. FIM DO STAGE EIGHT Congratulations!"
+        "activity": "Escolha um jogo no site TinyTap e jogue! Prefira jogos com frases completas e não somente vocabulário. Escreva sobre uma pessoa que você admira: descreva uma pessoa que você admira e explique por que ela é importante para você. Você também pode conferir seu texto usando o Grammarly. FIM DO STAGE EIGHT Congratulations!"
       },
       {
         "day": 242,
@@ -1650,13 +1650,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 243,
         "lesson": 243,
         "quiz": 243,
-        "activity": "Visite o site Word Search e procure um tema que você goste, mas que ainda não seja muito familiarizado. Comidas típicas, por exemplo. Faça a palavra cruzada e anote as novas aprendidas. Escolha pelo menos 10 dessas palavras e escreva um pequeno texto com elas e com o vocabulário que você aprendeu recentemente. Compartilhe seus estudos na comunidade."
+        "activity": "Visite o site Word Search e procure um tema que você goste, mas que ainda não seja muito familiarizado. Comidas típicas, por exemplo. Faça a palavra cruzada e anote as novas aprendidas. Escolha pelo menos 10 dessas palavras e escreva um pequeno texto com elas e com o vocabulário que você aprendeu recentemente."
       },
       {
         "day": 244,
         "lesson": 244,
         "quiz": 244,
-        "activity": "Imagine que precisa comprar uma passagem - de avião, ônibus, navio, etc. Tente visualizar a conversa que teria com o atendente e escreva-a em forma de diálogo. Compartilhe com a comunidade e chame alguém para praticar com você. Jogue uma partida de CrossWord Puzzle e divirta-se!"
+        "activity": "Imagine que precisa comprar uma passagem - de avião, ônibus, navio, etc. Tente visualizar a conversa que teria com o atendente e escreva-a em forma de diálogo. Chame alguém para praticar com você. Jogue uma partida de CrossWord Puzzle e divirta-se!"
       },
       {
         "day": 245,
@@ -1679,19 +1679,19 @@ export const PLANNER: PlannerWeek[] = [
         "day": 247,
         "lesson": 247,
         "quiz": 247,
-        "activity": "Assista a esse vídeo sobre a Austrália. Anote os fatos mais interessantes sobre esse país e divida com a comunidade. Pergunte se algum colega conhece outros fatos ou se já viajou para lá."
+        "activity": "Assista a esse vídeo sobre a Austrália. Anote os fatos mais interessantes sobre esse país."
       },
       {
         "day": 248,
         "lesson": 248,
         "quiz": 248,
-        "activity": "Escolha e faça um Word Search sobre sinônimos e divirta-se! Faça cinco frases para cada uma das palavras vistas no jogo e poste em nossa comunidade."
+        "activity": "Escolha e faça um Word Search sobre sinônimos e divirta-se! Faça cinco frases para cada uma das palavras vistas no jogo."
       },
       {
         "day": 249,
         "lesson": 249,
         "quiz": 249,
-        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e se precisar, ative as legendas do vídeo. Escreva um breve resumo do que aprendeu e se precisar, use o Reverso Contexto. Compartilhe o vídeo e suas ideias sobre ele em nossa comunidade."
+        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e se precisar, ative as legendas do vídeo. Escreva um breve resumo do que aprendeu e se precisar, use o Reverso Contexto."
       },
       {
         "day": 250,
@@ -1703,7 +1703,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 251,
         "lesson": 251,
         "quiz": 251,
-        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Use o Speak Aloud para te ajudar a repetir em voz alta o que é dito, tentando imitar quem está falando. Compartilhe a sua experiência com a comunidade de alunos."
+        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Use o Speak Aloud para te ajudar a repetir em voz alta o que é dito, tentando imitar quem está falando."
       },
       {
         "day": 252,
@@ -1720,7 +1720,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 253,
         "lesson": 253,
         "quiz": 253,
-        "activity": "Leia uma notícia sobre algum esporte que você gosta ou descobriu recentemente. Procure por esportes diferentes, como lacrosse ou rugby. Use sites como o BBC Sports e o Sky Sports. Faça um resumo, com suas palavras, sobre o esporte escolhido, como se tivesse que explicá- lo para alguém que nunca ouviu falar dele. Escreva e leia em voz alta. Se quiser, compartilhe com a comunidade também."
+        "activity": "Leia uma notícia sobre algum esporte que você gosta ou descobriu recentemente. Procure por esportes diferentes, como lacrosse ou rugby. Use sites como o BBC Sports e o Sky Sports. Faça um resumo, com suas palavras, sobre o esporte escolhido, como se tivesse que explicá- lo para alguém que nunca ouviu falar dele. Escreva e leia em voz alta."
       },
       {
         "day": 254,
@@ -1732,7 +1732,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 255,
         "lesson": 255,
         "quiz": 255,
-        "activity": "Escreva 5 frases sobre a aula que assistiu hoje, use vocabulários aprendidos no dia. Compartilhe suas frases na comunidade. Ouça diálogos simples no site Elllo, selecione seu nível aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
+        "activity": "Escreva 5 frases sobre a aula que assistiu hoje, use vocabulários aprendidos no dia. Ouça diálogos simples no site Elllo, selecione seu nível aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
       },
       {
         "day": 256,
@@ -1750,13 +1750,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 258,
         "lesson": 258,
         "quiz": 258,
-        "activity": "Assista esse vídeo sobre Londres. Descreva uma de suas paisagens sem dizer seu nome. Mantenha a simplicidade, tente fazer como uma charada e poste na nossa comunidade para as pessoas tentarem adivinhar de que local você está falando! Se for preciso, pesquise sobre sua história e curiosidades."
+        "activity": "Assista esse vídeo sobre Londres. Descreva uma de suas paisagens sem dizer seu nome. Mantenha a simplicidade, tente fazer como uma charada! Se for preciso, pesquise sobre sua história e curiosidades."
       },
       {
         "day": 259,
         "lesson": 259,
         "quiz": 259,
-        "activity": "Escreva um breve resumo sobre a sua semana em inglês e poste em nossa comunidade. Use um dicionário, como o de Oxford, caso seja necessário. Assista a um filme ou série em inglês, com legendas."
+        "activity": "Escreva um breve resumo sobre a sua semana em inglês. Use um dicionário, como o de Oxford, caso seja necessário. Assista a um filme ou série em inglês, com legendas."
       }
     ]
   },
@@ -1773,7 +1773,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 261,
         "lesson": 261,
         "quiz": 261,
-        "activity": "Visite sites de notícias como BBC News ou CNN e leia artigos sobre tópicos de seu interesse. Escreva um breve resumo sobre a notícia e poste em nossa comunidade."
+        "activity": "Visite sites de notícias como BBC News ou CNN e leia artigos sobre tópicos de seu interesse. Escreva um breve resumo sobre a notícia."
       },
       {
         "day": 262,
@@ -1797,7 +1797,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 265,
         "lesson": 265,
         "quiz": 265,
-        "activity": "Escreva 3 frases sobre o seu dia. Compartilhe suas frases na comunidade. Ouça diálogos simples no site Elllo, selecione seu nível como aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Peça ao Speak Aloud para te ajudar. Salve estes diálogos, você irá usá-los nas próximas atividades."
+        "activity": "Escreva 3 frases sobre o seu dia. Ouça diálogos simples no site Elllo, selecione seu nível como aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Peça ao Speak Aloud para te ajudar. Salve estes diálogos, você irá usá-los nas próximas atividades."
       },
       {
         "day": 266,
@@ -1814,13 +1814,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 267,
         "lesson": 267,
         "quiz": 267,
-        "activity": "Descreva um local de lazer que você tenha visitado recentemente, avaliando-o. Pode ser de forma oral ou escrita. Agora escreva uma resenha em inglês deste local. Faça um pequeno texto e compartilhe com a comunidade, ou use o próprio Google para encontrar o endereço e avaliar por lá. Poste nas suas redes sociais também e nos marque! FIM DO STAGE NINE Congratulations!"
+        "activity": "Descreva um local de lazer que você tenha visitado recentemente, avaliando-o. Pode ser de forma oral ou escrita. Agora escreva uma resenha em inglês deste local. Faça um pequeno texto e use o próprio Google para encontrar o endereço e avaliar por lá. FIM DO STAGE NINE Congratulations!"
       },
       {
         "day": 268,
         "lesson": 268,
         "quiz": 268,
-        "activity": "Faça a palavra cruzada diária do Washington Post para encontrar e aprender novas palavras em inglês. Escolha pelo menos 10 dessas palavras e escreva frases com elas e com o vocabulário que você aprendeu recentemente. Compartilhe seus estudos na comunidade."
+        "activity": "Faça a palavra cruzada diária do Washington Post para encontrar e aprender novas palavras em inglês. Escolha pelo menos 10 dessas palavras e escreva frases com elas e com o vocabulário que você aprendeu recentemente."
       },
       {
         "day": 269,
@@ -1838,7 +1838,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 271,
         "lesson": 271,
         "quiz": 271,
-        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e se precisar, ative as legendas do vídeo. Faça duas frases com cada palavra desconhecida que seja relevante ao tema do Ted Talk. Crie no mínimo 10 frases e poste em nossa comunidade. Se precisar, cheque a correção com o Fluêncio."
+        "activity": "Assista a um TedTalks. Selecione o tema que mais se interessar e se precisar, ative as legendas do vídeo. Faça duas frases com cada palavra desconhecida que seja relevante ao tema do Ted Talk. Crie no mínimo 10 frases. Se precisar, cheque a correção com o Fluêncio."
       },
       {
         "day": 272,
@@ -1850,7 +1850,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 273,
         "lesson": 273,
         "quiz": 273,
-        "activity": "Experimente escrever frases com rimas, cujas últimas palavras tenham o mesmo som. Não precisam fazer sentido como num poema ou letra de música, mas, se fizer, melhor! Mostre o resultado na comunidade! Atividade 2: Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém da comunidade para jogar com você."
+        "activity": "Experimente escrever frases com rimas, cujas últimas palavras tenham o mesmo som. Não precisam fazer sentido como num poema ou letra de música, mas, se fizer, melhor! Atividade 2: Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém para jogar com você."
       }
     ]
   },
@@ -1861,13 +1861,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 274,
         "lesson": 274,
         "quiz": 274,
-        "activity": "Assista a esse vídeo sobre Easy Habits e aprenda sobre os hábitos que podem mudar a sua vida. Faça uma lista com os hábitos que você pode incorporar na sua vida e se quiser, compartilhe com seus colegas na comunidade e/ou poste nas suas redes sociais."
+        "activity": "Assista a esse vídeo sobre Easy Habits e aprenda sobre os hábitos que podem mudar a sua vida. Faça uma lista com os hábitos que você pode incorporar na sua vida."
       },
       {
         "day": 275,
         "lesson": 275,
         "quiz": 275,
-        "activity": "Escolha e assista vídeos de notícias sobre o clima na CNN Weather. Escreva um breve texto como está o clima em sua região e qual é a previsão para os próximos dias. Compartilhe com seus colegas na comunidade."
+        "activity": "Escolha e assista vídeos de notícias sobre o clima na CNN Weather. Escreva um breve texto como está o clima em sua região e qual é a previsão para os próximos dias."
       },
       {
         "day": 276,
@@ -1885,7 +1885,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 278,
         "lesson": 278,
         "quiz": 278,
-        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Use o Speak Aloud para te ajudar, e repita em voz alta o que é dito, tentando imitar quem está falando. Compartilhe a sua experiência com a comunidade."
+        "activity": "Assista a um vídeo em inglês no YouTube e pratique sua compreensão auditiva: assista 15 segundos do vídeo, sem legendas e anote o que entendeu. Assista ao mesmo trecho e corrija o que for preciso. Repita esse processo algumas vezes, assistindo os próximos trechos do vídeo. Assista ao vídeo novamente a agora pratique sua pronúncia. Use o Speak Aloud para te ajudar, e repita em voz alta o que é dito, tentando imitar quem está falando."
       },
       {
         "day": 279,
@@ -1908,13 +1908,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 281,
         "lesson": 281,
         "quiz": 281,
-        "activity": "Escolha e faça um Word Search sobre sinônimos e divirta-se! Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use a comunidade para isso, ou entre em outras como o Reddit."
+        "activity": "Escolha e faça um Word Search sobre sinônimos e divirta-se! Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use fóruns ou grupos como o Reddit."
       },
       {
         "day": 282,
         "lesson": 282,
         "quiz": 282,
-        "activity": "Escolha uma receita, leia seus ingredientes e método de preparo usado o site Tasty. Procure pelo significado das palavras que não conhece. Assista ao vídeo da receita e pratique sua pronúncia. Use o Speak Aloud para te ajudar. Se você manda bem na cozinha, faça a receita e poste o resultado na comunidade e/ou nas suas redes sociais, marcando a gente!"
+        "activity": "Escolha uma receita, leia seus ingredientes e método de preparo usado o site Tasty. Procure pelo significado das palavras que não conhece. Assista ao vídeo da receita e pratique sua pronúncia. Use o Speak Aloud para te ajudar. Se você manda bem na cozinha, faça a receita."
       },
       {
         "day": 283,
@@ -1926,7 +1926,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 284,
         "lesson": 284,
         "quiz": 284,
-        "activity": "Escreva 5 frases sobre a aula que assistiu hoje, use vocabulários aprendidos no dia. Compartilhe suas frases na comunidade. Ouça diálogos simples no site Elllo, selecione seu nível aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Se precisar, use o Speak Aloud para te ajudar."
+        "activity": "Escreva 5 frases sobre a aula que assistiu hoje, use vocabulários aprendidos no dia. Ouça diálogos simples no site Elllo, selecione seu nível aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação. Se precisar, use o Speak Aloud para te ajudar."
       },
       {
         "day": 285,
@@ -1955,7 +1955,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 288,
         "lesson": 288,
         "quiz": 288,
-        "activity": "Escolha um episódio do Podcast e escute ele todo, ou apenas a um trecho. Você pode selecionar o nível de dificuldade e baixar a transcrição do áudio. Use palavras desconhecidas que você anotou ou leu na transcrição do áudio e escreva pelo menos 5 frases com elas. Compartilhe para na comunidade."
+        "activity": "Escolha um episódio do Podcast e escute ele todo, ou apenas a um trecho. Você pode selecionar o nível de dificuldade e baixar a transcrição do áudio. Use palavras desconhecidas que você anotou ou leu na transcrição do áudio e escreva pelo menos 5 frases com elas."
       },
       {
         "day": 289,
@@ -1985,13 +1985,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 293,
         "lesson": 293,
         "quiz": 293,
-        "activity": "Escolha uma cidade ou estado e divirta- se com um Word Search . Pesquise algumas curiosidades sobre a cidade ou estado escolhido, faça suas anotações e compartilhe na comunidade. Você pode usar a Wikipédia."
+        "activity": "Escolha uma cidade ou estado e divirta- se com um Word Search . Pesquise algumas curiosidades sobre a cidade ou estado escolhido, faça suas anotações. Você pode usar a Wikipédia."
       },
       {
         "day": 294,
         "lesson": 294,
         "quiz": 294,
-        "activity": "Acesse o site da ONU e leia sobre as 17 metas para transformar nosso mundo em um lugar melhor. Escreva um breve resumo sobre o que você aprendeu e compartilhe em nossa comunidade e/ou nas suas redes sociais."
+        "activity": "Acesse o site da ONU e leia sobre as 17 metas para transformar nosso mundo em um lugar melhor. Escreva um breve resumo sobre o que você aprendeu."
       }
     ]
   },
@@ -2014,13 +2014,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 297,
         "lesson": 297,
         "quiz": 297,
-        "activity": "Utilize o vocabulário que aprendeu no vídeo anterior sobre seu hobby e tente escrever um pequeno texto usando essas novas palavras. Compartilhe com a comunidade e convide os outros usuários a conhecer o seu hobby! Sintonize estações de rádio em inglês e ouça os anúncios comerciais para praticar a compreensão auditiva. Você pode encontrar estações de rádio online no site Radio Uk, por exemplo."
+        "activity": "Utilize o vocabulário que aprendeu no vídeo anterior sobre seu hobby e tente escrever um pequeno texto usando essas novas palavras. Sintonize estações de rádio em inglês e ouça os anúncios comerciais para praticar a compreensão auditiva. Você pode encontrar estações de rádio online no site Radio Uk, por exemplo."
       },
       {
         "day": 298,
         "lesson": 298,
         "quiz": 298,
-        "activity": "Escolha um episódio do Podcast sobre hobbies e escute ele todo, ou apenas a um trecho. Você pode selecionar o nível de dificuldade e baixar a transcrição do áudio. Foque em entender frases maiores. Escreva sobre os hobbies que descobriu ouvindo o podcast. Compartilhe na comunidade ou nas suas redes sociais para obter feedback."
+        "activity": "Escolha um episódio do Podcast sobre hobbies e escute ele todo, ou apenas a um trecho. Você pode selecionar o nível de dificuldade e baixar a transcrição do áudio. Foque em entender frases maiores. Escreva sobre os hobbies que descobriu ouvindo o podcast."
       },
       {
         "day": 299,
@@ -2032,7 +2032,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 300,
         "lesson": 300,
         "quiz": 300,
-        "activity": "Escreva uma resenha sobre o filme que assistiu no dia anterior, faça um post em suas redes sociais com ela e convide a comunidade para interagir com ele. Pesquise sobre este filme em sites como o Letterbox. Tente encontrar discussões e resenhas sobre o mesmo e responda comentários de outros colegas, dando sua opinião sobre o mesmo. FIM DO STAGE TEN Congratulations!"
+        "activity": "Escreva uma resenha sobre o filme que assistiu no dia anterior. Pesquise sobre este filme em sites como o Letterbox. Tente encontrar discussões e resenhas sobre o mesmo e responda comentários de outros colegas, dando sua opinião sobre o mesmo. FIM DO STAGE TEN Congratulations!"
       },
       {
         "day": 301,
@@ -2049,13 +2049,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 302,
         "lesson": 302,
         "quiz": 302,
-        "activity": "Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia. Se quiser, compartilhe com a nossa comunidade. Pesquise em um dicionário palavras diferentes que você pode usar. Já é hora de se arriscar em frases mais complexas. Jogue uma partida Letter Box."
+        "activity": "Durante esta semana, mantenha um diário, escrevendo as coisas que fez no dia. Pesquise em um dicionário palavras diferentes que você pode usar. Já é hora de se arriscar em frases mais complexas. Jogue uma partida Letter Box."
       },
       {
         "day": 303,
         "lesson": 303,
         "quiz": 303,
-        "activity": "Assista a esse vídeo no YouTube, sobre como evitar a má comunicação. Assista uma vez sem legendas e anote algumas das dicas do vídeo. Assista mais uma vez, com legendas e faça a correção. Escreva um breve resumo sobre os pontos mais interessantes do vídeo para você e poste em nossa comunidade."
+        "activity": "Assista a esse vídeo no YouTube, sobre como evitar a má comunicação. Assista uma vez sem legendas e anote algumas das dicas do vídeo. Assista mais uma vez, com legendas e faça a correção. Escreva um breve resumo sobre os pontos mais interessantes do vídeo para você."
       },
       {
         "day": 304,
@@ -2085,7 +2085,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 308,
         "lesson": 308,
         "quiz": 308,
-        "activity": "Leia seu diário semanal, de preferência em voz alta. Anote possíveis dúvidas ou correções que você já consegue fazer. Peça feedback na comunidade. Fale um trava-língua. Você pode encontrar alguns exemplos para iniciar aqui, no site do British Council, e também pesquisar em artigos, como este."
+        "activity": "Leia seu diário semanal, de preferência em voz alta. Anote possíveis dúvidas ou correções que você já consegue fazer. Fale um trava-língua. Você pode encontrar alguns exemplos para iniciar aqui, no site do British Council, e também pesquisar em artigos, como este."
       }
     ]
   },
@@ -2096,7 +2096,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 309,
         "lesson": 309,
         "quiz": 309,
-        "activity": "Descreva um local de lazer que você tenha visitado recentemente, avaliando-o. Pode ser de forma oral ou escrita. Busque comparar esse lugar com lugares que você visitou anteriormente. Qual é melhor, ou mais interessante, por exemplo. Agora escreva uma resenha em inglês deste local. Faça um pequeno texto e compartilhe com a comunidade, ou use o próprio Google para encontrar o endereço e avaliar por lá."
+        "activity": "Descreva um local de lazer que você tenha visitado recentemente, avaliando-o. Pode ser de forma oral ou escrita. Busque comparar esse lugar com lugares que você visitou anteriormente. Qual é melhor, ou mais interessante, por exemplo. Agora escreva uma resenha em inglês deste local. Faça um pequeno texto e use o próprio Google para encontrar o endereço e avaliar por lá."
       },
       {
         "day": 310,
@@ -2114,7 +2114,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 312,
         "lesson": 312,
         "quiz": 312,
-        "activity": "Escreva 5 frases sobre a aula que assistiu hoje, use vocabulários aprendidos no dia. Compartilhe suas frases na comunidade. Ouça diálogos simples no site Elllo, selecione seu nível aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
+        "activity": "Escreva 5 frases sobre a aula que assistiu hoje, use vocabulários aprendidos no dia. Ouça diálogos simples no site Elllo, selecione seu nível aqui. Foque em repetir em voz alta para praticar sua pronúncia e entonação."
       },
       {
         "day": 313,
@@ -2143,13 +2143,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 316,
         "lesson": 316,
         "quiz": 316,
-        "activity": "Leia mais alguns trechos de “The Little Prince”. Escute o trecho, pause e repita em voz alta. Escreva um breve resumo sobre o que você leu e diga quais foram seus momentos favoritos até agora. Poste nas suas redes sociais se puder."
+        "activity": "Leia mais alguns trechos de “The Little Prince”. Escute o trecho, pause e repita em voz alta. Escreva um breve resumo sobre o que você leu e diga quais foram seus momentos favoritos até agora."
       },
       {
         "day": 317,
         "lesson": 317,
         "quiz": 317,
-        "activity": "Escute uma música que você gosta, estude a letra desta música anotando palavras e frases que você já conhece. Interprete a música. Escreva um breve texto sobre o que a música diz, como você se sente e por que você gosta dela. Compartilhe com seus colegas em nossa comunidade."
+        "activity": "Escute uma música que você gosta, estude a letra desta música anotando palavras e frases que você já conhece. Interprete a música. Escreva um breve texto sobre o que a música diz, como você se sente e por que você gosta dela."
       },
       {
         "day": 318,
@@ -2161,19 +2161,19 @@ export const PLANNER: PlannerWeek[] = [
         "day": 319,
         "lesson": 319,
         "quiz": 319,
-        "activity": "Escolha e assista a um vídeo do History Channel. Pause o vídeo e repita algumas frases. Escreva um breve resumo sobre o que você aprendeu e compartilhe em nossa comunidade."
+        "activity": "Escolha e assista a um vídeo do History Channel. Pause o vídeo e repita algumas frases. Escreva um breve resumo sobre o que você aprendeu."
       },
       {
         "day": 320,
         "lesson": 320,
         "quiz": 320,
-        "activity": "Escolha a assista entrevistas que podem mudar suas perspectivas em The Diary of a CEO. Anote as ideias que achou mais interessantes e compartilhe em nossa comunidade."
+        "activity": "Escolha a assista entrevistas que podem mudar suas perspectivas em The Diary of a CEO. Anote as ideias que achou mais interessantes."
       },
       {
         "day": 321,
         "lesson": 321,
         "quiz": 321,
-        "activity": "Selecione e escute notícias na rádio NPR. Escreva um breve resumo sobre o que você leu e poste em nossa. comunidade."
+        "activity": "Selecione e escute notícias na rádio NPR. Escreva um breve resumo sobre o que você leu."
       },
       {
         "day": 322,
@@ -2190,13 +2190,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 323,
         "lesson": 323,
         "quiz": 323,
-        "activity": "Ouça este listening sobre música na BBC. Agora escreva sobre o seu estilo de música favorito, fale sobre seus cantores favoritos e convide alguém da comunidade para conhecê-lo!"
+        "activity": "Ouça este listening sobre música na BBC. Agora escreva sobre o seu estilo de música favorito, fale sobre seus cantores favoritos e convide alguém para conhecê-lo!"
       },
       {
         "day": 324,
         "lesson": 324,
         "quiz": 324,
-        "activity": "Encontre o videoclipe de um dos seus artistas favoritos do estilo musical descrito no dia anterior, e escreva uma história sobre ele - se ele já estiver contando uma história, narre-a para alguém. Se você fosse dirigir o videoclipe da sua canção favorita, como você faria? Conte para a gente, grave ou escreva, e compartilhe na comunidade."
+        "activity": "Encontre o videoclipe de um dos seus artistas favoritos do estilo musical descrito no dia anterior, e escreva uma história sobre ele - se ele já estiver contando uma história, narre-a para alguém. Se você fosse dirigir o videoclipe da sua canção favorita, como você faria? Grave ou escreva."
       },
       {
         "day": 325,
@@ -2214,7 +2214,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 327,
         "lesson": 327,
         "quiz": 327,
-        "activity": "Tente imitar seu cantor (a) favorito! Tente aproximar sua pronúncia da dele enquanto ouve suas músicas. Se possível, se grave fazendo isso para checar seu progresso. Use o Speak Aloud para te ajudar nisso. Pesquise sobre a “the Chitlinʼ Circuit”, explicada este listening e escreva um pequeno texto sobre. Compartilhe com a comunidade se puder."
+        "activity": "Tente imitar seu cantor (a) favorito! Tente aproximar sua pronúncia da dele enquanto ouve suas músicas. Se possível, se grave fazendo isso para checar seu progresso. Use o Speak Aloud para te ajudar nisso. Pesquise sobre a “the Chitlinʼ Circuit”, explicada este listening e escreva um pequeno texto sobre."
       },
       {
         "day": 328,
@@ -2249,7 +2249,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 332,
         "lesson": 332,
         "quiz": 332,
-        "activity": "Assista a desenhos animados ou programas infantis em inglês para se acostumar com o ritmo e entonação da língua. Sugestões de canais de desenhos: Peekaboo Kidz, The Kiboomers, Cocomelon. Imagine que você é um roteirista e agora irá criar mais um episódio do desenho que assistiu. Escreva um breve resumo sobre isso e poste na nossa comunidade."
+        "activity": "Assista a desenhos animados ou programas infantis em inglês para se acostumar com o ritmo e entonação da língua. Sugestões de canais de desenhos: Peekaboo Kidz, The Kiboomers, Cocomelon. Imagine que você é um roteirista e agora irá criar mais um episódio do desenho que assistiu. Escreva um breve resumo sobre isso."
       },
       {
         "day": 333,
@@ -2261,7 +2261,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 334,
         "lesson": 334,
         "quiz": 334,
-        "activity": "Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém da comunidade para jogar com você. Escreva sobre como tem sido a sua rotina nestes últimos meses, o que tem feito e quais são as suas expectativas para os próximos meses. Poste seu texto em nossa comunidade. Você também pode conferir seu texto usando o Grammarly ou pedir ao Fluêncio para corrigi-lo."
+        "activity": "Jogue Gartic - com amigos, conhecidos ou online, em salas já criadas com temas que te agradem. Convide alguém para jogar com você. Escreva sobre como tem sido a sua rotina nestes últimos meses, o que tem feito e quais são as suas expectativas para os próximos meses. Você também pode conferir seu texto usando o Grammarly ou pedir ao Fluêncio para corrigi-lo."
       },
       {
         "day": 335,
@@ -2284,7 +2284,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 337,
         "lesson": 337,
         "quiz": 337,
-        "activity": "Escolha e faça um Word Search sobre sinônimos e divirta-se! Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use a comunidade para isso, ou entre em outras como o Reddit."
+        "activity": "Escolha e faça um Word Search sobre sinônimos e divirta-se! Leia e interaja em posts de fóruns ou grupos de discussão online em inglês. Use fóruns ou grupos como o Reddit."
       },
       {
         "day": 338,
@@ -2314,13 +2314,13 @@ export const PLANNER: PlannerWeek[] = [
         "day": 342,
         "lesson": 342,
         "quiz": 342,
-        "activity": "Escolha e assista a um vídeo do History Channel. Pause o vídeo e repita algumas frases. Escreva um breve resumo sobre o que você aprendeu e compartilhe em nossa comunidade."
+        "activity": "Escolha e assista a um vídeo do History Channel. Pause o vídeo e repita algumas frases. Escreva um breve resumo sobre o que você aprendeu."
       },
       {
         "day": 343,
         "lesson": 343,
         "quiz": 343,
-        "activity": "Faça a palavra cruzada diária do Washington Post para encontrar e aprender novas palavras em inglês. Escolha pelo menos 10 dessas palavras e escreva frases com elas e com o vocabulário que você aprendeu recentemente. Use estruturas mais complexas, se preciso peça ajuda ao Fluêncio. Compartilhe seus estudos na comunidade."
+        "activity": "Faça a palavra cruzada diária do Washington Post para encontrar e aprender novas palavras em inglês. Escolha pelo menos 10 dessas palavras e escreva frases com elas e com o vocabulário que você aprendeu recentemente. Use estruturas mais complexas, se preciso peça ajuda ao Fluêncio."
       }
     ]
   },
@@ -2331,7 +2331,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 344,
         "lesson": 344,
         "quiz": 344,
-        "activity": "Leia mais alguns trechos de The Little Prince. Lembre-se de sempre escutar e repetir a história em voz alta. Escreva um breve texto sobre as conclusões que podemos tirar desta história e poste em nossa comunidade."
+        "activity": "Leia mais alguns trechos de The Little Prince. Lembre-se de sempre escutar e repetir a história em voz alta. Escreva um breve texto sobre as conclusões que podemos tirar desta história."
       },
       {
         "day": 345,
@@ -2343,7 +2343,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 346,
         "lesson": 346,
         "quiz": 346,
-        "activity": "Leia este artigo sobre “Neuroscientists Reveal Secret of Superagers' Excellent Memories”. Anote o que achou de mais interessante e dê sua opinião. Poste em nossa comunidade."
+        "activity": "Leia este artigo sobre “Neuroscientists Reveal Secret of Superagers' Excellent Memories”. Anote o que achou de mais interessante e dê sua opinião."
       },
       {
         "day": 347,
@@ -2378,7 +2378,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 351,
         "lesson": 351,
         "quiz": 351,
-        "activity": "Escolha um destino no site de Rick Steves que oferece guias turísticos em áudio gratuitos para várias cidades e regiões da Europa. E ouça sobre ele. Agora imagine que você está fazendo uma viagem para este lugar específico. Crie seu próprio roteiro e compartilhe com a comunidade - use o Google Maps para te ajudar a escolher os lugares, e também nos conte quantos dias são necessários para conhecer todos os que você gostaria."
+        "activity": "Escolha um destino no site de Rick Steves que oferece guias turísticos em áudio gratuitos para várias cidades e regiões da Europa. E ouça sobre ele. Agora imagine que você está fazendo uma viagem para este lugar específico. Crie seu próprio roteiro - use o Google Maps para te ajudar a escolher os lugares, e também nos conte quantos dias são necessários para conhecer todos os que você gostaria."
       },
       {
         "day": 352,
@@ -2390,7 +2390,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 353,
         "lesson": 353,
         "quiz": 353,
-        "activity": "Conte-nos sobre uma viagem, férias ou local de lazer que você tenha visitado recentemente, dando sua opinião sobre ele. Tente gravar sem ler um texto ou roteiro, seja o mais natural possível, e reveja depois para checar seu progresso e se autocorrigir. Se puder, compartilhe na comunidade. Escreva uma resenha em inglês deste local. Use o próprio Google para encontrar o endereço e avaliar por lá. Poste nas suas redes sociais também e marque a gente!"
+        "activity": "Conte-nos sobre uma viagem, férias ou local de lazer que você tenha visitado recentemente, dando sua opinião sobre ele. Tente gravar sem ler um texto ou roteiro, seja o mais natural possível, e reveja depois para checar seu progresso e se autocorrigir. Escreva uma resenha em inglês deste local. Use o próprio Google para encontrar o endereço e avaliar por lá."
       },
       {
         "day": 354,
@@ -2402,19 +2402,19 @@ export const PLANNER: PlannerWeek[] = [
         "day": 355,
         "lesson": 355,
         "quiz": 355,
-        "activity": "Imagine que precisa comprar uma passagem para o local que você fez o roteiro - de avião, ônibus, navio, etc. Tente visualizar todas as rotas para chegar lá. Qual conversa teria com o atendente? Escreva- a em forma de diálogo. Compartilhe com a comunidade e chame alguém para praticar com você. Jogue uma partida de CrossWord Puzzle e divirta-se!"
+        "activity": "Imagine que precisa comprar uma passagem para o local que você fez o roteiro - de avião, ônibus, navio, etc. Tente visualizar todas as rotas para chegar lá. Qual conversa teria com o atendente? Escreva- a em forma de diálogo. Chame alguém para praticar com você. Jogue uma partida de CrossWord Puzzle e divirta-se!"
       },
       {
         "day": 356,
         "lesson": 356,
         "quiz": 356,
-        "activity": "Assista a este vídeo sobre os melhores locais para se visitar. Anote os países e locais citados, e nos conte quais deles você gostaria ou não de visitar e o motivo. Grave sua resposta para checar depois, ou escreva na comunidade convidando os outros a interagir e debater destinos de viagens com você. Use o Speak Aloud para checar sua pronúncia se for preciso."
+        "activity": "Assista a este vídeo sobre os melhores locais para se visitar. Anote os países e locais citados, e nos conte quais deles você gostaria ou não de visitar e o motivo. Grave sua resposta para checar depois. Use o Speak Aloud para checar sua pronúncia se for preciso."
       },
       {
         "day": 357,
         "lesson": 357,
         "quiz": 357,
-        "activity": "Descreva um projeto que você gostaria de realizar no futuro e como planeja fazê- lo. Compartilhe suas ideias com a comunidade. Jogue uma partida de Connections e divirta-se. Você deverá encontrar 4 palavras que pertencem ao mesmo grupo."
+        "activity": "Descreva um projeto que você gostaria de realizar no futuro e como planeja fazê- lo. Jogue uma partida de Connections e divirta-se. Você deverá encontrar 4 palavras que pertencem ao mesmo grupo."
       }
     ]
   },
@@ -2437,7 +2437,7 @@ export const PLANNER: PlannerWeek[] = [
         "day": 360,
         "lesson": 360,
         "quiz": 360,
-        "activity": "Estamos chegando ao final do Cronograma dos Fluentes. Escreva um texto ou grave um vídeo sobre como foi a sua trajetória. Poste em nossa comunidade e celebre a sua vitória com seus colegas."
+        "activity": "Estamos chegando ao final do Cronograma dos Fluentes. Escreva um texto ou grave um vídeo sobre como foi a sua trajetória. Celebre a sua vitória!"
       }
     ]
   }

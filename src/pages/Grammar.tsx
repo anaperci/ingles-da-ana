@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BookText, Repeat, Link2, Zap, Users, ArrowRight, type LucideIcon } from 'lucide-react'
+import { BookText, Repeat, Link2, Zap, Users, Sparkles, ArrowRight, type LucideIcon } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
@@ -35,6 +35,12 @@ const TOPICS: GrammarTopic[] = [
     title: 'Pronouns',
     description: 'Subject, object, possessive and reflexive',
     icon: Users,
+  },
+  {
+    to: '/gramatica-real',
+    title: 'Real grammar',
+    description: 'Conditionals, verb tenses, parts of speech and formality',
+    icon: Sparkles,
   },
 ]
 

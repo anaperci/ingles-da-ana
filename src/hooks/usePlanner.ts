@@ -24,9 +24,9 @@ export function usePlanner() {
     [setDone]
   )
 
+  // O dia fecha com aula + atividade (o quiz do curso não é mais exigido).
   const dayComplete = useCallback(
-    (day: number) =>
-      !!done[k(day, 'lesson')] && !!done[k(day, 'quiz')] && !!done[k(day, 'activity')],
+    (day: number) => !!done[k(day, 'lesson')] && !!done[k(day, 'activity')],
     [done]
   )
 
@@ -35,16 +35,15 @@ export function usePlanner() {
     let completedTasks = 0
     for (let day = 1; day <= PLANNER_TOTAL_DAYS; day++) {
       const l = !!done[k(day, 'lesson')]
-      const q = !!done[k(day, 'quiz')]
       const a = !!done[k(day, 'activity')]
-      completedTasks += (l ? 1 : 0) + (q ? 1 : 0) + (a ? 1 : 0)
-      if (l && q && a) completedDays += 1
+      completedTasks += (l ? 1 : 0) + (a ? 1 : 0)
+      if (l && a) completedDays += 1
     }
     return {
       completedDays,
       totalDays: PLANNER_TOTAL_DAYS,
       completedTasks,
-      totalTasks: PLANNER_TOTAL_DAYS * 3,
+      totalTasks: PLANNER_TOTAL_DAYS * 2,
       pct: Math.round((completedDays / PLANNER_TOTAL_DAYS) * 100),
     }
   }, [done])
@@ -52,8 +51,7 @@ export function usePlanner() {
   /** Próximo dia a fazer (primeiro não concluído). */
   const currentDay = useMemo(() => {
     for (let day = 1; day <= PLANNER_TOTAL_DAYS; day++) {
-      if (!(done[k(day, 'lesson')] && done[k(day, 'quiz')] && done[k(day, 'activity')]))
-        return day
+      if (!(done[k(day, 'lesson')] && done[k(day, 'activity')])) return day
     }
     return PLANNER_TOTAL_DAYS
   }, [done])

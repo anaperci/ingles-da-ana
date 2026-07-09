@@ -12,9 +12,10 @@ import {
   MonitorPlay,
   PenLine,
   Blocks,
-  AudioLines,
   NotebookPen,
   CalendarRange,
+  Sparkles,
+  GraduationCap,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -35,7 +36,18 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { to: '/', label: 'Home', icon: Home, end: true },
   { to: '/planner', label: 'Planner', icon: CalendarRange },
-  { to: '/vocabulario', label: 'Vocabulary', icon: Brain },
+  { to: '/notes', label: 'Notes', icon: NotebookPen },
+  {
+    to: '/training',
+    label: 'Training',
+    icon: GraduationCap,
+    children: [
+      { to: '/exercises', label: 'Exercises', icon: Dumbbell },
+      { to: '/escrita', label: 'Writing', icon: PenLine },
+      { to: '/conversacao', label: 'Conversation', icon: MessagesSquare },
+      { to: '/pronuncia', label: 'Pronunciation', icon: Mic },
+    ],
+  },
   {
     to: '/gramatica',
     label: 'Grammar',
@@ -45,17 +57,10 @@ export const NAV_ITEMS: NavItem[] = [
       { to: '/preposicoes', label: 'Prepositions', icon: Link2 },
       { to: '/adverbios', label: 'Adverbs', icon: Zap },
       { to: '/pronomes', label: 'Pronouns', icon: Users },
+      { to: '/gramatica-real', label: 'Real grammar', icon: Sparkles },
     ],
   },
-  { to: '/exercises', label: 'Exercises', icon: Dumbbell },
-  { to: '/verbos-som', label: 'Verb sounds', icon: AudioLines },
-  { to: '/escrita', label: 'Writing', icon: PenLine },
-  { to: '/notes', label: 'Notes', icon: NotebookPen },
+  { to: '/vocabulario', label: 'Vocabulary', icon: Brain },
   { to: '/estruturas', label: 'Sentence frames', icon: Blocks },
-  { to: '/conversacao', label: 'Conversation', icon: MessagesSquare },
-  { to: '/pronuncia', label: 'Pronunciation', icon: Mic },
   { to: '/videos', label: 'Videos', icon: MonitorPlay },
 ]
-
-/** rotas que pertencem ao grupo Gramática (para auto-expandir o submenu) */
-export const GRAMMAR_ROUTES = ['/gramatica', '/verbos', '/preposicoes', '/adverbios', '/pronomes']

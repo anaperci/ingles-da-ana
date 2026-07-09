@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { X, LogOut, KeyRound, Mic, ChevronDown } from 'lucide-react'
-import { NAV_ITEMS, GRAMMAR_ROUTES, type NavItem } from '@/config/nav'
+import { NAV_ITEMS, type NavItem } from '@/config/nav'
 import { useAuthUser } from '@/hooks/useAuthUser'
 import { ChangePasswordDialog } from '@/components/auth/ChangePasswordDialog'
 import { AzureKeyDialog } from '@/components/auth/AzureKeyDialog'
@@ -87,10 +87,12 @@ function LeafLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => void
   )
 }
 
-/** Item com submenu expansível (ex.: Grammar). */
+/** Item com submenu expansível (ex.: Training, Grammar). */
 function GroupLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => void }) {
   const { pathname } = useLocation()
-  const groupActive = GRAMMAR_ROUTES.includes(pathname)
+  // Ativo quando a rota atual é o próprio grupo ou uma das filhas.
+  const groupActive =
+    pathname === item.to || (item.children ?? []).some((c) => c.to === pathname)
   const [open, setOpen] = useState(groupActive)
 
   return (

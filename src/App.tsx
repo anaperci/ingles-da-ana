@@ -16,6 +16,7 @@ const SentenceFrames = lazy(() => import('@/pages/SentenceFrames'))
 const SoundVerbs = lazy(() => import('@/pages/SoundVerbs'))
 const Pronouns = lazy(() => import('@/pages/Pronouns'))
 const Grammar = lazy(() => import('@/pages/Grammar'))
+const GrammarPacks = lazy(() => import('@/pages/GrammarPacks'))
 const Exercises = lazy(() => import('@/pages/Exercises'))
 const Prepositions = lazy(() => import('@/pages/Prepositions'))
 const Adverbs = lazy(() => import('@/pages/Adverbs'))
@@ -121,6 +122,14 @@ export default function App() {
           element={
             <Suspense fallback={<PageFallback />}>
               <Grammar />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/gramatica-real"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <GrammarPacks />
             </Suspense>
           }
         />

@@ -10,5 +10,10 @@ export const STORAGE_KEYS = {
   dailyWriting: 'writing:daily',
   writingSrs: 'writing:srs',
   commonWordsKnown: 'words:known',
+  commonWordsCloze: 'words:cloze',
+  studyChecklist: 'study:checklist',
   framesWriting: 'frames:writing',
+  grammarPacksProgress: 'grammar-packs:progress',
+  grammarPacksWriting: 'grammar-packs:writing',
+  phrasalWriting: 'phrasal:writing',
 } as const

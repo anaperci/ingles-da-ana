@@ -21,7 +21,7 @@ import {
 const DAY_MS = 24 * 60 * 60 * 1000
 
 /** Quantas palavras de revisão, no máximo, podem ocupar o dia (deixa espaço pra palavras novas). */
-const REVIEW_CAP = 15
+const REVIEW_CAP = 5
 
 type SrsMap = Record<string, SrsState>
 
@@ -64,7 +64,7 @@ function sentenceFor(id: string, review: boolean): DailySentence {
 }
 
 /**
- * Seleciona as 30 palavras-alvo do dia: primeiro as que voltaram da fila de
+ * Seleciona as palavras-alvo do dia (DAILY_SENTENCE_GOAL): primeiro as que voltaram da fila de
  * revisão (erradas antes), depois palavras novas de uma janela rotativa pela
  * lista das 1000. A seleção é estável dentro do dia (não muda ao recarregar).
  */

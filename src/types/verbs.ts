@@ -28,6 +28,8 @@ export interface PhrasalVerb {
   example: string
   exampleTranslation: string
   level: CEFRLevel
+  /** dica extra (separável/inseparável, preposição fixa, etc.) */
+  note?: string
 }
 
 export type VerbItem = IrregularVerb | PhrasalVerb

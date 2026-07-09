@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Dumbbell, Plus, Library, Target, Percent, AlertTriangle, Loader2 } from 'lucide-react'
+import { Dumbbell, Plus, Library, Target, Percent, AlertTriangle, Loader2, CalendarDays } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { Card } from '@/components/ui/card'
 import { GeneratorChat } from '@/components/exercises/GeneratorChat'
@@ -14,6 +14,7 @@ import {
   type ExerciseType,
   type ExerciseTopic,
   type Difficulty,
+  type Exercise,
 } from '@/lib/exercises'
 
 const selCls =
@@ -37,6 +38,9 @@ export default function Exercises() {
       ),
     [exercises, fType, fTopic, fDiff]
   )
+
+  /** Agrupa os exercícios por dia de criação, mais recentes primeiro. */
+  const groups = useMemo(() => groupByDay(filtered), [filtered])
 
   return (
     <div className="animate-fade-in">
@@ -126,25 +130,38 @@ export default function Exercises() {
           </p>
         </Card>
       ) : (
-        <div className="grid gap-3 sm:grid-cols-2">
-          {filtered.map((ex, i) => (
-            <button
-              key={ex.id}
-              onClick={() => setPracticeStart(i)}
-              className="flex flex-col gap-2 rounded-2xl border border-card-border bg-card p-4 text-left shadow-soft transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-elevated"
-            >
-              <div className="flex flex-wrap items-center gap-2">
-                <TypeBadge type={ex.type} />
-                <DifficultyBadge difficulty={ex.difficulty} />
-                {ex.topic && (
-                  <span className="text-xs text-muted-foreground">{TOPIC_LABEL[ex.topic]}</span>
-                )}
-                <span className="ml-auto">
-                  <AttemptDot last={ex.last_correct} />
+        <div className="space-y-6">
+          {groups.map((g) => (
+            <div key={g.key}>
+              <div className="mb-2.5 flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+                <CalendarDays className="h-4 w-4" />
+                <span className="capitalize">{g.label}</span>
+                <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium">
+                  {g.items.length}
                 </span>
               </div>
-              <p className="line-clamp-2 text-sm font-medium text-foreground">{ex.question}</p>
-            </button>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {g.items.map((ex) => (
+                  <button
+                    key={ex.id}
+                    onClick={() => setPracticeStart(filtered.findIndex((e) => e.id === ex.id))}
+                    className="flex flex-col gap-2 rounded-2xl border border-card-border bg-card p-4 text-left shadow-soft transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-elevated"
+                  >
+                    <div className="flex flex-wrap items-center gap-2">
+                      <TypeBadge type={ex.type} />
+                      <DifficultyBadge difficulty={ex.difficulty} />
+                      {ex.topic && (
+                        <span className="text-xs text-muted-foreground">{TOPIC_LABEL[ex.topic]}</span>
+                      )}
+                      <span className="ml-auto">
+                        <AttemptDot last={ex.last_correct} />
+                      </span>
+                    </div>
+                    <p className="line-clamp-2 text-sm font-medium text-foreground">{ex.question}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       )}
@@ -161,6 +178,52 @@ export default function Exercises() {
       )}
     </div>
   )
+}
+
+/** Chave YYYY-MM-DD no fuso local a partir de uma data. */
+function ymd(d: Date): string {
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
+
+/** Rótulo amigável do dia: "Hoje", "Ontem" ou "seg, 09 jul". */
+function dayLabel(key: string): string {
+  if (key === 'unknown') return 'Sem data'
+  const now = new Date()
+  const yesterday = new Date(now)
+  yesterday.setDate(now.getDate() - 1)
+  if (key === ymd(now)) return 'Hoje'
+  if (key === ymd(yesterday)) return 'Ontem'
+  const [y, m, d] = key.split('-').map(Number)
+  return new Date(y, m - 1, d).toLocaleDateString('pt-BR', {
+    weekday: 'short',
+    day: '2-digit',
+    month: 'short',
+  })
+}
+
+/** Agrupa exercícios por dia de criação, dias e itens mais recentes primeiro. */
+function groupByDay(list: Exercise[]): { key: string; label: string; items: Exercise[] }[] {
+  const map = new Map<string, Exercise[]>()
+  for (const ex of list) {
+    const d = new Date(ex.created_at)
+    const key = isNaN(d.getTime()) ? 'unknown' : ymd(d)
+    const arr = map.get(key) ?? []
+    arr.push(ex)
+    map.set(key, arr)
+  }
+  return [...map.keys()]
+    .sort((a, b) => (a < b ? 1 : a > b ? -1 : 0))
+    .map((key) => ({
+      key,
+      label: dayLabel(key),
+      items: map
+        .get(key)!
+        .slice()
+        .sort((a, b) => (a.created_at < b.created_at ? 1 : -1)),
+    }))
 }
 
 function Stat({

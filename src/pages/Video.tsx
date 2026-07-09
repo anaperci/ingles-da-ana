@@ -12,7 +12,7 @@ export default function Video() {
         <div>
           <h1 className="text-2xl font-extrabold">Vídeo do dia</h1>
           <p className="text-muted-foreground">
-            Um vídeo por dia, escolhido com base nos seus interesses
+            Aulas de inglês com filmes e séries, uma por dia
           </p>
         </div>
       </div>

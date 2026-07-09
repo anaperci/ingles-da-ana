@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AudioLines, ChevronLeft, Sparkles, ArrowRight, Volume2 } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { TranslationToggle } from '@/components/common/TranslationToggle'
@@ -28,6 +29,13 @@ export default function SoundVerbs() {
 
   return (
     <div className="animate-fade-in">
+      <Link
+        to="/verbos"
+        className="mb-3 inline-flex items-center gap-1 text-sm font-semibold text-muted-foreground transition-colors hover:text-accent-dark"
+      >
+        <ChevronLeft className="h-4 w-4" />
+        Voltar para Verbs
+      </Link>
       <PageHeader
         icon={AudioLines}
         title="Verbs by sound"

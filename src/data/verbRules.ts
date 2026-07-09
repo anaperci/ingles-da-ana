@@ -130,3 +130,30 @@ export const verbMethodTips: MethodTip[] = [
     body: "Quando uma regra de pronúncia aparecer (EW = U, L mudo, E mágico), olhe outros verbos que seguem o mesmo padrão. Fixar o padrão é mais poderoso do que memorizar cada palavra individualmente. O inglês tem lógica — ela só não é óbvia no começo.",
   },
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Dicas de método específicas de PHRASAL VERBS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const phrasalMethodTips: MethodTip[] = [
+  {
+    id: "nao-traduza-ao-pe",
+    title: "Não traduza ao pé da letra",
+    body: "Phrasal verb quase nunca é a soma das palavras. 'Get over' não é 'pegar por cima' — é superar. Aprenda o significado inteiro como se fosse uma palavra nova, ligada a uma situação, não à tradução de cada pedaço.",
+  },
+  {
+    id: "agrupe-por-verbo-base",
+    title: "Estude por verbo base",
+    body: "Pegue um verbo base (get, take, look) e aprenda os phrasals dele em bloco: get up, get over, get along, get by. Seu cérebro fixa melhor a família junta do que phrasals soltos e aleatórios. É assim que este módulo agrupa.",
+  },
+  {
+    id: "a-particula-muda-tudo",
+    title: "A partícula muda tudo",
+    body: "Trocar a partícula muda o sentido inteiro: 'take off' (decolar) é outro verbo de 'take after' (parecer com). Preste atenção à preposição/advérbio — é ela que carrega o significado, não só o verbo.",
+  },
+  {
+    id: "uma-frase-sua",
+    title: "Fixe com uma frase sua",
+    body: "Ler o exemplo pronto ajuda, mas o que gruda é a frase que VOCÊ monta. Use o modo Escrever: crie uma frase com o phrasal ligada à sua vida real (seu trabalho, sua rotina, Malta). Depois leia em voz alta.",
+  },
+];

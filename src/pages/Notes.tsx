@@ -109,9 +109,12 @@ export default function Notes() {
         </p>
       )}
 
-      {loading ? (
-        <div className="flex items-center justify-center gap-2 py-20 text-muted-foreground">
-          <Loader2 className="h-5 w-5 animate-spin" /> Carregando…
+      {loading && notes.length === 0 ? (
+        // Cache vazio: abre na hora com skeletons enquanto sincroniza (sem travar).
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <NoteSkeleton key={i} />
+          ))}
         </div>
       ) : filtered.length === 0 ? (
         <EmptyState searching={query.trim().length > 0} onNew={openNew} />
@@ -165,6 +168,22 @@ export default function Notes() {
           </div>
         </DialogContent>
       </Dialog>
+    </div>
+  )
+}
+
+function NoteSkeleton() {
+  return (
+    <div className="flex flex-col rounded-2xl border border-card-border bg-card p-5 shadow-soft">
+      <div className="h-5 w-2/3 animate-pulse rounded bg-muted" />
+      <div className="mt-3 space-y-2">
+        <div className="h-3 w-full animate-pulse rounded bg-muted" />
+        <div className="h-3 w-5/6 animate-pulse rounded bg-muted" />
+      </div>
+      <div className="mt-4 flex items-center justify-between pt-1">
+        <div className="h-5 w-20 animate-pulse rounded-full bg-muted" />
+        <div className="h-3 w-16 animate-pulse rounded bg-muted" />
+      </div>
     </div>
   )
 }

@@ -5,13 +5,16 @@ import {
   Check,
   ChevronDown,
   PlayCircle,
-  ListChecks,
   Sparkles,
   ArrowRight,
+  PenLine,
+  Loader2,
 } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import { Textarea } from '@/components/ui/textarea'
+import { callFunction, NotConfiguredError } from '@/lib/api'
 import { cn } from '@/lib/utils'
 import { usePlanner, type PlannerTask } from '@/hooks/usePlanner'
 import { appLinksForActivity } from '@/lib/plannerLinks'
@@ -192,12 +195,6 @@ function DayRow({
           icon={<PlayCircle className="h-4 w-4" />}
           label={`Assistir à aula ${day.lesson}`}
         />
-        <TaskCheck
-          checked={isDone(day.day, 'quiz')}
-          onToggle={() => toggle(day.day, 'quiz')}
-          icon={<ListChecks className="h-4 w-4" />}
-          label={`Fazer o Quiz ${day.quiz}`}
-        />
         <ActivityItem
           checked={isDone(day.day, 'activity')}
           onToggle={() => toggle(day.day, 'activity')}
@@ -238,6 +235,10 @@ function ActivityItem({
   activity: string
 }) {
   const links = useMemo(() => appLinksForActivity(activity), [activity])
+  // Atividade de escrita abre um editor aqui mesmo (não manda pra página de escrita).
+  const isWriting = useMemo(() => links.some((l) => l.to === '/escrita'), [links])
+  const otherLinks = useMemo(() => links.filter((l) => l.to !== '/escrita'), [links])
+
   return (
     <div className="rounded-lg p-2">
       <button onClick={onToggle} className="flex w-full items-start gap-3 text-left">
@@ -265,10 +266,13 @@ function ActivityItem({
         </div>
       </button>
 
-      {/* Fazer no app */}
-      {links.length > 0 && (
+      {/* Escrita: editor inline com avaliação da IA (não sai da página) */}
+      {isWriting && <WritingActivity activity={activity} />}
+
+      {/* Fazer no app (demais módulos) */}
+      {otherLinks.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2 pl-8">
-          {links.map((l) => {
+          {otherLinks.map((l) => {
             // Conversação abre já com a atividade do dia como tema da prática
             const to =
               l.to === '/conversacao'
@@ -286,6 +290,101 @@ function ActivityItem({
               </Link>
             )
           })}
+        </div>
+      )}
+    </div>
+  )
+}
+
+const ACTIVITY_WRITING_SYSTEM = `Você é uma professora de inglês avaliando um texto que a Ana escreveu para uma atividade de escrita. A Ana é brasileira, nível iniciante/intermediário, se preparando para morar em Malta. Você recebe a DESCRIÇÃO da atividade e o TEXTO da Ana.
+Avalie com carinho e objetividade. Responda em português, em texto curto e claro, com três partes marcadas:
+Corrigido: a versão corrigida e natural do texto em inglês.
+Comentário: o que ficou bom e o que ajustar, e por quê (regras práticas).
+Dica: 1 ou 2 dicas rápidas para a próxima.
+Não use JSON. Seja concisa e encorajadora.`
+
+/** Escrita da atividade do planner + avaliação da IA, tudo inline. */
+function WritingActivity({ activity }: { activity: string }) {
+  const [open, setOpen] = useState(false)
+  const [text, setText] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [feedback, setFeedback] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  async function evaluate() {
+    if (!text.trim() || loading) return
+    setError(null)
+    setLoading(true)
+    setFeedback(null)
+    try {
+      const content = `Atividade: ${activity}\n\nTexto da Ana:\n${text.trim()}`
+      const data = await callFunction<{ reply: string }>('chat', {
+        system: ACTIVITY_WRITING_SYSTEM,
+        messages: [{ role: 'user', content }],
+        maxTokens: 800,
+      })
+      setFeedback(data.reply?.trim() || 'Sem resposta da IA. Tente de novo.')
+    } catch (e) {
+      setError(
+        e instanceof NotConfiguredError
+          ? 'A avaliação por IA precisa do backend configurado.'
+          : (e as Error).message
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (!open) {
+    return (
+      <div className="mt-2 pl-8">
+        <button
+          onClick={() => setOpen(true)}
+          className="inline-flex items-center gap-1.5 rounded-full bg-soft px-3 py-1.5 text-xs font-semibold text-primary transition-colors hover:bg-accent hover:text-accent-foreground"
+        >
+          <PenLine className="h-3.5 w-3.5" />
+          Escrever aqui
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="mt-2 space-y-2 pl-8">
+      <Textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Escreva seu texto em inglês aqui…"
+        rows={4}
+        className="bg-muted/40 text-sm transition-colors focus:bg-card focus:ring-2 focus:ring-accent"
+      />
+      <div className="flex items-center gap-2">
+        <button
+          onClick={evaluate}
+          disabled={loading || !text.trim()}
+          className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-xs font-semibold text-accent-foreground transition-colors hover:bg-accent-dark disabled:opacity-50"
+        >
+          {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+          {loading ? 'Avaliando…' : 'Avaliar'}
+        </button>
+        <button
+          onClick={() => {
+            setOpen(false)
+            setFeedback(null)
+            setError(null)
+          }}
+          className="text-xs font-semibold text-muted-foreground hover:text-foreground"
+        >
+          Fechar
+        </button>
+      </div>
+      {error && <p className="text-xs text-error">{error}</p>}
+      {feedback && (
+        <div className="rounded-lg border border-accent/30 bg-soft p-3 text-sm text-soft-text">
+          <div className="mb-1 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-accent-dark">
+            <Sparkles className="h-3.5 w-3.5" /> Avaliação
+          </div>
+          <p className="whitespace-pre-wrap leading-relaxed">{feedback}</p>
         </div>
       )}
     </div>

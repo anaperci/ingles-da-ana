@@ -6,13 +6,14 @@ export interface Interest {
   query: string
 }
 
+// Todos os interesses puxam AULAS DE INGLÊS usando filmes e séries.
 export const INTERESTS: Interest[] = [
-  { key: 'daily', label: 'Inglês do dia a dia', emoji: '🗣️', query: 'daily english conversation practice' },
-  { key: 'travel', label: 'Viagem', emoji: '✈️', query: 'english for travel and airport' },
-  { key: 'business', label: 'Negócios', emoji: '💼', query: 'business english meetings vocabulary' },
-  { key: 'pronunciation', label: 'Pronúncia', emoji: '🎯', query: 'english pronunciation practice lesson' },
-  { key: 'phrasal', label: 'Phrasal verbs', emoji: '🔗', query: 'english phrasal verbs explained' },
-  { key: 'grammar', label: 'Gramática', emoji: '📚', query: 'english grammar lesson intermediate' },
-  { key: 'slang', label: 'Gírias e expressões', emoji: '😎', query: 'common english slang and idioms' },
-  { key: 'tech', label: 'Tecnologia', emoji: '💻', query: 'technology english vocabulary' },
+  { key: 'movies', label: 'Aprender com filmes', emoji: '🎬', query: 'learn english with movies scenes lesson' },
+  { key: 'series', label: 'Aprender com séries', emoji: '📺', query: 'learn english with tv series lesson' },
+  { key: 'phrases', label: 'Frases de filmes', emoji: '💬', query: 'common english phrases from movies explained' },
+  { key: 'slang', label: 'Gírias no cinema', emoji: '😎', query: 'english slang and idioms from movies and tv shows' },
+  { key: 'pronunciation', label: 'Pronúncia com cenas', emoji: '🎯', query: 'english pronunciation practice with movie scenes' },
+  { key: 'listening', label: 'Listening com trechos', emoji: '👂', query: 'english listening practice with movie and series clips' },
+  { key: 'sitcom', label: 'Sitcoms', emoji: '😄', query: 'learn english with sitcoms friends explained' },
+  { key: 'dialogues', label: 'Diálogos de séries', emoji: '🗣️', query: 'english dialogues from tv series with subtitles lesson' },
 ]
