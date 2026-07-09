@@ -3,6 +3,7 @@ import { MessageCircle, X, Send, Sparkles, RotateCcw } from 'lucide-react'
 import { callFunction, isBackendConfigured, NotConfiguredError } from '@/lib/api'
 import { loadJSON, saveJSON } from '@/lib/storage'
 import { buildStudyContext } from '@/lib/studyContext'
+import { generateExercises, createExercises } from '@/lib/exercises'
 import { cn } from '@/lib/utils'
 import { Markdown } from '@/components/notes/Markdown'
 
@@ -16,13 +17,23 @@ Regras:
 - Respostas curtas (2 a 6 frases). Se a pessoa pedir, aprofunde.
 - Ao corrigir, mostre o certo e explique o porquê em uma linha.
 - Use inglês de Malta/britânico quando houver diferença relevante.
-- Você recebe abaixo um resumo do que a Ana está estudando hoje e já estudou. Considere isso ao responder (ex.: se ela falar "os verbos do dia", você já sabe quais são), mas não fique listando o contexto sem ela pedir.`
+- Você recebe abaixo um resumo do que a Ana está estudando hoje e já estudou. Considere isso ao responder (ex.: se ela falar "os verbos do dia", você já sabe quais são), mas não fique listando o contexto sem ela pedir.
+- Você PODE criar exercícios no sistema: quando a Ana pedir ("cria um exercício sobre…"), eles são gerados e salvos na página Exercises (menu Training › Exercises). Nunca diga que não consegue criar exercícios.`
 
 const SUGGESTIONS = [
   'Qual a diferença entre "make" e "do"?',
-  'Como peço informação na rua em Malta?',
+  'Cria um exercício sobre preposições',
   'Me dá uma rotina de estudo de 30 min/dia',
 ]
+
+/** Detecta pedido de CRIAR exercício (verbo de criação + a palavra exercício/quiz). */
+function isExerciseRequest(text: string): boolean {
+  const s = text.toLowerCase()
+  if (!/exerc[íi]cio|\bquiz\b|atividade/.test(s)) return false
+  return /\b(cria|criar|crie|cri[ae]me|faz|faça|fazer|gera|gerar|gere|monta|montar|monte|quero|preciso|me d[êe]|elabora|prepara)\b/.test(
+    s
+  )
+}
 
 const HISTORY_KEY = 'chat:history'
 /** Quantas mensagens guardar e quantas mandar de contexto pra IA. */
@@ -64,6 +75,50 @@ export function LearnChat() {
     const next = [...messages, { role: 'user' as const, content }]
     setMessages(next)
     setLoading(true)
+
+    // Pedido de criar exercício → cria de verdade na página de Exercises.
+    if (isExerciseRequest(content)) {
+      try {
+        const ex = await generateExercises(content)
+        if (!ex.length) {
+          setMessages((m) => [
+            ...m,
+            {
+              role: 'assistant',
+              content:
+                'Não consegui montar o exercício agora. Tenta descrever de outro jeito — ex.: "cria 3 exercícios de múltipla escolha sobre preposições".',
+            },
+          ])
+        } else {
+          await createExercises(ex, 'chat')
+          setMessages((m) => [
+            ...m,
+            {
+              role: 'assistant',
+              content: `Prontinho! Criei ${ex.length} ${
+                ex.length === 1 ? 'exercício' : 'exercícios'
+              } na sua página de **Exercises** (menu **Training › Exercises**) ✅\n\nQuer que eu explique algum deles aqui antes de você praticar?`,
+            },
+          ])
+        }
+      } catch (e) {
+        const msg = (e as Error).message
+        setMessages((m) => [
+          ...m,
+          {
+            role: 'assistant',
+            content:
+              msg.includes('402') || msg.includes('paid_feature')
+                ? 'A geração de exercícios é um recurso da conta dona (a sua). Se estiver logada como você, tenta de novo.'
+                : `Tive um erro ao criar o exercício: ${msg}`,
+          },
+        ])
+      } finally {
+        setLoading(false)
+      }
+      return
+    }
+
     try {
       const data = await callFunction<{ reply: string }>('chat', {
         system: TUTOR_SYSTEM + buildStudyContext(),
