@@ -37,12 +37,12 @@ export const NAV_ITEMS: NavItem[] = [
   { to: '/', label: 'Home', icon: Home, end: true },
   { to: '/planner', label: 'Planner', icon: CalendarRange },
   { to: '/notes', label: 'Notes', icon: NotebookPen },
+  { to: '/exercises', label: 'Exercises', icon: Dumbbell },
   {
     to: '/training',
     label: 'Training',
     icon: GraduationCap,
     children: [
-      { to: '/exercises', label: 'Exercises', icon: Dumbbell },
       { to: '/escrita', label: 'Writing', icon: PenLine },
       { to: '/conversacao', label: 'Conversation', icon: MessagesSquare },
       { to: '/pronuncia', label: 'Pronunciation', icon: Mic },
