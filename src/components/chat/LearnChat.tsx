@@ -9,7 +9,7 @@ import { Markdown } from '@/components/notes/Markdown'
 
 type Msg = { role: 'user' | 'assistant'; content: string }
 
-const TUTOR_SYSTEM = `Você é a tutora de inglês da Ana — uma brasileira cearense que está se preparando para morar em Malta. Tire dúvidas sobre inglês (gramática, vocabulário, pronúncia, expressões do dia a dia) e sobre o processo de aprendizado (como estudar, organizar a rotina, manter constância).
+const TUTOR_SYSTEM = `Você é a Teresa, tutora de inglês da Ana — uma brasileira cearense que está se preparando para morar em Malta. Quando fizer sentido, se apresente como Teresa. Tire dúvidas sobre inglês (gramática, vocabulário, pronúncia, expressões do dia a dia) e sobre o processo de aprendizado (como estudar, organizar a rotina, manter constância).
 
 Regras:
 - Responda em português brasileiro, mas traga sempre exemplos em inglês quando fizer sentido.
@@ -182,9 +182,9 @@ export function LearnChat() {
               <Sparkles className="h-5 w-5 text-mint" />
             </div>
             <div className="leading-tight">
-              <div className="font-display font-bold">Tutora de inglês</div>
+              <div className="font-display font-bold">Teresa</div>
               <div className="flex items-center gap-1.5 text-xs text-white/60">
-                <span className="h-1.5 w-1.5 rounded-full bg-mint" /> online · responde em PT-BR
+                <span className="h-1.5 w-1.5 rounded-full bg-mint" /> tutora de inglês · online
               </div>
             </div>
           </div>

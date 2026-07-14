@@ -44,7 +44,19 @@ let tableReady = false
 // deno-lint-ignore no-explicit-any
 async function ensureTable(sql: any): Promise<void> {
   if (tableReady) return
+  // Caminho quente: a tabela já existe → só confere e sai (nada de DDL por request,
+  // que causava deadlock quando chamadas concorrentes rodavam CREATE/ALTER juntas).
+  const [{ exists }] = await sql`
+    select (to_regclass('ingles.notes') is not null) as exists
+  `
+  if (exists) {
+    tableReady = true
+    return
+  }
+  // Banco novo: cria UMA vez, serializando com advisory lock (sem deadlock).
   await sql.unsafe(`
+    begin;
+    select pg_advisory_xact_lock(4823002);
     create schema if not exists ingles;
     create table if not exists ingles.notes (
       id         uuid primary key default gen_random_uuid(),
@@ -58,6 +70,7 @@ async function ensureTable(sql: any): Promise<void> {
     create index if not exists notes_user_created_idx
       on ingles.notes (user_id, created_at desc);
     alter table ingles.notes enable row level security;
+    commit;
   `)
   tableReady = true
 }

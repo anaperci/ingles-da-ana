@@ -47,7 +47,21 @@ let tableReady = false
 // deno-lint-ignore no-explicit-any
 async function ensureTables(sql: any): Promise<void> {
   if (tableReady) return
+  // Caminho quente: as tabelas já existem → só confere e sai (nada de DDL).
+  // Isso evita rodar CREATE/ALTER em toda requisição, que causava deadlock
+  // quando duas chamadas concorrentes (ex.: list + stats em paralelo) batiam juntas.
+  const [{ exists }] = await sql`
+    select (to_regclass('ingles.exercises') is not null) as exists
+  `
+  if (exists) {
+    tableReady = true
+    return
+  }
+  // Banco novo: cria as tabelas UMA vez, serializando com advisory lock pra que
+  // chamadas concorrentes não tentem o mesmo DDL ao mesmo tempo (sem deadlock).
   await sql.unsafe(`
+    begin;
+    select pg_advisory_xact_lock(4823001);
     create schema if not exists ingles;
     create table if not exists ingles.exercises (
       id uuid primary key default gen_random_uuid(),
@@ -74,6 +88,7 @@ async function ensureTables(sql: any): Promise<void> {
     create index if not exists attempts_user_idx on ingles.exercise_attempts(user_id);
     alter table ingles.exercises enable row level security;
     alter table ingles.exercise_attempts enable row level security;
+    commit;
   `)
   tableReady = true
 }
